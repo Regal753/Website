@@ -32,8 +32,8 @@ AI Studio 由来のコードを含むため、**本番運用向けに整理・�
 
 ## 現状把握（読み取り）
 
-- `services/geminiService.ts` … Gemini API をブラウザから直接呼ぶ（本番危険）
-- `components/Contact.tsx` … 送信はダミー（setTimeout）
+- Gemini 連携は削除済み（フロントにAPIキーを埋め込まない）
+- `components/Contact.tsx` … mailto による実運用導線
 - `index.html` … AI Studio 由来の importmap 等は削除済み（このブランチでは整理済み）
 
 ---
