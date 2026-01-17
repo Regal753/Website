@@ -1,13 +1,14 @@
 import React from 'react';
+import { siteConfig } from '../site.config';
 
 const Footer: React.FC = () => {
   return (
     <footer className="bg-slate-950 border-t border-slate-800 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
         <div>
-          <h2 className="text-xl font-bold text-white mb-2">NEXT CREATION</h2>
+          <h2 className="text-xl font-bold text-white mb-2">{siteConfig.companyName}</h2>
           <p className="text-slate-500 text-sm">
-            Empowering content creators with technology and sound.
+            クリエイターの制作と運用を、音とテクノロジーで支えます。
           </p>
         </div>
         
@@ -18,7 +19,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="text-slate-600 text-sm">
-          &copy; {new Date().getFullYear()} Next Creation Inc. All rights reserved.
+          &copy; {new Date().getFullYear()} {siteConfig.companyNameEn}. All rights reserved.
         </div>
       </div>
     </footer>
