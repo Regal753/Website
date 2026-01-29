@@ -1,12 +1,14 @@
 import { NavItem, SectionId } from './types';
 
+const CONTACT_EMAIL = 'retoa@regalocom.net';
+
 export const siteConfig = {
   companyName: 'Regalo',
   companyNameEn: 'Regalo Inc.',
-  contactEmail: 'hello@regalo.jp',
-  siteTitle: 'Regalo | クリエイティブ×テクノロジー',
+  contactEmail: CONTACT_EMAIL,
+  siteTitle: 'Regalo | YouTube運用・BGM・自動化',
   siteDescription:
-    'YouTube運営、BGM制作・権利管理、業務自動化ソリューションを提供するコーポレートサイト。',
+    'RegaloはYouTube運用、BGM制作・権利管理、ワークフロー自動化を支援する企業です。',
   navItems: [
     { id: SectionId.HOME, label: 'ホーム' },
     { id: SectionId.SERVICES, label: 'サービス' },

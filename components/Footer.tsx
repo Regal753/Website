@@ -13,13 +13,13 @@ const Footer: React.FC = () => {
         </div>
         
         <div className="flex gap-6 text-sm text-slate-400">
-          <a href="#" className="hover:text-blue-400 transition-colors">Privacy Policy</a>
-          <a href="#" className="hover:text-blue-400 transition-colors">Terms of Service</a>
-          <a href="#" className="hover:text-blue-400 transition-colors">Company Profile</a>
+          <a href="privacy.html" className="hover:text-blue-400 transition-colors">プライバシーポリシー</a>
+          <a href="terms.html" className="hover:text-blue-400 transition-colors">利用規約</a>
+          <a href="company.html" className="hover:text-blue-400 transition-colors">会社概要</a>
         </div>
 
         <div className="text-slate-600 text-sm">
-          &copy; {new Date().getFullYear()} {siteConfig.companyNameEn}. All rights reserved.
+          &copy; {new Date().getFullYear()} {siteConfig.companyNameEn}. 無断転載を禁じます。
         </div>
       </div>
     </footer>

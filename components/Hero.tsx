@@ -24,19 +24,19 @@ const Hero: React.FC<HeroProps> = ({ scrollToSection }) => {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
             </span>
-            Accepting New Clients
+            ご相談受付中
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-            <span className="block text-slate-100">コンテンツを</span>
+            <span className="block text-slate-100">運用を、</span>
             <span className="block bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400">
-              加速させる。
+              仕組みで加速する。
             </span>
           </h1>
 
           <p className="text-lg text-slate-400 max-w-xl leading-relaxed">
-            YouTube運営、BGM制作・権利管理、そして業務自動化。
-            クリエイティブとテクノロジーを融合させ、次世代のメディア運営をサポートします。
+            YouTubeチャンネル運用、BGM制作・権利管理、編集体制の標準化、Drive/Sheets/Discordによる自動化まで。
+            制作と運用のボトルネックを潰し、継続的に回るメディア運営を支援します。
           </p>
 
           <div className="flex flex-wrap gap-4">
@@ -51,7 +51,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToSection }) => {
               onClick={() => scrollToSection(SectionId.SERVICES)}
               className="px-8 py-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 font-semibold rounded-lg transition-all"
             >
-              事業内容を見る
+              サービスを見る
             </button>
           </div>
         </div>
@@ -63,28 +63,27 @@ const Hero: React.FC<HeroProps> = ({ scrollToSection }) => {
             <div className="absolute -top-12 -right-12 p-4 bg-slate-900 rounded-xl border border-slate-700 shadow-xl flex items-center gap-3 animate-bounce" style={{ animationDuration: '3s' }}>
               <div className="p-2 bg-red-500/20 rounded-lg text-red-500"><Youtube size={24} /></div>
               <div>
-                <div className="text-xs text-slate-400">Total Views</div>
-                <div className="font-bold text-white">10M+ / Month</div>
+                <div className="text-xs text-slate-400">チャンネル運用</div>
+                <div className="font-bold text-white">運用設計</div>
               </div>
             </div>
-
             <div className="absolute -bottom-8 -left-8 p-4 bg-slate-900 rounded-xl border border-slate-700 shadow-xl flex items-center gap-3 animate-bounce" style={{ animationDuration: '4s', animationDelay: '1s' }}>
               <div className="p-2 bg-green-500/20 rounded-lg text-green-500"><Cpu size={24} /></div>
               <div>
-                <div className="text-xs text-slate-400">Automation</div>
-                <div className="font-bold text-white">24/7 Active</div>
+                <div className="text-xs text-slate-400">自動化</div>
+                <div className="font-bold text-white">自動化運用中</div>
               </div>
             </div>
 
             <img 
               src="https://picsum.photos/600/400?grayscale&blur=2" 
-              alt="Studio and Workflow" 
+              alt="スタジオとワークフロー" 
               className="rounded-lg opacity-80"
             />
             
             <div className="mt-6 flex justify-between items-end border-t border-slate-700 pt-6">
                <div>
-                  <div className="text-sm text-slate-400 mb-2">Expertise</div>
+                  <div className="text-sm text-slate-400 mb-2">対応領域</div>
                   <div className="flex gap-2">
                      <span className="p-2 bg-slate-700 rounded text-slate-300"><Music size={20}/></span>
                      <span className="p-2 bg-slate-700 rounded text-slate-300"><Youtube size={20}/></span>
@@ -92,8 +91,8 @@ const Hero: React.FC<HeroProps> = ({ scrollToSection }) => {
                   </div>
                </div>
                <div className="text-right">
-                 <div className="text-4xl font-bold text-white">5+</div>
-                 <div className="text-xs text-slate-400">Years Experience</div>
+                 <div className="text-4xl font-bold text-white">運用支援</div>
+                 <div className="text-xs text-slate-400">運用支援</div>
                </div>
             </div>
           </div>
