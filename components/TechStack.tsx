@@ -71,7 +71,5 @@ const TechStack: React.FC = () => {
     </section>
   );
 };
-export default TechStack;
-
 
 export default TechStack;
