@@ -76,7 +76,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToSection }) => {
             </div>
 
             <img 
-              src="https://picsum.photos/600/400?grayscale&blur=2" 
+              src={import.meta.env.BASE_URL + "images/hero.webp"} 
               alt="スタジオとワークフロー" 
               className="rounded-lg opacity-80"
             />
