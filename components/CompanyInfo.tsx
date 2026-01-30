@@ -10,35 +10,35 @@ const rows = [
   { label: '設立日', value: companyProfile.established },
   { label: '事業内容', value: companyProfile.business.join('／') },
   { label: 'お問い合わせ', value: companyProfile.contactEmail },
-  ];
+];
 
 const CompanyInfo: React.FC = () => {
-    return (
-          <section
-                  id={SectionId.COMPANY}
-                  className="py-20 bg-slate-800/50"
-                >
-                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <h2 className="text-3xl font-bold text-center text-white mb-12">
-                                  会社情報
-                        </h2>h2>
-                        <div className="bg-slate-900/80 rounded-2xl border border-slate-700 overflow-hidden">
-                                  <table className="w-full text-left text-sm">
-                                              <tbody>
-                                                {rows.map((row) => (
-                                  <tr key={row.label} className="border-b border-slate-700 last:border-b-0">
-                                                    <th className="px-6 py-4 font-medium text-slate-400 whitespace-nowrap w-1/3">
-                                                      {row.label}
-                                                    </th>th>
-                                                    <td className="px-6 py-4 text-slate-100">{row.value}</td>td>
-                                  </tr>tr>
-                                ))}
-                                              </tbody>tbody>
-                                  </table>table>
-                        </div>div>
-                </div>div>
-          </section>section>
-        );
+  return (
+    <section
+      id={SectionId.COMPANY}
+      className="py-20 bg-slate-800/50"
+    >
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-3xl font-bold text-center text-white mb-12">
+          会社情報
+        </h2>
+        <div className="bg-slate-900/80 rounded-2xl border border-slate-700 overflow-hidden">
+          <table className="w-full text-left text-sm">
+            <tbody>
+              {rows.map((row) => (
+                <tr key={row.label} className="border-b border-slate-700 last:border-b-0">
+                  <th className="px-6 py-4 font-medium text-slate-400 whitespace-nowrap w-1/3">
+                    {row.label}
+                  </th>
+                  <td className="px-6 py-4 text-slate-100">{row.value}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  );
 };
 
-export default CompanyInfo;</section>
+export default CompanyInfo;
