@@ -20,6 +20,7 @@ export const siteConfig = {
     companyName: 'Regalo',
     companyNameEn: 'Regalo Inc.',
     contactEmail: CONTACT_EMAIL,
+        contactFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSdbqMVhTDUHcfhnrv5Vj96aBF9WhyAwysTfmG9CdgElhrGm1A/viewform',
     siteTitle: 'Regalo | YouTube運用・BGM・自動化',
     siteDescription:
           'RegaloはYouTube運用、BGM制作・権利管理、ワークフロー自動化を支援する企業です。',
