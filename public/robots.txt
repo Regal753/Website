@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.regalocom.net/sitemap.xml
+
