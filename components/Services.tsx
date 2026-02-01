@@ -37,7 +37,7 @@ const SERVICES: ServiceDetail[] = [
       "納品形式最適化"
     ],
     icon: Mic2,
-    color: "from-purple-500 to-purple-600"
+    color: "from-indigo-500 to-indigo-600"
   },
   {
     title: "権利管理・編集体制構築",
