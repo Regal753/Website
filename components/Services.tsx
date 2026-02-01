@@ -93,14 +93,12 @@ const Services: React.FC = () => {
                                         key={index}
                                         className="flex flex-col md:flex-row md:items-start md:gap-8 pb-12 border-b border-slate-200 last:border-b-0 last:pb-0"
                                       >
-                          {/* Service Number - Left */}
                                       <div className="md:w-32 flex-shrink-0 mb-4 md:mb-0">
                                                       <div className="text-2xl md:text-3xl font-bold text-slate-400">
                                                                         SERVICE.0{index + 1}
                                                       </div>div>
                                       </div>div>
                                       
-                          {/* Service Content - Right */}
                                       <div className="flex-grow">
                                                       <div className="flex items-start gap-4 mb-4">
                                                                         <div 
@@ -119,7 +117,6 @@ const Services: React.FC = () => {
                                                                         </div>div>
                                                       </div>div>
                                                       
-                                        {/* Items - styled as small headings */}
                                                       <div className="ml-16 mt-4">
                                                                         <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
                                                                           {service.items.map((item, i) => (
