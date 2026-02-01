@@ -25,7 +25,7 @@ const STEPS = [
     icon: Rocket,
     title: '着手',
     description: 'ご発注確定後、キックオフミーティングを経てプロジェクトを開始します。',
-    color: 'from-violet-500 to-purple-500',
+    color: 'from-blue-500 to-indigo-500',
   },
 ];
 
