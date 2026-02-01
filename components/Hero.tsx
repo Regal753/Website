@@ -12,7 +12,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToSection }) => {
       {/* Background Elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-[100px]" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px]h bg-blue-600/20 rounded-full blur-[100px]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
@@ -29,7 +29,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToSection }) => {
 
           <h1 className="text-5xl md:text-7xl font-bold leading-tight">
             <span className="block text-slate-100">運用を、</span>
-            <span className="block bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400">
+            <span className="block bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-blue-300 to-cyan-400">
               仕組みで加速する。
             </span>
           </h1>
