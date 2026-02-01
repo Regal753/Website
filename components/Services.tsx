@@ -66,6 +66,17 @@ const SERVICES: ServiceDetail[] = [
   ];
 
 const Services: React.FC = () => {
+    const getGradientStyle = (colorClass: string) => {
+          const gradients: { [key: string]: string } = {
+                  "from-red-500 to-red-600": "linear-gradient(135deg, rgb(239, 68, 68), rgb(220, 38, 38))",
+                  "from-blue-500 to-blue-600": "linear-gradient(135deg, rgb(59, 130, 246), rgb(37, 99, 235))",
+                  "from-indigo-500 to-indigo-600": "linear-gradient(135deg, rgb(99, 102, 241), rgb(79, 70, 229))",
+                  "from-emerald-500 to-emerald-600": "linear-gradient(135deg, rgb(16, 185, 129), rgb(5, 150, 105))",
+                  "from-cyan-500 to-cyan-600": "linear-gradient(135deg, rgb(6, 182, 212), rgb(8, 145, 178))"
+          };
+          return gradients[colorClass] || gradients["from-red-500 to-red-600"];
+    };
+
     return (
           <section id={SectionId.SERVICES} className="py-24 bg-slate-50 relative">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -92,7 +103,10 @@ const Services: React.FC = () => {
                           {/* Service Content - Right */}
                                       <div className="flex-grow">
                                                       <div className="flex items-start gap-4 mb-4">
-                                                                        <div className={"w-12 h-12 rounded-xl bg-gradient-to-br " + service.color + " flex items-center justify-center flex-shrink-0 shadow-lg"}>
+                                                                        <div 
+                                                                                              className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg"
+                                                                                              style={{ background: getGradientStyle(service.color) }}
+                                                                                            >
                                                                                             <service.icon className="text-white w-6 h-6" />
                                                                         </div>div>
                                                                         <div>
