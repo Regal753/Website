@@ -16,21 +16,21 @@ const CompanyInfo: React.FC = () => {
   return (
     <section
       id={SectionId.COMPANY}
-      className="py-20 bg-slate-800/50"
+      className="py-20 bg-white"
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center text-white mb-12">
+        <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
           会社情報
         </h2>
-        <div className="bg-slate-900/80 rounded-2xl border border-slate-700 overflow-hidden">
+        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
           <table className="w-full text-left text-sm">
             <tbody>
               {rows.map((row) => (
-                <tr key={row.label} className="border-b border-slate-700 last:border-b-0">
-                  <th className="px-6 py-4 font-medium text-slate-400 whitespace-nowrap w-1/3">
+                <tr key={row.label} className="border-b border-slate-100 last:border-b-0">
+                  <th className="px-6 py-4 font-medium text-slate-500 whitespace-nowrap w-1/3">
                     {row.label}
                   </th>
-                  <td className="px-6 py-4 text-slate-100">{row.value}</td>
+                  <td className="px-6 py-4 text-slate-900">{row.value}</td>
                 </tr>
               ))}
             </tbody>
