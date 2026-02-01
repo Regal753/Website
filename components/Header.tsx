@@ -48,8 +48,8 @@ const Header: React.FC<HeaderProps> = ({ activeSection, scrollToSection }) => {
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className={`text-sm font-medium transition-colors hover:text-blue-400 ${
-                activeSection === item.id ? 'text-blue-400' : 'text-slate-300'
+              className={`text-sm font-medium transition-colors hover:text-blue-600 ${
+                activeSection === item.id ? 'text-blue-600' : 'text-slate-600'
               }`}
             >
               {item.label}
