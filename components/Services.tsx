@@ -67,11 +67,11 @@ const SERVICES: ServiceDetail[] = [
 
 const Services: React.FC = () => {
   return (
-    <section id={SectionId.SERVICES} className="py-24 bg-slate-900 relative">
+    <section id={SectionId.SERVICES} className="py-24 bg-slate-50 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">提供サービス</h2>
-          <p className="text-slate-400 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">提供サービス</h2>
+          <p className="text-slate-600 max-w-2xl mx-auto">
             メディア運営から技術基盤の構築まで、包括的なソリューションを提供します。
           </p>
         </div>
@@ -79,23 +79,23 @@ const Services: React.FC = () => {
           {SERVICES.map((service, index) => (
             <div 
               key={index}
-              className="group bg-slate-800/50 hover:bg-slate-800 rounded-2xl p-6 transition-all duration-300 border border-slate-700 hover:border-slate-500 hover:shadow-2xl hover:-translate-y-1"
+              className="group bg-white hover:bg-white rounded-2xl p-6 transition-all duration-300 border border-slate-200 hover:border-slate-300 hover:shadow-md hover:-translate-y-1 shadow-sm"
             >
               <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-6 shadow-lg`}>
                 <service.icon className="text-white w-6 h-6" />
               </div>
               
-              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">
+              <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
                 {service.title}
               </h3>
               
-              <p className="text-slate-400 text-sm mb-6 leading-relaxed">
+              <p className="text-slate-600 text-sm mb-6 leading-relaxed">
                 {service.description}
               </p>
               <ul className="space-y-3">
                 {service.items.map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-slate-300">
-                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-slate-500 group-hover:bg-blue-400 transition-colors" />
+                  <li key={i} className="flex items-start gap-2 text-sm text-slate-700">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-slate-300 group-hover:bg-blue-500 transition-colors" />
                     {item}
                   </li>
                 ))}
