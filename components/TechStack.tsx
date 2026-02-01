@@ -28,7 +28,7 @@ const TechStack: React.FC = () => {
                 <span className="text-slate-200 font-medium">Google Cloud Platform</span>
               </div>
               <div className="flex items-center gap-3 p-4 rounded-lg bg-slate-900 border border-slate-800">
-                <Bot className="text-purple-400" />
+                <Bot className="text-blue-400" />
                 <span className="text-slate-200 font-medium">Discord Bot 開発</span>
               </div>
               <div className="flex items-center gap-3 p-4 rounded-lg bg-slate-900 border border-slate-800">
