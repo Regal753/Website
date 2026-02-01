@@ -92,7 +92,7 @@ const Services: React.FC = () => {
                           {/* Service Content - Right */}
                                       <div className="flex-grow">
                                                       <div className="flex items-start gap-4 mb-4">
-                                                                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center flex-shrink-0 shadow-lg`}>
+                                                                        <div className={"w-12 h-12 rounded-xl bg-gradient-to-br " + service.color + " flex items-center justify-center flex-shrink-0 shadow-lg"}>
                                                                                             <service.icon className="text-white w-6 h-6" />
                                                                         </div>div>
                                                                         <div>
