@@ -31,11 +31,11 @@ const STEPS = [
 
 const Process: React.FC = () => {
   return (
-    <section id={SectionId.PROCESS} className="py-24 bg-gradient-to-b from-slate-950 to-slate-900 relative">
+    <section id={SectionId.PROCESS} className="py-24 bg-white relative">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">進め方</h2>
-          <p className="text-slate-400 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">進め方</h2>
+          <p className="text-slate-600 max-w-2xl mx-auto">
             お問い合わせから着手まで、4 つのステップで進めます。
           </p>
         </div>
@@ -44,14 +44,14 @@ const Process: React.FC = () => {
           {STEPS.map((step, index) => (
             <div key={index} className="relative text-center">
               {index < STEPS.length - 1 && (
-                <div className="hidden md:block absolute top-10 left-[60%] w-[80%] h-px bg-slate-700" />
+                <div className="hidden md:block absolute top-10 left-[60%] w-[80%] h-px bg-slate-200" />
               )}
               <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center mx-auto mb-6 shadow-lg`}>
                 <step.icon className="text-white w-8 h-8" />
               </div>
               <div className="text-xs text-slate-500 font-bold mb-2">STEP {index + 1}</div>
-              <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">{step.description}</p>
+              <h3 className="text-lg font-bold text-slate-900 mb-2">{step.title}</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">{step.description}</p>
             </div>
           ))}
         </div>
