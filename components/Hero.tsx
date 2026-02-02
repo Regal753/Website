@@ -51,6 +51,18 @@ const Hero: React.FC<HeroProps> = ({ scrollToSection }) => {
               サービスを見る
             </button>
           </div>
+
+          <div className="mt-10 lg:hidden">
+            <div className="rounded-2xl bg-white border border-slate-200 shadow-sm overflow-hidden">
+              <img
+                src={import.meta.env.BASE_URL + "images/workflow.webp"}
+                alt="自動化フロー例"
+                className="w-full aspect-[16/10] object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </div>
         </div>
 
         <div className="hidden lg:block relative">
