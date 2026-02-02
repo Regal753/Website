@@ -86,50 +86,51 @@ const Services: React.FC = () => {
             メディア運営から技術基盤の構築まで、包括的なソリューションを提供します。
           </p>
         </div>
-        <div className="space-y-12">
-          {SERVICES.map((service, index) => (
-            <div
-              key={index}
-              className="flex flex-col md:flex-row md:items-start md:gap-8 pb-12 border-b border-slate-200 last:border-b-0 last:pb-0"
-            >
-              <div className="md:w-32 flex-shrink-0 mb-4 md:mb-0">
-                <div className="text-2xl md:text-3xl font-bold text-slate-400">
-                  SERVICE.0{index + 1}
+        <div className="space-y-0">
+          {SERVICES.map((service, index) => {
+            const Icon = service.icon;
+            return (
+              <div
+                key={index}
+                className="grid grid-cols-1 md:grid-cols-[160px_1fr] gap-4 md:gap-8 items-start py-10 border-b border-slate-200 last:border-b-0"
+              >
+                <div className="text-2xl md:text-3xl font-bold text-slate-300 whitespace-nowrap">
+                  SERVICE.{String(index + 1).padStart(2, '0')}
+                </div>
+                <div>
+                  <div className="flex items-start gap-4 mb-4">
+                    <div
+                      className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 shadow-lg"
+                      style={{ background: getGradientStyle(service.color) }}
+                    >
+                      <Icon className="text-white w-6 h-6" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">
+                        {service.title}
+                      </h3>
+                      <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+                        {service.description}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="ml-16 mt-4">
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
+                      {service.items.map((item, i) => (
+                        <li
+                          key={i}
+                          className="flex items-center gap-2 text-sm md:text-base font-semibold text-slate-700"
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-slate-900 shrink-0" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
-              <div className="flex-grow">
-                <div className="flex items-start gap-4 mb-4">
-                  <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg"
-                    style={{ background: getGradientStyle(service.color) }}
-                  >
-                    <service.icon className="text-white w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">
-                      {service.title}
-                    </h3>
-                    <p className="text-slate-600 text-sm md:text-base leading-relaxed">
-                      {service.description}
-                    </p>
-                  </div>
-                </div>
-                <div className="ml-16 mt-4">
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
-                    {service.items.map((item, i) => (
-                      <li
-                        key={i}
-                        className="flex items-center gap-2 text-sm md:text-base font-semibold text-slate-700"
-                      >
-                        <span className="w-1.5 h-1.5 rounded-full bg-slate-900" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
