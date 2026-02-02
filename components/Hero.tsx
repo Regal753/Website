@@ -36,23 +36,33 @@ const Hero: React.FC<HeroProps> = ({ scrollToSection }) => {
             制作と運用のボトルネックを潰し、継続的に回るメディア運営を支援します。
           </p>
 
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-2">
+            <span className="bg-white/80 border border-slate-200 rounded-full px-3 py-1 text-xs text-slate-700">YouTube運用</span>
+            <span className="bg-white/80 border border-slate-200 rounded-full px-3 py-1 text-xs text-slate-700">BGM制作・権利管理</span>
+            <span className="bg-white/80 border border-slate-200 rounded-full px-3 py-1 text-xs text-slate-700">編集体制整備</span>
+            <span className="bg-white/80 border border-slate-200 rounded-full px-3 py-1 text-xs text-slate-700">Drive/Sheets/Discord自動化</span>
+          </div>
+
+          <div className="flex flex-col sm:flex-row flex-wrap gap-4">
             <button
               onClick={() => scrollToSection(SectionId.CONTACT)}
-              className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg flex items-center gap-2 transition-all shadow-lg shadow-blue-600/20"
+              className="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-600/20"
             >
               お問い合わせ
               <ArrowRight size={20} />
             </button>
             <button
               onClick={() => scrollToSection(SectionId.SERVICES)}
-              className="px-8 py-4 bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-semibold rounded-lg transition-all"
+              className="w-full sm:w-auto px-8 py-4 bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-semibold rounded-lg transition-all"
             >
               サービスを見る
             </button>
           </div>
 
+          <p className="text-xs text-slate-500 mt-3">フォーム送信 → ヒアリング → ご提案・お見積り → 着手</p>
+
           <div className="mt-10 lg:hidden">
+            <p className="text-sm text-slate-600 mb-3">サービスフロー</p>
             <div className="rounded-2xl bg-white border border-slate-200 shadow-sm overflow-hidden">
               <img
                 src={import.meta.env.BASE_URL + "images/workflow.webp"}
@@ -62,6 +72,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToSection }) => {
                 decoding="async"
               />
             </div>
+            <p className="text-xs text-slate-600 mt-2">運用を仕組み化して回すための設計</p>
           </div>
         </div>
 
