@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
         <div>
           <h2 className="text-xl font-bold text-slate-900 mb-2">{siteConfig.companyName}</h2>
           <p className="text-slate-500 text-sm">
-            クリエイターの制作と運用を、音とテクノロジーで支えます。
+            SNSと知的財産事業の継続運用を、設計と自動化で支えます。
           </p>
         </div>
         
