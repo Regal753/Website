@@ -11,7 +11,7 @@ const INITIAL_FORM: ContactFormState = {
   message: '',
 };
 
-const CONTACT_HOURS = '平日 10:00-18:00';
+const CONTACT_HOURS = '電話受付 9:00-20:00（フォームは24時間受付）';
 
 const formatBytes = (bytes: number): string => {
   if (bytes < 1024) return `${bytes} B`;
@@ -252,14 +252,14 @@ const Contact: React.FC = () => {
               </div>
               <div className="mt-2 flex items-center gap-2 text-xs text-slate-500">
                 <Phone className="w-3.5 h-3.5" />
-                <span>お急ぎのご相談はお電話をご利用ください。</span>
+                <span>フォームは24時間受付です。お急ぎの場合はお電話をご利用ください。</span>
               </div>
             </div>
 
             <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
               <h3 className="text-base font-bold text-slate-900">Googleフォーム</h3>
               <p className="text-sm text-slate-600 mt-2">
-                ブラウザで完結したい方は、Googleフォームからも受け付けています。
+                Googleフォームは24時間いつでも送信できます。
               </p>
               <a
                 href={siteConfig.contactFormUrl}
