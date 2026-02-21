@@ -1,42 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import Hero from './components/Hero';
-import Services from './components/Services';
-import Cases from './components/Cases';
-import Pricing from './components/Pricing';
-import Process from './components/Process';
-import TechStack from './components/TechStack';
-import CompanyInfo from './components/CompanyInfo';
-import Contact from './components/Contact';
 import Footer from './components/Footer';
-import { SectionId } from './types';
+import HomePage from './pages/HomePage';
+import CompanyPage from './pages/CompanyPage';
+import ContactPage from './pages/ContactPage';
 
 function App() {
-  const [activeSection, setActiveSection] = useState<SectionId>(SectionId.HOME);
-
-  const scrollToSection = (id: SectionId) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setActiveSection(id);
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-white text-slate-800 selection:bg-blue-100">
-      <Header activeSection={activeSection} scrollToSection={scrollToSection} />
-      <main>
-        <Hero scrollToSection={scrollToSection} />
-        <Services />
-        <Cases />
-        <Pricing />
-        <Process />
-        <TechStack />
-        <CompanyInfo />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <HashRouter>
+      <div className="min-h-screen bg-white text-slate-800 selection:bg-blue-100">
+        <Header />
+        <main>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/company" element={<CompanyPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </HashRouter>
   );
 }
 

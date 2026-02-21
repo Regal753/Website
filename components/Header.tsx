@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { SectionId } from '../types';
 import { siteConfig } from '../site.config';
 
-interface HeaderProps {
-  activeSection: SectionId;
-  scrollToSection: (id: SectionId) => void;
-}
+const PAGE_ROUTES: Partial<Record<SectionId, string>> = {
+  [SectionId.COMPANY]: '/company',
+  [SectionId.CONTACT]: '/contact',
+};
 
-const Header: React.FC<HeaderProps> = ({ activeSection, scrollToSection }) => {
+const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +22,42 @@ const Header: React.FC<HeaderProps> = ({ activeSection, scrollToSection }) => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleNavClick = (id: SectionId) => {
+    setIsMobileMenuOpen(false);
+
+    const route = PAGE_ROUTES[id];
+    if (route) {
+      navigate(route);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    if (id === SectionId.HOME) {
+      navigate('/');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    // Scroll-based section on the home page
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const isActive = (id: SectionId) => {
+    const route = PAGE_ROUTES[id];
+    if (route) return location.pathname === route;
+    if (id === SectionId.HOME) return location.pathname === '/';
+    return false;
+  };
 
   return (
     <header
@@ -30,7 +69,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, scrollToSection }) => {
         {/* Logo */}
         <div
           className="flex items-center gap-2 cursor-pointer group"
-          onClick={() => scrollToSection(SectionId.HOME)}
+          onClick={() => handleNavClick(SectionId.HOME)}
         >
           <img
             src={import.meta.env.BASE_URL + "images/logo.webp"}
@@ -47,9 +86,9 @@ const Header: React.FC<HeaderProps> = ({ activeSection, scrollToSection }) => {
           {siteConfig.navItems.map((item) => (
             <button
               key={item.id}
-              onClick={() => scrollToSection(item.id)}
+              onClick={() => handleNavClick(item.id)}
               className={`text-sm font-medium transition-colors hover:text-blue-600 ${
-                activeSection === item.id ? 'text-blue-600' : 'text-slate-600'
+                isActive(item.id) ? 'text-blue-600' : 'text-slate-600'
               }`}
             >
               {item.label}
@@ -72,12 +111,9 @@ const Header: React.FC<HeaderProps> = ({ activeSection, scrollToSection }) => {
           {siteConfig.navItems.map((item) => (
             <button
               key={item.id}
-              onClick={() => {
-                scrollToSection(item.id);
-                setIsMobileMenuOpen(false);
-              }}
+              onClick={() => handleNavClick(item.id)}
               className={`text-left text-sm font-medium p-2 rounded hover:bg-slate-50 transition-colors ${
-                activeSection === item.id ? 'text-blue-600 bg-blue-50' : 'text-slate-600'
+                isActive(item.id) ? 'text-blue-600 bg-blue-50' : 'text-slate-600'
               }`}
             >
               {item.label}

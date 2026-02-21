@@ -41,6 +41,7 @@ export interface CompanyProfile {
       brandName: string;
       legalName: string;
       representative: string;
+      phone?: string;
       address: string;
       established: string;
       business: string[];

@@ -44,10 +44,13 @@ const TechStack: React.FC = () => {
           <div className="lg:w-1/2">
             <div className="relative rounded-xl overflow-hidden shadow-2xl border border-slate-200 group">
               <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent z-10" />
-              <img
-                src="https://picsum.photos/800/600?grayscale"
-                alt="サーバー監視"
-                className="w-full h-auto transform group-hover:scale-105 transition-transform duration-700"
+              <div
+                className="w-full h-[400px] transform group-hover:scale-105 transition-transform duration-700"
+                style={{
+                  background: 'linear-gradient(135deg, #0f172a 0%, #1e3a5f 40%, #0f172a 70%, #1a2744 100%)',
+                }}
+                role="img"
+                aria-label="サーバー監視"
               />
               <div className="absolute bottom-6 left-6 right-6 z-20">
                 <div className="flex items-center gap-2 mb-2 text-green-400 text-sm font-mono">

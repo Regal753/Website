@@ -1,12 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { SectionId } from '../types';
 import { ArrowRight, Youtube, Music, Cpu } from 'lucide-react';
 
-interface HeroProps {
-  scrollToSection: (id: SectionId) => void;
-}
+const Hero: React.FC = () => {
+  const navigate = useNavigate();
 
-const Hero: React.FC<HeroProps> = ({ scrollToSection }) => {
+  const scrollToSection = (id: SectionId) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section id={SectionId.HOME} className="relative overflow-hidden pt-24 pb-16 md:pt-28 md:pb-24">
       <div className="absolute inset-0 z-0">
@@ -45,7 +49,7 @@ const Hero: React.FC<HeroProps> = ({ scrollToSection }) => {
 
           <div className="flex flex-col sm:flex-row flex-wrap gap-4">
             <button
-              onClick={() => scrollToSection(SectionId.CONTACT)}
+              onClick={() => navigate('/contact')}
               className="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-600/20"
             >
               お問い合わせ

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { siteConfig } from '../site.config';
 
 const Footer: React.FC = () => {
@@ -11,11 +12,11 @@ const Footer: React.FC = () => {
             SNSと知的財産事業の継続運用を、設計と自動化で支えます。
           </p>
         </div>
-        
+
         <div className="flex gap-6 text-sm text-slate-500">
           <a href="privacy.html" className="hover:text-blue-600 transition-colors">プライバシーポリシー</a>
           <a href="terms.html" className="hover:text-blue-400 transition-colors">利用規約</a>
-          <a href="company.html" className="hover:text-blue-400 transition-colors">会社概要</a>
+          <Link to="/company" className="hover:text-blue-400 transition-colors">会社概要</Link>
         </div>
 
         <div className="text-slate-400 text-sm">

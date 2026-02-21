@@ -2,14 +2,27 @@ import React from 'react';
 import { companyProfile } from '../site.config';
 import { SectionId } from '../types';
 
-const rows = [
+interface Row {
+  label: string;
+  value: string;
+  isLink?: { href: string };
+}
+
+const rows: Row[] = [
   { label: '屋号 / ブランド名', value: companyProfile.brandName },
   { label: '法人名', value: companyProfile.legalName },
   { label: '代表者', value: companyProfile.representative },
+  ...(companyProfile.phone
+    ? [{ label: '電話番号', value: companyProfile.phone, isLink: { href: `tel:${companyProfile.phone}` } }]
+    : []),
   { label: '所在地', value: companyProfile.address },
   { label: '設立日', value: companyProfile.established },
   { label: '事業内容', value: companyProfile.business.join('／') },
-  { label: 'お問い合わせ', value: companyProfile.contactEmail },
+  {
+    label: 'お問い合わせ',
+    value: companyProfile.contactEmail,
+    isLink: { href: `mailto:${companyProfile.contactEmail}` },
+  },
 ];
 
 const CompanyInfo: React.FC = () => {
@@ -30,7 +43,18 @@ const CompanyInfo: React.FC = () => {
                   <th className="px-6 py-4 font-medium text-slate-500 whitespace-nowrap w-1/3">
                     {row.label}
                   </th>
-                  <td className="px-6 py-4 text-slate-900">{row.value}</td>
+                  <td className="px-6 py-4 text-slate-900">
+                    {row.isLink ? (
+                      <a
+                        href={row.isLink.href}
+                        className="text-blue-600 hover:text-blue-700 transition-colors"
+                      >
+                        {row.value}
+                      </a>
+                    ) : (
+                      row.value
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>
