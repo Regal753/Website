@@ -4,8 +4,10 @@ const CONTACT_EMAIL = 'retoa@regalocom.net';
 
 export const companyProfile: CompanyProfile = {
   brandName: 'Regalo',
-  legalName: '株式会社Regalo',
+  
   representative: '塩田玲央',
+  
+  phone: '07091317882',
   address: '京都府長岡京市',
   established: '2024年6月10日',
   business: [
