@@ -24,7 +24,9 @@ npm run preview
 ## Environment variables
 
 `.env.example` を参照してください。  
-※本番運用でフロントエンドにAPIキーを埋め込むのは推奨しません（`CLAUDE.md` を参照）。
+フォーム送信を有効化する場合は `VITE_CONTACT_ENDPOINT` を設定できます（未設定時は `site.config.ts` のメール宛に FormSubmit を使用）。  
+`VITE_SITE_URL` は送信完了後の戻り先URLです。  
+※ FormSubmit は初回送信時に宛先メールの認証が必要です。
 
 ## Claude Code に投げる場合
 
