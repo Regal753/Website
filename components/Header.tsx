@@ -87,7 +87,7 @@ const Header: React.FC = () => {
             <button
               key={item.id}
               onClick={() => handleNavClick(item.id)}
-              className={`text-sm font-medium transition-colors hover:text-blue-600 ${
+              className={`text-sm font-medium whitespace-nowrap transition-colors hover:text-blue-600 ${
                 isActive(item.id) ? 'text-blue-600' : 'text-slate-600'
               }`}
             >
