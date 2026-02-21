@@ -47,7 +47,7 @@ export const siteConfig = {
   cases,
   navItems: [
     { id: SectionId.HOME, label: 'ホーム' },
-    { id: SectionId.SERVICES, label: 'SNS運用事業部' },
+    { id: SectionId.SERVICES, label: 'サービス' },
     { id: SectionId.CASES, label: '実績' },
     { id: SectionId.PRICING, label: '料金' },
     { id: SectionId.PROCESS, label: '進め方' },

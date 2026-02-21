@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SectionId, ServiceDetail } from '../types';
-import { Youtube, Music, Mic2, FileCheck, Bot } from 'lucide-react';
+import { Youtube, Music, Mic2, FileCheck, Bot, ChevronDown } from 'lucide-react';
 
 const SERVICES: ServiceDetail[] = [
   {
-    title: "YouTubeチャンネル運用",
+    title: "SNS運用事業部",
     description: "企画と運用設計で、改善が回る体制へ。企画・制作・分析を分断せず、チームで再現できる運用に整えます。属人化を減らし、検証→改善が回る仕組みを作ります。",
     items: [
       "企画設計",
@@ -66,6 +66,8 @@ const SERVICES: ServiceDetail[] = [
 ];
 
 const Services: React.FC = () => {
+  const [isSnsDetailOpen, setIsSnsDetailOpen] = useState(false);
+
   const getGradientStyle = (colorClass: string) => {
     const gradients: Record<string, string> = {
       "from-red-500 to-red-600": "linear-gradient(135deg, rgb(239, 68, 68), rgb(220, 38, 38))",
@@ -81,9 +83,9 @@ const Services: React.FC = () => {
     <section id={SectionId.SERVICES} className="py-24 bg-slate-50 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">SNS運用事業部</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">提供サービス</h2>
           <p className="text-slate-600 max-w-2xl mx-auto">
-            企画・制作・運用・改善を一気通貫で支援し、継続的に成果が積み上がる体制をつくります。
+            メディア運営から技術基盤の構築まで、包括的なソリューションを提供します。
           </p>
         </div>
         <div className="space-y-0">
@@ -106,9 +108,26 @@ const Services: React.FC = () => {
                       <Icon className="text-white w-6 h-6" />
                     </div>
                     <div>
-                      <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">
-                        {service.title}
-                      </h3>
+                      {index === 0 ? (
+                        <button
+                          type="button"
+                          onClick={() => setIsSnsDetailOpen((prev) => !prev)}
+                          className="group inline-flex items-center gap-2 text-left mb-2"
+                          aria-expanded={isSnsDetailOpen}
+                        >
+                          <h3 className="text-xl md:text-2xl font-bold text-slate-900 group-hover:text-blue-700 transition-colors">
+                            {service.title}
+                          </h3>
+                          <span className="text-xs font-semibold text-blue-700 whitespace-nowrap">詳細を見る</span>
+                          <ChevronDown
+                            className={`w-4 h-4 text-blue-700 transition-transform ${isSnsDetailOpen ? 'rotate-180' : ''}`}
+                          />
+                        </button>
+                      ) : (
+                        <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">
+                          {service.title}
+                        </h3>
+                      )}
                       <p className="text-slate-600 text-sm md:text-base leading-relaxed">
                         {service.description}
                       </p>
@@ -127,6 +146,19 @@ const Services: React.FC = () => {
                       ))}
                     </ul>
                   </div>
+                  {index === 0 && isSnsDetailOpen && (
+                    <div className="ml-16 mt-5 rounded-xl border border-blue-200 bg-blue-50/70 p-4">
+                      <h4 className="text-sm md:text-base font-bold text-slate-900 mb-2">
+                        YouTube運用代行の主な対応内容
+                      </h4>
+                      <ul className="space-y-1.5 text-sm text-slate-700">
+                        <li>投稿企画・台本設計・撮影/編集ディレクション</li>
+                        <li>サムネイル・タイトルの検証と改善提案</li>
+                        <li>投稿スケジュール管理と運用オペレーション代行</li>
+                        <li>数値分析レポートと次月アクションの提案</li>
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </div>
             );

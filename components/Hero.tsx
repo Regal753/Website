@@ -59,7 +59,7 @@ const Hero: React.FC = () => {
               onClick={() => scrollToSection(SectionId.SERVICES)}
               className="w-full sm:w-auto px-8 py-4 bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-semibold rounded-lg transition-all"
             >
-              SNS運用事業部を見る
+              サービスを見る
             </button>
           </div>
 
