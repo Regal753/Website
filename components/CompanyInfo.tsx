@@ -8,12 +8,14 @@ interface Row {
   isLink?: { href: string };
 }
 
+const phoneHref = (companyProfile.phone || '').replace(/[^\d+]/g, '');
+
 const rows: Row[] = [
   { label: '屋号 / ブランド名', value: companyProfile.brandName },
   { label: '法人名', value: companyProfile.legalName },
   { label: '代表者', value: companyProfile.representative },
   ...(companyProfile.phone
-    ? [{ label: '電話番号', value: companyProfile.phone, isLink: { href: `tel:${companyProfile.phone}` } }]
+    ? [{ label: '電話番号', value: companyProfile.phone, isLink: { href: `tel:${phoneHref}` } }]
     : []),
   { label: '所在地', value: companyProfile.address },
   { label: '設立日', value: companyProfile.established },
@@ -35,6 +37,10 @@ const CompanyInfo: React.FC = () => {
         <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">
           会社情報
         </h2>
+        <p className="text-slate-700 leading-relaxed mb-8">
+          Regaloは「贈り物」の精神を軸に、関わる皆さまの毎日がより明るく前向きになるよう支援しています。
+          常に成果を意識しながら、継続的な改善と丁寧な伴走で価値を届けます。
+        </p>
         <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
           <table className="w-full text-left text-sm">
             <tbody>

@@ -6,8 +6,8 @@ export const companyProfile: CompanyProfile = {
   brandName: 'Regalo',
   legalName: '株式会社Regalo',
   representative: '塩田玲央',
-  phone: '07091317882',
-  address: '京都府長岡京市',
+  phone: '070-9131-7882',
+  address: '〒617-0813 京都府長岡京市井ノ内南内畑11-14',
   established: '2024年6月10日',
   business: [
     'SNS運用支援',
