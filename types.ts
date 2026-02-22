@@ -14,6 +14,11 @@ export interface CaseStudy {
       outcome: string;
 }
 
+export interface NewsItem {
+      date: string;
+      title: string;
+}
+
 export enum SectionId {
       HOME = 'home',
       SERVICES = 'services',

@@ -1,4 +1,4 @@
-import { NavItem, CompanyProfile, CaseStudy } from './types';
+import { NavItem, CompanyProfile, CaseStudy, NewsItem } from './types';
 
 const CONTACT_EMAIL = 'retoa@regalocom.net';
 
@@ -35,6 +35,12 @@ export const cases: CaseStudy[] = [
   },
 ];
 
+export const newsItems: NewsItem[] = [
+  { date: '2026.02.18', title: 'AI戦略事業部発足' },
+  { date: '2025.12.08', title: '音楽著作権管理者資格取得' },
+  { date: '2025.04.12', title: 'ホームページリニューアル' },
+];
+
 export const siteConfig = {
   companyName: 'Regalo',
   companyNameEn: 'Regalo Inc.',
@@ -45,6 +51,7 @@ export const siteConfig = {
     'RegaloはSNS管理事業部、音楽出版事業部、AIマーケティング戦略事業部を展開し、運用と改善を一気通貫で支援します。',
   companyProfile,
   cases,
+  newsItems,
   navItems: [
     { label: 'ホーム', href: '/' },
     { label: 'SNS管理事業部', href: '/services/sns-management' },
