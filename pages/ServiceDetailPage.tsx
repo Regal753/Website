@@ -21,30 +21,25 @@ const ServiceDetailPage: React.FC = () => {
   const navigate = useNavigate();
   const service = slug ? getServiceBySlug(slug) : undefined;
   const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
+  const [activeSlide, setActiveSlide] = useState(0);
 
   useEffect(() => {
     if (slug && service && slug !== service.slug) {
       navigate(`/services/${service.slug}`, { replace: true });
     }
   }, [slug, service, navigate]);
-
-  if (!service) {
-    return <NotFoundPage />;
-  }
-
-  const Icon = service.icon;
-  const phoneDisplay = siteConfig.companyProfile.phone || '';
-  const phoneHref = phoneDisplay.replace(/[^\d+]/g, '');
-  const otherServices = serviceCatalog.filter((item) => item.slug !== service.slug);
-  const slideImagePaths = useMemo(
-    () => [service.media.listImage, ...service.media.galleryImages].slice(0, 3),
-    [service.media.listImage, service.media.galleryImages],
-  );
-  const [activeSlide, setActiveSlide] = useState(0);
+  const slideImagePaths = useMemo(() => {
+    if (!service) return [];
+    return [service.media.listImage, ...service.media.galleryImages].slice(0, 3);
+  }, [service]);
+  const otherServices = useMemo(() => {
+    if (!service) return [];
+    return serviceCatalog.filter((item) => item.slug !== service.slug);
+  }, [service]);
 
   useEffect(() => {
     setActiveSlide(0);
-  }, [service.slug]);
+  }, [service?.slug]);
 
   useEffect(() => {
     if (slideImagePaths.length <= 1) {
@@ -55,6 +50,14 @@ const ServiceDetailPage: React.FC = () => {
     }, 2800);
     return () => window.clearInterval(timer);
   }, [slideImagePaths]);
+
+  if (!service) {
+    return <NotFoundPage />;
+  }
+
+  const Icon = service.icon;
+  const phoneDisplay = siteConfig.companyProfile.phone || '';
+  const phoneHref = phoneDisplay.replace(/[^\d+]/g, '');
 
   return (
     <section className="pt-28 pb-20 bg-white">

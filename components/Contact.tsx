@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Clock, ExternalLink, Mail, Paperclip, Phone, Send } from 'lucide-react';
 import { SectionId, ContactFormState } from '../types';
 import { siteConfig } from '../site.config';
@@ -32,6 +32,7 @@ const Contact: React.FC = () => {
   const [consent, setConsent] = useState(false);
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const companyPhoneDisplay =
     (siteConfig.companyProfile.phone || '').trim() || '現在準備中（メール窓口をご利用ください）';
@@ -48,8 +49,9 @@ const Contact: React.FC = () => {
   );
 
   const isSubmitted = useMemo(() => {
-    return new URLSearchParams(location.search).get('submitted') === '1';
-  }, [location.search]);
+    const byQuery = new URLSearchParams(location.search).get('submitted') === '1';
+    return hasSubmitted || byQuery;
+  }, [hasSubmitted, location.search]);
 
   const formAction = useMemo(() => {
     const configured = (import.meta.env.VITE_CONTACT_ENDPOINT || '').trim();
@@ -79,24 +81,56 @@ const Contact: React.FC = () => {
     setAttachments(Array.from(event.target.files || []));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setError('');
 
     if (!consent) {
-      event.preventDefault();
-      setIsSubmitting(false);
       setError('プライバシーポリシー・利用規約への同意が必要です。');
       return;
     }
 
     if (totalAttachmentBytes > MAX_ATTACHMENT_BYTES) {
-      event.preventDefault();
-      setIsSubmitting(false);
       setError('添付ファイルの合計サイズは10MB以内にしてください。');
       return;
     }
 
     setIsSubmitting(true);
+    const formElement = event.currentTarget;
+
+    try {
+      const payload = new FormData(formElement);
+      const response = await fetch(formAction, {
+        method: 'POST',
+        body: payload,
+      });
+      const responseBody = await response.text();
+      const requiresActivation = /needs Activation|Activate Form/i.test(responseBody);
+      const genericFormSubmitPage =
+        /<title>FormSubmit/i.test(responseBody) && !/thank|success|submitted/i.test(responseBody);
+
+      if (requiresActivation || genericFormSubmitPage) {
+        setError('メールフォームが未有効化です。Googleフォームかお電話でご連絡ください。');
+        return;
+      }
+
+      if (!response.ok) {
+        setError('送信に失敗しました。Googleフォームかお電話でご連絡ください。');
+        return;
+      }
+
+      setHasSubmitted(true);
+      setForm(INITIAL_FORM);
+      setCompany('');
+      setPhone('');
+      setAttachments([]);
+      setConsent(false);
+      formElement.reset();
+    } catch (_error) {
+      setError('送信に失敗しました。Googleフォームかお電話でご連絡ください。');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -128,12 +162,12 @@ const Contact: React.FC = () => {
                     電話する（{companyPhoneDisplay}）
                   </a>
                 )}
-                <Link
-                  to="/"
+                <a
+                  href={import.meta.env.BASE_URL}
                   className="inline-flex items-center justify-center rounded-lg border border-emerald-300 bg-white px-5 py-2.5 text-sm font-bold text-emerald-800 hover:bg-emerald-100 transition-colors"
                 >
                   トップへ戻る
-                </Link>
+                </a>
               </div>
             </div>
           )}
@@ -269,14 +303,20 @@ const Contact: React.FC = () => {
                   className="mt-1"
                 />
                 <span className="text-sm text-slate-700 leading-relaxed">
-                  <Link to="/privacy" className="text-blue-700 hover:text-blue-800 underline underline-offset-2">
+                  <a
+                    href={asset('privacy.html')}
+                    className="text-blue-700 hover:text-blue-800 underline underline-offset-2"
+                  >
                     プライバシーポリシー
-                  </Link>
+                  </a>
                   と
                   {' '}
-                  <Link to="/terms" className="text-blue-700 hover:text-blue-800 underline underline-offset-2">
+                  <a
+                    href={asset('terms.html')}
+                    className="text-blue-700 hover:text-blue-800 underline underline-offset-2"
+                  >
                     利用規約
-                  </Link>
+                  </a>
                   に同意します。*
                 </span>
               </label>

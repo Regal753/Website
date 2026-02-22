@@ -14,8 +14,8 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="flex gap-6 text-sm text-slate-500">
-          <Link to="/privacy" className="hover:text-blue-600 transition-colors">プライバシーポリシー</Link>
-          <Link to="/terms" className="hover:text-blue-400 transition-colors">利用規約</Link>
+          <a href={`${import.meta.env.BASE_URL}privacy.html`} className="hover:text-blue-600 transition-colors">プライバシーポリシー</a>
+          <a href={`${import.meta.env.BASE_URL}terms.html`} className="hover:text-blue-400 transition-colors">利用規約</a>
           <Link to="/company" className="hover:text-blue-400 transition-colors">会社概要</Link>
         </div>
 
