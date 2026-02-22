@@ -24,6 +24,7 @@ const formatBytes = (bytes: number): string => {
 
 const Contact: React.FC = () => {
   const location = useLocation();
+  const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
   const [form, setForm] = useState<ContactFormState>(INITIAL_FORM);
   const [company, setCompany] = useState('');
   const [phone, setPhone] = useState('');
@@ -312,7 +313,16 @@ const Contact: React.FC = () => {
             </div>
 
             <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
-              <h3 className="text-base font-bold text-slate-900">Instagram</h3>
+              <div className="flex items-center gap-2">
+                <img
+                  src={asset('images/icons/instagram.png')}
+                  alt="Instagram"
+                  className="w-6 h-6 rounded"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <h3 className="text-base font-bold text-slate-900">Instagram</h3>
+              </div>
               <p className="text-sm text-slate-600 mt-2">
                 最新情報や活動内容はInstagramでも発信しています。DMからのご連絡も可能です。
               </p>
@@ -329,7 +339,16 @@ const Contact: React.FC = () => {
             </div>
 
             <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
-              <h3 className="text-base font-bold text-slate-900">Googleフォーム</h3>
+              <div className="flex items-center gap-2">
+                <img
+                  src={asset('images/icons/google-forms.png')}
+                  alt="Googleフォーム"
+                  className="w-6 h-6 rounded"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <h3 className="text-base font-bold text-slate-900">Googleフォーム</h3>
+              </div>
               <p className="text-sm text-slate-600 mt-2">
                 Googleフォームは24時間いつでも送信できます。
               </p>
