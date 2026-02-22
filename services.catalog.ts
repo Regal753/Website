@@ -100,12 +100,12 @@ export const serviceCatalog: ServiceCatalogItem[] = [
     ],
     techStack: ['YouTube Analytics', 'Google Sheets', 'Looker Studio', 'Discord'],
     media: {
-      listImage: 'images/services/sns-cover.png',
+      listImage: 'images/services/sns-cover.webp',
       videoSrc: 'videos/placeholders/sns-management.mp4',
-      videoPoster: 'images/services/sns-cover.png',
+      videoPoster: 'images/services/sns-cover.webp',
       galleryImages: [
-        'images/services/sns-gallery-1.png',
-        'images/services/sns-gallery-2.png',
+        'images/services/sns-gallery-1.webp',
+        'images/services/sns-gallery-2.webp',
       ],
     },
   },
@@ -113,8 +113,8 @@ export const serviceCatalog: ServiceCatalogItem[] = [
     slug: 'music-publishing',
     title: '音楽出版事業部',
     description:
-      '音楽出版・BGM運用と受託/買い切りBGM制作を統合し、制作から権利管理、実運用まで一貫して支援します。',
-    items: ['音楽出版・権利管理', '受託BGM制作', '買い切り制作', '利用許諾/台帳運用'],
+      '音楽著作権の管理を行い、制作から権利管理、実運用まで一貫して支援します。',
+    items: ['音楽著作権管理', 'BGM制作', '利用許諾/台帳運用', '運用フロー整備'],
     icon: Music,
     color: 'from-blue-500 to-blue-600',
     detailLead:
@@ -124,7 +124,7 @@ export const serviceCatalog: ServiceCatalogItem[] = [
         title: '主な提供内容',
         points: [
           'BGMカタログ設計と運用ルール整備',
-          '受託/買い切りBGM制作（尺違い・差分対応）',
+          'BGM制作（尺違い・差分対応）',
           '権利情報・契約情報の台帳整備',
           '利用許諾フローの可視化と運用定着支援',
         ],
@@ -164,12 +164,12 @@ export const serviceCatalog: ServiceCatalogItem[] = [
     ],
     techStack: ['Google Sheets', 'Google Drive', '契約管理台帳', '監査チェックリスト'],
     media: {
-      listImage: 'images/services/music-cover.png',
+      listImage: 'images/services/music-cover.webp',
       videoSrc: 'videos/placeholders/music-publishing.mp4',
-      videoPoster: 'images/services/music-cover.png',
+      videoPoster: 'images/services/music-cover.webp',
       galleryImages: [
-        'images/services/music-gallery-1.png',
-        'images/services/music-gallery-2.png',
+        'images/services/music-gallery-1.webp',
+        'images/services/music-gallery-2.webp',
       ],
     },
   },
@@ -228,12 +228,12 @@ export const serviceCatalog: ServiceCatalogItem[] = [
     ],
     techStack: ['Google Drive API', 'Google Sheets API', 'Discord Bot', 'n8n / GCP'],
     media: {
-      listImage: 'images/services/ai-cover.png',
+      listImage: 'images/services/ai-cover.webp',
       videoSrc: 'videos/placeholders/ai-marketing-strategy.mp4',
-      videoPoster: 'images/services/ai-cover.png',
+      videoPoster: 'images/services/ai-cover.webp',
       galleryImages: [
-        'images/services/ai-gallery-1.png',
-        'images/services/ai-gallery-2.png',
+        'images/services/ai-gallery-1.webp',
+        'images/services/ai-gallery-2.webp',
       ],
     },
   },

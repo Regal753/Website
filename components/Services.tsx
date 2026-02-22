@@ -77,7 +77,7 @@ const Services: React.FC = () => {
                     <img
                       src={asset(service.media.listImage)}
                       alt={`${service.title}のイメージ（仮）`}
-                      className="w-full h-44 object-cover"
+                      className="w-full h-44 object-contain bg-slate-100"
                       loading="lazy"
                       decoding="async"
                     />
