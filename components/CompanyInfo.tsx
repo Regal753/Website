@@ -47,7 +47,7 @@ const CompanyInfo: React.FC = () => {
         </p>
 
         <div className="mb-8 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-          <h3 className="text-lg font-bold text-slate-900 mb-3">会社紹介メディア（仮）</h3>
+          <h3 className="text-lg font-bold text-slate-900 mb-3">会社紹介メディア</h3>
           <video
             className="w-full aspect-video rounded-xl object-cover"
             autoPlay
@@ -55,21 +55,21 @@ const CompanyInfo: React.FC = () => {
             loop
             playsInline
             preload="metadata"
-            poster={asset('images/placeholders/company-main.svg')}
+            poster={asset('images/services/sns-cover.webp')}
           >
-            <source src={asset('videos/placeholders/home-showreel.mp4')} type="video/mp4" />
+            <source src={asset('videos/services/home-showreel.mp4')} type="video/mp4" />
           </video>
           <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3">
             <img
-              src={asset('images/placeholders/company-thumb-1.svg')}
-              alt="会社紹介の仮画像1"
+              src={asset('images/services/music-cover.webp')}
+              alt="会社紹介画像1"
               className="w-full h-40 rounded-lg object-cover border border-slate-200"
               loading="lazy"
               decoding="async"
             />
             <img
-              src={asset('images/placeholders/company-thumb-2.svg')}
-              alt="会社紹介の仮画像2"
+              src={asset('images/services/ai-cover.webp')}
+              alt="会社紹介画像2"
               className="w-full h-40 rounded-lg object-cover border border-slate-200"
               loading="lazy"
               decoding="async"

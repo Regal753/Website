@@ -101,7 +101,7 @@ export const serviceCatalog: ServiceCatalogItem[] = [
     techStack: ['YouTube Analytics', 'Google Sheets', 'Looker Studio', 'Discord'],
     media: {
       listImage: 'images/services/sns-cover.webp',
-      videoSrc: 'videos/placeholders/sns-management.mp4',
+      videoSrc: 'videos/services/sns-management.mp4',
       videoPoster: 'images/services/sns-cover.webp',
       galleryImages: [
         'images/services/sns-gallery-1.webp',
@@ -165,7 +165,7 @@ export const serviceCatalog: ServiceCatalogItem[] = [
     techStack: ['Google Sheets', 'Google Drive', '契約管理台帳', '監査チェックリスト'],
     media: {
       listImage: 'images/services/music-cover.webp',
-      videoSrc: 'videos/placeholders/music-publishing.mp4',
+      videoSrc: 'videos/services/music-publishing.mp4',
       videoPoster: 'images/services/music-cover.webp',
       galleryImages: [
         'images/services/music-gallery-1.webp',
@@ -229,7 +229,7 @@ export const serviceCatalog: ServiceCatalogItem[] = [
     techStack: ['Google Drive API', 'Google Sheets API', 'Discord Bot', 'n8n / GCP'],
     media: {
       listImage: 'images/services/ai-cover.webp',
-      videoSrc: 'videos/placeholders/ai-marketing-strategy.mp4',
+      videoSrc: 'videos/services/ai-marketing-strategy.mp4',
       videoPoster: 'images/services/ai-cover.webp',
       galleryImages: [
         'images/services/ai-gallery-1.webp',

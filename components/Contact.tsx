@@ -114,7 +114,7 @@ const Contact: React.FC = () => {
           <p className="text-xs text-slate-500 mt-3">「*」は必須項目です。</p>
           {isSubmitted && (
             <div className="mt-5 max-w-3xl mx-auto text-left rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-4">
-              <p className="text-sm font-semibold text-emerald-800">送信が完了しました。お問い合わせありがとうございます。</p>
+              <p className="text-sm font-semibold text-emerald-800">送信が完了しました。無料相談ありがとうございます。</p>
               <p className="mt-1 text-sm text-emerald-900/90">
                 通常1〜3営業日以内にご連絡します。お急ぎの場合はお電話でも受け付けています。
               </p>
@@ -141,7 +141,7 @@ const Contact: React.FC = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8">
-            <h3 className="text-xl font-bold text-slate-900 mb-1">お問い合わせフォーム</h3>
+            <h3 className="text-xl font-bold text-slate-900 mb-1">無料相談フォーム</h3>
             <p className="text-sm text-slate-600 mb-6">
               フォーム送信後、受付通知を自動返信します。添付ファイルもそのまま送信できます。
             </p>
@@ -283,7 +283,7 @@ const Contact: React.FC = () => {
                 className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-blue-700 hover:bg-blue-800 disabled:bg-slate-400 text-white font-bold transition-colors"
               >
                 <Send size={18} />
-                {isSubmitting ? '送信中...' : 'フォームを送信'}
+                {isSubmitting ? '送信中...' : '無料相談を送信'}
               </button>
             </form>
           </div>

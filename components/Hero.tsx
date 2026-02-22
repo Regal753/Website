@@ -52,7 +52,7 @@ const Hero: React.FC = () => {
               onClick={() => navigate('/contact')}
               className="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-600/20"
             >
-              お問い合わせ
+              無料相談する
               <ArrowRight size={20} />
             </button>
             <button
@@ -66,7 +66,7 @@ const Hero: React.FC = () => {
           <p className="text-xs text-slate-500 mt-3">フォーム送信 → ヒアリング → ご提案・お見積り → 着手</p>
 
           <div className="mt-10 lg:hidden">
-            <p className="text-sm text-slate-600 mb-3">トップ動画・ギャラリー（仮）</p>
+            <p className="text-sm text-slate-600 mb-3">トップ動画・ギャラリー</p>
             <div className="rounded-2xl bg-white border border-slate-200 shadow-sm overflow-hidden p-3 space-y-3">
               <video
                 className="w-full aspect-video rounded-xl object-cover"
@@ -75,21 +75,21 @@ const Hero: React.FC = () => {
                 loop
                 playsInline
                 preload="metadata"
-                poster={asset('images/placeholders/home-main.svg')}
+                poster={asset('images/services/sns-cover.webp')}
               >
-                <source src={asset('videos/placeholders/home-showreel.mp4')} type="video/mp4" />
+                <source src={asset('videos/services/home-showreel.mp4')} type="video/mp4" />
               </video>
               <div className="grid grid-cols-2 gap-3">
                 <img
-                  src={asset('images/placeholders/home-thumb-1.svg')}
-                  alt="ホーム仮画像1"
+                  src={asset('images/services/music-cover.webp')}
+                  alt="ホーム画像1"
                   className="w-full h-24 rounded-lg object-cover"
                   loading="lazy"
                   decoding="async"
                 />
                 <img
-                  src={asset('images/placeholders/home-thumb-2.svg')}
-                  alt="ホーム仮画像2"
+                  src={asset('images/services/ai-cover.webp')}
+                  alt="ホーム画像2"
                   className="w-full h-24 rounded-lg object-cover"
                   loading="lazy"
                   decoding="async"
@@ -125,22 +125,22 @@ const Hero: React.FC = () => {
                 loop
                 playsInline
                 preload="metadata"
-                poster={asset('images/placeholders/home-main.svg')}
+                poster={asset('images/services/sns-cover.webp')}
               >
-                <source src={asset('videos/placeholders/home-showreel.mp4')} type="video/mp4" />
+                <source src={asset('videos/services/home-showreel.mp4')} type="video/mp4" />
               </video>
 
               <div className="grid grid-cols-2 gap-4">
                 <img
-                  src={asset('images/placeholders/home-thumb-1.svg')}
-                  alt="ホーム仮画像1"
+                  src={asset('images/services/music-cover.webp')}
+                  alt="ホーム画像1"
                   className="w-full h-28 rounded-lg object-cover"
                   loading="lazy"
                   decoding="async"
                 />
                 <img
-                  src={asset('images/placeholders/home-thumb-2.svg')}
-                  alt="ホーム仮画像2"
+                  src={asset('images/services/ai-cover.webp')}
+                  alt="ホーム画像2"
                   className="w-full h-28 rounded-lg object-cover"
                   loading="lazy"
                   decoding="async"

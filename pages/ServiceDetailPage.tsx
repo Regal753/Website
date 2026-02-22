@@ -65,7 +65,7 @@ const ServiceDetailPage: React.FC = () => {
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
             <div className="md:col-span-2 rounded-xl border border-slate-200 bg-slate-50 p-4">
-              <h2 className="text-lg font-bold text-slate-900 mb-3">事業紹介動画（仮）</h2>
+              <h2 className="text-lg font-bold text-slate-900 mb-3">事業紹介動画</h2>
               <video
                 className="w-full aspect-video rounded-lg object-cover"
                 autoPlay
@@ -80,13 +80,13 @@ const ServiceDetailPage: React.FC = () => {
             </div>
 
             <div className="md:col-span-2">
-              <h2 className="text-lg font-bold text-slate-900 mb-3">ギャラリー（仮）</h2>
+              <h2 className="text-lg font-bold text-slate-900 mb-3">ギャラリー</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {service.media.galleryImages.map((imagePath, index) => (
                   <img
                     key={imagePath}
                     src={asset(imagePath)}
-                    alt={`${service.title}の仮画像${index + 1}`}
+                    alt={`${service.title}の参考画像${index + 1}`}
                     className="w-full h-52 rounded-xl object-cover border border-slate-200"
                     loading="lazy"
                     decoding="async"
@@ -181,7 +181,7 @@ const ServiceDetailPage: React.FC = () => {
                 to="/contact"
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-bold text-white hover:bg-blue-800 transition-colors"
               >
-                お問い合わせフォームへ
+                無料相談フォームへ
                 <ArrowRight className="w-4 h-4" />
               </Link>
               {phoneHref && (
@@ -190,7 +190,7 @@ const ServiceDetailPage: React.FC = () => {
                   className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-bold text-slate-700 hover:bg-slate-100 transition-colors"
                 >
                   <Phone className="w-4 h-4" />
-                  {phoneDisplay}
+                  電話で相談: {phoneDisplay}
                 </a>
               )}
             </div>
