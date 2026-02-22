@@ -24,7 +24,6 @@ const formatBytes = (bytes: number): string => {
 
 const Contact: React.FC = () => {
   const location = useLocation();
-  const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
   const [form, setForm] = useState<ContactFormState>(INITIAL_FORM);
   const [company, setCompany] = useState('');
   const [phone, setPhone] = useState('');
@@ -313,28 +312,20 @@ const Contact: React.FC = () => {
             </div>
 
             <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
-              <h3 className="text-base font-bold text-slate-900">お問い合わせメディア（仮）</h3>
+              <h3 className="text-base font-bold text-slate-900">Instagram</h3>
               <p className="text-sm text-slate-600 mt-2">
-                ここに実際の案内動画・画像を後から差し替えできます。
+                最新情報や活動内容はInstagramでも発信しています。DMからのご連絡も可能です。
               </p>
-              <video
-                className="mt-3 w-full aspect-video rounded-lg object-cover border border-slate-200"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                poster={asset('images/placeholders/contact-main.svg')}
+              <a
+                href="https://www.instagram.com/regalo0610/"
+                target="_blank"
+                rel="noreferrer"
+                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-pink-600 text-pink-700 font-bold px-4 py-3 hover:bg-pink-50 transition-colors"
               >
-                <source src={asset('videos/placeholders/contact-loop.mp4')} type="video/mp4" />
-              </video>
-              <img
-                src={asset('images/placeholders/contact-thumb.svg')}
-                alt="お問い合わせの仮画像"
-                className="mt-3 w-full h-28 rounded-lg object-cover border border-slate-200"
-                loading="lazy"
-                decoding="async"
-              />
+                <ExternalLink size={16} />
+                Instagramを見る
+              </a>
+              <p className="mt-2 text-xs text-slate-500">@regalo0610</p>
             </div>
 
             <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
