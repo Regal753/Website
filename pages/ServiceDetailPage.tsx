@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Phone } from 'lucide-react';
 import NotFoundPage from './NotFoundPage';
 import { getServiceBySlug, serviceCatalog } from '../services.catalog';
@@ -18,7 +18,14 @@ const getGradientStyle = (colorClass: string): string => {
 
 const ServiceDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
   const service = slug ? getServiceBySlug(slug) : undefined;
+
+  useEffect(() => {
+    if (slug && service && slug !== service.slug) {
+      navigate(`/services/${service.slug}`, { replace: true });
+    }
+  }, [slug, service, navigate]);
 
   if (!service) {
     return <NotFoundPage />;

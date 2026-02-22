@@ -41,10 +41,9 @@ const Hero: React.FC = () => {
           </p>
 
           <div className="flex flex-wrap gap-2">
-            <span className="bg-white/80 border border-slate-200 rounded-full px-3 py-1 text-xs text-slate-700">YouTube運用</span>
-            <span className="bg-white/80 border border-slate-200 rounded-full px-3 py-1 text-xs text-slate-700">BGM制作・権利管理</span>
-            <span className="bg-white/80 border border-slate-200 rounded-full px-3 py-1 text-xs text-slate-700">編集体制整備</span>
-            <span className="bg-white/80 border border-slate-200 rounded-full px-3 py-1 text-xs text-slate-700">Drive/Sheets/Discord自動化</span>
+            <span className="bg-white/80 border border-slate-200 rounded-full px-3 py-1 text-xs text-slate-700">SNS管理事業部</span>
+            <span className="bg-white/80 border border-slate-200 rounded-full px-3 py-1 text-xs text-slate-700">音楽出版事業部</span>
+            <span className="bg-white/80 border border-slate-200 rounded-full px-3 py-1 text-xs text-slate-700">AIマーケティング戦略事業部</span>
           </div>
 
           <div className="flex flex-col sm:flex-row flex-wrap gap-4">

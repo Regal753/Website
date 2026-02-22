@@ -1,4 +1,4 @@
-import { Bot, FileCheck, Mic2, Music, Youtube } from 'lucide-react';
+import { Bot, Music, Youtube } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 
 interface ServiceDetailSection {
@@ -38,54 +38,46 @@ export interface ServiceCatalogItem {
 
 export const serviceCatalog: ServiceCatalogItem[] = [
   {
-    slug: 'sns-operations',
-    title: 'SNS運用事業部',
+    slug: 'sns-management',
+    title: 'SNS管理事業部',
     description:
-      '企画と運用設計で、改善が回る体制へ。企画・制作・分析を分断せず、チームで再現できる運用に整えます。',
-    items: ['企画設計', 'KPI設計', 'サムネ・タイトル検証', '編集ガイドライン'],
+      'YouTubeを中心に、企画設計から制作進行、公開後の分析改善まで一気通貫で支援します。再現可能な運用体制を構築し、継続的な成果を目指します。',
+    items: ['YouTube運用代行', '企画・台本設計', 'KPI分析/改善', '投稿運用オペレーション'],
     icon: Youtube,
     color: 'from-red-500 to-red-600',
     detailLead:
-      'YouTube運用代行を中心に、企画設計から制作進行、分析改善まで一気通貫で支援します。担当者依存を減らし、継続的に成果が積み上がる運用体制を構築します。',
+      'SNS管理事業部では、運用担当者依存から脱却し、組織で成果を積み上げるための運用設計を提供します。特にYouTube運用代行では、企画・制作・分析を同一フローで回し、改善サイクルの定着まで伴走します。',
     detailSections: [
       {
-        title: 'YouTube運用代行の主な対応内容',
+        title: '主な提供内容',
         points: [
-          '投稿企画・台本設計・撮影/編集ディレクション',
-          'サムネイル・タイトルの検証と改善提案',
-          '投稿スケジュール管理と運用オペレーション代行',
-          '数値分析レポートと次月アクションの提案',
+          '投稿企画・台本設計・制作ディレクション',
+          'サムネイル/タイトル改善と検証運用',
+          '投稿スケジュール管理と進行代行',
+          '月次レポートと改善アクション策定',
         ],
       },
       {
-        title: 'このような課題に対応します',
+        title: '対応課題',
         points: [
-          '更新が止まりがちで、担当者ごとに品質がぶれる',
-          '再生回数・登録者数が伸び悩み、打ち手の精度が上がらない',
-          '社内で企画・制作・分析が分断され、改善が回らない',
-        ],
-      },
-      {
-        title: '導入後の進め方',
-        points: [
-          '現状ヒアリングとKPI設定',
-          '30日単位での運用設計・制作・検証',
-          '月次レビューで改善案を優先度順に実装',
+          '更新停止や運用品質のばらつきを解消したい',
+          '再生回数・登録者数の伸び悩みを改善したい',
+          '担当者ごとの属人化を減らして体制化したい',
         ],
       },
     ],
     caseHighlights: [
       {
-        title: '運用体制を標準化し、投稿継続率を改善',
-        summary: '属人化していた進行を役割分担とチェックフローで再設計し、更新停止リスクを低減。',
+        title: '投稿継続率を改善し、運用停止リスクを低減',
+        summary: '企画/制作/分析の役割を明確化し、運用サイクルを標準化。',
       },
       {
-        title: 'タイトル/サムネ改善で視聴効率を向上',
-        summary: '検証サイクルを導入し、訴求軸の改善を継続。CTR改善に寄与する運用体制を構築。',
+        title: 'サムネ・タイトル検証で視聴効率を向上',
+        summary: '検証フロー導入により、改善施策の実行速度と再現性を向上。',
       },
     ],
     pricing: {
-      summary: '投稿本数・運用範囲・改善頻度に応じて、月額型で個別見積りします。',
+      summary: '投稿本数・運用範囲・改善頻度に応じた月額型で個別見積りします。',
       items: [
         '初期設計: 現状分析、KPI設計、運用方針策定',
         '運用代行: 企画進行、投稿管理、数値分析、改善提案',
@@ -93,230 +85,134 @@ export const serviceCatalog: ServiceCatalogItem[] = [
       ],
     },
     processSteps: [
-      { title: '課題ヒアリング', description: '目標KPI、現状体制、運用課題を整理します。' },
-      { title: '運用設計', description: '企画方針、投稿計画、改善指標を設計します。' },
-      { title: '実行・検証', description: '実運用を代行しながら数値を観測し、改善します。' },
-      { title: '月次レビュー', description: '成果報告と次月アクションを合意し、継続改善します。' },
+      { title: '現状ヒアリング', description: '目標と運用課題を整理し、優先指標を定義します。' },
+      { title: '運用設計', description: '企画方針・制作フロー・投稿計画を設計します。' },
+      { title: '実行/検証', description: '実運用を進めながら数値を分析し、改善を回します。' },
+      { title: '月次改善', description: '成果共有と次月アクション合意を行い継続運用します。' },
     ],
     techStack: ['YouTube Analytics', 'Google Sheets', 'Looker Studio', 'Discord'],
   },
   {
-    slug: 'music-publishing-bgm',
-    title: '音楽出版・BGM運用',
+    slug: 'music-publishing',
+    title: '音楽出版事業部',
     description:
-      '権利がクリアなBGM運用。BGMの制作から台帳・契約・登録まで、実運用で困らない形で整備します。',
-    items: ['カタログ運用', '権利登録・台帳管理', '利用許諾の整理', '運用ルール整備'],
+      '音楽出版・BGM運用と受託/買い切りBGM制作を統合し、制作から権利管理、実運用まで一貫して支援します。',
+    items: ['音楽出版・権利管理', '受託BGM制作', '買い切り制作', '利用許諾/台帳運用'],
     icon: Music,
     color: 'from-blue-500 to-blue-600',
     detailLead:
-      'BGMの制作だけでなく、著作権や利用許諾の管理まで含めて設計します。利用範囲の明確化と台帳運用により、トラブルのない音楽活用を実現します。',
+      '音楽出版事業部では、BGM制作だけでなく、著作権管理・利用許諾・契約情報の整備まで含めて設計します。権利トラブルを抑えつつ、制作現場で使いやすい形で音楽資産を運用できる体制を提供します。',
     detailSections: [
       {
-        title: '対応範囲',
+        title: '主な提供内容',
         points: [
-          '配信/動画用途に合わせたBGMカタログ設計',
-          '権利情報・契約情報の整備と更新運用',
-          '利用許諾フローの可視化と担当者教育',
+          'BGMカタログ設計と運用ルール整備',
+          '受託/買い切りBGM制作（尺違い・差分対応）',
+          '権利情報・契約情報の台帳整備',
+          '利用許諾フローの可視化と運用定着支援',
         ],
       },
       {
-        title: '成果イメージ',
+        title: '対応課題',
         points: [
-          '権利確認の手戻り削減',
-          '公開前チェックの標準化',
-          'BGM利用判断のスピード向上',
+          'BGM利用可否の判断基準が曖昧で確認工数が大きい',
+          '制作した音源を再利用しづらく、運用効率が低い',
+          '権利や契約情報の管理が属人化している',
         ],
       },
     ],
     caseHighlights: [
       {
-        title: '権利確認の属人化を解消',
-        summary: '台帳と利用ルールを整備し、公開前チェックを標準化して判断のばらつきを抑制。',
+        title: '公開前の権利確認を標準化',
+        summary: '台帳と利用ルールを整備し、判断のばらつきを抑制。',
       },
       {
-        title: 'BGM利用判断のスピード向上',
-        summary: '許諾条件の整理により、制作現場での利用可否確認時間を短縮。',
+        title: '用途別BGM納品で再利用性を向上',
+        summary: '本編/Shorts向けなど複数尺で納品し、現場運用の負荷を削減。',
       },
     ],
     pricing: {
-      summary: '管理対象曲数、契約状況、運用体制に応じてお見積りします。',
+      summary: '制作曲数・運用範囲・管理対象曲数に応じて個別見積りします。',
       items: [
         '初期整備: 権利情報棚卸し、台帳設計、運用ルール作成',
-        '運用支援: 登録更新、利用許諾整理、定期監査',
-        'オプション: チーム向け運用研修、監査レポート作成',
+        '制作支援: オリジナルBGM制作、差分制作、納品最適化',
+        '運用支援: 許諾整理、登録更新、定期監査',
       ],
     },
     processSteps: [
-      { title: '現状棚卸し', description: '既存曲・契約・許諾状況を確認します。' },
-      { title: '台帳/ルール設計', description: '運用しやすい管理フォーマットと判断基準を定義します。' },
-      { title: '運用導入', description: '現場フローに合わせて承認・確認手順を実装します。' },
-      { title: '定着支援', description: '運用レビューと改善で継続的に精度を高めます。' },
+      { title: '要件整理', description: '利用用途、制作条件、管理課題を整理します。' },
+      { title: '設計/制作', description: '制作・権利管理・運用フローを同時に設計します。' },
+      { title: '導入運用', description: '台帳運用と利用許諾フローを現場に導入します。' },
+      { title: '定着改善', description: 'レビューを通じて運用品質を継続的に改善します。' },
     ],
     techStack: ['Google Sheets', 'Google Drive', '契約管理台帳', '監査チェックリスト'],
   },
   {
-    slug: 'bgm-production',
-    title: '受託・買い切りBGM制作',
+    slug: 'ai-marketing-strategy',
+    title: 'AIマーケティング戦略事業部',
     description:
-      '用途に合わせた「使える」楽曲制作。尺・雰囲気・利用範囲を前提に、実運用しやすい形式で納品します。',
-    items: ['YouTube/配信向け', 'ループ・差分制作', '契約整備', '納品形式最適化'],
-    icon: Mic2,
-    color: 'from-indigo-500 to-indigo-600',
+      '権利管理・編集体制構築と業務自動化を統合し、マーケティング運用の品質とスピードを高める体制を構築します。',
+    items: ['権利管理体制構築', '編集ガイドライン設計', '業務自動化導入', '運用監査/改善'],
+    icon: Bot,
+    color: 'from-cyan-500 to-cyan-600',
     detailLead:
-      '動画や配信の現場でそのまま使えることを重視したBGM制作を行います。用途と運用フローに合わせて、差分やループ素材も含めて納品します。',
+      'AIマーケティング戦略事業部では、運用ルール整備と自動化導入を同時に進め、事故リスクを抑えながら実行速度を高めます。手作業依存を減らし、判断と実行が速いマーケティング体制を実現します。',
     detailSections: [
       {
-        title: '制作メニュー',
+        title: '主な提供内容',
         points: [
-          'オリジナルBGM制作（用途別）',
-          '尺違い・テンポ違いなどの差分制作',
-          'ループ仕様・ジングル仕様への最適化',
+          '権利管理ルール・承認フロー・編集ガイドライン整備',
+          'Drive/Sheets/Discord連携による進行自動化',
+          '定型レポート自動生成と通知フロー設計',
+          '運用監査と改善サイクルの定着支援',
         ],
       },
       {
-        title: '納品仕様',
+        title: '対応課題',
         points: [
-          '編集しやすいファイル形式で納品',
-          '用途別フォルダ構成で再利用しやすく管理',
-          '契約条件・利用範囲を文書化して共有',
-        ],
-      },
-    ],
-    caseHighlights: [
-      {
-        title: '動画用途に合わせた複数尺で納品',
-        summary: '本編・Shorts向けに尺違いを用意し、編集現場での再利用性を向上。',
-      },
-      {
-        title: '買い切り前提で運用負荷を低減',
-        summary: '利用範囲を事前定義し、公開後の確認作業を最小化。',
-      },
-    ],
-    pricing: {
-      summary: '制作曲数、尺バリエーション、利用範囲に応じて個別見積りします。',
-      items: [
-        '基本制作: 1曲単位のオリジナルBGM制作',
-        '差分対応: 尺違い、ループ、テンポ違いの追加制作',
-        '契約整備: 利用範囲・納品条件の文書化',
-      ],
-    },
-    processSteps: [
-      { title: '要件定義', description: '用途、雰囲気、利用範囲、納期を確定します。' },
-      { title: 'デモ制作', description: '方向性確認用デモを作成し、認識を合わせます。' },
-      { title: '本制作/調整', description: '本制作と修正対応を行い、最終音源を仕上げます。' },
-      { title: '納品', description: '実運用しやすい形式で音源と関連情報を納品します。' },
-    ],
-    techStack: ['DAW制作環境', 'WAV/MP3納品', 'Drive共有', 'メタデータ管理'],
-  },
-  {
-    slug: 'rights-management',
-    title: '権利管理・編集体制構築',
-    description:
-      'トラブルを起こさない仕組みづくり。編集チームが迷わないルールとチェックポイントを整備し、事故率を下げます。',
-    items: ['使用可否ルール', '素材・契約台帳', '監査ポイント', 'ガイドライン整備'],
-    icon: FileCheck,
-    color: 'from-emerald-500 to-emerald-600',
-    detailLead:
-      '素材利用の判断基準と承認フローを整備し、編集現場の迷いを減らします。継続運用で抜け漏れが起きにくい体制へ改善します。',
-    detailSections: [
-      {
-        title: '整備する内容',
-        points: [
-          '素材利用ルールと承認フローの定義',
-          '契約・権利情報の台帳化',
-          '公開前チェックリストの運用設計',
-        ],
-      },
-      {
-        title: '導入効果',
-        points: [
-          '確認工数の削減',
-          '確認漏れ・誤利用リスクの低減',
-          '新人でも対応できる運用標準化',
+          '公開前確認が属人化し、抜け漏れが発生している',
+          '進行共有や報告が手作業で、遅延や漏れが起きる',
+          '運用ルールが曖昧でチーム間品質に差がある',
         ],
       },
     ],
     caseHighlights: [
       {
         title: '公開前チェック工程を標準化',
-        summary: 'チェック項目の明文化により、確認漏れと差し戻しを削減。',
+        summary: 'ガイドラインとチェック項目整備で確認漏れを削減。',
       },
       {
-        title: '新人でも運用可能な体制へ',
-        summary: '判断基準と承認フローを整備し、引き継ぎコストを抑制。',
+        title: '進行通知を自動化し対応速度を向上',
+        summary: '連携フロー構築により、共有漏れと報告工数を削減。',
       },
     ],
     pricing: {
-      summary: '対象チーム規模、整備範囲、監査頻度に応じてお見積りします。',
+      summary: '整備範囲・自動化対象業務・連携システム数に応じて個別見積りします。',
       items: [
-        '体制構築: フロー設計、ルール策定、台帳整備',
-        '運用監査: 定期レビュー、改善提案、運用品質チェック',
-        'オプション: 社内ガイドライン文書化、運用研修',
+        '体制設計: フロー設計、ルール策定、運用ガイドライン整備',
+        '自動化構築: 連携設計、ワークフロー実装、監視設計',
+        '運用保守: 定期レビュー、改善提案、障害対応',
       ],
     },
     processSteps: [
-      { title: '現場把握', description: '実際の制作フローと課題をヒアリングします。' },
-      { title: 'ルール設計', description: '判断基準、承認経路、管理台帳を設計します。' },
-      { title: '試行運用', description: '一部運用で検証し、現場に合わせて調整します。' },
-      { title: '全体展開', description: '運用定着と定期監査で品質を維持します。' },
-    ],
-    techStack: ['管理台帳', '承認フロー設計', '運用ガイドライン', '監査チェック'],
-  },
-  {
-    slug: 'workflow-automation',
-    title: 'ワークフロー自動化・ツール構築',
-    description:
-      'Drive × Sheets × Discord で制作を自動化。素材共有・進行管理・通知・台帳更新など、手作業を減らし品質を安定させます。',
-    items: ['Drive/Sheets自動化', 'Discord Bot', 'n8n連携', 'GCP運用'],
-    icon: Bot,
-    color: 'from-cyan-500 to-cyan-600',
-    detailLead:
-      '手作業で行っていた進行管理・通知・台帳更新を自動化し、制作フローの速度と再現性を引き上げます。既存運用を活かしながら段階導入できます。',
-    detailSections: [
-      {
-        title: '自動化対象の例',
-        points: [
-          '素材アップロード時の通知と進行更新',
-          'タスク状態変更の自動反映',
-          '定期レポートの自動生成・配信',
-        ],
-      },
-      {
-        title: '導入ステップ',
-        points: [
-          '現状業務の棚卸し',
-          '優先度の高い業務から段階自動化',
-          '運用監視と改善サイクルの継続',
-        ],
-      },
-    ],
-    caseHighlights: [
-      {
-        title: '進行通知の自動化で確認漏れを削減',
-        summary: 'Drive更新とDiscord通知を連携し、手動共有の漏れを抑制。',
-      },
-      {
-        title: 'レポート作成工数を削減',
-        summary: '定型レポート自動生成により、集計・報告作業を効率化。',
-      },
-    ],
-    pricing: {
-      summary: '自動化対象業務の範囲、連携システム数、保守要件に応じて個別見積りします。',
-      items: [
-        '設計/実装: 業務整理、連携設計、ワークフロー構築',
-        '運用保守: 障害対応、改善提案、ログ監視',
-        'オプション: 追加連携、管理画面整備、運用ドキュメント作成',
-      ],
-    },
-    processSteps: [
-      { title: '業務診断', description: '手作業工程を洗い出し、自動化優先度を決定します。' },
-      { title: '連携設計', description: 'Drive/Sheets/Discord等の連携仕様を定義します。' },
-      { title: '構築/テスト', description: '段階導入で安全に自動化し、テスト運用します。' },
-      { title: '本番運用', description: '監視と改善を行い、運用品質を安定化します。' },
+      { title: '業務診断', description: '現行フローとボトルネックを可視化します。' },
+      { title: '設計', description: '運用ルールと自動化要件を統合設計します。' },
+      { title: '構築/試行', description: '段階導入で安全に構築し、実運用で検証します。' },
+      { title: '本番定着', description: '監視と改善を継続し、品質を安定化します。' },
     ],
     techStack: ['Google Drive API', 'Google Sheets API', 'Discord Bot', 'n8n / GCP'],
   },
 ];
 
-export const getServiceBySlug = (slug: string): ServiceCatalogItem | undefined =>
-  serviceCatalog.find((service) => service.slug === slug);
+const legacySlugMap: Record<string, string> = {
+  'sns-operations': 'sns-management',
+  'music-publishing-bgm': 'music-publishing',
+  'bgm-production': 'music-publishing',
+  'rights-management': 'ai-marketing-strategy',
+  'workflow-automation': 'ai-marketing-strategy',
+};
+
+export const getServiceBySlug = (slug: string): ServiceCatalogItem | undefined => {
+  const normalizedSlug = legacySlugMap[slug] || slug;
+  return serviceCatalog.find((service) => service.slug === normalizedSlug);
+};

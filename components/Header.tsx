@@ -52,7 +52,7 @@ const Header: React.FC = () => {
         </div>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-4 lg:gap-5 xl:gap-6">
+        <nav className="hidden lg:flex items-center gap-4 xl:gap-6">
           {siteConfig.navItems.map((item) => (
             <button
               key={item.href}
@@ -68,7 +68,7 @@ const Header: React.FC = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-slate-600 hover:text-slate-900"
+          className="lg:hidden text-slate-600 hover:text-slate-900"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -77,7 +77,7 @@ const Header: React.FC = () => {
 
       {/* Mobile Nav */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white border-t border-slate-200 shadow-xl p-4 flex flex-col gap-4">
+        <div className="lg:hidden absolute top-full left-0 right-0 bg-white border-t border-slate-200 shadow-xl p-4 flex flex-col gap-4">
           {siteConfig.navItems.map((item) => (
             <button
               key={item.href}
