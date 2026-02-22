@@ -1,8 +1,8 @@
-Background video sources (Pixabay):
-- bg-01.mp4: https://cdn.pixabay.com/video/2023/07/28/173530-849610807_large.mp4
-- bg-02.mp4: https://cdn.pixabay.com/video/2023/10/11/184510-873463500_large.mp4
-- bg-03.mp4: https://cdn.pixabay.com/video/2023/06/17/167569-837244635_large.mp4
+Background video sources (Coverr):
+- bg-01.mp4 (SNS/analytics): https://cdn.coverr.co/videos/coverr-a-male-worker-conducts-a-meeting-by-showing-statistics-9981/720p.mp4
+- bg-02.mp4 (music recording): https://cdn.coverr.co/videos/coverr-a-guy-setting-up-his-phone-camera-to-record-his-music-performance-3437/720p.mp4
+- bg-03.mp4 (AI strategy / operations): https://cdn.coverr.co/videos/coverr-close-up-of-a-man-typing-on-the-keyboard-4926/720p.mp4
 
-Note:
-- Source: Pixabay free stock video CDN
-- Please verify current Pixabay license/usage terms before production release.
+License note:
+- Source platform: Coverr
+- Verify current Coverr license and attribution requirements before production release.
