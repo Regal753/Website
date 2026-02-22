@@ -1,0 +1,8 @@
+Background video sources (Pixabay):
+- bg-01.mp4: https://cdn.pixabay.com/video/2023/07/28/173530-849610807_large.mp4
+- bg-02.mp4: https://cdn.pixabay.com/video/2023/10/11/184510-873463500_large.mp4
+- bg-03.mp4: https://cdn.pixabay.com/video/2023/06/17/167569-837244635_large.mp4
+
+Note:
+- Source: Pixabay free stock video CDN
+- Please verify current Pixabay license/usage terms before production release.
