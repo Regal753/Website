@@ -19,6 +19,21 @@ const Hero: React.FC = () => {
       className="relative overflow-hidden pt-20 pb-14 sm:pt-24 sm:pb-16 md:pt-28 md:pb-24 bg-gradient-to-b from-slate-50 to-white"
     >
       <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 hidden lg:block motion-reduce:hidden">
+          <video
+            className="w-full h-full object-cover opacity-20"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="none"
+            poster={asset('images/services/sns-cover.webp')}
+            aria-hidden="true"
+          >
+            <source src={asset('videos/services/home-showreel.mp4')} type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/65 to-white/80" />
+        </div>
         <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-blue-100/60 rounded-full blur-[120px]" />
         <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-cyan-50/80 rounded-full blur-[100px]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(148,163,184,0.08),transparent_35%),radial-gradient(circle_at_80%_70%,rgba(59,130,246,0.08),transparent_30%)]" />
