@@ -5,6 +5,7 @@ import { ArrowRight, Youtube, Music, Cpu } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const navigate = useNavigate();
+  const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 
   const scrollToSection = (id: SectionId) => {
     const el = document.getElementById(id);
@@ -65,15 +66,35 @@ const Hero: React.FC = () => {
           <p className="text-xs text-slate-500 mt-3">フォーム送信 → ヒアリング → ご提案・お見積り → 着手</p>
 
           <div className="mt-10 lg:hidden">
-            <p className="text-sm text-slate-600 mb-3">サービスフロー</p>
-            <div className="rounded-2xl bg-white border border-slate-200 shadow-sm overflow-hidden">
-              <img
-                src={import.meta.env.BASE_URL + "images/workflow.webp"}
-                alt="自動化フロー例"
-                className="w-full aspect-[16/10] object-cover"
-                loading="lazy"
-                decoding="async"
-              />
+            <p className="text-sm text-slate-600 mb-3">トップ動画・ギャラリー（仮）</p>
+            <div className="rounded-2xl bg-white border border-slate-200 shadow-sm overflow-hidden p-3 space-y-3">
+              <video
+                className="w-full aspect-video rounded-xl object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                poster={asset('images/placeholders/home-main.svg')}
+              >
+                <source src={asset('videos/placeholders/home-showreel.mp4')} type="video/mp4" />
+              </video>
+              <div className="grid grid-cols-2 gap-3">
+                <img
+                  src={asset('images/placeholders/home-thumb-1.svg')}
+                  alt="ホーム仮画像1"
+                  className="w-full h-24 rounded-lg object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <img
+                  src={asset('images/placeholders/home-thumb-2.svg')}
+                  alt="ホーム仮画像2"
+                  className="w-full h-24 rounded-lg object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -96,12 +117,36 @@ const Hero: React.FC = () => {
               </div>
             </div>
 
-            <img
-              src={import.meta.env.BASE_URL + "images/workflow.webp"}
-              alt="自動化フロー例"
-              className="w-full h-auto rounded-lg"
-              loading="lazy"
-            />
+            <div className="space-y-4">
+              <video
+                className="w-full aspect-video rounded-lg object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                poster={asset('images/placeholders/home-main.svg')}
+              >
+                <source src={asset('videos/placeholders/home-showreel.mp4')} type="video/mp4" />
+              </video>
+
+              <div className="grid grid-cols-2 gap-4">
+                <img
+                  src={asset('images/placeholders/home-thumb-1.svg')}
+                  alt="ホーム仮画像1"
+                  className="w-full h-28 rounded-lg object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <img
+                  src={asset('images/placeholders/home-thumb-2.svg')}
+                  alt="ホーム仮画像2"
+                  className="w-full h-28 rounded-lg object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
 
             <div className="mt-6 flex justify-between items-end border-t border-slate-200 pt-6">
               <div>

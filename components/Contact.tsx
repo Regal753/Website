@@ -24,6 +24,7 @@ const formatBytes = (bytes: number): string => {
 
 const Contact: React.FC = () => {
   const location = useLocation();
+  const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
   const [form, setForm] = useState<ContactFormState>(INITIAL_FORM);
   const [company, setCompany] = useState('');
   const [phone, setPhone] = useState('');
@@ -309,6 +310,31 @@ const Contact: React.FC = () => {
                 <Phone className="w-3.5 h-3.5" />
                 <span>フォームは24時間受付です。お急ぎの場合はお電話をご利用ください。</span>
               </div>
+            </div>
+
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+              <h3 className="text-base font-bold text-slate-900">お問い合わせメディア（仮）</h3>
+              <p className="text-sm text-slate-600 mt-2">
+                ここに実際の案内動画・画像を後から差し替えできます。
+              </p>
+              <video
+                className="mt-3 w-full aspect-video rounded-lg object-cover border border-slate-200"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                poster={asset('images/placeholders/contact-main.svg')}
+              >
+                <source src={asset('videos/placeholders/contact-loop.mp4')} type="video/mp4" />
+              </video>
+              <img
+                src={asset('images/placeholders/contact-thumb.svg')}
+                alt="お問い合わせの仮画像"
+                className="mt-3 w-full h-28 rounded-lg object-cover border border-slate-200"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
 
             <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">

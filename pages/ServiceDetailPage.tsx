@@ -20,6 +20,7 @@ const ServiceDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const service = slug ? getServiceBySlug(slug) : undefined;
+  const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 
   useEffect(() => {
     if (slug && service && slug !== service.slug) {
@@ -63,6 +64,37 @@ const ServiceDetailPage: React.FC = () => {
           </div>
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+            <div className="md:col-span-2 rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <h2 className="text-lg font-bold text-slate-900 mb-3">事業紹介動画（仮）</h2>
+              <video
+                className="w-full aspect-video rounded-lg object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                poster={asset(service.media.videoPoster)}
+              >
+                <source src={asset(service.media.videoSrc)} type="video/mp4" />
+              </video>
+            </div>
+
+            <div className="md:col-span-2">
+              <h2 className="text-lg font-bold text-slate-900 mb-3">ギャラリー（仮）</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {service.media.galleryImages.map((imagePath, index) => (
+                  <img
+                    key={imagePath}
+                    src={asset(imagePath)}
+                    alt={`${service.title}の仮画像${index + 1}`}
+                    className="w-full h-52 rounded-xl object-cover border border-slate-200"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ))}
+              </div>
+            </div>
+
             {service.detailSections.map((section) => (
               <div key={section.title} className="rounded-xl border border-slate-200 p-5 bg-slate-50">
                 <h2 className="text-lg font-bold text-slate-900">{section.title}</h2>

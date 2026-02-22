@@ -21,6 +21,13 @@ interface ServiceProcessStep {
   description: string;
 }
 
+interface ServiceMediaAssets {
+  listImage: string;
+  videoSrc: string;
+  videoPoster: string;
+  galleryImages: string[];
+}
+
 export interface ServiceCatalogItem {
   slug: string;
   title: string;
@@ -34,6 +41,7 @@ export interface ServiceCatalogItem {
   pricing: ServicePricingModel;
   processSteps: ServiceProcessStep[];
   techStack: string[];
+  media: ServiceMediaAssets;
 }
 
 export const serviceCatalog: ServiceCatalogItem[] = [
@@ -91,6 +99,15 @@ export const serviceCatalog: ServiceCatalogItem[] = [
       { title: '月次改善', description: '成果共有と次月アクション合意を行い継続運用します。' },
     ],
     techStack: ['YouTube Analytics', 'Google Sheets', 'Looker Studio', 'Discord'],
+    media: {
+      listImage: 'images/placeholders/sns-cover.svg',
+      videoSrc: 'videos/placeholders/sns-management.mp4',
+      videoPoster: 'images/placeholders/sns-cover.svg',
+      galleryImages: [
+        'images/placeholders/sns-gallery-1.svg',
+        'images/placeholders/sns-gallery-2.svg',
+      ],
+    },
   },
   {
     slug: 'music-publishing',
@@ -146,6 +163,15 @@ export const serviceCatalog: ServiceCatalogItem[] = [
       { title: '定着改善', description: 'レビューを通じて運用品質を継続的に改善します。' },
     ],
     techStack: ['Google Sheets', 'Google Drive', '契約管理台帳', '監査チェックリスト'],
+    media: {
+      listImage: 'images/placeholders/music-cover.svg',
+      videoSrc: 'videos/placeholders/music-publishing.mp4',
+      videoPoster: 'images/placeholders/music-cover.svg',
+      galleryImages: [
+        'images/placeholders/music-gallery-1.svg',
+        'images/placeholders/music-gallery-2.svg',
+      ],
+    },
   },
   {
     slug: 'ai-marketing-strategy',
@@ -201,6 +227,15 @@ export const serviceCatalog: ServiceCatalogItem[] = [
       { title: '本番定着', description: '監視と改善を継続し、品質を安定化します。' },
     ],
     techStack: ['Google Drive API', 'Google Sheets API', 'Discord Bot', 'n8n / GCP'],
+    media: {
+      listImage: 'images/placeholders/ai-cover.svg',
+      videoSrc: 'videos/placeholders/ai-marketing-strategy.mp4',
+      videoPoster: 'images/placeholders/ai-cover.svg',
+      galleryImages: [
+        'images/placeholders/ai-gallery-1.svg',
+        'images/placeholders/ai-gallery-2.svg',
+      ],
+    },
   },
 ];
 

@@ -30,6 +30,8 @@ const rows: Row[] = [
 ];
 
 const CompanyInfo: React.FC = () => {
+  const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
+
   return (
     <section
       id={SectionId.COMPANY}
@@ -43,6 +45,37 @@ const CompanyInfo: React.FC = () => {
           Regaloは「贈り物」の精神を軸に、関わる皆さまの毎日がより明るく前向きになるよう支援しています。
           常に成果を意識しながら、継続的な改善と丁寧な伴走で価値を届けます。
         </p>
+
+        <div className="mb-8 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+          <h3 className="text-lg font-bold text-slate-900 mb-3">会社紹介メディア（仮）</h3>
+          <video
+            className="w-full aspect-video rounded-xl object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster={asset('images/placeholders/company-main.svg')}
+          >
+            <source src={asset('videos/placeholders/home-showreel.mp4')} type="video/mp4" />
+          </video>
+          <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3">
+            <img
+              src={asset('images/placeholders/company-thumb-1.svg')}
+              alt="会社紹介の仮画像1"
+              className="w-full h-40 rounded-lg object-cover border border-slate-200"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src={asset('images/placeholders/company-thumb-2.svg')}
+              alt="会社紹介の仮画像2"
+              className="w-full h-40 rounded-lg object-cover border border-slate-200"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
         <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
           <table className="w-full text-left text-sm">
             <tbody>

@@ -1,0 +1,17 @@
+﻿<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1280 720'>
+  <defs>
+    <linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>
+      <stop offset='0%' stop-color='#991b1b'/>
+      <stop offset='100%' stop-color='#ef4444'/>
+    </linearGradient>
+  </defs>
+  <rect width='1280' height='720' fill='url(#g)'/>
+  <g opacity='0.22'>
+    <circle cx='220' cy='140' r='110' fill='#ffffff'/>
+    <circle cx='1060' cy='580' r='180' fill='#ffffff'/>
+    <rect x='460' y='140' width='360' height='210' rx='22' fill='#ffffff'/>
+  </g>
+  <rect x='72' y='560' width='1136' height='92' rx='20' fill='rgba(15,23,42,0.38)'/>
+  <text x='102' y='616' fill='#ffffff' font-family='Noto Sans JP, Segoe UI, sans-serif' font-size='44' font-weight='700'>SNS GALLERY 01</text>
+  <text x='102' y='665' fill='rgba(255,255,255,0.92)' font-family='Noto Sans JP, Segoe UI, sans-serif' font-size='26'>Placeholder image for layout and media composition</text>
+</svg>
