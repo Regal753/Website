@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Phone } from 'lucide-react';
 import NotFoundPage from './NotFoundPage';
@@ -36,6 +36,25 @@ const ServiceDetailPage: React.FC = () => {
   const phoneDisplay = siteConfig.companyProfile.phone || '';
   const phoneHref = phoneDisplay.replace(/[^\d+]/g, '');
   const otherServices = serviceCatalog.filter((item) => item.slug !== service.slug);
+  const slideImagePaths = useMemo(
+    () => [service.media.listImage, ...service.media.galleryImages].slice(0, 3),
+    [service.media.listImage, service.media.galleryImages],
+  );
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  useEffect(() => {
+    setActiveSlide(0);
+  }, [service.slug]);
+
+  useEffect(() => {
+    if (slideImagePaths.length <= 1) {
+      return;
+    }
+    const timer = window.setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % slideImagePaths.length);
+    }, 2800);
+    return () => window.clearInterval(timer);
+  }, [slideImagePaths]);
 
   return (
     <section className="pt-28 pb-20 bg-white">
@@ -64,25 +83,42 @@ const ServiceDetailPage: React.FC = () => {
           </div>
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
-            <div className="md:col-span-2 rounded-xl border border-slate-200 bg-slate-50 p-4">
-              <h2 className="text-lg font-bold text-slate-900 mb-3">事業紹介動画</h2>
-              <video
-                className="w-full aspect-video rounded-lg object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                poster={asset(service.media.videoPoster)}
-              >
-                <source src={asset(service.media.videoSrc)} type="video/mp4" />
-              </video>
+            <div className="md:col-span-2 rounded-xl border border-slate-200 bg-slate-50 overflow-hidden">
+              <div className="relative w-full aspect-video bg-slate-100">
+                {slideImagePaths.map((imagePath, index) => (
+                  <img
+                    key={imagePath}
+                    src={asset(imagePath)}
+                    alt={`${service.title}のスライド画像${index + 1}`}
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+                      activeSlide === index ? 'opacity-100' : 'opacity-0'
+                    }`}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    decoding="async"
+                  />
+                ))}
+              </div>
+              {slideImagePaths.length > 1 && (
+                <div className="flex items-center justify-center gap-2 py-3 bg-white border-t border-slate-200">
+                  {slideImagePaths.map((_, index) => (
+                    <button
+                      key={`slide-dot-${index}`}
+                      type="button"
+                      aria-label={`スライド${index + 1}を表示`}
+                      onClick={() => setActiveSlide(index)}
+                      className={`h-2.5 rounded-full transition-all ${
+                        activeSlide === index ? 'w-7 bg-blue-700' : 'w-2.5 bg-slate-300 hover:bg-slate-400'
+                      }`}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
 
             <div className="md:col-span-2">
               <h2 className="text-lg font-bold text-slate-900 mb-3">ギャラリー</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {service.media.galleryImages.map((imagePath, index) => (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {slideImagePaths.map((imagePath, index) => (
                   <img
                     key={imagePath}
                     src={asset(imagePath)}

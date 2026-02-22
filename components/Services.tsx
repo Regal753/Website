@@ -74,13 +74,18 @@ const Services: React.FC = () => {
                     </ul>
                   </div>
                   <div className="ml-16 mt-5 rounded-xl overflow-hidden border border-slate-200 bg-white shadow-sm">
-                    <img
-                      src={asset(service.media.listImage)}
-                      alt={`${service.title}のイメージ`}
-                      className="w-full h-44 object-contain bg-slate-100"
-                      loading="lazy"
-                      decoding="async"
-                    />
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 p-2 bg-slate-50">
+                      {[service.media.listImage, ...service.media.galleryImages].slice(0, 3).map((imagePath, imageIndex) => (
+                        <img
+                          key={`${service.slug}-preview-${imageIndex}`}
+                          src={asset(imagePath)}
+                          alt={`${service.title}のイメージ${imageIndex + 1}`}
+                          className="w-full h-36 rounded-lg object-cover border border-slate-200 bg-white"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      ))}
+                    </div>
                   </div>
                   <div className="ml-16 mt-5">
                     <Link
