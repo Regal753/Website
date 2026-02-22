@@ -30,7 +30,7 @@ const Hero: React.FC = () => {
             poster={asset('images/services/sns-cover.webp')}
             aria-hidden="true"
           >
-            <source src={asset('videos/services/home-showreel.mp4')} type="video/mp4" />
+            <source src={asset('videos/backgrounds/bg-01.mp4')} type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/65 to-white/80" />
         </div>
@@ -118,7 +118,7 @@ const Hero: React.FC = () => {
                 preload="metadata"
                 poster={asset('images/services/sns-cover.webp')}
               >
-                <source src={asset('videos/services/home-showreel.mp4')} type="video/mp4" />
+                <source src={asset('videos/backgrounds/bg-02.mp4')} type="video/mp4" />
               </video>
               <div className="grid grid-cols-2 gap-3">
                 <img
@@ -168,7 +168,7 @@ const Hero: React.FC = () => {
                 preload="metadata"
                 poster={asset('images/services/sns-cover.webp')}
               >
-                <source src={asset('videos/services/home-showreel.mp4')} type="video/mp4" />
+                <source src={asset('videos/backgrounds/bg-03.mp4')} type="video/mp4" />
               </video>
 
               <div className="grid grid-cols-2 gap-4">

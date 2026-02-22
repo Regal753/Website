@@ -66,7 +66,7 @@ const CompanyInfo: React.FC = () => {
             preload="metadata"
             poster={asset('images/services/sns-cover.webp')}
           >
-            <source src={asset('videos/services/home-showreel.mp4')} type="video/mp4" />
+            <source src={asset('videos/backgrounds/bg-02.mp4')} type="video/mp4" />
           </video>
           <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3">
             <img
