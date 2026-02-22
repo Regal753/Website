@@ -151,9 +151,16 @@ const Contact: React.FC = () => {
   }, [isSubmitted]);
 
   return (
-    <section id={SectionId.CONTACT} className="py-20 md:py-24 bg-slate-50">
+    <section id={SectionId.CONTACT} className="relative overflow-hidden py-20 md:py-24 bg-gradient-to-b from-white via-slate-50 to-slate-100/70">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-blue-100/60 blur-3xl" />
+        <div className="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-cyan-100/70 blur-3xl" />
+      </div>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10 md:mb-14">
+        <div className="text-center mb-10 md:mb-14 relative z-10">
+          <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-100 bg-blue-50 text-blue-700 text-xs font-semibold mb-4">
+            CONTACT
+          </p>
           <div className="inline-flex items-center justify-center p-3 bg-blue-50 rounded-full mb-4">
             <Mail className="w-6 h-6 text-blue-700" />
           </div>
@@ -191,8 +198,8 @@ const Contact: React.FC = () => {
           )}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-          <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8">
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div className="lg:col-span-2 bg-white/95 rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/60 p-6 md:p-8">
             <h3 className="text-xl font-bold text-slate-900 mb-1">無料相談フォーム</h3>
             <p className="text-sm text-slate-600 mb-6">
               フォーム送信後、受付通知を自動返信します。添付ファイルもそのまま送信できます。
@@ -353,7 +360,7 @@ const Contact: React.FC = () => {
           </div>
 
           <aside className="space-y-4">
-            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+            <div className="bg-gradient-to-br from-white to-blue-50/60 rounded-2xl border border-slate-200 shadow-sm p-5">
               <h3 className="text-base font-bold text-slate-900">お電話でのお問い合わせ</h3>
               <p className="text-xs text-slate-500 mt-2">TEL</p>
               {companyPhoneHref ? (
@@ -377,7 +384,7 @@ const Contact: React.FC = () => {
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+            <div className="bg-white/95 rounded-2xl border border-slate-200 shadow-sm p-5">
               <div className="flex items-center gap-2">
                 <img
                   src={asset('images/icons/instagram.png')}
@@ -404,7 +411,7 @@ const Contact: React.FC = () => {
               <p className="mt-2 text-xs text-slate-500">@regalo0610</p>
             </div>
 
-            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+            <div className="bg-white/95 rounded-2xl border border-slate-200 shadow-sm p-5">
               <div className="flex items-center gap-2">
                 <img
                   src={asset('images/icons/google-forms.png')}
@@ -430,7 +437,7 @@ const Contact: React.FC = () => {
               </a>
             </div>
 
-            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+            <div className="bg-gradient-to-br from-white to-slate-50 rounded-2xl border border-slate-200 shadow-sm p-5">
               <h3 className="text-base font-bold text-slate-900">直接メール</h3>
               <p className="text-sm text-slate-600 mt-2">
                 フォームが使いづらい場合は、下記メールアドレスへご連絡ください。

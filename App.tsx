@@ -25,7 +25,7 @@ function App() {
   return (
     <HashRouter>
       <RouteTracker />
-      <div className="min-h-screen bg-white text-slate-800 selection:bg-blue-100">
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100/70 text-slate-800 selection:bg-cyan-100">
         <Header />
         <main>
           <Routes>

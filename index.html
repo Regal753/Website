@@ -56,10 +56,18 @@
       rel="stylesheet"
     />
     <style>
+      :root {
+        --surface: #f8fafc;
+        --surface-soft: #eef2ff;
+        --ink: #0f172a;
+        --ink-subtle: #475569;
+        --accent: #2563eb;
+      }
+
       body {
         font-family: 'Noto Sans JP', sans-serif;
-        background-color: #ffffff;
-        color: #1e293b;
+        background-color: var(--surface);
+        color: var(--ink-subtle);
       }
 
       ::-webkit-scrollbar {
@@ -67,16 +75,16 @@
       }
 
       ::-webkit-scrollbar-track {
-        background: #ffffff;
+        background: var(--surface);
       }
 
       ::-webkit-scrollbar-thumb {
-        background: #cbd5e1;
+        background: #94a3b8;
         border-radius: 4px;
       }
 
       ::-webkit-scrollbar-thumb:hover {
-        background: #94a3b8;
+        background: #64748b;
       }
     </style>
   </head>
