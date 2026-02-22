@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { companyProfile } from '../site.config';
 import { SectionId } from '../types';
+import { serviceCatalog } from '../services.catalog';
 
 interface Row {
   label: string;
@@ -65,6 +67,22 @@ const CompanyInfo: React.FC = () => {
               ))}
             </tbody>
           </table>
+        </div>
+
+        <div className="mt-8">
+          <h3 className="text-xl font-bold text-slate-900 mb-4">事業一覧</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {serviceCatalog.map((service) => (
+              <Link
+                key={service.slug}
+                to={`/services/${service.slug}`}
+                className="rounded-xl border border-slate-200 p-4 hover:border-blue-300 hover:bg-blue-50/40 transition-colors"
+              >
+                <p className="font-bold text-slate-900">{service.title}</p>
+                <p className="text-sm text-slate-600 mt-1 leading-relaxed">{service.description}</p>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </section>

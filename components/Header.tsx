@@ -56,6 +56,7 @@ const Header: React.FC = () => {
     const route = PAGE_ROUTES[id];
     if (route) return location.pathname === route;
     if (id === SectionId.HOME) return location.pathname === '/';
+    if (id === SectionId.SERVICES) return location.pathname.startsWith('/services');
     return false;
   };
 

@@ -1,72 +1,10 @@
-import React, { useState } from 'react';
-import { SectionId, ServiceDetail } from '../types';
-import { Youtube, Music, Mic2, FileCheck, Bot, ChevronDown } from 'lucide-react';
-
-const SERVICES: ServiceDetail[] = [
-  {
-    title: "SNS運用事業部",
-    description: "企画と運用設計で、改善が回る体制へ。企画・制作・分析を分断せず、チームで再現できる運用に整えます。属人化を減らし、検証→改善が回る仕組みを作ります。",
-    items: [
-      "企画設計",
-      "KPI設計",
-      "サムネ・タイトル検証",
-      "編集ガイドライン"
-    ],
-    icon: Youtube,
-    color: "from-red-500 to-red-600"
-  },
-  {
-    title: "音楽出版・BGM運用",
-    description: "権利がクリアなBGM運用。BGMの制作から台帳・契約・登録まで、実運用で困らない形で整備します。",
-    items: [
-      "カタログ運用",
-      "権利登録・台帳管理",
-      "利用許諾の整理",
-      "運用ルール整備"
-    ],
-    icon: Music,
-    color: "from-blue-500 to-blue-600"
-  },
-  {
-    title: "受託・買い切りBGM制作",
-    description: "用途に合わせた「使える」楽曲制作。尺・雰囲気・利用範囲を前提に、実運用しやすい形式で納品します。",
-    items: [
-      "YouTube/配信向け",
-      "ループ・差分制作",
-      "契約整備",
-      "納品形式最適化"
-    ],
-    icon: Mic2,
-    color: "from-indigo-500 to-indigo-600"
-  },
-  {
-    title: "権利管理・編集体制構築",
-    description: "トラブルを起こさない仕組みづくり。編集チームが迷わないルールとチェックポイントを整備し、事故率を下げます。",
-    items: [
-      "使用可否ルール",
-      "素材・契約台帳",
-      "監査ポイント",
-      "ガイドライン整備"
-    ],
-    icon: FileCheck,
-    color: "from-emerald-500 to-emerald-600"
-  },
-  {
-    title: "ワークフロー自動化・ツール構築",
-    description: "Drive × Sheets × Discord で制作を自動化。素材共有・進行管理・通知・台帳更新など、手作業を減らし品質を安定させます。",
-    items: [
-      "Drive/Sheets自動化",
-      "Discord Bot",
-      "n8n連携",
-      "GCP運用"
-    ],
-    icon: Bot,
-    color: "from-cyan-500 to-cyan-600"
-  }
-];
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+import { SectionId } from '../types';
+import { serviceCatalog } from '../services.catalog';
 
 const Services: React.FC = () => {
-  const [isSnsDetailOpen, setIsSnsDetailOpen] = useState(false);
 
   const getGradientStyle = (colorClass: string) => {
     const gradients: Record<string, string> = {
@@ -89,11 +27,11 @@ const Services: React.FC = () => {
           </p>
         </div>
         <div className="space-y-0">
-          {SERVICES.map((service, index) => {
+          {serviceCatalog.map((service, index) => {
             const Icon = service.icon;
             return (
               <div
-                key={index}
+                key={service.slug}
                 className="grid grid-cols-1 md:grid-cols-[160px_1fr] gap-4 md:gap-8 items-start py-10 border-b border-slate-200 last:border-b-0"
               >
                 <div className="text-2xl md:text-3xl font-bold text-slate-300 whitespace-nowrap">
@@ -108,26 +46,14 @@ const Services: React.FC = () => {
                       <Icon className="text-white w-6 h-6" />
                     </div>
                     <div>
-                      {index === 0 ? (
-                        <button
-                          type="button"
-                          onClick={() => setIsSnsDetailOpen((prev) => !prev)}
-                          className="group inline-flex items-center gap-2 text-left mb-2"
-                          aria-expanded={isSnsDetailOpen}
+                      <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">
+                        <Link
+                          to={`/services/${service.slug}`}
+                          className="hover:text-blue-700 transition-colors"
                         >
-                          <h3 className="text-xl md:text-2xl font-bold text-slate-900 group-hover:text-blue-700 transition-colors">
-                            {service.title}
-                          </h3>
-                          <span className="text-xs font-semibold text-blue-700 whitespace-nowrap">詳細を見る</span>
-                          <ChevronDown
-                            className={`w-4 h-4 text-blue-700 transition-transform ${isSnsDetailOpen ? 'rotate-180' : ''}`}
-                          />
-                        </button>
-                      ) : (
-                        <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">
                           {service.title}
-                        </h3>
-                      )}
+                        </Link>
+                      </h3>
                       <p className="text-slate-600 text-sm md:text-base leading-relaxed">
                         {service.description}
                       </p>
@@ -146,19 +72,15 @@ const Services: React.FC = () => {
                       ))}
                     </ul>
                   </div>
-                  {index === 0 && isSnsDetailOpen && (
-                    <div className="ml-16 mt-5 rounded-xl border border-blue-200 bg-blue-50/70 p-4">
-                      <h4 className="text-sm md:text-base font-bold text-slate-900 mb-2">
-                        YouTube運用代行の主な対応内容
-                      </h4>
-                      <ul className="space-y-1.5 text-sm text-slate-700">
-                        <li>投稿企画・台本設計・撮影/編集ディレクション</li>
-                        <li>サムネイル・タイトルの検証と改善提案</li>
-                        <li>投稿スケジュール管理と運用オペレーション代行</li>
-                        <li>数値分析レポートと次月アクションの提案</li>
-                      </ul>
-                    </div>
-                  )}
+                  <div className="ml-16 mt-5">
+                    <Link
+                      to={`/services/${service.slug}`}
+                      className="inline-flex items-center gap-2 text-blue-700 font-semibold hover:text-blue-800 transition-colors"
+                    >
+                      詳細ページへ
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
                 </div>
               </div>
             );
