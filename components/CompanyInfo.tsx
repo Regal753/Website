@@ -30,8 +30,6 @@ const rows: Row[] = [
 ];
 
 const CompanyInfo: React.FC = () => {
-  const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
-
   return (
     <section
       id={SectionId.COMPANY}
@@ -55,36 +53,6 @@ const CompanyInfo: React.FC = () => {
           常に成果を意識しながら、継続的な改善と丁寧な伴走で価値を届けます。
         </p>
 
-        <div className="mb-8 rounded-2xl border border-slate-200 bg-white/90 shadow-lg shadow-slate-200/50 p-4">
-          <h3 className="text-lg font-bold text-slate-900 mb-3">会社紹介メディア</h3>
-          <video
-            className="w-full aspect-video rounded-xl object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster={asset('images/services/sns-cover.webp')}
-          >
-            <source src={asset('videos/backgrounds/bg-02.mp4')} type="video/mp4" />
-          </video>
-          <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3">
-            <img
-              src={asset('images/services/music-cover.webp')}
-              alt="会社紹介画像1"
-              className="w-full h-40 rounded-lg object-cover border border-slate-200"
-              loading="lazy"
-              decoding="async"
-            />
-            <img
-              src={asset('images/services/ai-cover.webp')}
-              alt="会社紹介画像2"
-              className="w-full h-40 rounded-lg object-cover border border-slate-200"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        </div>
         <div className="bg-white/95 rounded-2xl border border-slate-200 shadow-lg shadow-slate-200/50 overflow-hidden">
           <table className="w-full text-left text-sm">
             <tbody>
