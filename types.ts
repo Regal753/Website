@@ -33,8 +33,9 @@ export interface ContactFormState {
 }
 
 export interface NavItem {
-      id: SectionId;
       label: string;
+      href: string;
+      matchPrefix?: boolean;
 }
 
 export interface CompanyProfile {

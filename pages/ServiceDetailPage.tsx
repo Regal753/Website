@@ -71,6 +71,67 @@ const ServiceDetailPage: React.FC = () => {
             ))}
           </div>
 
+          <section className="mt-8">
+            <h2 className="text-xl font-bold text-slate-900 mb-4">実績</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {service.caseHighlights.map((item) => (
+                <div key={item.title} className="rounded-xl border border-slate-200 p-5 bg-white">
+                  <h3 className="text-base font-bold text-slate-900">{item.title}</h3>
+                  <p className="mt-2 text-sm text-slate-600 leading-relaxed">{item.summary}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="rounded-xl border border-slate-200 p-5 bg-slate-50">
+              <h2 className="text-xl font-bold text-slate-900">料金</h2>
+              <p className="mt-2 text-sm text-slate-700 leading-relaxed">{service.pricing.summary}</p>
+              <ul className="mt-3 space-y-2">
+                {service.pricing.items.map((item) => (
+                  <li key={item} className="text-sm text-slate-700 leading-relaxed flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-slate-900 mt-2 shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="rounded-xl border border-slate-200 p-5 bg-slate-50">
+              <h2 className="text-xl font-bold text-slate-900">技術</h2>
+              <p className="mt-2 text-sm text-slate-700 leading-relaxed">
+                既存運用との整合を重視し、必要な技術要素のみを選定して導入します。
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {service.techStack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="inline-flex items-center rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-semibold text-slate-700"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="mt-8 rounded-xl border border-slate-200 p-5 bg-white">
+            <h2 className="text-xl font-bold text-slate-900 mb-4">進め方</h2>
+            <div className="space-y-3">
+              {service.processSteps.map((step, index) => (
+                <div key={step.title} className="flex gap-3">
+                  <div className="mt-0.5 w-7 h-7 rounded-full bg-blue-50 text-blue-700 text-xs font-bold flex items-center justify-center shrink-0">
+                    {index + 1}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-slate-900 text-sm">{step.title}</p>
+                    <p className="text-sm text-slate-600 leading-relaxed">{step.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
           <div className="mt-8 rounded-xl border border-blue-200 bg-blue-50 p-5">
             <h2 className="text-xl font-bold text-slate-900">ご相談・お見積り</h2>
             <p className="mt-2 text-slate-700 text-sm leading-relaxed">

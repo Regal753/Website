@@ -1,4 +1,4 @@
-import { NavItem, SectionId, CompanyProfile, CaseStudy } from './types';
+import { NavItem, CompanyProfile, CaseStudy } from './types';
 
 const CONTACT_EMAIL = 'retoa@regalocom.net';
 
@@ -46,13 +46,13 @@ export const siteConfig = {
   companyProfile,
   cases,
   navItems: [
-    { id: SectionId.HOME, label: 'ホーム' },
-    { id: SectionId.SERVICES, label: 'サービス' },
-    { id: SectionId.CASES, label: '実績' },
-    { id: SectionId.PRICING, label: '料金' },
-    { id: SectionId.PROCESS, label: '進め方' },
-    { id: SectionId.TECH, label: '技術' },
-    { id: SectionId.COMPANY, label: '会社情報' },
-    { id: SectionId.CONTACT, label: 'お問い合わせ' },
+    { label: 'ホーム', href: '/' },
+    { label: 'SNS運用', href: '/services/sns-operations' },
+    { label: '音楽出版・BGM', href: '/services/music-publishing-bgm' },
+    { label: 'BGM制作', href: '/services/bgm-production' },
+    { label: '権利管理', href: '/services/rights-management' },
+    { label: '自動化', href: '/services/workflow-automation' },
+    { label: '会社情報', href: '/company' },
+    { label: 'お問い合わせ', href: '/contact' },
   ] as NavItem[],
 };
