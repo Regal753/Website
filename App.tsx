@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -9,10 +9,22 @@ import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ServiceDetailPage from './pages/ServiceDetailPage';
+import { trackEvent } from './utils/analytics';
+
+const RouteTracker: React.FC = () => {
+  const location = useLocation();
+
+  React.useEffect(() => {
+    trackEvent('page_view', { path: `${location.pathname}${location.search}` });
+  }, [location.pathname, location.search]);
+
+  return null;
+};
 
 function App() {
   return (
     <HashRouter>
+      <RouteTracker />
       <div className="min-h-screen bg-white text-slate-800 selection:bg-blue-100">
         <Header />
         <main>

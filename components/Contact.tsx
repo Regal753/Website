@@ -1,8 +1,9 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Clock, ExternalLink, Mail, Paperclip, Phone, Send } from 'lucide-react';
 import { SectionId, ContactFormState } from '../types';
 import { siteConfig } from '../site.config';
+import { trackEvent } from '../utils/analytics';
 
 const INITIAL_FORM: ContactFormState = {
   name: '',
@@ -33,6 +34,7 @@ const Contact: React.FC = () => {
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const hasTrackedSubmitSuccess = useRef(false);
 
   const companyPhoneDisplay =
     (siteConfig.companyProfile.phone || '').trim() || '現在準備中（メール窓口をご利用ください）';
@@ -84,14 +86,17 @@ const Contact: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError('');
+    trackEvent('contact_submit_attempt', { inquiry_type: form.type, has_attachment: attachments.length > 0 });
 
     if (!consent) {
       setError('プライバシーポリシー・利用規約への同意が必要です。');
+      trackEvent('contact_submit_blocked', { reason: 'consent_missing' });
       return;
     }
 
     if (totalAttachmentBytes > MAX_ATTACHMENT_BYTES) {
       setError('添付ファイルの合計サイズは10MB以内にしてください。');
+      trackEvent('contact_submit_blocked', { reason: 'attachment_too_large' });
       return;
     }
 
@@ -111,15 +116,19 @@ const Contact: React.FC = () => {
 
       if (requiresActivation || genericFormSubmitPage) {
         setError('メールフォームが未有効化です。Googleフォームかお電話でご連絡ください。');
+        trackEvent('contact_submit_failed', { reason: 'formsubmit_not_activated' });
         return;
       }
 
       if (!response.ok) {
         setError('送信に失敗しました。Googleフォームかお電話でご連絡ください。');
+        trackEvent('contact_submit_failed', { reason: 'http_error', status: response.status });
         return;
       }
 
       setHasSubmitted(true);
+      hasTrackedSubmitSuccess.current = false;
+      trackEvent('contact_submit_success', { inquiry_type: form.type, has_attachment: attachments.length > 0 });
       setForm(INITIAL_FORM);
       setCompany('');
       setPhone('');
@@ -128,10 +137,18 @@ const Contact: React.FC = () => {
       formElement.reset();
     } catch (_error) {
       setError('送信に失敗しました。Googleフォームかお電話でご連絡ください。');
+      trackEvent('contact_submit_failed', { reason: 'network_error' });
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  useEffect(() => {
+    if (isSubmitted && !hasTrackedSubmitSuccess.current) {
+      trackEvent('contact_submit_success_view');
+      hasTrackedSubmitSuccess.current = true;
+    }
+  }, [isSubmitted]);
 
   return (
     <section id={SectionId.CONTACT} className="py-20 md:py-24 bg-slate-50">
@@ -156,6 +173,7 @@ const Contact: React.FC = () => {
                 {companyPhoneHref && (
                   <a
                     href={`tel:${companyPhoneHref}`}
+                    onClick={() => trackEvent('phone_click', { placement: 'contact_success_banner' })}
                     className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-700 px-5 py-2.5 text-sm font-bold text-white hover:bg-emerald-800 transition-colors"
                   >
                     <Phone className="w-4 h-4" />
@@ -341,6 +359,7 @@ const Contact: React.FC = () => {
               {companyPhoneHref ? (
                 <a
                   href={`tel:${companyPhoneHref}`}
+                  onClick={() => trackEvent('phone_click', { placement: 'contact_sidebar' })}
                   className="text-2xl font-bold text-slate-900 hover:text-blue-700 tracking-wide"
                 >
                   {companyPhoneDisplay}
@@ -376,6 +395,7 @@ const Contact: React.FC = () => {
                 href="https://www.instagram.com/regalo0610/"
                 target="_blank"
                 rel="noreferrer"
+                onClick={() => trackEvent('external_link_click', { platform: 'instagram', placement: 'contact_sidebar' })}
                 className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-pink-600 text-pink-700 font-bold px-4 py-3 hover:bg-pink-50 transition-colors"
               >
                 <ExternalLink size={16} />
@@ -402,6 +422,7 @@ const Contact: React.FC = () => {
                 href={siteConfig.contactFormUrl}
                 target="_blank"
                 rel="noreferrer"
+                onClick={() => trackEvent('external_link_click', { platform: 'google_form', placement: 'contact_sidebar' })}
                 className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-blue-700 text-blue-700 font-bold px-4 py-3 hover:bg-blue-50 transition-colors"
               >
                 <ExternalLink size={16} />

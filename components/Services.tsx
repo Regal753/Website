@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { SectionId } from '../types';
 import { serviceCatalog } from '../services.catalog';
+import { trackEvent } from '../utils/analytics';
 
 const Services: React.FC = () => {
   const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
@@ -20,6 +21,7 @@ const Services: React.FC = () => {
 
   return (
     <section id={SectionId.SERVICES} className="py-24 bg-slate-50 relative">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(14,165,233,0.08),transparent_25%),radial-gradient(circle_at_90%_80%,rgba(59,130,246,0.08),transparent_30%)]" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">事業一覧</h2>
@@ -27,13 +29,13 @@ const Services: React.FC = () => {
             各事業ページで、実績・料金・進め方・技術までまとめてご確認いただけます。
           </p>
         </div>
-        <div className="space-y-0">
+        <div className="space-y-6">
           {serviceCatalog.map((service, index) => {
             const Icon = service.icon;
             return (
               <div
                 key={service.slug}
-                className="grid grid-cols-1 md:grid-cols-[160px_1fr] gap-4 md:gap-8 items-start py-10 border-b border-slate-200 last:border-b-0"
+                className="grid grid-cols-1 md:grid-cols-[160px_1fr] gap-4 md:gap-8 items-start p-6 md:p-8 rounded-2xl border border-slate-200 bg-white/90 backdrop-blur-sm shadow-sm hover:shadow-lg hover:border-blue-200 transition-all"
               >
                 <div className="text-2xl md:text-3xl font-bold text-slate-300 whitespace-nowrap">
                   SERVICE.{String(index + 1).padStart(2, '0')}
@@ -50,6 +52,9 @@ const Services: React.FC = () => {
                       <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">
                         <Link
                           to={`/services/${service.slug}`}
+                          onClick={() =>
+                            trackEvent('service_detail_click', { placement: 'services_title', service: service.slug })
+                          }
                           className="hover:text-blue-700 transition-colors"
                         >
                           {service.title}
@@ -90,6 +95,9 @@ const Services: React.FC = () => {
                   <div className="ml-16 mt-5">
                     <Link
                       to={`/services/${service.slug}`}
+                      onClick={() =>
+                        trackEvent('service_detail_click', { placement: 'services_cta', service: service.slug })
+                      }
                       className="inline-flex items-center gap-2 text-blue-700 font-semibold hover:text-blue-800 transition-colors"
                     >
                       詳細ページへ

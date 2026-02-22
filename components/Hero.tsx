@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SectionId } from '../types';
 import { ArrowRight, Youtube, Music, Cpu } from 'lucide-react';
+import { trackEvent } from '../utils/analytics';
 
 const Hero: React.FC = () => {
   const navigate = useNavigate();
@@ -13,10 +14,11 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id={SectionId.HOME} className="relative overflow-hidden pt-24 pb-16 md:pt-28 md:pb-24">
+    <section id={SectionId.HOME} className="relative overflow-hidden pt-24 pb-16 md:pt-28 md:pb-24 bg-gradient-to-b from-slate-50 to-white">
       <div className="absolute inset-0 z-0">
         <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-blue-100/60 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-50/80 rounded-full blur-[100px]" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-cyan-50/80 rounded-full blur-[100px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(148,163,184,0.08),transparent_35%),radial-gradient(circle_at_80%_70%,rgba(59,130,246,0.08),transparent_30%)]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
@@ -49,21 +51,42 @@ const Hero: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row flex-wrap gap-4">
             <button
-              onClick={() => navigate('/contact')}
-              className="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-600/20"
+              onClick={() => {
+                trackEvent('cta_click', { placement: 'hero_primary', target: 'contact' });
+                navigate('/contact');
+              }}
+              className="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-600/20 hover:translate-y-[-1px]"
             >
               無料相談する
               <ArrowRight size={20} />
             </button>
             <button
-              onClick={() => scrollToSection(SectionId.SERVICES)}
-              className="w-full sm:w-auto px-8 py-4 bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-semibold rounded-lg transition-all"
+              onClick={() => {
+                trackEvent('cta_click', { placement: 'hero_secondary', target: 'services' });
+                scrollToSection(SectionId.SERVICES);
+              }}
+              className="w-full sm:w-auto px-8 py-4 bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-semibold rounded-lg transition-all hover:translate-y-[-1px]"
             >
               サービスを見る
             </button>
           </div>
 
           <p className="text-xs text-slate-500 mt-3">フォーム送信 → ヒアリング → ご提案・お見積り → 着手</p>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <div className="rounded-xl border border-slate-200 bg-white/80 backdrop-blur px-4 py-3">
+              <p className="text-[11px] text-slate-500">事業部</p>
+              <p className="text-xl font-bold text-slate-900">3</p>
+            </div>
+            <div className="rounded-xl border border-slate-200 bg-white/80 backdrop-blur px-4 py-3">
+              <p className="text-[11px] text-slate-500">対応時間</p>
+              <p className="text-xl font-bold text-slate-900">9:00-20:00</p>
+            </div>
+            <div className="rounded-xl border border-slate-200 bg-white/80 backdrop-blur px-4 py-3 col-span-2 md:col-span-1">
+              <p className="text-[11px] text-slate-500">フォーム受付</p>
+              <p className="text-xl font-bold text-slate-900">24H</p>
+            </div>
+          </div>
 
           <div className="mt-10 lg:hidden">
             <p className="text-sm text-slate-600 mb-3">トップ動画・ギャラリー</p>
@@ -100,7 +123,7 @@ const Hero: React.FC = () => {
         </div>
 
         <div className="hidden lg:block relative">
-          <div className="relative rounded-2xl bg-white border border-slate-200 p-8 backdrop-blur-sm shadow-xl">
+          <div className="relative rounded-2xl bg-white/90 border border-slate-200 p-8 backdrop-blur-sm shadow-xl">
             <div className="absolute -top-12 -right-12 p-4 bg-white rounded-xl border border-slate-200 shadow-lg flex items-center gap-3 animate-bounce" style={{ animationDuration: '3s' }}>
               <div className="p-2 bg-red-50 rounded-lg text-red-500"><Youtube size={24} /></div>
               <div>

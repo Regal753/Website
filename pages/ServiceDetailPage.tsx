@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, Phone } from 'lucide-react';
 import NotFoundPage from './NotFoundPage';
 import { getServiceBySlug, serviceCatalog } from '../services.catalog';
 import { siteConfig } from '../site.config';
+import { trackEvent } from '../utils/analytics';
 
 const getGradientStyle = (colorClass: string): string => {
   const gradients: Record<string, string> = {
@@ -39,6 +40,12 @@ const ServiceDetailPage: React.FC = () => {
 
   useEffect(() => {
     setActiveSlide(0);
+  }, [service?.slug]);
+
+  useEffect(() => {
+    if (service?.slug) {
+      trackEvent('service_detail_view', { service: service.slug });
+    }
   }, [service?.slug]);
 
   useEffect(() => {
@@ -218,6 +225,7 @@ const ServiceDetailPage: React.FC = () => {
             <div className="mt-4 flex flex-wrap gap-3">
               <Link
                 to="/contact"
+                onClick={() => trackEvent('cta_click', { placement: 'service_detail', service: service.slug, target: 'contact' })}
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-bold text-white hover:bg-blue-800 transition-colors"
               >
                 無料相談フォームへ
@@ -226,6 +234,7 @@ const ServiceDetailPage: React.FC = () => {
               {phoneHref && (
                 <a
                   href={`tel:${phoneHref}`}
+                  onClick={() => trackEvent('phone_click', { placement: 'service_detail', service: service.slug })}
                   className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-bold text-slate-700 hover:bg-slate-100 transition-colors"
                 >
                   <Phone className="w-4 h-4" />
