@@ -20,10 +20,10 @@ const Services: React.FC = () => {
   };
 
   return (
-    <section id={SectionId.SERVICES} className="py-24 bg-slate-50 relative">
+    <section id={SectionId.SERVICES} className="py-18 sm:py-20 md:py-24 bg-slate-50 relative">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(14,165,233,0.08),transparent_25%),radial-gradient(circle_at_90%_80%,rgba(59,130,246,0.08),transparent_30%)]" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">事業一覧</h2>
           <p className="text-slate-600 max-w-2xl mx-auto">
             各事業ページで、実績・料金・進め方・技術までまとめてご確認いただけます。
@@ -35,7 +35,7 @@ const Services: React.FC = () => {
             return (
               <div
                 key={service.slug}
-                className="grid grid-cols-1 md:grid-cols-[160px_1fr] gap-4 md:gap-8 items-start p-6 md:p-8 rounded-2xl border border-slate-200 bg-white/90 backdrop-blur-sm shadow-sm hover:shadow-lg hover:border-blue-200 transition-all"
+                className="grid grid-cols-1 md:grid-cols-[160px_1fr] gap-4 md:gap-8 items-start p-5 sm:p-6 md:p-8 rounded-2xl border border-slate-200 bg-white/90 backdrop-blur-sm shadow-sm hover:shadow-lg hover:border-blue-200 transition-all"
               >
                 <div className="text-2xl md:text-3xl font-bold text-slate-300 whitespace-nowrap">
                   SERVICE.{String(index + 1).padStart(2, '0')}
@@ -65,7 +65,7 @@ const Services: React.FC = () => {
                       </p>
                     </div>
                   </div>
-                  <div className="ml-16 mt-4">
+                  <div className="ml-0 md:ml-16 mt-4">
                     <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
                       {service.items.map((item, i) => (
                         <li
@@ -78,21 +78,21 @@ const Services: React.FC = () => {
                       ))}
                     </ul>
                   </div>
-                  <div className="ml-16 mt-5 rounded-xl overflow-hidden border border-slate-200 bg-white shadow-sm">
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 p-2 bg-slate-50">
+                  <div className="ml-0 md:ml-16 mt-5 rounded-xl overflow-hidden border border-slate-200 bg-white shadow-sm">
+                    <div className="grid grid-cols-3 gap-2 p-2 bg-slate-50">
                       {[service.media.listImage, ...service.media.galleryImages].slice(0, 3).map((imagePath, imageIndex) => (
                         <img
                           key={`${service.slug}-preview-${imageIndex}`}
                           src={asset(imagePath)}
                           alt={`${service.title}のイメージ${imageIndex + 1}`}
-                          className="w-full h-36 rounded-lg object-cover border border-slate-200 bg-white"
+                          className="w-full h-24 sm:h-36 rounded-lg object-cover border border-slate-200 bg-white"
                           loading="lazy"
                           decoding="async"
                         />
                       ))}
                     </div>
                   </div>
-                  <div className="ml-16 mt-5">
+                  <div className="ml-0 md:ml-16 mt-5">
                     <Link
                       to={`/services/${service.slug}`}
                       onClick={() =>

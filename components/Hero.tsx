@@ -14,15 +14,18 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id={SectionId.HOME} className="relative overflow-hidden pt-24 pb-16 md:pt-28 md:pb-24 bg-gradient-to-b from-slate-50 to-white">
+    <section
+      id={SectionId.HOME}
+      className="relative overflow-hidden pt-20 pb-14 sm:pt-24 sm:pb-16 md:pt-28 md:pb-24 bg-gradient-to-b from-slate-50 to-white"
+    >
       <div className="absolute inset-0 z-0">
         <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-blue-100/60 rounded-full blur-[120px]" />
         <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-cyan-50/80 rounded-full blur-[100px]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(148,163,184,0.08),transparent_35%),radial-gradient(circle_at_80%_70%,rgba(59,130,246,0.08),transparent_30%)]" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
-        <div className="space-y-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid lg:grid-cols-2 gap-10 md:gap-12 items-center">
+        <div className="space-y-6 md:space-y-8">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-600 text-sm font-medium">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
@@ -31,14 +34,14 @@ const Hero: React.FC = () => {
             ご相談受付中
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold leading-tight tracking-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold leading-tight tracking-tight">
             <span className="block text-slate-900">運用を、仕組みで</span>
             <span className="block bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 whitespace-nowrap">
               加速する。
             </span>
           </h1>
 
-          <p className="text-lg text-slate-600 max-w-xl leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-600 max-w-xl leading-relaxed">
             YouTubeチャンネル運用、BGM制作・権利管理、編集体制の標準化、Drive/Sheets/Discordによる自動化まで。
             制作と運用のボトルネックを潰し、継続的に回るメディア運営を支援します。
           </p>
@@ -55,7 +58,7 @@ const Hero: React.FC = () => {
                 trackEvent('cta_click', { placement: 'hero_primary', target: 'contact' });
                 navigate('/contact');
               }}
-              className="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-600/20 hover:translate-y-[-1px]"
+              className="w-full sm:w-auto px-7 sm:px-8 py-3.5 sm:py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-600/20 hover:translate-y-[-1px]"
             >
               無料相談する
               <ArrowRight size={20} />
@@ -65,7 +68,7 @@ const Hero: React.FC = () => {
                 trackEvent('cta_click', { placement: 'hero_secondary', target: 'services' });
                 scrollToSection(SectionId.SERVICES);
               }}
-              className="w-full sm:w-auto px-8 py-4 bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-semibold rounded-lg transition-all hover:translate-y-[-1px]"
+              className="w-full sm:w-auto px-7 sm:px-8 py-3.5 sm:py-4 bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-semibold rounded-lg transition-all hover:translate-y-[-1px]"
             >
               サービスを見る
             </button>
@@ -73,7 +76,7 @@ const Hero: React.FC = () => {
 
           <p className="text-xs text-slate-500 mt-3">フォーム送信 → ヒアリング → ご提案・お見積り → 着手</p>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-3">
             <div className="rounded-xl border border-slate-200 bg-white/80 backdrop-blur px-4 py-3">
               <p className="text-[11px] text-slate-500">事業部</p>
               <p className="text-xl font-bold text-slate-900">3</p>
@@ -88,8 +91,8 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          <div className="mt-10 lg:hidden">
-            <p className="text-sm text-slate-600 mb-3">トップ動画・ギャラリー</p>
+          <div className="mt-8 lg:hidden">
+            <p className="text-xs sm:text-sm text-slate-600 mb-3">トップ動画・ギャラリー</p>
             <div className="rounded-2xl bg-white border border-slate-200 shadow-sm overflow-hidden p-3 space-y-3">
               <video
                 className="w-full aspect-video rounded-xl object-cover"
@@ -106,14 +109,14 @@ const Hero: React.FC = () => {
                 <img
                   src={asset('images/services/music-cover.webp')}
                   alt="ホーム画像1"
-                  className="w-full h-24 rounded-lg object-cover"
+                  className="w-full h-20 sm:h-24 rounded-lg object-cover"
                   loading="lazy"
                   decoding="async"
                 />
                 <img
                   src={asset('images/services/ai-cover.webp')}
                   alt="ホーム画像2"
-                  className="w-full h-24 rounded-lg object-cover"
+                  className="w-full h-20 sm:h-24 rounded-lg object-cover"
                   loading="lazy"
                   decoding="async"
                 />
