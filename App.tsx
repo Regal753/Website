@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import CompanyPage from './pages/CompanyPage';
 import ContactPage from './pages/ContactPage';
 import PrivacyPage from './pages/PrivacyPage';
+import TermsPage from './pages/TermsPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ServiceDetailPage from './pages/ServiceDetailPage';
 
@@ -20,6 +21,7 @@ function App() {
             <Route path="/company" element={<CompanyPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/terms" element={<TermsPage />} />
             <Route path="/services/:slug" element={<ServiceDetailPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

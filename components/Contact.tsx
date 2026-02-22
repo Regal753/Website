@@ -85,7 +85,7 @@ const Contact: React.FC = () => {
     if (!consent) {
       event.preventDefault();
       setIsSubmitting(false);
-      setError('プライバシーポリシーへの同意が必要です。');
+      setError('プライバシーポリシー・利用規約への同意が必要です。');
       return;
     }
 
@@ -155,6 +155,7 @@ const Contact: React.FC = () => {
             >
               <input type="hidden" name="_subject" value={mailSubject} />
               <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_next" value={nextUrl} />
               <input type="hidden" name="_autoresponse" value={AUTORESPONSE_MESSAGE} />
               <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
@@ -270,6 +271,11 @@ const Contact: React.FC = () => {
                 <span className="text-sm text-slate-700 leading-relaxed">
                   <Link to="/privacy" className="text-blue-700 hover:text-blue-800 underline underline-offset-2">
                     プライバシーポリシー
+                  </Link>
+                  と
+                  {' '}
+                  <Link to="/terms" className="text-blue-700 hover:text-blue-800 underline underline-offset-2">
+                    利用規約
                   </Link>
                   に同意します。*
                 </span>
