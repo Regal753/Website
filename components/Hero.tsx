@@ -16,7 +16,7 @@ const Hero: React.FC = () => {
   return (
     <section
       id={SectionId.HOME}
-      className="relative overflow-hidden pt-20 pb-14 sm:pt-24 sm:pb-16 md:pt-28 md:pb-24 bg-gradient-to-b from-slate-50 to-white"
+      className="relative overflow-hidden pt-28 pb-14 sm:pt-28 sm:pb-16 md:pt-28 md:pb-24 bg-gradient-to-b from-slate-50 to-white"
     >
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 hidden lg:block motion-reduce:hidden">
@@ -107,7 +107,6 @@ const Hero: React.FC = () => {
           </div>
 
           <div className="mt-8 lg:hidden">
-            <p className="text-xs sm:text-sm text-slate-600 mb-3">トップ動画・ギャラリー</p>
             <div className="rounded-2xl bg-white border border-slate-200 shadow-sm overflow-hidden p-3 space-y-3">
               <img
                 src={asset('images/services/sns-cover.webp')}

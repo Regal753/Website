@@ -144,9 +144,20 @@ const RouteTracker: React.FC = () => {
   return null;
 };
 
+const ScrollToTopOnRouteChange: React.FC = () => {
+  const location = useLocation();
+
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [location.pathname]);
+
+  return null;
+};
+
 function App() {
   return (
     <BrowserRouter basename={getRouterBasename()}>
+      <ScrollToTopOnRouteChange />
       <RouteTracker />
       <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100/70 text-slate-800 selection:bg-cyan-100">
         <Header />
