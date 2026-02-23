@@ -9,6 +9,10 @@ export const companyProfile: CompanyProfile = {
   phone: '070-9131-7882',
   address: '〒617-0813 京都府長岡京市井ノ内南内畑11-14',
   established: '2024年6月10日',
+  capital: '100万円',
+  corporateNumber: '4130001077277',
+  invoiceStatus: '適格請求書発行事業者: 未登録（設立2年未満のため）',
+  partnerBanks: ['住信SBIネット銀行', 'GMOあおぞら銀行', 'みずほ銀行'],
   business: [
     'SNS管理事業部',
     '音楽出版事業部',
