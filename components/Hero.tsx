@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Cpu, Music, Youtube } from 'lucide-react';
 import { SectionId } from '../types';
@@ -7,11 +7,17 @@ import { trackEvent } from '../utils/analytics';
 const Hero: React.FC = () => {
   const navigate = useNavigate();
   const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
+  const heroVideoRef = useRef<HTMLVideoElement | null>(null);
 
   const scrollToServices = () => {
     const el = document.getElementById(SectionId.SERVICES);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
+
+  useEffect(() => {
+    if (!heroVideoRef.current) return;
+    heroVideoRef.current.playbackRate = 0.82;
+  }, []);
 
   return (
     <section
@@ -21,6 +27,7 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 motion-reduce:hidden">
           <video
+            ref={heroVideoRef}
             className="h-full w-full object-cover opacity-78"
             autoPlay
             muted
@@ -30,7 +37,7 @@ const Hero: React.FC = () => {
             poster={asset('images/services/ai-cover.webp')}
             aria-hidden="true"
           >
-            <source src={asset('videos/backgrounds/bg-03.mp4')} type="video/mp4" />
+            <source src={asset('videos/backgrounds/bg-02.mp4')} type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-r from-white/92 via-white/70 to-white/15" />
         </div>
