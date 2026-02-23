@@ -44,7 +44,7 @@ const Services: React.FC = () => {
                 <div>
                   <div className="flex items-start gap-4 mb-4">
                     <div
-                      className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 shadow-lg"
+                      className="w-12 h-12 rounded-xl bg-brand-primary-600 flex items-center justify-center shrink-0 shadow-lg"
                       style={{ background: getGradientStyle(service.color) }}
                     >
                       <Icon className="text-white w-6 h-6" />

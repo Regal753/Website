@@ -16,26 +16,23 @@ const Hero: React.FC = () => {
   return (
     <section
       id={SectionId.HOME}
-      className="relative overflow-hidden pt-28 pb-16 md:pb-24 bg-gradient-to-b from-slate-50 to-white"
+      className="relative overflow-hidden pt-28 pb-16 md:pb-24 bg-white"
     >
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 hidden lg:block motion-reduce:hidden">
+        <div className="absolute inset-0 motion-reduce:hidden">
           <video
-            className="h-full w-full object-cover opacity-20"
+            className="h-full w-full object-cover opacity-85"
             autoPlay
             muted
             loop
             playsInline
-            preload="none"
-            poster={asset('images/services/sns-cover.webp')}
+            preload="metadata"
+            poster={asset('images/services/ai-cover.webp')}
             aria-hidden="true"
           >
-            <source src={asset('videos/backgrounds/bg-01.mp4')} type="video/mp4" />
+            <source src={asset('videos/backgrounds/bg-03.mp4')} type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/65 to-white/80" />
         </div>
-        <div className="absolute top-[-20%] right-[-10%] h-[560px] w-[560px] rounded-full bg-brand-primary-100/60 blur-[120px]" />
-        <div className="absolute bottom-[-10%] left-[-10%] h-[440px] w-[440px] rounded-full bg-cyan-50/80 blur-[100px]" />
       </div>
 
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 md:gap-12 lg:grid-cols-2 lg:px-8">
@@ -116,7 +113,7 @@ const Hero: React.FC = () => {
         </div>
 
         <div className="relative hidden lg:block">
-          <div className="rounded-2xl border border-slate-200 bg-white/90 p-8 shadow-xl backdrop-blur-sm">
+          <div className="rounded-2xl border border-slate-200 bg-white/78 p-8 shadow-xl backdrop-blur-sm">
             <div className="space-y-4">
               <img
                 src={asset('images/services/sns-cover.webp')}

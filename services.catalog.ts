@@ -112,7 +112,7 @@ export const serviceCatalog: ServiceCatalogItem[] = [
       '音楽著作権の管理を行い、制作から権利管理、実運用まで一貫して支援します。',
     items: ['音楽著作権管理', 'BGM制作', '利用許諾/台帳運用', '運用フロー整備'],
     icon: Music,
-    color: 'from-blue-500 to-blue-600',
+    color: 'from-brand-primary-500 to-brand-primary-600',
     detailLead:
       '音楽出版事業部では、BGM制作だけでなく、著作権管理・利用許諾・契約情報の整備まで含めて設計します。権利トラブルを抑えつつ、制作現場で使いやすい形で音楽資産を運用できる体制を提供します。',
     detailSections: [

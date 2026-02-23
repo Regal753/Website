@@ -70,7 +70,7 @@ const ServiceDetailPage: React.FC = () => {
         <article className="mt-4 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-10">
           <div className="flex items-start gap-4">
             <div
-              className="w-14 h-14 rounded-xl flex items-center justify-center shrink-0 shadow-lg"
+              className="w-14 h-14 rounded-xl bg-brand-primary-600 flex items-center justify-center shrink-0 shadow-lg"
               style={{ background: getGradientStyle(service.color) }}
             >
               <Icon className="text-white w-7 h-7" />

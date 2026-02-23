@@ -46,7 +46,7 @@ const Process: React.FC = () => {
               {index < STEPS.length - 1 && (
                 <div className="hidden md:block absolute top-10 left-[60%] w-[80%] h-px bg-slate-200" />
               )}
-              <div className={`mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br ${step.color} shadow-lg`}>
+              <div className={`mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-brand-primary-600 bg-gradient-to-br ${step.color} shadow-lg`}>
                 <step.icon className="text-white w-8 h-8" />
               </div>
               <div className="mb-2 text-xs font-semibold tracking-wide text-slate-500">STEP {index + 1}</div>

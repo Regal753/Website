@@ -16,7 +16,7 @@ const Pricing: React.FC = () => {
 
         <div className="bg-white rounded-2xl p-8 md:p-12 border border-slate-200 shadow-sm">
           <div className="flex items-start gap-4 mb-8">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-primary-500 to-brand-primary-600 flex items-center justify-center shadow-lg flex-shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-brand-primary-600 bg-gradient-to-br from-brand-primary-500 to-brand-primary-600 flex items-center justify-center shadow-lg flex-shrink-0">
               <FileText className="text-white w-6 h-6" />
             </div>
             <div>
