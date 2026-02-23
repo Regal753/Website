@@ -192,7 +192,7 @@ const Hero: React.FC = () => {
               </div>
               <div className="text-right">
                 <div className="text-4xl font-bold text-slate-900">運用支援</div>
-                <div className="text-xs text-slate-500">運用支援</div>
+                <div className="text-xs text-slate-500">制作・運用・改善</div>
               </div>
             </div>
           </div>

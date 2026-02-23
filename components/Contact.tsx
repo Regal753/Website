@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Clock, ExternalLink, Mail, Paperclip, Phone, Send } from 'lucide-react';
+import { Clock, ExternalLink, FileText, Instagram, Mail, Paperclip, Phone, Send } from 'lucide-react';
 import { ContactFormState, SectionId } from '../types';
 import { siteConfig } from '../site.config';
 import { trackEvent } from '../utils/analytics';
@@ -221,11 +221,11 @@ const Contact: React.FC = () => {
   return (
     <section
       id={SectionId.CONTACT}
-      className="relative overflow-hidden py-16 sm:py-20 md:py-24 bg-gradient-to-b from-white via-slate-50 to-slate-100/70"
+      className="relative overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-20 md:pb-24 bg-gradient-to-b from-slate-50 via-blue-50/30 to-white"
     >
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-blue-100/60 blur-3xl" />
-        <div className="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-cyan-100/70 blur-3xl" />
+        <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-blue-100/70 blur-3xl" />
+        <div className="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-cyan-100/80 blur-3xl" />
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -455,13 +455,9 @@ const Contact: React.FC = () => {
 
             <div className="bg-white/95 rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-5">
               <div className="flex items-center gap-2">
-                <img
-                  src={asset('images/icons/instagram.png')}
-                  alt="Instagram"
-                  className="w-6 h-6 rounded"
-                  loading="lazy"
-                  decoding="async"
-                />
+                <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-pink-50 border border-pink-100">
+                  <Instagram className="h-4 w-4 text-pink-700" />
+                </span>
                 <h3 className="text-base font-bold text-slate-900">Instagram</h3>
               </div>
               <p className="text-sm text-slate-600 mt-2">
@@ -487,13 +483,9 @@ const Contact: React.FC = () => {
 
             <div className="bg-white/95 rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-5">
               <div className="flex items-center gap-2">
-                <img
-                  src={asset('images/icons/google-forms.png')}
-                  alt="Googleフォーム"
-                  className="w-6 h-6 rounded"
-                  loading="lazy"
-                  decoding="async"
-                />
+                <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50 border border-blue-100">
+                  <FileText className="h-4 w-4 text-blue-700" />
+                </span>
                 <h3 className="text-base font-bold text-slate-900">Googleフォーム</h3>
               </div>
               <p className="text-sm text-slate-600 mt-2">
