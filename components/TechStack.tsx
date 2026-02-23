@@ -11,7 +11,7 @@ const stackItems = [
 
 const TechStack: React.FC = () => {
   return (
-    <section id={SectionId.TECH} className="bg-slate-50 py-16 md:py-24">
+    <section id={SectionId.TECH} className="bg-white py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center md:mb-14">
           <p className="mb-4 inline-flex rounded-full border border-brand-primary-200 bg-brand-primary-50 px-3 py-1 text-xs font-semibold text-brand-primary-700">

@@ -16,7 +16,7 @@ const Pricing: React.FC = () => {
 
         <div className="bg-white rounded-2xl p-8 md:p-12 border border-slate-200 shadow-sm">
           <div className="flex items-start gap-4 mb-8">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg flex-shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-primary-500 to-brand-primary-600 flex items-center justify-center shadow-lg flex-shrink-0">
               <FileText className="text-white w-6 h-6" />
             </div>
             <div>
@@ -29,19 +29,19 @@ const Pricing: React.FC = () => {
 
           <div className="space-y-6 mb-10">
             <div className="flex items-start gap-3">
-              <span className="mt-1 w-6 h-6 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
+              <span className="mt-1 w-6 h-6 rounded-full bg-brand-primary-50 text-brand-primary-600 flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
               <p className="text-slate-600 text-sm leading-relaxed">
                 お問い合わせフォームから、ご相談内容をお送りください。現状の課題感やご希望をざっくりお書きいただければ大丈夫です。
               </p>
             </div>
             <div className="flex items-start gap-3">
-              <span className="mt-1 w-6 h-6 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
+              <span className="mt-1 w-6 h-6 rounded-full bg-brand-primary-50 text-brand-primary-600 flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
               <p className="text-slate-600 text-sm leading-relaxed">
                 内容を確認後、必要に応じてオンラインでヒアリングを行います（30 分程度）。ここまで費用はかかりません。
               </p>
             </div>
             <div className="flex items-start gap-3">
-              <span className="mt-1 w-6 h-6 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
+              <span className="mt-1 w-6 h-6 rounded-full bg-brand-primary-50 text-brand-primary-600 flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
               <p className="text-slate-600 text-sm leading-relaxed">
                 作業スコープ・スケジュール・費用を明記したお見積りをお送りします。ご納得いただけた場合のみ正式発注となります。
               </p>

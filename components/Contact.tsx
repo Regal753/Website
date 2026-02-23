@@ -431,7 +431,7 @@ const Contact: React.FC = () => {
           </div>
 
           <aside className="space-y-4">
-            <div className="bg-gradient-to-br from-white to-blue-50/60 rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-5">
+            <div className="bg-gradient-to-br from-white to-brand-primary-50/60 rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-5">
               <h3 className="text-base font-semibold text-brand-ink">お電話でのお問い合わせ</h3>
               <p className="text-xs text-slate-500 mt-2">TEL</p>
               {companyPhoneHref ? (
@@ -481,8 +481,8 @@ const Contact: React.FC = () => {
 
             <div className="bg-white/95 rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-5">
               <div className="flex items-center gap-2">
-                <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50 border border-blue-100">
-                  <FileText className="h-4 w-4 text-blue-700" />
+                <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-brand-primary-50 border border-brand-primary-100">
+                  <FileText className="h-4 w-4 text-brand-primary-700" />
                 </span>
                 <h3 className="text-base font-semibold text-brand-ink">Googleフォーム</h3>
               </div>
@@ -499,7 +499,7 @@ const Contact: React.FC = () => {
                     placement: 'contact_sidebar',
                   })
                 }
-                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-blue-700 text-blue-700 font-bold px-4 py-3 hover:bg-blue-50 transition-colors"
+                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-brand-primary-700 text-brand-primary-700 font-bold px-4 py-3 hover:bg-brand-primary-50 transition-colors"
               >
                 <ExternalLink size={16} />
                 Googleフォームを開く
@@ -513,7 +513,7 @@ const Contact: React.FC = () => {
               </p>
               <a
                 href={`mailto:${siteConfig.contactEmail}`}
-                className="mt-3 inline-block text-blue-700 hover:text-blue-800 font-semibold break-all"
+                className="mt-3 inline-block text-brand-primary-700 hover:text-brand-primary-800 font-semibold break-all"
               >
                 {siteConfig.contactEmail}
               </a>

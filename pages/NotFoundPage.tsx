@@ -17,7 +17,7 @@ const NotFoundPage: React.FC = () => {
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link
               to="/"
-              className="px-5 py-2.5 rounded-lg bg-blue-700 hover:bg-blue-800 text-white font-semibold transition-colors"
+              className="px-5 py-2.5 rounded-lg bg-brand-primary-700 hover:bg-brand-primary-800 text-white font-semibold transition-colors"
             >
               トップへ戻る
             </Link>

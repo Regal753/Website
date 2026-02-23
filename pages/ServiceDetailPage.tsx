@@ -5,17 +5,7 @@ import NotFoundPage from './NotFoundPage';
 import { getServiceBySlug, serviceCatalog } from '../services.catalog';
 import { siteConfig } from '../site.config';
 import { trackEvent } from '../utils/analytics';
-
-const getGradientStyle = (colorClass: string): string => {
-  const gradients: Record<string, string> = {
-    'from-red-500 to-red-600': 'linear-gradient(135deg, rgb(239, 68, 68), rgb(220, 38, 38))',
-    'from-blue-500 to-blue-600': 'linear-gradient(135deg, rgb(59, 130, 246), rgb(37, 99, 235))',
-    'from-indigo-500 to-indigo-600': 'linear-gradient(135deg, rgb(99, 102, 241), rgb(79, 70, 229))',
-    'from-emerald-500 to-emerald-600': 'linear-gradient(135deg, rgb(16, 185, 129), rgb(5, 150, 105))',
-    'from-cyan-500 to-cyan-600': 'linear-gradient(135deg, rgb(6, 182, 212), rgb(8, 145, 178))',
-  };
-  return gradients[colorClass] || gradients['from-blue-500 to-blue-600'];
-};
+import { getGradientStyle } from '../utils/gradient';
 
 const ServiceDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -119,7 +109,7 @@ const ServiceDetailPage: React.FC = () => {
                       aria-label={`スライド${index + 1}を表示`}
                       onClick={() => setActiveSlide(index)}
                       className={`h-2.5 rounded-full transition-all ${
-                        activeSlide === index ? 'w-7 bg-blue-700' : 'w-2.5 bg-slate-300 hover:bg-slate-400'
+                        activeSlide === index ? 'w-7 bg-brand-primary-700' : 'w-2.5 bg-slate-300 hover:bg-slate-400'
                       }`}
                     />
                   ))}
@@ -209,7 +199,7 @@ const ServiceDetailPage: React.FC = () => {
             <div className="space-y-3">
               {service.processSteps.map((step, index) => (
                 <div key={step.title} className="flex gap-3">
-                  <div className="mt-0.5 w-7 h-7 rounded-full bg-blue-50 text-blue-700 text-xs font-bold flex items-center justify-center shrink-0">
+                  <div className="mt-0.5 w-7 h-7 rounded-full bg-brand-primary-50 text-brand-primary-700 text-xs font-bold flex items-center justify-center shrink-0">
                     {index + 1}
                   </div>
                   <div>
@@ -221,7 +211,7 @@ const ServiceDetailPage: React.FC = () => {
             </div>
           </section>
 
-          <div className="mt-8 rounded-xl border border-blue-200 bg-blue-50 p-5">
+          <div className="mt-8 rounded-xl border border-brand-primary-200 bg-brand-primary-50 p-5">
             <h2 className="text-xl font-semibold text-brand-ink">ご相談・お見積り</h2>
             <p className="mt-2 text-slate-700 text-sm leading-relaxed">
               事業フェーズや運用体制に合わせて、最適な支援内容をご提案します。まずは現状課題をお聞かせください。
@@ -256,7 +246,7 @@ const ServiceDetailPage: React.FC = () => {
               <Link
                 key={item.slug}
                 to={`/services/${item.slug}`}
-                className="rounded-xl border border-slate-200 p-4 bg-white hover:border-blue-300 hover:bg-blue-50/40 transition-colors"
+                className="rounded-xl border border-slate-200 p-4 bg-white hover:border-brand-primary-300 hover:bg-brand-primary-50/40 transition-colors"
               >
                 <p className="font-semibold text-brand-ink">{item.title}</p>
                 <p className="text-sm text-slate-600 mt-1">{item.description}</p>

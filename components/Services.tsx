@@ -4,20 +4,10 @@ import { ArrowRight } from 'lucide-react';
 import { SectionId } from '../types';
 import { serviceCatalog } from '../services.catalog';
 import { trackEvent } from '../utils/analytics';
+import { getGradientStyle } from '../utils/gradient';
 
 const Services: React.FC = () => {
   const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
-
-  const getGradientStyle = (colorClass: string) => {
-    const gradients: Record<string, string> = {
-      'from-red-500 to-red-600': 'linear-gradient(135deg, rgb(239, 68, 68), rgb(220, 38, 38))',
-      'from-blue-500 to-blue-600': 'linear-gradient(135deg, rgb(59, 130, 246), rgb(37, 99, 235))',
-      'from-indigo-500 to-indigo-600': 'linear-gradient(135deg, rgb(99, 102, 241), rgb(79, 70, 229))',
-      'from-emerald-500 to-emerald-600': 'linear-gradient(135deg, rgb(16, 185, 129), rgb(5, 150, 105))',
-      'from-cyan-500 to-cyan-600': 'linear-gradient(135deg, rgb(6, 182, 212), rgb(8, 145, 178))',
-    };
-    return gradients[colorClass] || gradients['from-red-500 to-red-600'];
-  };
 
   return (
     <section id={SectionId.SERVICES} className="bg-slate-50 py-16 md:py-24">
@@ -40,13 +30,13 @@ const Services: React.FC = () => {
                 key={service.slug}
                 className={`grid grid-cols-1 md:grid-cols-[160px_1fr] gap-4 md:gap-8 items-start p-5 sm:p-6 md:p-8 rounded-2xl border backdrop-blur-sm transition-all ${
                   isMusicFocus
-                    ? 'border-blue-300 bg-gradient-to-br from-white via-blue-50/40 to-cyan-50/50 shadow-lg shadow-blue-100/60'
-                    : 'border-slate-200 bg-white/90 shadow-sm hover:shadow-lg hover:border-blue-200'
+                    ? 'border-brand-primary-300 bg-gradient-to-br from-white via-brand-primary-50/40 to-cyan-50/50 shadow-lg shadow-brand-primary-100/60'
+                    : 'border-slate-200 bg-white/90 shadow-sm hover:shadow-lg hover:border-brand-primary-200'
                 }`}
               >
                 <div
                   className={`text-2xl md:text-3xl font-bold whitespace-nowrap ${
-                    isMusicFocus ? 'text-blue-300' : 'text-slate-300'
+                    isMusicFocus ? 'text-brand-primary-300' : 'text-slate-300'
                   }`}
                 >
                   SERVICE.{String(index + 1).padStart(2, '0')}

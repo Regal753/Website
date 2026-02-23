@@ -99,7 +99,7 @@ const CompanyInfo: React.FC = () => {
               <Link
                 key={service.slug}
                 to={`/services/${service.slug}`}
-                className="rounded-xl border border-slate-200 bg-white/90 p-4 shadow-sm hover:shadow-md hover:border-blue-300 hover:bg-blue-50/40 transition-all"
+                className="rounded-xl border border-slate-200 bg-white/90 p-4 shadow-sm hover:shadow-md hover:border-brand-primary-300 hover:bg-brand-primary-50/40 transition-all"
               >
                 <p className="font-semibold text-brand-ink">{service.title}</p>
                 <p className="text-sm text-slate-600 mt-1 leading-relaxed">{service.description}</p>

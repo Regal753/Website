@@ -7,7 +7,7 @@ const STEPS = [
     icon: Send,
     title: 'フォーム送信',
     description: 'お問い合わせフォームから、ご相談内容をお送りください。簡単な概要で構いません。',
-    color: 'from-blue-500 to-cyan-500',
+    color: 'from-brand-primary-500 to-cyan-500',
   },
   {
     icon: MessageSquare,
@@ -25,13 +25,13 @@ const STEPS = [
     icon: Rocket,
     title: '着手',
     description: 'ご発注確定後、キックオフミーティングを経てプロジェクトを開始します。',
-    color: 'from-blue-500 to-indigo-500',
+    color: 'from-brand-primary-500 to-indigo-500',
   },
 ];
 
 const Process: React.FC = () => {
   return (
-    <section id={SectionId.PROCESS} className="bg-white py-16 md:py-24">
+    <section id={SectionId.PROCESS} className="bg-slate-50 py-16 md:py-24">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center md:mb-14">
           <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">進め方</h2>
