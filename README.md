@@ -1,34 +1,48 @@
-# Corporate site starter (React + Vite)
+# Regalo Website (React + Vite)
 
-このリポジトリは、1ページ構成のコーポレートサイト（React + Vite + TypeScript）です。
+Regalo のコーポレートサイトです。  
+React + Vite + TypeScript で構成されています。
 
-- 開発: Vite dev server（http://localhost:3000）
-- ビルド: `vite build` → `dist/`
-
-## Run locally
-
-**Prerequisites:** Node.js (LTS 推奨)
+## 開発
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Build / Preview
+## ビルド
 
 ```bash
 npm run build
 npm run preview
 ```
 
-## Environment variables
+## ルーティング
 
-`.env.example` を参照してください。  
-フォーム送信を有効化する場合は `VITE_CONTACT_ENDPOINT` を設定できます（未設定時は `site.config.ts` のメール宛に FormSubmit を使用）。  
-`VITE_SITE_URL` は送信完了後の戻り先URLです。  
-※ FormSubmit は初回送信時に宛先メールの認証が必要です。
+- `BrowserRouter` を利用
+- GitHub Pages 直リンク対応のため、`public/404.html` で復元リダイレクトを実装
+- `BASE_PATH` を指定すればサブパス配信にも対応（既定 `/`）
 
-## Claude Code に投げる場合
+例:
 
-- `CLAUDE.md` にタスクと制約をまとめています。
-- Claude Code には「`CLAUDE.md` の内容に従って作業して」と指示してください。
+```bash
+BASE_PATH=/Website/ npm run build
+```
+
+## 問い合わせフォーム
+
+フロントは `VITE_CONTACT_ENDPOINT`（既定 `/api/contact`）へ送信します。  
+API障害時は任意で旧フォーム送信にフォールバックできます。
+
+`.env` 例:
+
+```env
+VITE_CONTACT_ENDPOINT=/api/contact
+VITE_CONTACT_ENABLE_LEGACY_FALLBACK=true
+VITE_CONTACT_LEGACY_ENDPOINT=
+VITE_SITE_URL=https://www.regalocom.net
+```
+
+Cloudflare Worker 版の実装とセットアップは以下:
+
+- `infrastructure/cloudflare/contact-worker/README.md`

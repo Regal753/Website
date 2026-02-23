@@ -1,42 +1,14 @@
 import React, { useMemo } from 'react';
 import { siteConfig } from '../site.config';
-
-const NEWS_VISIBLE_DAYS = 90;
-const MS_PER_DAY = 24 * 60 * 60 * 1000;
-
-const parseNewsDate = (value: string): Date | null => {
-  const match = value.match(/^(\d{4})[./-](\d{1,2})[./-](\d{1,2})$/);
-  if (!match) return null;
-
-  const year = Number(match[1]);
-  const month = Number(match[2]) - 1;
-  const day = Number(match[3]);
-  const date = new Date(year, month, day);
-  date.setHours(0, 0, 0, 0);
-  return Number.isNaN(date.getTime()) ? null : date;
-};
+import { shouldDisplayNews, sortValidNewsItems } from '../utils/news';
 
 const News: React.FC = () => {
   const items = useMemo(
-    () =>
-      siteConfig.newsItems
-        .map((item) => ({
-          ...item,
-          timestamp: parseNewsDate(item.date)?.getTime() ?? Number.NaN,
-        }))
-        .filter((item) => Number.isFinite(item.timestamp))
-        .sort((a, b) => b.timestamp - a.timestamp),
+    () => sortValidNewsItems(siteConfig.newsItems),
     []
   );
 
-  if (items.length === 0) return null;
-
-  const latestDate = items[0].timestamp;
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const staleDays = Math.floor((today.getTime() - latestDate) / MS_PER_DAY);
-
-  if (staleDays > NEWS_VISIBLE_DAYS) return null;
+  if (!shouldDisplayNews(items)) return null;
 
   return (
     <section className="py-10 sm:py-12 bg-white">

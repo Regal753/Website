@@ -109,17 +109,13 @@ const Hero: React.FC = () => {
           <div className="mt-8 lg:hidden">
             <p className="text-xs sm:text-sm text-slate-600 mb-3">トップ動画・ギャラリー</p>
             <div className="rounded-2xl bg-white border border-slate-200 shadow-sm overflow-hidden p-3 space-y-3">
-              <video
+              <img
+                src={asset('images/services/sns-cover.webp')}
+                alt="SNS management visual"
                 className="w-full aspect-video rounded-xl object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                poster={asset('images/services/sns-cover.webp')}
-              >
-                <source src={asset('videos/backgrounds/bg-02.mp4')} type="video/mp4" />
-              </video>
+                loading="lazy"
+                decoding="async"
+              />
               <div className="grid grid-cols-2 gap-3">
                 <img
                   src={asset('images/services/music-cover.webp')}
@@ -159,17 +155,13 @@ const Hero: React.FC = () => {
             </div>
 
             <div className="space-y-4">
-              <video
+              <img
+                src={asset('images/services/sns-cover.webp')}
+                alt="SNS management visual"
                 className="w-full aspect-video rounded-lg object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                poster={asset('images/services/sns-cover.webp')}
-              >
-                <source src={asset('videos/backgrounds/bg-03.mp4')} type="video/mp4" />
-              </video>
+                loading="lazy"
+                decoding="async"
+              />
 
               <div className="grid grid-cols-2 gap-4">
                 <img

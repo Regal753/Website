@@ -39,9 +39,11 @@ const Header: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         {/* Logo */}
-        <div
+        <button
+          type="button"
           className="flex items-center gap-2 cursor-pointer group rounded-xl bg-white/80 border border-slate-200/80 px-2.5 py-1.5 shadow-sm"
           onClick={() => handleNavClick('/')}
+          aria-label="トップページへ移動"
         >
           <img
             src={import.meta.env.BASE_URL + "images/logo.webp"}
@@ -51,13 +53,14 @@ const Header: React.FC = () => {
           <span className="text-xl font-bold text-slate-900">
             {siteConfig.companyName}
           </span>
-        </div>
+        </button>
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-4 xl:gap-6">
           {siteConfig.navItems.map((item) => (
             <button
               key={item.href}
+              type="button"
               onClick={() => handleNavClick(item.href)}
               className={`px-3 py-1.5 rounded-full text-xs lg:text-sm font-semibold whitespace-nowrap border transition-all ${
                 isActive(item.href, item.matchPrefix)
@@ -72,8 +75,12 @@ const Header: React.FC = () => {
 
         {/* Mobile Menu Button */}
         <button
+          type="button"
           className="lg:hidden text-slate-600 hover:text-slate-900 rounded-lg bg-white/85 border border-slate-200 p-2"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label={isMobileMenuOpen ? 'メニューを閉じる' : 'メニューを開く'}
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-navigation"
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -81,10 +88,11 @@ const Header: React.FC = () => {
 
       {/* Mobile Nav */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 right-0 rounded-b-2xl bg-white/95 backdrop-blur-xl border-t border-slate-200 shadow-xl p-4 flex flex-col gap-3">
+        <div id="mobile-navigation" className="lg:hidden absolute top-full left-0 right-0 rounded-b-2xl bg-white/95 backdrop-blur-xl border-t border-slate-200 shadow-xl p-4 flex flex-col gap-3">
           {siteConfig.navItems.map((item) => (
             <button
               key={item.href}
+              type="button"
               onClick={() => handleNavClick(item.href)}
               className={`text-left text-sm font-semibold p-2.5 rounded-lg border transition-colors ${
                 isActive(item.href, item.matchPrefix)

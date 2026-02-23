@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Regalo | SNS管理・音楽著作権管理・AIマーケティング戦略</title>
+    <title>Regalo | SNS運用・音楽著作権管理・AIマーケティング戦略</title>
     <meta
       name="description"
-      content="RegaloはSNS管理事業部、音楽出版事業部、AIマーケティング戦略事業部を展開し、運用から改善まで一気通貫で支援します。"
+      content="RegaloはSNS管理、音楽著作権管理、AIマーケティング戦略の3事業を軸に、運用設計から改善まで一貫して支援します。"
     />
     <meta
       name="keywords"
-      content="Regalo,SNS運用,YouTube運用,音楽著作権管理,BGM,AIマーケティング,京都"
+      content="Regalo,SNS運用,YouTube運用,音楽著作権,AIマーケティング,京都"
     />
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <meta name="theme-color" content="#0f172a" />
@@ -21,10 +21,10 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ja_JP" />
     <meta property="og:url" content="https://www.regalocom.net/" />
-    <meta property="og:title" content="Regalo | SNS管理・音楽著作権管理・AIマーケティング戦略" />
+    <meta property="og:title" content="Regalo | SNS運用・音楽著作権管理・AIマーケティング戦略" />
     <meta
       property="og:description"
-      content="SNS管理・音楽著作権管理・AIマーケティング戦略を一気通貫で支援。運用現場に強い実行力で成果改善を伴走します。"
+      content="SNS管理、音楽著作権管理、AIマーケティング戦略を一貫支援。運用の成果につながる仕組み化を支援します。"
     />
     <meta property="og:image" content="https://www.regalocom.net/images/hero.webp" />
     <meta property="og:image:alt" content="Regaloのサービスイメージ" />
@@ -33,10 +33,10 @@
     <meta property="og:image:height" content="630" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Regalo | SNS管理・音楽著作権管理・AIマーケティング戦略" />
+    <meta name="twitter:title" content="Regalo | SNS運用・音楽著作権管理・AIマーケティング戦略" />
     <meta
       name="twitter:description"
-      content="運用と改善をまとめて支援するRegalo。SNS管理・音楽著作権管理・AI戦略まで対応します。"
+      content="運用を仕組み化し、継続成果につなげるRegalo。SNS管理・音楽著作権管理・AI戦略を提供。"
     />
     <meta name="twitter:image" content="https://www.regalocom.net/images/hero.webp" />
 
@@ -47,7 +47,7 @@
         "name": "Regalo",
         "url": "https://www.regalocom.net/",
         "logo": "https://www.regalocom.net/images/logo.webp",
-        "description": "SNS管理・音楽著作権管理・AIマーケティング戦略を提供する京都拠点の運用支援会社。",
+        "description": "SNS管理、音楽著作権管理、AIマーケティング戦略を支援する京都の運用支援会社。",
         "telephone": "+81-70-9131-7882",
         "email": "retoa@regalocom.net",
         "address": {
@@ -70,10 +70,10 @@
       }
     </script>
 
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="%BASE_URL%favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="/tailwind.css" />
+    <link rel="stylesheet" href="%BASE_URL%tailwind.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
       rel="stylesheet"
@@ -81,10 +81,7 @@
     <style>
       :root {
         --surface: #f8fafc;
-        --surface-soft: #eef2ff;
-        --ink: #0f172a;
         --ink-subtle: #475569;
-        --accent: #2563eb;
       }
 
       body {
@@ -112,7 +109,21 @@
     </style>
   </head>
   <body>
+    <script>
+      (function () {
+        var key = 'spa_redirect_path';
+        var redirectPath = null;
+        try {
+          redirectPath = sessionStorage.getItem(key);
+          if (redirectPath) sessionStorage.removeItem(key);
+        } catch (_error) {}
+
+        if (!redirectPath) return;
+        if (!redirectPath.startsWith('/')) redirectPath = '/' + redirectPath;
+        window.history.replaceState(null, '', redirectPath);
+      })();
+    </script>
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
+    <script type="module" src="%BASE_URL%index.tsx"></script>
   </body>
 </html>

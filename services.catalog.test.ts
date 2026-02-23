@@ -19,8 +19,6 @@ describe('service catalog', () => {
   it('uses optimized media assets', () => {
     for (const service of serviceCatalog) {
       expect(service.media.listImage.endsWith('.webp')).toBe(true);
-      expect(service.media.videoPoster.endsWith('.webp')).toBe(true);
-      expect(service.media.videoSrc.endsWith('.mp4')).toBe(true);
       for (const image of service.media.galleryImages) {
         expect(image.endsWith('.webp')).toBe(true);
       }
