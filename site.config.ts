@@ -11,7 +11,6 @@ export const companyProfile: CompanyProfile = {
   established: '2024年6月10日',
   capital: '100万円',
   corporateNumber: '4130001077277',
-  invoiceStatus: '適格請求書発行事業者: 未登録（設立2年未満のため）',
   partnerBanks: ['住信SBIネット銀行', 'GMOあおぞら銀行', 'みずほ銀行'],
   business: [
     'SNS管理事業部',

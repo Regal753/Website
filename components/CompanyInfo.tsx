@@ -23,7 +23,6 @@ const rows: Row[] = [
   { label: '設立日', value: companyProfile.established },
   ...(companyProfile.capital ? [{ label: '資本金', value: companyProfile.capital }] : []),
   ...(companyProfile.corporateNumber ? [{ label: '法人番号', value: companyProfile.corporateNumber }] : []),
-  ...(companyProfile.invoiceStatus ? [{ label: '適格請求書', value: companyProfile.invoiceStatus }] : []),
   ...(companyProfile.partnerBanks?.length
     ? [{ label: '取引金融機関', value: companyProfile.partnerBanks.join('／') }]
     : []),

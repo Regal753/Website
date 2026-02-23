@@ -52,8 +52,6 @@ export interface CompanyProfile {
   established: string;
   capital?: string;
   corporateNumber?: string;
-  invoiceRegistrationNumber?: string;
-  invoiceStatus?: string;
   partnerBanks?: string[];
   business: string[];
   contactEmail: string;
