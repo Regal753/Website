@@ -1,71 +1,67 @@
 import React from 'react';
+import { ArrowRight, Bot, Cloud, Database, FolderKanban, MessageSquareShare } from 'lucide-react';
 import { SectionId } from '../types';
-import { Cloud, Database, Bot, Terminal } from 'lucide-react';
+
+const stackItems = [
+  { icon: Cloud, label: 'Google Cloud / n8n', detail: '処理実行・通知ワークフロー' },
+  { icon: Database, label: 'Google Sheets', detail: '進行管理・権利台帳管理' },
+  { icon: FolderKanban, label: 'Google Drive', detail: '素材保管・納品管理' },
+  { icon: Bot, label: 'Discord Bot', detail: '進捗通知・リマインド' },
+];
 
 const TechStack: React.FC = () => {
   return (
-    <section id={SectionId.TECH} className="py-24 relative overflow-hidden bg-slate-50">
-      {/* Background Decor */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-200 to-transparent"></div>
-      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-200 to-transparent"></div>
+    <section id={SectionId.TECH} className="bg-slate-50 py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-10 text-center md:mb-14">
+          <p className="mb-4 inline-flex rounded-full border border-brand-primary-200 bg-brand-primary-50 px-3 py-1 text-xs font-semibold text-brand-primary-700">
+            TECH FOUNDATION
+          </p>
+          <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">運用を支える技術基盤</h2>
+          <p className="mx-auto max-w-2xl text-slate-600">
+            実運用で使うツール構成を前提に、管理台帳・進行・通知をつなぐ基盤を設計します。
+          </p>
+        </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="lg:flex lg:items-center lg:gap-16">
-          <div className="lg:w-1/2 mb-12 lg:mb-0">
-            <div className="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-blue-600 uppercase bg-blue-50 rounded-full">
-              技術基盤
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
-              制作を支える<br/>
-              <span className="text-blue-500">自動化基盤</span>
-            </h2>
-            <p className="text-slate-600 leading-relaxed mb-8">
-              運用が長くなるほど手作業がボトルネックになります。Drive/Sheets/Discordを中心にワークフローを設計し、必要に応じてGCP上で常時稼働するツール群として運用します。
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="flex items-center gap-3 p-4 rounded-lg bg-white border border-slate-200 shadow-sm">
-                <Cloud className="text-blue-400" />
-                <span className="text-slate-700 font-medium">Google Cloud Platform</span>
-              </div>
-              <div className="flex items-center gap-3 p-4 rounded-lg bg-white border border-slate-200 shadow-sm">
-                <Bot className="text-blue-400" />
-                <span className="text-slate-700 font-medium">Discord Bot 開発</span>
-              </div>
-              <div className="flex items-center gap-3 p-4 rounded-lg bg-white border border-slate-200 shadow-sm">
-                <Terminal className="text-green-400" />
-                <span className="text-slate-700 font-medium">n8n 自動化</span>
-              </div>
-              <div className="flex items-center gap-3 p-4 rounded-lg bg-white border border-slate-200 shadow-sm">
-                <Database className="text-yellow-400" />
-                <span className="text-slate-700 font-medium">Google Sheets API</span>
-              </div>
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+            <h3 className="mb-4 text-xl font-semibold text-brand-ink">採用技術</h3>
+            <div className="space-y-3">
+              {stackItems.map((item) => (
+                <div key={item.label} className="flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4">
+                  <item.icon className="mt-0.5 h-5 w-5 text-brand-primary-700" />
+                  <div>
+                    <p className="text-sm font-semibold text-brand-ink">{item.label}</p>
+                    <p className="text-sm text-slate-600">{item.detail}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-          <div className="lg:w-1/2">
-            <div className="relative rounded-xl overflow-hidden shadow-2xl border border-slate-200 group">
-              <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent z-10" />
-              <div
-                className="w-full h-[400px] transform group-hover:scale-105 transition-transform duration-700"
-                style={{
-                  background: 'linear-gradient(135deg, #0f172a 0%, #1e3a5f 40%, #0f172a 70%, #1a2744 100%)',
-                }}
-                role="img"
-                aria-label="サーバー監視"
-              />
-              <div className="absolute bottom-6 left-6 right-6 z-20">
-                <div className="flex items-center gap-2 mb-2 text-green-400 text-sm font-mono">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                  </span>
-                  システム稼働中
-                </div>
-                <div className="bg-slate-900/90 backdrop-blur border border-slate-700 rounded p-4 font-mono text-xs text-slate-300">
-                  <p>$ gcloud compute instances list</p>
-                  <p className="text-yellow-400">NAME &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ZONE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STATUS</p>
-                  <p>discord-bot &nbsp;asia-northeast1 &nbsp;<span className="text-green-400">稼働中</span></p>
-                  <p>n8n-worker &nbsp;&nbsp;asia-northeast1 &nbsp;<span className="text-green-400">稼働中</span></p>
-                </div>
+
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+            <h3 className="mb-4 text-xl font-semibold text-brand-ink">運用フロー構成</h3>
+            <div className="space-y-3">
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                <p className="text-xs font-semibold tracking-wider text-slate-500">INPUT</p>
+                <p className="mt-1 text-sm font-medium text-slate-700">お問い合わせ / 素材 / 楽曲情報</p>
+              </div>
+              <div className="flex justify-center">
+                <ArrowRight className="h-4 w-4 text-slate-400" />
+              </div>
+              <div className="rounded-xl border border-brand-primary-200 bg-brand-primary-50/50 p-4">
+                <p className="text-xs font-semibold tracking-wider text-brand-primary-700">MANAGE</p>
+                <p className="mt-1 text-sm font-medium text-slate-700">Drive + Sheetsで進行管理と権利台帳を統合</p>
+              </div>
+              <div className="flex justify-center">
+                <ArrowRight className="h-4 w-4 text-slate-400" />
+              </div>
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                <p className="text-xs font-semibold tracking-wider text-slate-500">NOTIFY</p>
+                <p className="mt-1 flex items-center gap-2 text-sm font-medium text-slate-700">
+                  <MessageSquareShare className="h-4 w-4 text-brand-primary-700" />
+                  Discord通知・定期レポート自動送信
+                </p>
               </div>
             </div>
           </div>

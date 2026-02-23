@@ -1,27 +1,27 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ArrowRight, Cpu, Music, Youtube } from 'lucide-react';
 import { SectionId } from '../types';
-import { ArrowRight, Youtube, Music, Cpu } from 'lucide-react';
 import { trackEvent } from '../utils/analytics';
 
 const Hero: React.FC = () => {
   const navigate = useNavigate();
   const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 
-  const scrollToSection = (id: SectionId) => {
-    const el = document.getElementById(id);
+  const scrollToServices = () => {
+    const el = document.getElementById(SectionId.SERVICES);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <section
       id={SectionId.HOME}
-      className="relative overflow-hidden pt-28 pb-14 sm:pt-28 sm:pb-16 md:pt-28 md:pb-24 bg-gradient-to-b from-slate-50 to-white"
+      className="relative overflow-hidden pt-28 pb-16 md:pb-24 bg-gradient-to-b from-slate-50 to-white"
     >
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 hidden lg:block motion-reduce:hidden">
           <video
-            className="w-full h-full object-cover opacity-20"
+            className="h-full w-full object-cover opacity-20"
             autoPlay
             muted
             loop
@@ -34,46 +34,39 @@ const Hero: React.FC = () => {
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/65 to-white/80" />
         </div>
-        <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-blue-100/60 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-cyan-50/80 rounded-full blur-[100px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(148,163,184,0.08),transparent_35%),radial-gradient(circle_at_80%_70%,rgba(59,130,246,0.08),transparent_30%)]" />
+        <div className="absolute top-[-20%] right-[-10%] h-[560px] w-[560px] rounded-full bg-brand-primary-100/60 blur-[120px]" />
+        <div className="absolute bottom-[-10%] left-[-10%] h-[440px] w-[440px] rounded-full bg-cyan-50/80 blur-[100px]" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid lg:grid-cols-2 gap-10 md:gap-12 items-center">
+      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 md:gap-12 lg:grid-cols-2 lg:px-8">
         <div className="space-y-6 md:space-y-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-600 text-sm font-medium">
+          <div className="inline-flex items-center gap-2 rounded-full border border-brand-primary-200 bg-brand-primary-50 px-3 py-1 text-sm font-medium text-brand-primary-700">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-primary-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-primary-500" />
             </span>
             ご相談受付中
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold leading-tight tracking-tight">
-            <span className="block text-slate-900">運用を、仕組みで</span>
-            <span className="block bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 whitespace-nowrap">
+          <h1 className="text-4xl font-semibold leading-tight tracking-tight text-brand-ink sm:text-5xl md:text-7xl md:font-bold">
+            <span className="block">運用を、仕組みで</span>
+            <span className="block bg-gradient-to-r from-brand-primary-700 via-brand-primary-500 to-cyan-500 bg-clip-text text-transparent">
               加速する。
             </span>
           </h1>
 
-          <p className="text-base sm:text-lg text-slate-600 max-w-xl leading-relaxed">
-            YouTubeチャンネル運用、BGM制作・権利管理、編集体制の標準化、Drive/Sheets/Discordによる自動化まで。
-            制作と運用のボトルネックを潰し、継続的に回るメディア運営を支援します。
+          <p className="max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
+            YouTube運用、音楽著作権管理、編集体制の標準化から自動化まで。
+            制作と運用のボトルネックを潰し、継続的に成果が出る体制づくりを支援します。
           </p>
 
-          <div className="flex flex-wrap gap-2">
-            <span className="bg-white/80 border border-slate-200 rounded-full px-3 py-1 text-xs text-slate-700">SNS管理事業部</span>
-            <span className="bg-white/80 border border-slate-200 rounded-full px-3 py-1 text-xs text-slate-700">音楽出版事業部</span>
-            <span className="bg-white/80 border border-slate-200 rounded-full px-3 py-1 text-xs text-slate-700">AIマーケティング戦略事業部</span>
-          </div>
-
-          <div className="flex flex-col sm:flex-row flex-wrap gap-4">
+          <div className="flex flex-col flex-wrap gap-4 sm:flex-row">
             <button
               onClick={() => {
                 trackEvent('cta_click', { placement: 'hero_primary', target: 'contact' });
                 navigate('/contact');
               }}
-              className="w-full sm:w-auto px-7 sm:px-8 py-3.5 sm:py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-600/20 hover:translate-y-[-1px]"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-primary-700 px-7 py-3.5 font-semibold text-white shadow-lg shadow-brand-primary-700/20 transition-all hover:-translate-y-px hover:bg-brand-primary-800 sm:w-auto sm:px-8 sm:py-4"
             >
               無料相談する
               <ArrowRight size={20} />
@@ -81,117 +74,96 @@ const Hero: React.FC = () => {
             <button
               onClick={() => {
                 trackEvent('cta_click', { placement: 'hero_secondary', target: 'services' });
-                scrollToSection(SectionId.SERVICES);
+                scrollToServices();
               }}
-              className="w-full sm:w-auto px-7 sm:px-8 py-3.5 sm:py-4 bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-semibold rounded-lg transition-all hover:translate-y-[-1px]"
+              className="inline-flex w-full items-center justify-center rounded-lg border border-slate-300 bg-white px-7 py-3.5 font-semibold text-slate-800 transition-all hover:-translate-y-px hover:bg-slate-50 sm:w-auto sm:px-8 sm:py-4"
             >
               サービスを見る
             </button>
           </div>
 
-          <p className="text-xs text-slate-500 mt-3">フォーム送信 → ヒアリング → ご提案・お見積り → 着手</p>
+          <p className="text-xs text-slate-500">フォーム送信 → ヒアリング → ご提案・お見積り → 着手</p>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-3">
-            <div className="rounded-xl border border-slate-200 bg-white/80 backdrop-blur px-4 py-3">
-              <p className="text-[11px] text-slate-500">事業部</p>
-              <p className="text-xl font-bold text-slate-900">3</p>
-            </div>
-            <div className="rounded-xl border border-slate-200 bg-white/80 backdrop-blur px-4 py-3">
-              <p className="text-[11px] text-slate-500">対応時間</p>
-              <p className="text-xl font-bold text-slate-900">9:00-20:00</p>
-            </div>
-            <div className="rounded-xl border border-slate-200 bg-white/80 backdrop-blur px-4 py-3 col-span-2 md:col-span-1">
-              <p className="text-[11px] text-slate-500">フォーム受付</p>
-              <p className="text-xl font-bold text-slate-900">24H</p>
-            </div>
-          </div>
-
-          <div className="mt-8 lg:hidden">
-            <div className="rounded-2xl bg-white border border-slate-200 shadow-sm overflow-hidden p-3 space-y-3">
-              <img
-                src={asset('images/services/sns-cover.webp')}
-                alt="SNS management visual"
-                className="w-full aspect-video rounded-xl object-cover"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="grid grid-cols-2 gap-3">
-                <img
-                  src={asset('images/services/music-cover.webp')}
-                  alt="ホーム画像1"
-                  className="w-full h-20 sm:h-24 rounded-lg object-cover"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <img
-                  src={asset('images/services/ai-cover.webp')}
-                  alt="ホーム画像2"
-                  className="w-full h-20 sm:h-24 rounded-lg object-cover"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-            </div>
+          <div className="mt-6 grid grid-cols-3 gap-2 sm:gap-3 lg:hidden">
+            <img
+              src={asset('images/services/sns-cover.webp')}
+              alt="SNS運用のイメージ"
+              width={640}
+              height={360}
+              className="h-24 w-full rounded-lg border border-slate-200 object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src={asset('images/services/music-cover.webp')}
+              alt="音楽出版のイメージ"
+              width={640}
+              height={360}
+              className="h-24 w-full rounded-lg border border-slate-200 object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src={asset('images/services/ai-cover.webp')}
+              alt="AI戦略のイメージ"
+              width={640}
+              height={360}
+              className="h-24 w-full rounded-lg border border-slate-200 object-cover"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         </div>
 
-        <div className="hidden lg:block relative">
-          <div className="relative rounded-2xl bg-white/90 border border-slate-200 p-8 backdrop-blur-sm shadow-xl">
-            <div className="absolute -top-12 -right-12 p-4 bg-white rounded-xl border border-slate-200 shadow-lg flex items-center gap-3 animate-bounce" style={{ animationDuration: '3s' }}>
-              <div className="p-2 bg-red-50 rounded-lg text-red-500"><Youtube size={24} /></div>
-              <div>
-                <div className="text-xs text-slate-500">チャンネル運用</div>
-                <div className="font-bold text-slate-900">運用設計</div>
-              </div>
-            </div>
-
-            <div className="absolute -bottom-8 -left-8 p-4 bg-white rounded-xl border border-slate-200 shadow-lg flex items-center gap-3 animate-bounce" style={{ animationDuration: '4s', animationDelay: '1s' }}>
-              <div className="p-2 bg-green-50 rounded-lg text-green-500"><Cpu size={24} /></div>
-              <div>
-                <div className="text-xs text-slate-500">自動化</div>
-                <div className="font-bold text-slate-900">自動化運用中</div>
-              </div>
-            </div>
-
+        <div className="relative hidden lg:block">
+          <div className="rounded-2xl border border-slate-200 bg-white/90 p-8 shadow-xl backdrop-blur-sm">
             <div className="space-y-4">
               <img
                 src={asset('images/services/sns-cover.webp')}
-                alt="SNS management visual"
-                className="w-full aspect-video rounded-lg object-cover"
-                loading="lazy"
+                alt="SNS運用のメインイメージ"
+                width={1280}
+                height={720}
+                className="aspect-video w-full rounded-lg object-cover"
+                loading="eager"
                 decoding="async"
               />
-
               <div className="grid grid-cols-2 gap-4">
                 <img
                   src={asset('images/services/music-cover.webp')}
-                  alt="ホーム画像1"
-                  className="w-full h-28 rounded-lg object-cover"
+                  alt="音楽出版のイメージ"
+                  width={640}
+                  height={360}
+                  className="h-28 w-full rounded-lg object-cover"
                   loading="lazy"
                   decoding="async"
                 />
                 <img
                   src={asset('images/services/ai-cover.webp')}
-                  alt="ホーム画像2"
-                  className="w-full h-28 rounded-lg object-cover"
+                  alt="AI戦略のイメージ"
+                  width={640}
+                  height={360}
+                  className="h-28 w-full rounded-lg object-cover"
                   loading="lazy"
                   decoding="async"
                 />
               </div>
             </div>
 
-            <div className="mt-6 flex justify-between items-end border-t border-slate-200 pt-6">
-              <div>
-                <div className="text-sm text-slate-500 mb-2">対応領域</div>
-                <div className="flex gap-2">
-                  <span className="p-2 bg-slate-100 rounded text-slate-500"><Music size={20}/></span>
-                  <span className="p-2 bg-slate-100 rounded text-slate-500"><Youtube size={20}/></span>
-                  <span className="p-2 bg-slate-100 rounded text-slate-500"><Cpu size={20}/></span>
-                </div>
-              </div>
-              <div className="text-right">
-                <div className="text-4xl font-bold text-slate-900">運用支援</div>
-                <div className="text-xs text-slate-500">制作・運用・改善</div>
+            <div className="mt-6 border-t border-slate-200 pt-6">
+              <p className="mb-3 text-xs font-semibold tracking-widest text-slate-500">対応領域</p>
+              <div className="flex flex-wrap gap-2">
+                <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700">
+                  <Youtube size={14} />
+                  SNS管理
+                </span>
+                <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700">
+                  <Music size={14} />
+                  音楽出版
+                </span>
+                <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700">
+                  <Cpu size={14} />
+                  AI戦略
+                </span>
               </div>
             </div>
           </div>

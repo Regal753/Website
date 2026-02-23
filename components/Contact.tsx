@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Clock, ExternalLink, FileText, Instagram, Mail, Paperclip, Phone, Send } from 'lucide-react';
+import { Check, Clock, ExternalLink, FileText, Instagram, Loader2, Mail, Paperclip, Phone, Send } from 'lucide-react';
 import { ContactFormState, SectionId } from '../types';
 import { siteConfig } from '../site.config';
 import { trackEvent } from '../utils/analytics';
@@ -221,22 +221,17 @@ const Contact: React.FC = () => {
   return (
     <section
       id={SectionId.CONTACT}
-      className="relative overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-20 md:pb-24 bg-gradient-to-b from-slate-50 via-blue-50/30 to-white"
+      className="bg-slate-50 pt-28 pb-20 md:pb-24"
     >
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-blue-100/70 blur-3xl" />
-        <div className="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-cyan-100/80 blur-3xl" />
-      </div>
-
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8 sm:mb-10 md:mb-14 relative z-10">
-          <p className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-100 bg-blue-50 text-blue-700 text-xs font-semibold mb-4">
+        <div className="mb-10 text-center md:mb-14">
+          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-brand-primary-200 bg-brand-primary-50 px-3 py-1 text-xs font-semibold text-brand-primary-700">
             CONTACT
           </p>
-          <div className="inline-flex items-center justify-center p-3 bg-blue-50 rounded-full mb-4">
-            <Mail className="w-6 h-6 text-blue-700" />
+          <div className="mb-4 inline-flex items-center justify-center rounded-full bg-brand-primary-50 p-3">
+            <Mail className="h-6 w-6 text-brand-primary-700" />
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900">お問い合わせ</h2>
+          <h2 className="text-2xl font-semibold text-brand-ink sm:text-3xl md:text-4xl">お問い合わせ</h2>
           <p className="text-slate-600 mt-3 max-w-3xl mx-auto leading-relaxed">
             内容を確認のうえ、通常1営業日以内にメールまたはお電話でご連絡します。
             返信が確認できない場合は、お手数ですがお電話でお問い合わせください。
@@ -273,9 +268,9 @@ const Contact: React.FC = () => {
           )}
         </div>
 
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
           <div className="lg:col-span-2 bg-white/95 rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/60 p-5 sm:p-6 md:p-8">
-            <h3 className="text-xl font-bold text-slate-900 mb-1">お問い合わせフォーム</h3>
+            <h3 className="mb-1 text-xl font-semibold text-brand-ink">お問い合わせフォーム</h3>
             <p className="text-sm text-slate-600 mb-6">
               フォーム送信後、内容を確認して担当よりご連絡します。添付ファイルもそのまま送信できます。
             </p>
@@ -394,24 +389,27 @@ const Contact: React.FC = () => {
                 />
               </label>
 
-              <label className="flex items-start gap-3 rounded-lg border border-slate-200 p-3 bg-slate-50">
+              <label className="flex items-start gap-3 rounded-lg border border-slate-200 bg-slate-50 p-3 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={consent}
                   onChange={(event) => setConsent(event.target.checked)}
-                  className="mt-1"
+                  className="peer sr-only"
                 />
+                <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded border border-slate-300 bg-white text-brand-primary-700 transition-colors peer-checked:border-brand-primary-600 peer-checked:bg-brand-primary-50">
+                  {consent && <Check className="h-3.5 w-3.5" />}
+                </span>
                 <span className="text-sm text-slate-700 leading-relaxed">
                   <a
                     href={asset('privacy.html')}
-                    className="text-blue-700 hover:text-blue-800 underline underline-offset-2"
+                    className="text-brand-primary-700 hover:text-brand-primary-800 underline underline-offset-2"
                   >
                     プライバシーポリシー
                   </a>
                   と{' '}
                   <a
                     href={asset('terms.html')}
-                    className="text-blue-700 hover:text-blue-800 underline underline-offset-2"
+                    className="text-brand-primary-700 hover:text-brand-primary-800 underline underline-offset-2"
                   >
                     利用規約
                   </a>
@@ -424,9 +422,9 @@ const Contact: React.FC = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-blue-700 hover:bg-blue-800 disabled:bg-slate-400 text-white font-bold transition-colors"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-primary-700 px-6 py-3.5 font-semibold text-white transition-colors hover:bg-brand-primary-800 disabled:cursor-not-allowed disabled:opacity-70 md:w-auto"
               >
-                <Send size={18} />
+                {isSubmitting ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
                 {isSubmitting ? '送信中...' : 'お問い合わせを送信'}
               </button>
             </form>
@@ -434,18 +432,18 @@ const Contact: React.FC = () => {
 
           <aside className="space-y-4">
             <div className="bg-gradient-to-br from-white to-blue-50/60 rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-5">
-              <h3 className="text-base font-bold text-slate-900">お電話でのお問い合わせ</h3>
+              <h3 className="text-base font-semibold text-brand-ink">お電話でのお問い合わせ</h3>
               <p className="text-xs text-slate-500 mt-2">TEL</p>
               {companyPhoneHref ? (
                 <a
                   href={`tel:${companyPhoneHref}`}
                   onClick={() => trackEvent('phone_click', { placement: 'contact_sidebar' })}
-                  className="text-xl sm:text-2xl font-bold text-slate-900 hover:text-blue-700 tracking-wide"
+                  className="text-xl sm:text-2xl font-semibold text-brand-ink hover:text-brand-primary-700 tracking-wide"
                 >
                   {companyPhoneDisplay}
                 </a>
               ) : (
-                <p className="text-lg font-bold text-slate-900">{companyPhoneDisplay}</p>
+                <p className="text-lg font-semibold text-brand-ink">{companyPhoneDisplay}</p>
               )}
               <div className="mt-3 flex items-center gap-2 text-sm text-slate-600">
                 <Clock className="w-4 h-4" />
@@ -458,7 +456,7 @@ const Contact: React.FC = () => {
                 <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-pink-50 border border-pink-100">
                   <Instagram className="h-4 w-4 text-pink-700" />
                 </span>
-                <h3 className="text-base font-bold text-slate-900">Instagram</h3>
+                <h3 className="text-base font-semibold text-brand-ink">Instagram</h3>
               </div>
               <p className="text-sm text-slate-600 mt-2">
                 最新の活動内容や制作事例はInstagramでも発信しています。
@@ -486,7 +484,7 @@ const Contact: React.FC = () => {
                 <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-blue-50 border border-blue-100">
                   <FileText className="h-4 w-4 text-blue-700" />
                 </span>
-                <h3 className="text-base font-bold text-slate-900">Googleフォーム</h3>
+                <h3 className="text-base font-semibold text-brand-ink">Googleフォーム</h3>
               </div>
               <p className="text-sm text-slate-600 mt-2">
                 Googleフォームからも24時間受け付けています。
@@ -509,7 +507,7 @@ const Contact: React.FC = () => {
             </div>
 
             <div className="bg-gradient-to-br from-white to-slate-50 rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-5">
-              <h3 className="text-base font-bold text-slate-900">メール</h3>
+              <h3 className="text-base font-semibold text-brand-ink">メール</h3>
               <p className="text-sm text-slate-600 mt-2">
                 フォームが使いづらい場合は、直接メールでも受け付けています。
               </p>

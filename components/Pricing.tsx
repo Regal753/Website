@@ -5,10 +5,10 @@ import { siteConfig } from '../site.config';
 
 const Pricing: React.FC = () => {
   return (
-    <section id={SectionId.PRICING} className="py-24 bg-slate-50 relative">
+    <section id={SectionId.PRICING} className="bg-slate-50 py-16 md:py-24">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">料金について</h2>
+        <div className="mb-10 text-center md:mb-14">
+          <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">料金について</h2>
           <p className="text-slate-600 max-w-2xl mx-auto">
             プロジェクトの内容・規模に応じて個別にお見積りをご提示しています。
           </p>
@@ -20,7 +20,7 @@ const Pricing: React.FC = () => {
               <FileText className="text-white w-6 h-6" />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">お見積り提示フロー</h3>
+              <h3 className="mb-2 text-xl font-semibold text-brand-ink">お見積り提示フロー</h3>
               <p className="text-slate-600 text-sm leading-relaxed">
                 定額メニューは設けていません。ヒアリング内容をもとに、作業範囲・期間・体制を整理したうえで、明細つきのお見積りをお送りします。
               </p>
@@ -53,7 +53,7 @@ const Pricing: React.FC = () => {
               href={siteConfig.contactFormUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-all transform hover:scale-[1.02] shadow-lg"
+              className="inline-flex items-center gap-2 rounded-lg bg-brand-primary-700 px-8 py-3 font-semibold text-white shadow-lg transition-all hover:scale-[1.02] hover:bg-brand-primary-800"
             >
               <Send size={18} />
               まずは相談する

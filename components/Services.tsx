@@ -20,21 +20,13 @@ const Services: React.FC = () => {
   };
 
   return (
-    <section
-      id={SectionId.SERVICES}
-      className="relative py-16 sm:py-20 md:py-24 bg-gradient-to-b from-slate-100 via-white to-blue-50/60"
-    >
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-16 left-[60%] h-[400px] w-[400px] rounded-full bg-blue-100/60 blur-[120px]" />
-        <div className="absolute -bottom-20 -left-10 h-[360px] w-[360px] rounded-full bg-cyan-100/60 blur-[120px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(14,165,233,0.08),transparent_25%),radial-gradient(circle_at_90%_80%,rgba(59,130,246,0.08),transparent_30%)]" />
-      </div>
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 md:mb-16">
-          <p className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold tracking-wide text-blue-700 mb-4">
+    <section id={SectionId.SERVICES} className="bg-slate-50 py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-10 text-center md:mb-14">
+          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-brand-primary-200 bg-brand-primary-50 px-3 py-1 text-xs font-semibold tracking-wide text-brand-primary-700">
             BUSINESS DIVISIONS
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">事業一覧</h2>
+          <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">事業一覧</h2>
           <p className="text-slate-600 max-w-2xl mx-auto">
             各事業ページで、実績・料金・進め方・技術までまとめてご確認いただけます。
           </p>
@@ -69,17 +61,17 @@ const Services: React.FC = () => {
                     </div>
                     <div>
                       {isMusicFocus && (
-                        <p className="inline-flex items-center rounded-full border border-blue-200 bg-white px-2.5 py-1 text-[11px] font-semibold tracking-wider text-blue-700 mb-2">
+                        <p className="mb-2 inline-flex items-center rounded-full border border-brand-primary-200 bg-white px-2.5 py-1 text-[11px] font-semibold tracking-wider text-brand-primary-700">
                           重点強化事業
                         </p>
                       )}
-                      <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">
+                      <h3 className="mb-2 text-xl font-semibold text-brand-ink md:text-2xl">
                         <Link
                           to={`/services/${service.slug}`}
                           onClick={() =>
                             trackEvent('service_detail_click', { placement: 'services_title', service: service.slug })
                           }
-                          className="hover:text-blue-700 transition-colors"
+                          className="transition-colors hover:text-brand-primary-700"
                         >
                           {service.title}
                         </Link>
@@ -109,6 +101,8 @@ const Services: React.FC = () => {
                           key={`${service.slug}-preview-${imageIndex}`}
                           src={asset(imagePath)}
                           alt={`${service.title}のイメージ${imageIndex + 1}`}
+                          width={640}
+                          height={360}
                           className="w-full h-24 sm:h-36 rounded-lg object-cover border border-slate-200 bg-white"
                           loading="lazy"
                           decoding="async"
@@ -122,7 +116,7 @@ const Services: React.FC = () => {
                       onClick={() =>
                         trackEvent('service_detail_click', { placement: 'services_cta', service: service.slug })
                       }
-                      className="inline-flex items-center gap-2 text-blue-700 font-semibold hover:text-blue-800 transition-colors"
+                      className="inline-flex items-center gap-2 font-semibold text-brand-primary-700 transition-colors hover:text-brand-primary-800"
                     >
                       詳細ページへ
                       <ArrowRight className="w-4 h-4" />

@@ -11,12 +11,12 @@ const News: React.FC = () => {
   if (!shouldDisplayNews(items)) return null;
 
   return (
-    <section className="py-10 sm:py-12 bg-white">
+    <section className="bg-white py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="rounded-2xl border border-slate-200 bg-slate-50/80 backdrop-blur-sm p-5 sm:p-6 md:p-8 shadow-sm">
-          <div className="mb-4 sm:mb-5">
-            <p className="text-xs font-semibold tracking-widest text-blue-700">NEWS</p>
-            <h2 className="mt-1 text-xl sm:text-2xl font-bold text-slate-900">お知らせ</h2>
+        <div className="rounded-2xl border border-slate-200 bg-slate-50/80 p-5 shadow-sm sm:p-6 md:p-8">
+          <div className="mb-5">
+            <p className="text-xs font-semibold tracking-widest text-brand-primary-700">NEWS</p>
+            <h2 className="mt-1 text-xl font-semibold text-brand-ink sm:text-2xl">お知らせ</h2>
           </div>
           <ul className="divide-y divide-slate-200/90">
             {items.map((item) => (

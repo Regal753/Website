@@ -67,11 +67,11 @@ const ServiceDetailPage: React.FC = () => {
   const phoneHref = phoneDisplay.replace(/[^\d+]/g, '');
 
   return (
-    <section className="pt-28 pb-20 bg-white">
+    <section className="bg-white pt-28 pb-20 md:pb-24">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-sm text-blue-700 hover:text-blue-800 transition-colors"
+          className="inline-flex items-center gap-2 text-sm text-brand-primary-700 transition-colors hover:text-brand-primary-800"
         >
           <ArrowLeft className="w-4 h-4" />
           トップへ戻る
@@ -86,8 +86,8 @@ const ServiceDetailPage: React.FC = () => {
               <Icon className="text-white w-7 h-7" />
             </div>
             <div>
-              <p className="text-xs font-semibold tracking-widest text-blue-700">SERVICE DETAIL</p>
-              <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mt-1">{service.title}</h1>
+              <p className="text-xs font-semibold tracking-widest text-brand-primary-700">SERVICE DETAIL</p>
+              <h1 className="mt-1 text-3xl font-semibold text-brand-ink md:text-4xl">{service.title}</h1>
               <p className="text-slate-600 mt-4 leading-relaxed">{service.detailLead}</p>
             </div>
           </div>
@@ -100,6 +100,8 @@ const ServiceDetailPage: React.FC = () => {
                     key={imagePath}
                     src={asset(imagePath)}
                     alt={`${service.title}のスライド画像${index + 1}`}
+                    width={1280}
+                    height={720}
                     className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
                       activeSlide === index ? 'opacity-100' : 'opacity-0'
                     }`}
@@ -133,6 +135,8 @@ const ServiceDetailPage: React.FC = () => {
                     key={imagePath}
                     src={asset(imagePath)}
                     alt={`${service.title}の参考画像${index + 1}`}
+                    width={960}
+                    height={640}
                     className="w-full h-52 rounded-xl object-cover border border-slate-200"
                     loading="lazy"
                     decoding="async"
@@ -143,7 +147,7 @@ const ServiceDetailPage: React.FC = () => {
 
             {service.detailSections.map((section) => (
               <div key={section.title} className="rounded-xl border border-slate-200 p-5 bg-slate-50">
-                <h2 className="text-lg font-bold text-slate-900">{section.title}</h2>
+                <h2 className="text-lg font-semibold text-brand-ink">{section.title}</h2>
                 <ul className="mt-3 space-y-2">
                   {section.points.map((point) => (
                     <li key={point} className="text-sm text-slate-700 leading-relaxed flex items-start gap-2">
@@ -157,11 +161,11 @@ const ServiceDetailPage: React.FC = () => {
           </div>
 
           <section className="mt-8">
-            <h2 className="text-xl font-bold text-slate-900 mb-4">実績</h2>
+            <h2 className="mb-4 text-xl font-semibold text-brand-ink">実績</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {service.caseHighlights.map((item) => (
                 <div key={item.title} className="rounded-xl border border-slate-200 p-5 bg-white">
-                  <h3 className="text-base font-bold text-slate-900">{item.title}</h3>
+                  <h3 className="text-base font-semibold text-brand-ink">{item.title}</h3>
                   <p className="mt-2 text-sm text-slate-600 leading-relaxed">{item.summary}</p>
                 </div>
               ))}
@@ -170,7 +174,7 @@ const ServiceDetailPage: React.FC = () => {
 
           <section className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="rounded-xl border border-slate-200 p-5 bg-slate-50">
-              <h2 className="text-xl font-bold text-slate-900">料金</h2>
+              <h2 className="text-xl font-semibold text-brand-ink">料金</h2>
               <p className="mt-2 text-sm text-slate-700 leading-relaxed">{service.pricing.summary}</p>
               <ul className="mt-3 space-y-2">
                 {service.pricing.items.map((item) => (
@@ -183,7 +187,7 @@ const ServiceDetailPage: React.FC = () => {
             </div>
 
             <div className="rounded-xl border border-slate-200 p-5 bg-slate-50">
-              <h2 className="text-xl font-bold text-slate-900">技術</h2>
+              <h2 className="text-xl font-semibold text-brand-ink">技術</h2>
               <p className="mt-2 text-sm text-slate-700 leading-relaxed">
                 既存運用との整合を重視し、必要な技術要素のみを選定して導入します。
               </p>
@@ -201,7 +205,7 @@ const ServiceDetailPage: React.FC = () => {
           </section>
 
           <section className="mt-8 rounded-xl border border-slate-200 p-5 bg-white">
-            <h2 className="text-xl font-bold text-slate-900 mb-4">進め方</h2>
+            <h2 className="mb-4 text-xl font-semibold text-brand-ink">進め方</h2>
             <div className="space-y-3">
               {service.processSteps.map((step, index) => (
                 <div key={step.title} className="flex gap-3">
@@ -218,7 +222,7 @@ const ServiceDetailPage: React.FC = () => {
           </section>
 
           <div className="mt-8 rounded-xl border border-blue-200 bg-blue-50 p-5">
-            <h2 className="text-xl font-bold text-slate-900">ご相談・お見積り</h2>
+            <h2 className="text-xl font-semibold text-brand-ink">ご相談・お見積り</h2>
             <p className="mt-2 text-slate-700 text-sm leading-relaxed">
               事業フェーズや運用体制に合わせて、最適な支援内容をご提案します。まずは現状課題をお聞かせください。
             </p>
@@ -226,7 +230,7 @@ const ServiceDetailPage: React.FC = () => {
               <Link
                 to="/contact"
                 onClick={() => trackEvent('cta_click', { placement: 'service_detail', service: service.slug, target: 'contact' })}
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-bold text-white hover:bg-blue-800 transition-colors"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand-primary-700 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-primary-800"
               >
                 無料相談フォームへ
                 <ArrowRight className="w-4 h-4" />
@@ -246,7 +250,7 @@ const ServiceDetailPage: React.FC = () => {
         </article>
 
         <section className="mt-8">
-          <h2 className="text-xl font-bold text-slate-900 mb-4">他の事業を見る</h2>
+          <h2 className="mb-4 text-xl font-semibold text-brand-ink">他の事業を見る</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {otherServices.map((item) => (
               <Link
@@ -254,7 +258,7 @@ const ServiceDetailPage: React.FC = () => {
                 to={`/services/${item.slug}`}
                 className="rounded-xl border border-slate-200 p-4 bg-white hover:border-blue-300 hover:bg-blue-50/40 transition-colors"
               >
-                <p className="font-bold text-slate-900">{item.title}</p>
+                <p className="font-semibold text-brand-ink">{item.title}</p>
                 <p className="text-sm text-slate-600 mt-1">{item.description}</p>
               </Link>
             ))}
