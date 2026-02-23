@@ -31,7 +31,6 @@ const Hero: React.FC = () => {
             className="h-full w-full object-cover opacity-78"
             autoPlay
             muted
-            loop
             playsInline
             preload="metadata"
             poster={asset('images/services/ai-cover.webp')}
