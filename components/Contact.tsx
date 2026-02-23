@@ -296,7 +296,7 @@ const Contact: React.FC = () => {
                     name="name"
                     value={form.name}
                     onChange={(event) => updateField('name', event.target.value)}
-                    className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
                     autoComplete="name"
                     required
                   />
@@ -309,7 +309,7 @@ const Contact: React.FC = () => {
                     name="company"
                     value={company}
                     onChange={(event) => setCompany(event.target.value)}
-                    className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
                     autoComplete="organization"
                   />
                 </label>
@@ -323,7 +323,7 @@ const Contact: React.FC = () => {
                     name="email"
                     value={form.email}
                     onChange={(event) => updateField('email', event.target.value)}
-                    className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
                     autoComplete="email"
                     required
                   />
@@ -336,7 +336,7 @@ const Contact: React.FC = () => {
                     name="phone"
                     value={phone}
                     onChange={(event) => setPhone(event.target.value)}
-                    className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
                     autoComplete="tel"
                   />
                 </label>
@@ -348,7 +348,7 @@ const Contact: React.FC = () => {
                   name="inquiry_type"
                   value={form.type}
                   onChange={(event) => updateField('type', event.target.value)}
-                  className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
                 >
                   <option>お問い合わせ</option>
                   <option>SNS管理事業部について</option>
@@ -384,7 +384,7 @@ const Contact: React.FC = () => {
                   value={form.message}
                   onChange={(event) => updateField('message', event.target.value)}
                   rows={7}
-                  className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
                   required
                 />
               </label>

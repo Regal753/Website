@@ -78,7 +78,7 @@ const CompanyInfo: React.FC = () => {
                     {row.isLink ? (
                       <a
                         href={row.isLink.href}
-                        className="text-blue-600 hover:text-blue-700 transition-colors"
+                        className="text-brand-primary-700 hover:text-brand-primary-800 transition-colors"
                       >
                         {row.value}
                       </a>

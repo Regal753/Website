@@ -1,7 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FileText, Send } from 'lucide-react';
 import { SectionId } from '../types';
-import { siteConfig } from '../site.config';
 
 const Pricing: React.FC = () => {
   return (
@@ -49,15 +49,13 @@ const Pricing: React.FC = () => {
           </div>
 
           <div className="text-center">
-            <a
-              href={siteConfig.contactFormUrl}
-              target="_blank"
-              rel="noreferrer"
+            <Link
+              to="/contact"
               className="inline-flex items-center gap-2 rounded-lg bg-brand-primary-700 px-8 py-3 font-semibold text-white shadow-lg transition-all hover:scale-[1.02] hover:bg-brand-primary-800"
             >
               <Send size={18} />
               まずは相談する
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -66,4 +64,3 @@ const Pricing: React.FC = () => {
 };
 
 export default Pricing;
-
