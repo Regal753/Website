@@ -21,7 +21,7 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 motion-reduce:hidden">
           <video
-            className="h-full w-full object-cover opacity-85"
+            className="h-full w-full object-cover opacity-78"
             autoPlay
             muted
             loop
@@ -32,6 +32,7 @@ const Hero: React.FC = () => {
           >
             <source src={asset('videos/backgrounds/bg-03.mp4')} type="video/mp4" />
           </video>
+          <div className="absolute inset-0 bg-gradient-to-r from-white/92 via-white/70 to-white/15" />
         </div>
       </div>
 
