@@ -52,6 +52,9 @@ const CompanyInfo: React.FC = () => {
           Regaloは「贈り物」の精神を軸に、関わる皆さまの毎日がより明るく前向きになるよう支援しています。
           常に成果を意識しながら、継続的な改善と丁寧な伴走で価値を届けます。
         </p>
+        <p className="text-slate-700 leading-relaxed mb-6">
+          代表取締役 塩田玲央｜同志社大学卒業。在学中にSNS事業で法人設立。現在は運用支援と権利管理を中心に事業展開中。
+        </p>
         <div className="mb-6 flex flex-wrap gap-2">
           <span className="inline-flex rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700">
             法人番号公開済み
