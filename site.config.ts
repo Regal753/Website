@@ -1,6 +1,6 @@
 import { NavItem, CompanyProfile, CaseStudy, NewsItem } from './types';
 
-const CONTACT_EMAIL = 'retoa@regalocom.net';
+const CONTACT_EMAIL = 'contact@regalocom.net';
 
 export const companyProfile: CompanyProfile = {
   brandName: 'Regalo',

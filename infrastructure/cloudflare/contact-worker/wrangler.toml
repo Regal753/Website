@@ -12,7 +12,7 @@ pattern = "regalocom.net/api/contact*"
 zone_name = "regalocom.net"
 
 [vars]
-CONTACT_TO_EMAIL = "retoa@regalocom.net"
+CONTACT_TO_EMAIL = "contact@regalocom.net"
 CONTACT_FROM_EMAIL = "Regalo Contact <noreply@regalocom.net>"
 CONTACT_ALLOWED_ORIGIN = "https://www.regalocom.net"
 CONTACT_LOG_RETENTION_DAYS = "180"

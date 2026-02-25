@@ -4,6 +4,7 @@ import { siteConfig } from '../site.config';
 
 const Footer: React.FC = () => {
   const phone = siteConfig.companyProfile.phone || '';
+  const phoneHref = phone.replace(/[^\d+]/g, '');
 
   return (
     <footer className="relative mt-10 border-t border-slate-200 bg-gradient-to-b from-white to-slate-100/80 py-14">
@@ -12,8 +13,8 @@ const Footer: React.FC = () => {
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
         <div className="md:col-span-2 lg:col-span-1">
           <h2 className="mb-1 text-xl font-semibold text-brand-ink">{siteConfig.companyName}</h2>
-          <p className="text-sm text-slate-500">3つの事業部で、運用・制作・改善を一気通貫で支援します。</p>
-          <p className="mt-2 text-xs text-slate-400">京都発、伴走型の運用支援チーム</p>
+          <p className="text-sm text-slate-500">3つの事業部で、運用・制作・改善を一貫して支援します。</p>
+          <p className="mt-2 text-xs text-slate-400">京都発・音楽と運用の実務チーム</p>
         </div>
 
         <div>
@@ -38,14 +39,11 @@ const Footer: React.FC = () => {
           <p className="mb-3 text-xs font-semibold tracking-widest text-slate-500">お問い合わせ</p>
           <div className="flex flex-col gap-2 text-sm">
             {phone && (
-              <a
-                href={`tel:${phone.replace(/[^\d+]/g, '')}`}
-                className="font-semibold text-slate-700 transition-colors hover:text-brand-primary-700"
-              >
+              <a href={`tel:${phoneHref}`} className="font-semibold text-slate-700 transition-colors hover:text-brand-primary-700">
                 TEL: {phone}
               </a>
             )}
-            <p className="text-slate-500">電話受付 9:00-20:00</p>
+            <p className="text-slate-500">受付時間 9:00-20:00</p>
             <a
               href="https://www.instagram.com/regalo0610/"
               target="_blank"
@@ -61,7 +59,7 @@ const Footer: React.FC = () => {
           <p className="mb-3 text-xs font-semibold tracking-widest text-slate-500">ガイド</p>
           <div className="flex flex-col gap-2 text-sm">
             <Link to="/company" className="text-slate-600 transition-colors hover:text-brand-primary-700">
-              会社概要
+              会社情報
             </Link>
             <Link to="/contact" className="text-slate-600 transition-colors hover:text-brand-primary-700">
               お問い合わせ
@@ -84,7 +82,7 @@ const Footer: React.FC = () => {
 
       <div className="mx-auto mt-8 max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="border-t border-slate-200 pt-4 text-center text-sm text-slate-400">
-          &copy; {new Date().getFullYear()} {siteConfig.companyNameEn}. 無断転載を禁じます。
+          &copy; {new Date().getFullYear()} {siteConfig.companyProfile.legalName}
         </div>
       </div>
     </footer>
@@ -92,3 +90,4 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
+

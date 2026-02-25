@@ -53,7 +53,7 @@ GitHub Actions で自動デプロイする場合は以下の Secrets を設定�
 `.env` で以下を利用します:
 
 ```env
-VITE_CONTACT_ENDPOINT=/api/contact
+VITE_CONTACT_ENDPOINT=
 VITE_CONTACT_ENABLE_LEGACY_FALLBACK=true
 VITE_CONTACT_LEGACY_ENDPOINT=
 VITE_SITE_URL=https://www.regalocom.net

@@ -37,7 +37,7 @@ API障害時は任意で旧フォーム送信にフォールバックできま�
 `.env` 例:
 
 ```env
-VITE_CONTACT_ENDPOINT=/api/contact
+VITE_CONTACT_ENDPOINT=
 VITE_CONTACT_ENABLE_LEGACY_FALLBACK=true
 VITE_CONTACT_LEGACY_ENDPOINT=
 VITE_SITE_URL=https://www.regalocom.net
