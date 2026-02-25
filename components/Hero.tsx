@@ -32,7 +32,7 @@ const Hero: React.FC = () => {
             autoPlay
             muted
             playsInline
-            preload="metadata"
+            preload="none"
             poster={asset('images/services/ai-cover.webp')}
             aria-hidden="true"
           >

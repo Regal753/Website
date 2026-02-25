@@ -59,7 +59,7 @@ const CompanyInfo: React.FC = () => {
           <p className="text-xs font-semibold tracking-wider text-brand-primary-700">REPRESENTATIVE PROFILE</p>
           <h3 className="mt-1 text-lg font-semibold text-brand-ink">代表プロフィール</h3>
           <p className="mt-3 text-sm leading-relaxed text-slate-700">
-            代表取締役 塩田玲央｜同志社大学卒業。在学中にSNS事業で法人設立。現在は運用支援と権利管理を中心に事業展開中。
+            代表取締役 塩田玲央｜同志社大学卒業。在学中にSNS事業で法人設立。JASRAC信託会員。音楽著作権管理者養成講座修了。現在はSNS運用支援と権利管理を展開。
           </p>
         </section>
         <div className="mb-6 flex flex-wrap gap-2">

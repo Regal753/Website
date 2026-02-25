@@ -15,8 +15,7 @@
 cd infrastructure/cloudflare/contact-worker
 ```
 
-1. `wrangler.toml` の `kv_namespaces.id` を実値に置換  
-2. 必要なら `routes.pattern` と `CONTACT_ALLOWED_ORIGIN` を環境に合わせて変更
+1. 必要なら `routes.pattern` と `CONTACT_ALLOWED_ORIGIN` を環境に合わせて変更
 
 ### KV 作成例
 

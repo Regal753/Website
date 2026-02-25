@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "npm run build:css && vite",
-    "build": "npm run build:css && vite build",
+    "build": "npm run build:css && vite build && npm run build:routes",
     "preview": "vite preview",
     "build:css": "tailwindcss -c tailwind.config.cjs -i styles/tailwind.css -o public/tailwind.css --minify",
+    "build:routes": "node scripts/generate-spa-routes.mjs",
     "test": "vitest run"
   },
   "dependencies": {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { serviceCatalog } from './services.catalog';
+import { getServiceBySlug, serviceCatalog } from './services.catalog';
 
 describe('service catalog', () => {
   it('has exactly three divisions', () => {
@@ -13,7 +13,10 @@ describe('service catalog', () => {
 
   it('does not contain banned wording', () => {
     const serialized = JSON.stringify(serviceCatalog);
-    expect(serialized).not.toContain('????');
+    const forbiddenTerms = ['買い切り', '買切', 'バイアウト'];
+    for (const term of forbiddenTerms) {
+      expect(serialized).not.toContain(term);
+    }
   });
 
   it('uses optimized media assets', () => {
@@ -23,5 +26,12 @@ describe('service catalog', () => {
         expect(image.endsWith('.webp')).toBe(true);
       }
     }
+  });
+
+  it('resolves legacy slugs including .html suffix', () => {
+    expect(getServiceBySlug('music-publishing-bgm')?.slug).toBe('music-publishing');
+    expect(getServiceBySlug('music-publishing-bgm.html')?.slug).toBe('music-publishing');
+    expect(getServiceBySlug('rights-management')?.slug).toBe('ai-marketing-strategy');
+    expect(getServiceBySlug('rights-management.html')?.slug).toBe('ai-marketing-strategy');
   });
 });

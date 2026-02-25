@@ -93,8 +93,9 @@ const Contact: React.FC = () => {
     const origin =
       configuredSiteUrl ||
       (typeof window !== 'undefined' ? window.location.origin : 'https://www.regalocom.net');
-    const base = origin.replace(/\/$/, '');
-    return `${base}/contact?submitted=1`;
+    const baseOrigin = origin.replace(/\/$/, '');
+    const baseUrl = import.meta.env.BASE_URL || '/';
+    return new URL(`${baseUrl}contact?submitted=1`, `${baseOrigin}/`).toString();
   }, []);
 
   const mailSubject = useMemo(
