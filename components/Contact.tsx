@@ -73,15 +73,15 @@ const Contact: React.FC = () => {
     return hasSubmitted || byQuery;
   }, [hasSubmitted, location.search]);
 
-  const contactEndpoint = useMemo(() => {
-    const configured = (import.meta.env.VITE_CONTACT_ENDPOINT || '').trim();
-    return configured || '/api/contact';
-  }, []);
-
   const legacyFallbackEndpoint = useMemo(() => {
     const configured = (import.meta.env.VITE_CONTACT_LEGACY_ENDPOINT || '').trim();
     return configured || `https://formsubmit.co/${siteConfig.contactEmail}`;
   }, []);
+
+  const contactEndpoint = useMemo(() => {
+    const configured = (import.meta.env.VITE_CONTACT_ENDPOINT || '').trim();
+    return configured || legacyFallbackEndpoint;
+  }, [legacyFallbackEndpoint]);
 
   const enableLegacyFallback = useMemo(() => {
     const configured = (import.meta.env.VITE_CONTACT_ENABLE_LEGACY_FALLBACK || 'true').trim();
