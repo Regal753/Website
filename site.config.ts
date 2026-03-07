@@ -51,7 +51,7 @@ export const siteConfig = {
   contactFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSdbqMVhTDUHcfhnrv5Vj96aBF9WhyAwysTfmG9CdgElhrGm1A/viewform',
   siteTitle: 'Regalo | SNS管理・音楽出版・AIマーケティング戦略',
   siteDescription:
-    'RegaloはSNS管理事業部、音楽出版事業部、AIマーケティング戦略事業部を展開し、運用と改善を一気通貫で支援します。',
+    'Regaloは京都発の実務チームとして、YouTubeを中心としたSNS運用、音楽著作権・BGM運用、AIを活用した共有と進行設計まで、仕組みづくりと改善を一気通貫で支援します。',
   companyProfile,
   cases,
   newsItems,
@@ -61,6 +61,5 @@ export const siteConfig = {
     { label: '音楽出版事業部', href: '/services/music-publishing' },
     { label: 'AIマーケティング戦略事業部', href: '/services/ai-marketing-strategy' },
     { label: '会社情報', href: '/company' },
-    { label: 'お問い合わせ', href: '/contact' },
   ] as NavItem[],
 };

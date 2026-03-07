@@ -6,6 +6,35 @@ import { serviceCatalog } from '../services.catalog';
 import { trackEvent } from '../utils/analytics';
 import { getGradientStyle } from '../utils/gradient';
 
+const themes: Record<
+  string,
+  {
+    card: string;
+    chip: string;
+    imageBorder: string;
+    eyebrow: string;
+  }
+> = {
+  'sns-management': {
+    card: 'border-rose-200 bg-gradient-to-br from-rose-50 via-white to-white',
+    chip: 'bg-rose-100 text-rose-800',
+    imageBorder: 'border-rose-100',
+    eyebrow: 'YouTube運用と改善',
+  },
+  'music-publishing': {
+    card: 'border-amber-200 bg-gradient-to-br from-amber-50 via-white to-white',
+    chip: 'bg-amber-100 text-amber-900',
+    imageBorder: 'border-amber-100',
+    eyebrow: 'BGM制作と権利管理',
+  },
+  'ai-marketing-strategy': {
+    card: 'border-cyan-200 bg-gradient-to-br from-cyan-50 via-white to-white',
+    chip: 'bg-cyan-100 text-cyan-900',
+    imageBorder: 'border-cyan-100',
+    eyebrow: '共有・進行・自動化',
+  },
+};
+
 const Services: React.FC = () => {
   const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 
@@ -14,48 +43,39 @@ const Services: React.FC = () => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center md:mb-14">
           <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-brand-primary-200 bg-brand-primary-50 px-3 py-1 text-xs font-semibold tracking-wide text-brand-primary-700">
-            BUSINESS DIVISIONS
+            何を頼める会社かを明確にする
           </p>
-          <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">事業一覧</h2>
-          <p className="text-slate-600 max-w-2xl mx-auto">
-            各事業ページで、実績・料金・進め方・技術までまとめてご確認いただけます。
+          <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">3つの支援領域</h2>
+          <p className="mx-auto max-w-2xl text-slate-600">
+            企画や運用の改善、音楽権利の整理、共有フローの自動化まで。
+            課題の場所に合わせて入口を用意しています。
           </p>
         </div>
+
         <div className="space-y-6">
-          {serviceCatalog.map((service, index) => {
+          {serviceCatalog.map((service) => {
             const Icon = service.icon;
-            const isMusicFocus = service.slug === 'music-publishing';
+            const theme = themes[service.slug];
+            const images = [service.media.listImage, ...service.media.galleryImages];
+
             return (
-              <div
+              <article
                 key={service.slug}
-                className={`grid grid-cols-1 md:grid-cols-[160px_1fr] gap-4 md:gap-8 items-start p-5 sm:p-6 md:p-8 rounded-2xl border backdrop-blur-sm transition-all ${
-                  isMusicFocus
-                    ? 'border-brand-primary-300 bg-gradient-to-br from-white via-brand-primary-50/40 to-cyan-50/50 shadow-lg shadow-brand-primary-100/60'
-                    : 'border-slate-200 bg-white/90 shadow-sm hover:shadow-lg hover:border-brand-primary-200'
-                }`}
+                className={`grid gap-6 rounded-3xl border p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg md:grid-cols-[minmax(0,1fr)_320px] md:p-8 ${theme.card}`}
               >
-                <div
-                  className={`text-2xl md:text-3xl font-bold whitespace-nowrap ${
-                    isMusicFocus ? 'text-brand-primary-300' : 'text-slate-300'
-                  }`}
-                >
-                  SERVICE.{String(index + 1).padStart(2, '0')}
-                </div>
                 <div>
-                  <div className="flex items-start gap-4 mb-4">
+                  <div className="flex items-start gap-4">
                     <div
-                      className="w-12 h-12 rounded-xl bg-brand-primary-600 flex items-center justify-center shrink-0 shadow-lg"
+                      className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl shadow-lg"
                       style={{ background: getGradientStyle(service.color) }}
                     >
-                      <Icon className="text-white w-6 h-6" />
+                      <Icon className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      {isMusicFocus && (
-                        <p className="mb-2 inline-flex items-center rounded-full border border-brand-primary-200 bg-white px-2.5 py-1 text-[11px] font-semibold tracking-wider text-brand-primary-700">
-                          重点強化事業
-                        </p>
-                      )}
-                      <h3 className="mb-2 text-xl font-semibold text-brand-ink md:text-2xl">
+                      <p className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${theme.chip}`}>
+                        {theme.eyebrow}
+                      </p>
+                      <h3 className="mt-3 text-xl font-semibold text-brand-ink md:text-2xl">
                         <Link
                           to={`/services/${service.slug}`}
                           onClick={() =>
@@ -66,41 +86,38 @@ const Services: React.FC = () => {
                           {service.title}
                         </Link>
                       </h3>
-                      <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+                      <p className="mt-3 text-sm leading-relaxed text-slate-600 md:text-base">
                         {service.description}
                       </p>
                     </div>
                   </div>
-                  <div className="ml-0 md:ml-16 mt-4">
-                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
-                      {service.items.map((item, i) => (
+
+                  <div className="mt-5">
+                    <ul className="grid grid-cols-1 gap-x-8 gap-y-2 md:grid-cols-2">
+                      {service.items.map((item) => (
                         <li
-                          key={i}
-                          className="flex items-center gap-2 text-sm md:text-base font-semibold text-slate-700"
+                          key={item}
+                          className="flex items-center gap-2 text-sm font-semibold text-slate-700 md:text-base"
                         >
-                          <span className="w-1.5 h-1.5 rounded-full bg-slate-900 shrink-0" />
+                          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-slate-900" />
                           {item}
                         </li>
                       ))}
                     </ul>
                   </div>
-                  <div className="ml-0 md:ml-16 mt-5 rounded-xl overflow-hidden border border-slate-200 bg-white shadow-sm">
-                    <div className="grid grid-cols-3 gap-2 p-2 bg-slate-50">
-                      {[service.media.listImage, ...service.media.galleryImages].slice(0, 3).map((imagePath, imageIndex) => (
-                        <img
-                          key={`${service.slug}-preview-${imageIndex}`}
-                          src={asset(imagePath)}
-                          alt={`${service.title}のイメージ${imageIndex + 1}`}
-                          width={640}
-                          height={360}
-                          className="w-full h-24 sm:h-36 rounded-lg object-cover border border-slate-200 bg-white"
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      ))}
-                    </div>
+
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {service.techStack.slice(0, 4).map((item) => (
+                      <span
+                        key={item}
+                        className="inline-flex rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700"
+                      >
+                        {item}
+                      </span>
+                    ))}
                   </div>
-                  <div className="ml-0 md:ml-16 mt-5">
+
+                  <div className="mt-5">
                     <Link
                       to={`/services/${service.slug}`}
                       onClick={() =>
@@ -108,12 +125,36 @@ const Services: React.FC = () => {
                       }
                       className="inline-flex items-center gap-2 font-semibold text-brand-primary-700 transition-colors hover:text-brand-primary-800"
                     >
-                      詳細ページへ
-                      <ArrowRight className="w-4 h-4" />
+                      料金・進め方・事例を見る
+                      <ArrowRight className="h-4 w-4" />
                     </Link>
                   </div>
                 </div>
-              </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <img
+                    src={asset(images[0])}
+                    alt={`${service.title}のメインイメージ`}
+                    width={1280}
+                    height={720}
+                    className={`col-span-2 h-44 w-full rounded-3xl border bg-white object-cover ${theme.imageBorder}`}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  {images.slice(1).map((imagePath, imageIndex) => (
+                    <img
+                      key={`${service.slug}-preview-${imageIndex}`}
+                      src={asset(imagePath)}
+                      alt={`${service.title}の参考イメージ${imageIndex + 1}`}
+                      width={640}
+                      height={360}
+                      className={`h-28 w-full rounded-2xl border bg-white object-cover ${theme.imageBorder}`}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ))}
+                </div>
+              </article>
             );
           })}
         </div>

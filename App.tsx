@@ -160,8 +160,14 @@ function App() {
       <ScrollToTopOnRouteChange />
       <RouteTracker />
       <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100/70 text-slate-800 selection:bg-cyan-100">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-brand-primary-700 focus:shadow-lg"
+        >
+          本文へスキップ
+        </a>
         <Header />
-        <main>
+        <main id="main-content">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/company" element={<CompanyPage />} />

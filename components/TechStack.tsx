@@ -15,17 +15,17 @@ const TechStack: React.FC = () => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center md:mb-14">
           <p className="mb-4 inline-flex rounded-full border border-brand-primary-200 bg-brand-primary-50 px-3 py-1 text-xs font-semibold text-brand-primary-700">
-            TECH FOUNDATION
+            実務で使う運用基盤
           </p>
           <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">運用を支える技術基盤</h2>
           <p className="mx-auto max-w-2xl text-slate-600">
-            実運用で使うツール構成を前提に、管理台帳・進行・通知をつなぐ基盤を設計します。
+            管理台帳、進行共有、通知フローをばらばらにせず、現場で使うツール同士をつないで設計します。
           </p>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-2">
           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
-            <h3 className="mb-4 text-xl font-semibold text-brand-ink">採用技術</h3>
+            <h3 className="mb-4 text-xl font-semibold text-brand-ink">主に使うツール</h3>
             <div className="space-y-3">
               {stackItems.map((item) => (
                 <div key={item.label} className="flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4">
@@ -40,24 +40,24 @@ const TechStack: React.FC = () => {
           </div>
 
           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
-            <h3 className="mb-4 text-xl font-semibold text-brand-ink">運用フロー構成</h3>
+            <h3 className="mb-4 text-xl font-semibold text-brand-ink">運用フローの考え方</h3>
             <div className="space-y-3">
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <p className="text-xs font-semibold tracking-wider text-slate-500">INPUT</p>
+                <p className="text-xs font-semibold tracking-wider text-slate-500">入力</p>
                 <p className="mt-1 text-sm font-medium text-slate-700">お問い合わせ / 素材 / 楽曲情報</p>
               </div>
               <div className="flex justify-center">
                 <ArrowRight className="h-4 w-4 text-slate-400" />
               </div>
               <div className="rounded-xl border border-brand-primary-200 bg-brand-primary-50/50 p-4">
-                <p className="text-xs font-semibold tracking-wider text-brand-primary-700">MANAGE</p>
+                <p className="text-xs font-semibold tracking-wider text-brand-primary-700">管理</p>
                 <p className="mt-1 text-sm font-medium text-slate-700">Drive + Sheetsで進行管理と権利台帳を統合</p>
               </div>
               <div className="flex justify-center">
                 <ArrowRight className="h-4 w-4 text-slate-400" />
               </div>
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <p className="text-xs font-semibold tracking-wider text-slate-500">NOTIFY</p>
+                <p className="text-xs font-semibold tracking-wider text-slate-500">共有</p>
                 <p className="mt-1 flex items-center gap-2 text-sm font-medium text-slate-700">
                   <MessageSquareShare className="h-4 w-4 text-brand-primary-700" />
                   Discord通知・定期レポート自動送信

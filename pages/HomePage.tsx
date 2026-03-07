@@ -1,12 +1,14 @@
 import React from 'react';
-import Hero from '../components/Hero';
-import TrustStats from '../components/TrustStats';
-import Services from '../components/Services';
 import Cases from '../components/Cases';
-import Process from '../components/Process';
-import TechStack from '../components/TechStack';
-import Pricing from '../components/Pricing';
+import Hero from '../components/Hero';
+import InlineCTA from '../components/InlineCTA';
 import News from '../components/News';
+import Pricing from '../components/Pricing';
+import Process from '../components/Process';
+import Services from '../components/Services';
+import TeamPreview from '../components/TeamPreview';
+import TechStack from '../components/TechStack';
+import TrustStats from '../components/TrustStats';
 
 const HomePage: React.FC = () => (
   <>
@@ -14,6 +16,8 @@ const HomePage: React.FC = () => (
     <TrustStats />
     <Services />
     <Cases />
+    <InlineCTA />
+    <TeamPreview />
     <Process />
     <TechStack />
     <Pricing />

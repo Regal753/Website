@@ -227,7 +227,7 @@ const Contact: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center md:mb-14">
           <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-brand-primary-200 bg-brand-primary-50 px-3 py-1 text-xs font-semibold text-brand-primary-700">
-            CONTACT
+            お問い合わせ
           </p>
           <div className="mb-4 inline-flex items-center justify-center rounded-full bg-brand-primary-50 p-3">
             <Mail className="h-6 w-6 text-brand-primary-700" />

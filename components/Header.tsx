@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { ArrowRight, Menu, X } from 'lucide-react';
 import { siteConfig } from '../site.config';
 
 const Header: React.FC = () => {
@@ -57,23 +57,33 @@ const Header: React.FC = () => {
           </span>
         </button>
 
-        {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-4 xl:gap-6">
-          {siteConfig.navItems.map((item) => (
-            <button
-              key={item.href}
-              type="button"
-              onClick={() => handleNavClick(item.href)}
-              className={`px-3 py-1.5 rounded-full text-xs lg:text-sm font-semibold whitespace-nowrap border transition-all ${
-                isActive(item.href, item.matchPrefix)
-                  ? 'text-brand-primary-700 bg-brand-primary-50 border-brand-primary-100'
-                  : 'text-slate-600 bg-white/70 border-slate-200 hover:text-brand-primary-700 hover:border-brand-primary-200 hover:bg-brand-primary-50/60'
-              }`}
-            >
-              {item.label}
-            </button>
-          ))}
-        </nav>
+        <div className="hidden lg:flex items-center gap-3 xl:gap-4">
+          <nav className="flex items-center gap-4 xl:gap-6">
+            {siteConfig.navItems.map((item) => (
+              <button
+                key={item.href}
+                type="button"
+                onClick={() => handleNavClick(item.href)}
+                className={`px-3 py-1.5 rounded-full text-xs lg:text-sm font-semibold whitespace-nowrap border transition-all ${
+                  isActive(item.href, item.matchPrefix)
+                    ? 'text-brand-primary-700 bg-brand-primary-50 border-brand-primary-100'
+                    : 'text-slate-600 bg-white/70 border-slate-200 hover:text-brand-primary-700 hover:border-brand-primary-200 hover:bg-brand-primary-50/60'
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+
+          <button
+            type="button"
+            onClick={() => handleNavClick('/contact')}
+            className="inline-flex items-center gap-2 rounded-full bg-brand-primary-700 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-brand-primary-700/20 transition-all hover:-translate-y-px hover:bg-brand-primary-800"
+          >
+            無料相談
+            <ArrowRight className="h-4 w-4" />
+          </button>
+        </div>
 
         {/* Mobile Menu Button */}
         <button
@@ -112,6 +122,14 @@ const Header: React.FC = () => {
               {item.label}
             </button>
           ))}
+          <button
+            type="button"
+            onClick={() => handleNavClick('/contact')}
+            className="mt-1 inline-flex items-center justify-center gap-2 rounded-xl bg-brand-primary-700 px-4 py-3 text-sm font-semibold text-white"
+          >
+            無料相談する
+            <ArrowRight className="h-4 w-4" />
+          </button>
         </div>
       </div>
     </header>
