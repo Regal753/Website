@@ -35,6 +35,13 @@ const themes: Record<
   },
 };
 
+const defaultTheme = {
+  card: 'border-slate-200 bg-gradient-to-br from-slate-50 via-white to-white',
+  chip: 'bg-slate-100 text-slate-800',
+  imageBorder: 'border-slate-200',
+  eyebrow: '運用設計と改善',
+};
+
 const Services: React.FC = () => {
   const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 
@@ -55,7 +62,7 @@ const Services: React.FC = () => {
         <div className="space-y-6">
           {serviceCatalog.map((service) => {
             const Icon = service.icon;
-            const theme = themes[service.slug];
+            const theme = themes[service.slug] ?? defaultTheme;
             const images = [service.media.listImage, ...service.media.galleryImages];
 
             return (

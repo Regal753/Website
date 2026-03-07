@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight, Menu, X } from 'lucide-react';
 import { siteConfig } from '../site.config';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
@@ -17,10 +16,8 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = () => {
     setIsMobileMenuOpen(false);
-    navigate(href);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const isActive = (href: string, matchPrefix?: boolean) => {
@@ -39,10 +36,10 @@ const Header: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         {/* Logo */}
-        <button
-          type="button"
+        <Link
+          to="/"
           className="flex items-center gap-2 cursor-pointer group rounded-xl bg-white/80 border border-slate-200/80 px-2.5 py-1.5 shadow-sm"
-          onClick={() => handleNavClick('/')}
+          onClick={handleNavClick}
           aria-label="トップページへ移動"
         >
           <img
@@ -55,15 +52,15 @@ const Header: React.FC = () => {
           <span className="text-xl font-semibold text-brand-ink">
             {siteConfig.companyName}
           </span>
-        </button>
+        </Link>
 
         <div className="hidden lg:flex items-center gap-3 xl:gap-4">
           <nav className="flex items-center gap-4 xl:gap-6">
             {siteConfig.navItems.map((item) => (
-              <button
+              <Link
                 key={item.href}
-                type="button"
-                onClick={() => handleNavClick(item.href)}
+                to={item.href}
+                onClick={handleNavClick}
                 className={`px-3 py-1.5 rounded-full text-xs lg:text-sm font-semibold whitespace-nowrap border transition-all ${
                   isActive(item.href, item.matchPrefix)
                     ? 'text-brand-primary-700 bg-brand-primary-50 border-brand-primary-100'
@@ -71,18 +68,18 @@ const Header: React.FC = () => {
                 }`}
               >
                 {item.label}
-              </button>
+              </Link>
             ))}
           </nav>
 
-          <button
-            type="button"
-            onClick={() => handleNavClick('/contact')}
+          <Link
+            to="/contact"
+            onClick={handleNavClick}
             className="inline-flex items-center gap-2 rounded-full bg-brand-primary-700 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-brand-primary-700/20 transition-all hover:-translate-y-px hover:bg-brand-primary-800"
           >
             無料相談
             <ArrowRight className="h-4 w-4" />
-          </button>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -109,10 +106,10 @@ const Header: React.FC = () => {
       >
         <div className="rounded-b-2xl bg-white/95 backdrop-blur-xl border-t border-slate-200 shadow-xl p-4 flex flex-col gap-3">
           {siteConfig.navItems.map((item) => (
-            <button
+            <Link
               key={item.href}
-              type="button"
-              onClick={() => handleNavClick(item.href)}
+              to={item.href}
+              onClick={handleNavClick}
               className={`text-left text-sm font-semibold p-2.5 rounded-lg border transition-colors ${
                 isActive(item.href, item.matchPrefix)
                   ? 'text-brand-primary-700 bg-brand-primary-50 border-brand-primary-100'
@@ -120,16 +117,16 @@ const Header: React.FC = () => {
               }`}
             >
               {item.label}
-            </button>
+            </Link>
           ))}
-          <button
-            type="button"
-            onClick={() => handleNavClick('/contact')}
+          <Link
+            to="/contact"
+            onClick={handleNavClick}
             className="mt-1 inline-flex items-center justify-center gap-2 rounded-xl bg-brand-primary-700 px-4 py-3 text-sm font-semibold text-white"
           >
             無料相談する
             <ArrowRight className="h-4 w-4" />
-          </button>
+          </Link>
         </div>
       </div>
     </header>
