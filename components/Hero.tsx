@@ -52,9 +52,9 @@ const Hero: React.FC = () => {
           </div>
 
           <h1 className="text-4xl font-semibold leading-tight tracking-tight text-brand-ink sm:text-5xl md:text-7xl md:font-bold">
-            <span className="block">SNS運用と音楽権利管理を、</span>
+            <span className="block">継続的な</span>
             <span className="block bg-gradient-to-r from-amber-700 via-brand-primary-700 to-cyan-600 bg-clip-text text-transparent">
-              続けられる仕組みに変える。
+              仕組みづくりを
             </span>
           </h1>
 
