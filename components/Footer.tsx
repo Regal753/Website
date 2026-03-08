@@ -13,8 +13,8 @@ const Footer: React.FC = () => {
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
         <div className="md:col-span-2 lg:col-span-1">
           <h2 className="mb-1 text-xl font-semibold text-brand-ink">{siteConfig.companyName}</h2>
-          <p className="text-sm text-slate-500">3つの事業部で、運用・制作・改善を一貫して支援します。</p>
-          <p className="mt-2 text-xs text-slate-400">京都発・音楽と運用の実務チーム</p>
+          <p className="text-sm text-slate-500">{siteConfig.positioning.footerTagline}</p>
+          <p className="mt-2 text-xs text-slate-400">京都発・運用と権利管理の実務チーム</p>
         </div>
 
         <div>

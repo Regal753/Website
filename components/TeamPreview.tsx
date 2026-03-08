@@ -27,7 +27,7 @@ const TeamPreview: React.FC = () => {
           </p>
           <h2 className="text-3xl font-semibold text-brand-ink md:text-4xl">代表とチームの考え方</h2>
           <p className="mx-auto mt-4 max-w-3xl text-slate-600">
-            Regaloは京都を拠点に、SNS運用、音楽権利管理、AI活用の実務を横断して支援する少人数チームです。
+            {siteConfig.positioning.companySummary}
           </p>
         </div>
 
@@ -92,7 +92,7 @@ const TeamPreview: React.FC = () => {
                 onClick={() => trackEvent('cta_click', { placement: 'team_preview', target: 'company' })}
                 className="inline-flex items-center gap-2 text-sm font-semibold text-brand-primary-700 transition-colors hover:text-brand-primary-800"
               >
-                会社情報と代表プロフィールを見る
+                会社情報と代表者紹介を見る
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

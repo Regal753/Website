@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "build:css": "tailwindcss -c tailwind.config.cjs -i styles/tailwind.css -o public/tailwind.css --minify",
     "build:routes": "node scripts/generate-spa-routes.mjs",
-    "test": "vitest run"
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "lucide-react": "^0.555.0",

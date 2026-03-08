@@ -1,6 +1,17 @@
 import { NavItem, CompanyProfile, CaseStudy, NewsItem } from './types';
 
 const CONTACT_EMAIL = 'contact@regalocom.net';
+const BRAND_POSITIONING = {
+  homepageSummary:
+    'Regaloは、YouTubeを中心としたSNS運用、音楽著作権・BGM運用、AIを使った共有や進行の整備まで、実務と運用設計を同じチームで支援します。見た目だけでなく、日々の運用が止まらない形まで整えます。',
+  companySummary:
+    'Regaloは京都発の実務チームとして、SNS運用、音楽権利管理、AIを活用した共有と進行設計までを横断し、相談から改善まで一気通貫で支援します。',
+  crossFunctionalLabel: '3つの支援領域を横断して支援',
+  serviceDetailEyebrow: '支援内容',
+  serviceDetailSummary:
+    '課題の整理から設計、運用定着まで、現場で回る形を重視して伴走します。',
+  footerTagline: '3つの支援領域で、運用・権利管理・改善を一貫して支援します。',
+} as const;
 
 export const companyProfile: CompanyProfile = {
   brandName: 'Regalo',
@@ -22,19 +33,34 @@ export const companyProfile: CompanyProfile = {
 
 export const cases: CaseStudy[] = [
   {
-    clientType: '音楽系YouTubeチャンネル（登録者数万〜）',
+    serviceSlug: 'music-publishing',
+    title: 'BGM運用と権利管理を整理',
+    clientType: '音楽系YouTubeチャンネル',
+    challenge: 'BGM利用可否の判断が人依存で、公開前確認に時間がかかる。',
     scope: 'BGMカタログ構築・権利台帳整備・利用許諾フロー設計',
-    outcome: '権利トラブル 0 件を維持しつつ、月次のBGM納品本数を約2倍に改善',
+    outcome: '権利トラブル0件を維持しつつ、月次のBGM納品本数を約2倍に改善。',
+    results: ['権利トラブル 0件を維持', 'BGM納品本数 約2倍', '利用判断の基準を統一'],
+    deliverables: ['台帳設計', '利用可否ルール', '許諾管理手順', '運用ルール'],
   },
   {
+    serviceSlug: 'sns-management',
+    title: 'YouTube運用の属人化を標準化',
     clientType: '企業メディア運営チーム',
+    challenge: '企画や改善が担当者依存で、数値を見ながら運用改善を回せない。',
     scope: 'YouTube運用設計・編集ガイドライン策定・KPIダッシュボード構築',
-    outcome: '属人化していた運用を標準化し、制作リードタイムを約40%短縮',
+    outcome: '属人化していた運用を標準化し、制作リードタイムを約40%短縮。',
+    results: ['制作リードタイム 約40%短縮', 'KPIダッシュボードを構築', '役割分担を明文化'],
+    deliverables: ['運用フロー', '編集ガイドライン', 'KPI定義', 'ダッシュボード'],
   },
   {
+    serviceSlug: 'ai-marketing-strategy',
+    title: '制作進行をDrive/Sheets/Discordで自動化',
     clientType: 'クリエイター事務所',
+    challenge: '素材収集・進捗共有・リマインドが手作業で、共有漏れや遅延が起きる。',
     scope: 'Google Drive / Sheets / Discord を連携した制作進行自動化',
-    outcome: '手動だった素材共有・進捗管理を自動化し、週あたり約10時間の工数を削減',
+    outcome: '手動だった素材共有・進捗管理を自動化し、週あたり約10時間の工数を削減。',
+    results: ['週あたり約10時間の工数削減', '共有漏れを抑制', 'リマインドを自動化'],
+    deliverables: ['フォルダ設計', '進捗シート雛形', '通知フロー', '運用手順'],
   },
 ];
 
@@ -52,6 +78,7 @@ export const siteConfig = {
   siteTitle: 'Regalo | SNS管理・音楽出版・AIマーケティング戦略',
   siteDescription:
     'Regaloは京都発の実務チームとして、YouTubeを中心としたSNS運用、音楽著作権・BGM運用、AIを活用した共有と進行設計まで、仕組みづくりと改善を一気通貫で支援します。',
+  positioning: BRAND_POSITIONING,
   companyProfile,
   cases,
   newsItems,

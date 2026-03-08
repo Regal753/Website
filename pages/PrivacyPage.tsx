@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
+import LegalRedirect from '../components/LegalRedirect';
 
 const PrivacyPage: React.FC = () => {
-  useEffect(() => {
-    window.location.replace(`${import.meta.env.BASE_URL}privacy.html`);
-  }, []);
+  const target = `${import.meta.env.BASE_URL}privacy.html`;
 
-  return null;
+  useEffect(() => {
+    window.location.replace(target);
+  }, [target]);
+
+  return <LegalRedirect title="プライバシーポリシー" target={target} />;
 };
 
 export default PrivacyPage;

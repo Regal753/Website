@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ArrowRight, Clock3, MapPin, ShieldCheck } from 'lucide-react';
 import { serviceCatalog } from '../services.catalog';
 import { siteConfig } from '../site.config';
@@ -7,7 +7,6 @@ import { SectionId } from '../types';
 import { trackEvent } from '../utils/analytics';
 
 const Hero: React.FC = () => {
-  const navigate = useNavigate();
   const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 
   const scrollToServices = () => {
@@ -59,8 +58,7 @@ const Hero: React.FC = () => {
           </h1>
 
           <p className="max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
-            Regaloは、YouTubeを中心としたSNS運用、音楽著作権・BGM運用、AIを使った共有や進行の整備まで、
-            実務と運用設計を同じチームで支援します。見た目だけでなく、日々の運用が止まらない形まで整えます。
+            {siteConfig.positioning.homepageSummary}
           </p>
 
           <div className="flex flex-wrap gap-2 text-sm font-medium text-slate-700">
@@ -72,16 +70,14 @@ const Hero: React.FC = () => {
           </div>
 
           <div className="flex flex-col flex-wrap gap-4 sm:flex-row">
-            <button
-              onClick={() => {
-                trackEvent('cta_click', { placement: 'hero_primary', target: 'contact' });
-                navigate('/contact');
-              }}
+            <Link
+              to="/contact"
+              onClick={() => trackEvent('cta_click', { placement: 'hero_primary', target: 'contact' })}
               className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-primary-700 px-7 py-3.5 font-semibold text-white shadow-lg shadow-brand-primary-700/20 transition-all hover:-translate-y-px hover:bg-brand-primary-800 sm:w-auto sm:px-8 sm:py-4"
             >
               無料相談する
               <ArrowRight size={20} />
-            </button>
+            </Link>
             <button
               onClick={() => {
                 trackEvent('cta_click', { placement: 'hero_secondary', target: 'services' });

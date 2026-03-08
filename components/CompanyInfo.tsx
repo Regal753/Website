@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { companyProfile } from '../site.config';
+import { companyProfile, siteConfig } from '../site.config';
 import { SectionId } from '../types';
 import { serviceCatalog } from '../services.catalog';
 
@@ -49,15 +49,15 @@ const CompanyInfo: React.FC = () => {
           <h2 className="text-3xl font-semibold text-brand-ink">会社情報</h2>
         </div>
         <p className="text-slate-700 leading-relaxed mb-8">
-          Regaloは「贈り物」の精神を軸に、関わる皆さまの毎日がより明るく前向きになるよう支援しています。
-          常に成果を意識しながら、継続的な改善と丁寧な伴走で価値を届けます。
+          {siteConfig.positioning.companySummary}{' '}
+          「贈り物」の精神を軸に、相談段階から改善の定着まで、継続しやすい形で価値を届けます。
         </p>
         <section
           className="mb-8 rounded-2xl border border-brand-primary-200 bg-brand-primary-50/40 p-5 shadow-sm sm:p-6"
-          aria-label="代表プロフィール"
+          aria-label="代表者について"
         >
-          <p className="text-xs font-semibold tracking-wider text-brand-primary-700">代表プロフィール</p>
-          <h3 className="mt-1 text-lg font-semibold text-brand-ink">代表プロフィール</h3>
+          <p className="text-xs font-semibold tracking-wider text-brand-primary-700">代表者について</p>
+          <h3 className="mt-1 text-lg font-semibold text-brand-ink">{companyProfile.representative}について</h3>
           <p className="mt-3 text-sm leading-relaxed text-slate-700">
             代表取締役 塩田玲央｜同志社大学卒業。在学中にSNS事業で法人設立。JASRAC信託会員。音楽著作権管理者養成講座修了。現在はSNS運用支援と権利管理を展開。
           </p>
@@ -72,7 +72,7 @@ const CompanyInfo: React.FC = () => {
             </span>
           )}
           <span className="inline-flex rounded-full border border-brand-primary-200 bg-brand-primary-50 px-3 py-1 text-xs font-semibold text-brand-primary-700">
-            音楽出版事業を中核に展開
+            {siteConfig.positioning.crossFunctionalLabel}
           </span>
         </div>
 

@@ -9,9 +9,14 @@ export interface ServiceDetail {
 }
 
 export interface CaseStudy {
+  serviceSlug: string;
+  title: string;
   clientType: string;
+  challenge: string;
   scope: string;
   outcome: string;
+  results: string[];
+  deliverables: string[];
 }
 
 export interface NewsItem {

@@ -1,44 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Cpu, Music, Youtube } from 'lucide-react';
+import { serviceCatalog } from '../services.catalog';
+import { siteConfig } from '../site.config';
 import { SectionId } from '../types';
 import { trackEvent } from '../utils/analytics';
 
-const CASES = [
+const caseStyles: Record<
+  string,
   {
-    title: 'YouTube運用の属人化を標準化',
-    icon: Youtube,
+    colorClass: string;
+    serviceChip: string;
+  }
+> = {
+  'sns-management': {
     colorClass: 'text-red-700 bg-red-50 border-red-100',
-    clientType: '企業メディア運営チーム',
-    challenge: '企画や改善が担当者依存で、数値を見ながら運用改善を回せない。',
-    scope: 'YouTube運用設計・編集ガイドライン策定・KPIダッシュボード構築',
-    outcome: '属人化していた運用を標準化し、制作リードタイムを約40%短縮。',
-    results: ['制作リードタイム 約40%短縮', 'KPIダッシュボードを構築', '役割分担を明文化'],
-    deliverables: ['運用フロー', '編集ガイドライン', 'KPI定義', 'ダッシュボード'],
+    serviceChip: 'bg-red-100 text-red-800',
   },
-  {
-    title: 'BGM運用と権利管理を整理',
-    icon: Music,
+  'music-publishing': {
     colorClass: 'text-brand-primary-700 bg-brand-primary-50 border-brand-primary-100',
-    clientType: '音楽系YouTubeチャンネル',
-    challenge: 'BGM利用可否の判断が人依存で、公開前確認に時間がかかる。',
-    scope: 'BGMカタログ構築・権利台帳整備・利用許諾フロー設計',
-    outcome: '権利トラブル0件を維持しつつ、月次のBGM納品本数を約2倍に改善。',
-    results: ['権利トラブル 0件を維持', 'BGM納品本数 約2倍', '利用判断の基準を統一'],
-    deliverables: ['台帳設計', '利用可否ルール', '許諾管理手順', '運用ルール'],
+    serviceChip: 'bg-brand-primary-100 text-brand-primary-800',
   },
-  {
-    title: '制作進行をDrive/Sheets/Discordで自動化',
-    icon: Cpu,
+  'ai-marketing-strategy': {
     colorClass: 'text-cyan-700 bg-cyan-50 border-cyan-100',
-    clientType: 'クリエイター事務所',
-    challenge: '素材収集・進捗共有・リマインドが手作業で、共有漏れや遅延が起きる。',
-    scope: 'Google Drive / Sheets / Discord を連携した制作進行自動化',
-    outcome: '手動だった素材共有・進捗管理を自動化し、週あたり約10時間の工数を削減。',
-    results: ['週あたり約10時間の工数削減', '共有漏れを抑制', 'リマインドを自動化'],
-    deliverables: ['フォルダ設計', '進捗シート雛形', '通知フロー', '運用手順'],
+    serviceChip: 'bg-cyan-100 text-cyan-900',
   },
-];
+};
+
+const defaultStyle = {
+  colorClass: 'text-slate-700 bg-slate-50 border-slate-200',
+  serviceChip: 'bg-slate-100 text-slate-800',
+};
 
 const Cases: React.FC = () => {
   return (
@@ -55,8 +46,11 @@ const Cases: React.FC = () => {
         </div>
 
         <div className="space-y-5">
-          {CASES.map((c) => {
-            const Icon = c.icon;
+          {siteConfig.cases.map((c) => {
+            const service = serviceCatalog.find((item) => item.slug === c.serviceSlug);
+            if (!service) return null;
+            const Icon = service.icon;
+            const style = caseStyles[c.serviceSlug] ?? defaultStyle;
             return (
               <article
                 key={c.title}
@@ -65,10 +59,13 @@ const Cases: React.FC = () => {
                 <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_280px]">
                   <div>
                     <div className="flex items-start gap-4">
-                      <div className={`shrink-0 rounded-2xl border p-3 ${c.colorClass}`}>
+                      <div className={`shrink-0 rounded-2xl border p-3 ${style.colorClass}`}>
                         <Icon size={20} />
                       </div>
                       <div>
+                        <p className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${style.serviceChip}`}>
+                          {service.title}
+                        </p>
                         <p className="text-sm font-semibold text-slate-500">{c.clientType}</p>
                         <h3 className="mt-1 text-2xl font-semibold text-brand-ink">{c.title}</h3>
                       </div>

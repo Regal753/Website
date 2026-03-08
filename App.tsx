@@ -86,13 +86,15 @@ const getRouteMeta = (pathname: string): RouteMeta => {
     case '/company':
       return {
         title: `会社情報 | ${siteConfig.companyName}`,
-        description: `${siteConfig.companyName}の会社概要と事業内容をご案内します。`,
+        description:
+          '京都発の実務チームRegaloの会社概要、代表者紹介、支援領域をご案内します。',
         canonicalPath: '/company',
       };
     case '/contact':
       return {
         title: `お問い合わせ | ${siteConfig.companyName}`,
-        description: `${siteConfig.companyName}へのお問い合わせフォームです。24時間受け付けています。`,
+        description:
+          'SNS運用、音楽権利管理、AIを活用した運用改善のご相談を24時間受け付けています。通常1営業日以内にご連絡します。',
         canonicalPath: '/contact',
       };
     case '/privacy':
