@@ -10,19 +10,32 @@ const News: React.FC = () => {
   return (
     <section className="bg-white py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-2xl border border-slate-200 bg-slate-50/80 p-5 shadow-sm sm:p-6 md:p-8">
-          <div className="mb-5">
-            <p className="text-xs font-semibold tracking-widest text-brand-primary-700">更新情報</p>
-            <h2 className="mt-1 text-xl font-semibold text-brand-ink sm:text-2xl">お知らせ</h2>
+        <div className="grid gap-6 lg:grid-cols-[300px_minmax(0,1fr)]">
+          <div>
+            <p className="inline-flex rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-700">
+              更新情報
+            </p>
+            <h2 className="mt-4 text-3xl font-semibold text-brand-ink">お知らせ</h2>
+            <p className="mt-3 text-sm leading-relaxed text-slate-600 md:text-base">
+              体制変更、資格取得、サイト更新など、公開している動きをここにまとめています。
+            </p>
           </div>
-          <ul className="divide-y divide-slate-200/90">
-            {items.map((item) => (
-              <li key={`${item.date}-${item.title}`} className="flex flex-col gap-1 py-3.5 sm:flex-row sm:items-center sm:gap-5 sm:py-4">
-                <time className="shrink-0 text-sm font-semibold tabular-nums text-slate-900">{item.date}</time>
-                <p className="text-sm text-slate-700 sm:text-base">{item.title}</p>
-              </li>
-            ))}
-          </ul>
+
+          <div className="rounded-[28px] border border-slate-200 bg-[#fffaf7] p-5 shadow-sm md:p-6">
+            <ul className="divide-y divide-slate-200/90">
+              {items.map((item) => (
+                <li
+                  key={`${item.date}-${item.title}`}
+                  className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:gap-5"
+                >
+                  <time className="inline-flex w-fit rounded-full border border-slate-200 bg-white px-3 py-1 text-sm font-semibold tabular-nums text-slate-900">
+                    {item.date}
+                  </time>
+                  <p className="text-sm leading-relaxed text-slate-700 sm:text-base">{item.title}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>

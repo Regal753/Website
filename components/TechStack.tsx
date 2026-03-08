@@ -1,17 +1,40 @@
 import React from 'react';
-import { ArrowRight, Bot, Cloud, Database, FolderKanban, MessageSquareShare } from 'lucide-react';
+import { Bot, Cloud, Database, FolderKanban, MessageSquareShare } from 'lucide-react';
 import { SectionId } from '../types';
 
 const stackItems = [
-  { icon: Cloud, label: 'Google Cloud / n8n', detail: '処理実行・通知ワークフロー' },
-  { icon: Database, label: 'Google Sheets', detail: '進行管理・権利台帳管理' },
-  { icon: FolderKanban, label: 'Google Drive', detail: '素材保管・納品管理' },
-  { icon: Bot, label: 'Discord Bot', detail: '進捗通知・リマインド' },
-];
+  { icon: Cloud, label: 'Google Cloud / n8n', detail: '処理実行・通知ワークフロー', surface: 'border-cyan-100 bg-cyan-50/80' },
+  { icon: Database, label: 'Google Sheets', detail: '進行管理・権利台帳管理', surface: 'border-amber-100 bg-amber-50/80' },
+  { icon: FolderKanban, label: 'Google Drive', detail: '素材保管・納品管理', surface: 'border-brand-primary-100 bg-brand-primary-50/80' },
+  { icon: Bot, label: 'Discord Bot', detail: '進捗通知・リマインド', surface: 'border-rose-100 bg-rose-50/80' },
+] as const;
+
+const workflowNodes = [
+  {
+    label: '入力',
+    title: 'お問い合わせ / 素材 / 楽曲情報',
+    description: '現場から入る情報を最初に揃える',
+  },
+  {
+    label: '管理',
+    title: 'Drive + Sheetsで進行と権利台帳を統合',
+    description: '誰が見ても追える状態にする',
+  },
+  {
+    label: '共有',
+    title: 'Discord通知・定期レポート自動送信',
+    description: '抜け漏れを減らし、判断を速くする',
+  },
+] as const;
+
+const designPrinciples = ['既存運用を壊さずに入れる', '属人化を減らす', '継続運用を前提に設計する'] as const;
 
 const TechStack: React.FC = () => {
   return (
-    <section id={SectionId.TECH} className="bg-white py-16 md:py-24">
+    <section
+      id={SectionId.TECH}
+      className="bg-[linear-gradient(180deg,_#ffffff_0%,_#f8fafc_100%)] py-16 md:py-24"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center md:mb-14">
           <p className="mb-4 inline-flex rounded-full border border-brand-primary-200 bg-brand-primary-50 px-3 py-1 text-xs font-semibold text-brand-primary-700">
@@ -23,46 +46,61 @@ const TechStack: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-2">
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
-            <h3 className="mb-4 text-xl font-semibold text-brand-ink">主に使うツール</h3>
-            <div className="space-y-3">
-              {stackItems.map((item) => (
-                <div key={item.label} className="flex items-start gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4">
-                  <item.icon className="mt-0.5 h-5 w-5 text-brand-primary-700" />
-                  <div>
-                    <p className="text-sm font-semibold text-brand-ink">{item.label}</p>
-                    <p className="text-sm text-slate-600">{item.detail}</p>
+        <div className="grid gap-6 lg:grid-cols-[1.02fr_0.98fr]">
+          <div className="rounded-[32px] bg-slate-900 p-6 text-white shadow-xl shadow-slate-900/10 md:p-8">
+            <p className="inline-flex rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-semibold tracking-wide text-white/70">
+              運用フローの考え方
+            </p>
+            <h3 className="mt-4 text-2xl font-semibold text-white">情報が止まる場所を先に減らす</h3>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/70 md:text-base">
+              素材、権利、進行、通知が別々の場所にあると、判断が遅れます。
+              まずは管理場所と通知経路を絞り、運用が止まりにくい導線を作ります。
+            </p>
+
+            <div className="mt-8 space-y-4">
+              {workflowNodes.map((item, index) => (
+                <div key={item.label}>
+                  <div className="rounded-3xl border border-white/10 bg-white/10 p-5">
+                    <p className="text-xs font-semibold tracking-widest text-white/60">{item.label}</p>
+                    <p className="mt-2 text-lg font-semibold text-white">{item.title}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-white/70">{item.description}</p>
                   </div>
+                  {index < workflowNodes.length - 1 && (
+                    <div className="mx-auto h-6 w-px bg-white/15" aria-hidden="true" />
+                  )}
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
-            <h3 className="mb-4 text-xl font-semibold text-brand-ink">運用フローの考え方</h3>
-            <div className="space-y-3">
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <p className="text-xs font-semibold tracking-wider text-slate-500">入力</p>
-                <p className="mt-1 text-sm font-medium text-slate-700">お問い合わせ / 素材 / 楽曲情報</p>
+          <div className="space-y-4">
+            <div className="grid gap-4 sm:grid-cols-2">
+              {stackItems.map((item) => (
+                <article
+                  key={item.label}
+                  className={`rounded-3xl border p-5 shadow-sm shadow-slate-200/40 ${item.surface}`}
+                >
+                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-brand-primary-700 shadow-sm">
+                    <item.icon className="h-5 w-5" />
+                  </span>
+                  <p className="mt-4 text-lg font-semibold text-brand-ink">{item.label}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.detail}</p>
+                </article>
+              ))}
+            </div>
+
+            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-7">
+              <p className="text-sm font-semibold text-slate-500">設計方針</p>
+              <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                {designPrinciples.map((item) => (
+                  <div key={item} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                    <p className="text-sm font-semibold leading-relaxed text-brand-ink">{item}</p>
+                  </div>
+                ))}
               </div>
-              <div className="flex justify-center">
-                <ArrowRight className="h-4 w-4 text-slate-400" />
-              </div>
-              <div className="rounded-xl border border-brand-primary-200 bg-brand-primary-50/50 p-4">
-                <p className="text-xs font-semibold tracking-wider text-brand-primary-700">管理</p>
-                <p className="mt-1 text-sm font-medium text-slate-700">Drive + Sheetsで進行管理と権利台帳を統合</p>
-              </div>
-              <div className="flex justify-center">
-                <ArrowRight className="h-4 w-4 text-slate-400" />
-              </div>
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <p className="text-xs font-semibold tracking-wider text-slate-500">共有</p>
-                <p className="mt-1 flex items-center gap-2 text-sm font-medium text-slate-700">
-                  <MessageSquareShare className="h-4 w-4 text-brand-primary-700" />
-                  Discord通知・定期レポート自動送信
-                </p>
-              </div>
+              <p className="mt-4 text-sm leading-relaxed text-slate-600">
+                派手な仕組みより、担当者が増えても回しやすい運用を優先します。
+              </p>
             </div>
           </div>
         </div>
