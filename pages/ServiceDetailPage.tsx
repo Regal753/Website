@@ -157,7 +157,7 @@ const ServiceDetailPage: React.FC = () => {
                     alt={`${service.title}のスライド画像${index + 1}`}
                     width={1280}
                     height={720}
-                    className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+                    className={`absolute inset-0 h-full w-full bg-slate-50 p-4 object-contain transition-opacity duration-700 ${
                       activeSlide === index ? 'opacity-100' : 'opacity-0'
                     }`}
                     loading={index === 0 ? 'eager' : 'lazy'}
@@ -192,7 +192,7 @@ const ServiceDetailPage: React.FC = () => {
                     alt={`${service.title}の参考画像${index + 1}`}
                     width={960}
                     height={640}
-                    className="h-52 w-full rounded-xl border border-slate-200 object-cover"
+                    className="h-52 w-full rounded-xl border border-slate-200 bg-slate-50 p-3 object-contain"
                     loading="lazy"
                     decoding="async"
                   />

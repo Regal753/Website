@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">AI workflow operations illustration</title>
+  <desc id="desc">A workflow board showing intake, routing, approvals, automation, and status reporting.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ecfeff" />
+      <stop offset="55%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#eff6ff" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)" />
+  <rect x="82" y="76" width="1436" height="748" rx="42" fill="#ffffff" stroke="#c7f9ff" />
+  <rect x="126" y="124" width="248" height="34" rx="17" fill="#cffafe" />
+  <text x="150" y="147" fill="#0f766e" font-family="Segoe UI, sans-serif" font-size="22" font-weight="700">Automation and ops design</text>
+  <text x="126" y="208" fill="#0f172a" font-family="Segoe UI, sans-serif" font-size="54" font-weight="700">Workflow clarity over dashboard theater</text>
+  <text x="126" y="250" fill="#475569" font-family="Segoe UI, sans-serif" font-size="24">Intake, routing, review, sync, and reporting shown as an actual operating system.</text>
+
+  <rect x="126" y="306" width="860" height="410" rx="34" fill="#f8fafc" stroke="#e2e8f0" />
+  <text x="164" y="354" fill="#0f766e" font-family="Segoe UI, sans-serif" font-size="24" font-weight="700">Workflow map</text>
+  <rect x="164" y="430" width="150" height="74" rx="24" fill="#cffafe" />
+  <rect x="402" y="430" width="150" height="74" rx="24" fill="#ffffff" stroke="#cbd5e1" />
+  <rect x="640" y="430" width="150" height="74" rx="24" fill="#dbeafe" />
+  <rect x="402" y="578" width="150" height="74" rx="24" fill="#fef3c7" />
+  <rect x="640" y="578" width="150" height="74" rx="24" fill="#dcfce7" />
+  <path d="M314 467 H402 M552 467 H640 M477 504 V578 M552 615 H640" stroke="#94a3b8" stroke-width="12" stroke-linecap="round" />
+
+  <rect x="1020" y="306" width="380" height="182" rx="34" fill="#eff6ff" stroke="#bfdbfe" />
+  <text x="1056" y="354" fill="#1d4ed8" font-family="Segoe UI, sans-serif" font-size="24" font-weight="700">System health</text>
+  <rect x="1056" y="392" width="308" height="18" rx="9" fill="#ffffff" />
+  <rect x="1056" y="428" width="256" height="18" rx="9" fill="#ffffff" />
+  <rect x="1056" y="452" width="208" height="18" rx="9" fill="#ffffff" />
+
+  <rect x="1020" y="520" width="380" height="196" rx="34" fill="#ecfeff" stroke="#a5f3fc" />
+  <text x="1056" y="568" fill="#0f766e" font-family="Segoe UI, sans-serif" font-size="24" font-weight="700">Weekly report</text>
+  <rect x="1056" y="606" width="50" height="70" rx="18" fill="#06b6d4" />
+  <rect x="1134" y="578" width="50" height="98" rx="18" fill="#38bdf8" />
+  <rect x="1212" y="542" width="50" height="134" rx="18" fill="#60a5fa" />
+  <rect x="1290" y="594" width="50" height="82" rx="18" fill="#93c5fd" />
+</svg>

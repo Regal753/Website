@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">SNS content calendar board</title>
+  <desc id="desc">An editorial calendar showing content slots, thumbnails, owners, and publish states.</desc>
+  <rect width="1600" height="900" fill="#fff7f7" />
+  <rect x="88" y="82" width="1424" height="736" rx="40" fill="#ffffff" stroke="#fecdd3" />
+  <text x="140" y="164" fill="#9f1239" font-family="Segoe UI, sans-serif" font-size="24" font-weight="700">Weekly publishing board</text>
+  <text x="140" y="214" fill="#0f172a" font-family="Segoe UI, sans-serif" font-size="48" font-weight="700">What goes out, when, and who owns it</text>
+  <g transform="translate(140 278)">
+    <rect width="1280" height="470" rx="30" fill="#f8fafc" stroke="#e2e8f0" />
+    <rect x="36" y="34" width="196" height="28" rx="14" fill="#ffe4e6" />
+    <rect x="256" y="34" width="196" height="28" rx="14" fill="#fce7f3" />
+    <rect x="476" y="34" width="196" height="28" rx="14" fill="#fef3c7" />
+    <rect x="696" y="34" width="196" height="28" rx="14" fill="#dbeafe" />
+    <rect x="916" y="34" width="196" height="28" rx="14" fill="#dcfce7" />
+    <rect x="36" y="94" width="196" height="320" rx="26" fill="#ffffff" />
+    <rect x="256" y="94" width="196" height="320" rx="26" fill="#ffffff" />
+    <rect x="476" y="94" width="196" height="320" rx="26" fill="#ffffff" />
+    <rect x="696" y="94" width="196" height="320" rx="26" fill="#ffffff" />
+    <rect x="916" y="94" width="196" height="320" rx="26" fill="#ffffff" />
+    <rect x="60" y="122" width="148" height="92" rx="20" fill="#fecdd3" />
+    <rect x="280" y="122" width="148" height="92" rx="20" fill="#fbcfe8" />
+    <rect x="500" y="122" width="148" height="92" rx="20" fill="#fde68a" />
+    <rect x="720" y="122" width="148" height="92" rx="20" fill="#bfdbfe" />
+    <rect x="940" y="122" width="148" height="92" rx="20" fill="#bbf7d0" />
+    <rect x="60" y="242" width="148" height="18" rx="9" fill="#e2e8f0" />
+    <rect x="280" y="242" width="148" height="18" rx="9" fill="#e2e8f0" />
+    <rect x="500" y="242" width="148" height="18" rx="9" fill="#e2e8f0" />
+    <rect x="720" y="242" width="148" height="18" rx="9" fill="#e2e8f0" />
+    <rect x="940" y="242" width="148" height="18" rx="9" fill="#e2e8f0" />
+    <rect x="60" y="280" width="104" height="30" rx="15" fill="#f43f5e" />
+    <rect x="280" y="280" width="104" height="30" rx="15" fill="#fb7185" />
+    <rect x="500" y="280" width="104" height="30" rx="15" fill="#f59e0b" />
+    <rect x="720" y="280" width="104" height="30" rx="15" fill="#2563eb" />
+    <rect x="940" y="280" width="104" height="30" rx="15" fill="#16a34a" />
+  </g>
+</svg>

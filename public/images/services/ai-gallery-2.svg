@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">AI operations dashboard</title>
+  <desc id="desc">A system health board showing SLAs, blockers, automation coverage, and team updates.</desc>
+  <rect width="1600" height="900" fill="#f7fbff" />
+  <rect x="96" y="88" width="1408" height="724" rx="40" fill="#ffffff" stroke="#bfdbfe" />
+  <text x="150" y="174" fill="#1d4ed8" font-family="Segoe UI, sans-serif" font-size="24" font-weight="700">Team visibility</text>
+  <text x="150" y="226" fill="#0f172a" font-family="Segoe UI, sans-serif" font-size="48" font-weight="700">Status, blockers, and coverage in one board</text>
+  <rect x="150" y="292" width="334" height="170" rx="30" fill="#eff6ff" stroke="#bfdbfe" />
+  <rect x="514" y="292" width="334" height="170" rx="30" fill="#ecfeff" stroke="#a5f3fc" />
+  <rect x="878" y="292" width="334" height="170" rx="30" fill="#f8fafc" stroke="#cbd5e1" />
+  <rect x="1242" y="292" width="112" height="170" rx="30" fill="#dcfce7" stroke="#bbf7d0" />
+  <text x="184" y="344" fill="#1d4ed8" font-family="Segoe UI, sans-serif" font-size="22" font-weight="700">SLA</text>
+  <text x="184" y="404" fill="#0f172a" font-family="Segoe UI, sans-serif" font-size="56" font-weight="700">94%</text>
+  <text x="548" y="344" fill="#0f766e" font-family="Segoe UI, sans-serif" font-size="22" font-weight="700">Coverage</text>
+  <text x="548" y="404" fill="#0f172a" font-family="Segoe UI, sans-serif" font-size="56" font-weight="700">17 flows</text>
+  <text x="912" y="344" fill="#334155" font-family="Segoe UI, sans-serif" font-size="22" font-weight="700">Blockers</text>
+  <text x="912" y="404" fill="#0f172a" font-family="Segoe UI, sans-serif" font-size="56" font-weight="700">3</text>
+  <rect x="150" y="510" width="1204" height="220" rx="34" fill="#f8fafc" stroke="#e2e8f0" />
+  <path d="M212 660 H450 M484 660 H722 M756 660 H994 M1028 660 H1266" stroke="#cbd5e1" stroke-width="16" stroke-linecap="round" />
+  <rect x="212" y="598" width="130" height="42" rx="21" fill="#dbeafe" />
+  <rect x="484" y="570" width="130" height="70" rx="24" fill="#cffafe" />
+  <rect x="756" y="610" width="130" height="30" rx="15" fill="#fee2e2" />
+  <rect x="1028" y="554" width="130" height="86" rx="28" fill="#dcfce7" />
+</svg>

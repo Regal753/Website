@@ -144,7 +144,7 @@ const Services: React.FC = () => {
                     alt={`${service.title}のメインイメージ`}
                     width={1280}
                     height={720}
-                    className={`col-span-2 h-44 w-full rounded-3xl border bg-white object-cover ${theme.imageBorder}`}
+                    className={`col-span-2 h-44 w-full rounded-3xl border bg-white p-2 object-contain ${theme.imageBorder}`}
                     loading="lazy"
                     decoding="async"
                   />
@@ -155,7 +155,7 @@ const Services: React.FC = () => {
                       alt={`${service.title}の参考イメージ${imageIndex + 1}`}
                       width={640}
                       height={360}
-                      className={`h-28 w-full rounded-2xl border bg-white object-cover ${theme.imageBorder}`}
+                      className={`h-28 w-full rounded-2xl border bg-white p-2 object-contain ${theme.imageBorder}`}
                       loading="lazy"
                       decoding="async"
                     />
