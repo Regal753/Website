@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import { getServiceBySlug } from './services.catalog';
@@ -76,7 +76,13 @@ const getRouteMeta = (pathname: string): RouteMeta => {
     }
   }
 
-  switch (pathname) {
+  const legacyRouteAliases: Record<string, '/company' | '/contact'> = {
+    '/company.html': '/company',
+    '/contact.html': '/contact',
+  };
+  const normalizedPathname = legacyRouteAliases[pathname] || pathname;
+
+  switch (normalizedPathname) {
     case '/':
       return {
         title: siteConfig.siteTitle,
@@ -173,7 +179,9 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/company" element={<CompanyPage />} />
+            <Route path="/company.html" element={<Navigate to="/company" replace />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/contact.html" element={<Navigate to="/contact" replace />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/services/:slug" element={<ServiceDetailPage />} />

@@ -19,16 +19,16 @@ const routeIndexPaths = [
   'services/workflow-automation/index.html',
 ];
 
-const routeHtmlAliases = [
-  'company.html',
-  'contact.html',
+const redirectAliases = {
+  'company.html': 'company',
+  'contact.html': 'contact',
   // Legacy service detail URLs
-  'services/sns-operations.html',
-  'services/music-publishing-bgm.html',
-  'services/bgm-production.html',
-  'services/rights-management.html',
-  'services/workflow-automation.html',
-];
+  'services/sns-operations.html': 'sns-management',
+  'services/music-publishing-bgm.html': 'music-publishing',
+  'services/bgm-production.html': 'music-publishing',
+  'services/rights-management.html': 'ai-marketing-strategy',
+  'services/workflow-automation.html': 'ai-marketing-strategy',
+};
 
 const writeEntrypoint = async (relativePath, content) => {
   const absolutePath = path.join(distDir, relativePath);
@@ -36,15 +36,52 @@ const writeEntrypoint = async (relativePath, content) => {
   await writeFile(absolutePath, content, 'utf8');
 };
 
+const escapeHtml = (value) =>
+  value
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+const createRedirectHtml = (relativeTarget) => {
+  const escapedTarget = escapeHtml(relativeTarget);
+  return `<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting...</title>
+    <meta name="robots" content="noindex,follow" />
+    <link rel="canonical" href="${escapedTarget}" />
+    <meta http-equiv="refresh" content="0; url=${escapedTarget}" />
+    <script>
+      (function () {
+        var target = new URL(${JSON.stringify(relativeTarget)}, window.location.href).toString();
+        window.location.replace(target);
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Redirecting. If you are not redirected automatically, open <a href="${escapedTarget}">this page</a>.</p>
+  </body>
+</html>
+`;
+};
+
 const main = async () => {
   const indexHtml = await readFile(indexHtmlPath, 'utf8');
-  const targets = [...routeIndexPaths, ...routeHtmlAliases];
 
-  for (const target of targets) {
+  for (const target of routeIndexPaths) {
     await writeEntrypoint(target, indexHtml);
   }
 
-  console.info(`[build:routes] generated ${targets.length} SPA entrypoints`);
+  for (const [aliasPath, redirectTarget] of Object.entries(redirectAliases)) {
+    await writeEntrypoint(aliasPath, createRedirectHtml(redirectTarget));
+  }
+
+  console.info(
+    `[build:routes] generated ${routeIndexPaths.length} SPA entrypoints and ${Object.keys(redirectAliases).length} redirect aliases`,
+  );
 };
 
 main().catch((error) => {
