@@ -1,6 +1,18 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { Check, Clock, ExternalLink, FileText, Instagram, Loader2, Mail, Paperclip, Phone, Send } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import {
+  Check,
+  Clock3,
+  ExternalLink,
+  FileText,
+  Instagram,
+  Loader2,
+  Mail,
+  Paperclip,
+  Phone,
+  Send,
+  ShieldCheck,
+} from 'lucide-react';
 import { ContactFormState, SectionId } from '../types';
 import { siteConfig } from '../site.config';
 import { trackEvent } from '../utils/analytics';
@@ -17,6 +29,13 @@ const MAX_ATTACHMENT_BYTES = 10 * 1024 * 1024;
 const AUTORESPONSE_MESSAGE =
   'お問い合わせありがとうございます。内容を確認のうえ、通常1営業日以内にご連絡いたします。';
 const GENERIC_SUBMIT_ERROR = '送信に失敗しました。時間をおいて再度お試しください。';
+
+const CONTACT_PROMISES = ['通常1営業日以内に返信', '初回相談無料', 'フォームは24時間受付'] as const;
+const COMMON_ISSUES = [
+  '何から相談すべきか整理できていない',
+  'SNS運用と権利管理が別々に散っている',
+  '共有フローが属人化していて止まりやすい',
+] as const;
 
 const formatBytes = (bytes: number): string => {
   if (bytes < 1024) return `${bytes} B`;
@@ -222,66 +241,124 @@ const Contact: React.FC = () => {
   return (
     <section
       id={SectionId.CONTACT}
-      className="bg-slate-50 pt-28 pb-20 md:pb-24"
+      className="bg-[linear-gradient(180deg,_#ffffff_0%,_#fff8f1_100%)] pt-28 pb-20 md:pb-24"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 text-center md:mb-14">
-          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-brand-primary-200 bg-brand-primary-50 px-3 py-1 text-xs font-semibold text-brand-primary-700">
-            お問い合わせ
-          </p>
-          <div className="mb-4 inline-flex items-center justify-center rounded-full bg-brand-primary-50 p-3">
-            <Mail className="h-6 w-6 text-brand-primary-700" />
-          </div>
-          <h2 className="text-2xl font-semibold text-brand-ink sm:text-3xl md:text-4xl">お問い合わせ</h2>
-          <p className="text-slate-600 mt-3 max-w-3xl mx-auto leading-relaxed">
-            内容を確認のうえ、通常1営業日以内にメールまたはお電話でご連絡します。
-            返信が確認できない場合は、お手数ですがお電話でお問い合わせください。
-          </p>
-          <p className="text-xs text-slate-500 mt-3">「*」は必須項目です。</p>
-
-          {isSubmitted && (
-            <div className="mt-5 max-w-3xl mx-auto text-left rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-4">
-              <p className="text-sm font-semibold text-emerald-800">
-                送信が完了しました。無料相談ありがとうございます。
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-[0_18px_50px_rgba(15,23,42,0.08)]">
+          <div className="grid lg:grid-cols-[minmax(0,1fr)_320px]">
+            <div className="p-6 md:p-8">
+              <p className="inline-flex rounded-full border border-brand-primary-200 bg-brand-primary-50 px-3 py-1 text-xs font-semibold text-brand-primary-700">
+                お問い合わせ
               </p>
-              <p className="mt-1 text-sm text-emerald-900/90">
-                通常1営業日以内にご連絡します。お急ぎの場合はお電話でも受け付けています。
-              </p>
-              <div className="mt-4 flex flex-col sm:flex-row gap-3">
-                {companyPhoneHref && (
-                  <a
-                    href={`tel:${companyPhoneHref}`}
-                    onClick={() => trackEvent('phone_click', { placement: 'contact_success_banner' })}
-                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-700 px-5 py-2.5 text-sm font-bold text-white hover:bg-emerald-800 transition-colors"
-                  >
-                    <Phone className="w-4 h-4" />
-                    電話する（{companyPhoneDisplay}）
-                  </a>
-                )}
-                <a
-                  href={import.meta.env.BASE_URL}
-                  className="inline-flex items-center justify-center rounded-lg border border-emerald-300 bg-white px-5 py-2.5 text-sm font-bold text-emerald-800 hover:bg-emerald-100 transition-colors"
-                >
-                  トップへ戻る
-                </a>
+              <div className="mt-4 inline-flex items-center justify-center rounded-full bg-brand-primary-50 p-3">
+                <Mail className="h-6 w-6 text-brand-primary-700" />
               </div>
+              <h1 className="mt-4 text-4xl font-semibold tracking-tight text-brand-ink md:text-5xl">お問い合わせ</h1>
+              <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-600 md:text-base">
+                内容を確認のうえ、通常1営業日以内にメールまたはお電話でご連絡します。
+                何から相談すべきか整理できていない段階でも、そのまま送って問題ありません。
+              </p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {CONTACT_PROMISES.map((item) => (
+                  <span
+                    key={item}
+                    className="inline-flex rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-700"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+              <p className="mt-4 text-xs text-slate-500">「*」は必須項目です。</p>
             </div>
-          )}
+
+            <aside className="bg-slate-900 p-6 text-white md:p-8">
+              <p className="text-xs font-semibold tracking-widest text-white/60">RESPONSE</p>
+              <h2 className="mt-4 text-2xl font-semibold text-white">相談の入口は一つにまとめています</h2>
+              <p className="mt-3 text-sm leading-relaxed text-white/70">
+                SNS運用、権利管理、共有設計をまたいでいても、窓口を分けずに整理します。
+              </p>
+
+              <div className="mt-6 space-y-3">
+                <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
+                  <div className="flex items-center gap-3">
+                    <Clock3 className="h-5 w-5 text-amber-300" />
+                    <div>
+                      <p className="text-xs font-semibold tracking-wide text-white/60">返信目安</p>
+                      <p className="mt-1 text-lg font-semibold text-white">1営業日以内</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
+                  <div className="flex items-center gap-3">
+                    <Phone className="h-5 w-5 text-amber-300" />
+                    <div>
+                      <p className="text-xs font-semibold tracking-wide text-white/60">電話窓口</p>
+                      {companyPhoneHref ? (
+                        <a href={`tel:${companyPhoneHref}`} className="mt-1 block text-lg font-semibold text-white hover:text-amber-200">
+                          {companyPhoneDisplay}
+                        </a>
+                      ) : (
+                        <p className="mt-1 text-lg font-semibold text-white">{companyPhoneDisplay}</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
+                  <div className="flex items-center gap-3">
+                    <ShieldCheck className="h-5 w-5 text-amber-300" />
+                    <div>
+                      <p className="text-xs font-semibold tracking-wide text-white/60">対応時間</p>
+                      <p className="mt-1 text-sm font-semibold leading-relaxed text-white">{CONTACT_HOURS}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
-          <div className="lg:col-span-2 bg-white/95 rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/60 p-5 sm:p-6 md:p-8">
-            <h3 className="mb-1 text-xl font-semibold text-brand-ink">お問い合わせフォーム</h3>
-            <p className="text-sm text-slate-600 mb-6">
-              フォーム送信後、内容を確認して担当よりご連絡します。添付ファイルもそのまま送信できます。
+        {isSubmitted && (
+          <div className="mt-6 rounded-[28px] border border-emerald-200 bg-emerald-50 px-5 py-4 shadow-sm">
+            <p className="text-sm font-semibold text-emerald-800">送信が完了しました。無料相談ありがとうございます。</p>
+            <p className="mt-1 text-sm leading-relaxed text-emerald-900/90">
+              通常1営業日以内にご連絡します。お急ぎの場合はお電話でも受け付けています。
             </p>
+            <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+              {companyPhoneHref && (
+                <a
+                  href={`tel:${companyPhoneHref}`}
+                  onClick={() => trackEvent('phone_click', { placement: 'contact_success_banner' })}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-700 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-emerald-800"
+                >
+                  <Phone className="h-4 w-4" />
+                  電話する（{companyPhoneDisplay}）
+                </a>
+              )}
+              <Link
+                to="/"
+                className="inline-flex items-center justify-center rounded-lg border border-emerald-300 bg-white px-5 py-2.5 text-sm font-bold text-emerald-800 transition-colors hover:bg-emerald-100"
+              >
+                トップへ戻る
+              </Link>
+            </div>
+          </div>
+        )}
+
+        <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.12fr)_340px]">
+          <div className="rounded-[32px] border border-slate-200 bg-white/95 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.06)] md:p-8">
+            <div className="mb-6">
+              <h2 className="text-2xl font-semibold text-brand-ink">お問い合わせフォーム</h2>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                フォーム送信後、内容を確認して担当よりご連絡します。添付ファイルもそのまま送信できます。
+              </p>
+            </div>
 
             <form
               action={contactEndpoint}
               method="POST"
               encType="multipart/form-data"
               onSubmit={handleSubmit}
-              className="space-y-4"
+              className="space-y-5"
             >
               <input type="hidden" name="_subject" value={mailSubject} />
               <input type="hidden" name="_template" value="table" />
@@ -289,141 +366,152 @@ const Contact: React.FC = () => {
               <input type="hidden" name="_autoresponse" value={AUTORESPONSE_MESSAGE} />
               <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <label className="block text-sm">
-                  <span className="font-medium text-slate-700">お名前 *</span>
-                  <input
-                    type="text"
-                    name="name"
-                    value={form.name}
-                    onChange={(event) => updateField('name', event.target.value)}
-                    className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
-                    autoComplete="name"
-                    required
-                  />
-                </label>
+              <div className="rounded-3xl border border-slate-200 bg-slate-50/80 p-4 md:p-5">
+                <p className="text-sm font-semibold text-slate-500">基本情報</p>
+                <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+                  <label className="block text-sm">
+                    <span className="font-medium text-slate-700">お名前 *</span>
+                    <input
+                      type="text"
+                      name="name"
+                      value={form.name}
+                      onChange={(event) => updateField('name', event.target.value)}
+                      className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
+                      autoComplete="name"
+                      required
+                    />
+                  </label>
 
-                <label className="block text-sm">
-                  <span className="font-medium text-slate-700">会社名</span>
-                  <input
-                    type="text"
-                    name="company"
-                    value={company}
-                    onChange={(event) => setCompany(event.target.value)}
-                    className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
-                    autoComplete="organization"
-                  />
-                </label>
-              </div>
+                  <label className="block text-sm">
+                    <span className="font-medium text-slate-700">会社名</span>
+                    <input
+                      type="text"
+                      name="company"
+                      value={company}
+                      onChange={(event) => setCompany(event.target.value)}
+                      className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
+                      autoComplete="organization"
+                    />
+                  </label>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <label className="block text-sm">
-                  <span className="font-medium text-slate-700">メールアドレス *</span>
-                  <input
-                    type="email"
-                    name="email"
-                    value={form.email}
-                    onChange={(event) => updateField('email', event.target.value)}
-                    className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
-                    autoComplete="email"
-                    required
-                  />
-                </label>
+                  <label className="block text-sm">
+                    <span className="font-medium text-slate-700">メールアドレス *</span>
+                    <input
+                      type="email"
+                      name="email"
+                      value={form.email}
+                      onChange={(event) => updateField('email', event.target.value)}
+                      className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
+                      autoComplete="email"
+                      required
+                    />
+                  </label>
 
-                <label className="block text-sm">
-                  <span className="font-medium text-slate-700">電話番号</span>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={phone}
-                    onChange={(event) => setPhone(event.target.value)}
-                    className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
-                    autoComplete="tel"
-                  />
-                </label>
-              </div>
-
-              <label className="block text-sm">
-                <span className="font-medium text-slate-700">お問い合わせ種別</span>
-                <select
-                  name="inquiry_type"
-                  value={form.type}
-                  onChange={(event) => updateField('type', event.target.value)}
-                  className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
-                >
-                  <option>お問い合わせ</option>
-                  <option>SNS管理事業部について</option>
-                  <option>音楽出版事業部について</option>
-                  <option>AIマーケティング戦略事業部について</option>
-                  <option>その他</option>
-                </select>
-              </label>
-
-              <label className="block text-sm">
-                <span className="font-medium text-slate-700">添付ファイル（任意）</span>
-                <input
-                  type="file"
-                  name="attachment"
-                  multiple
-                  onChange={handleFileChange}
-                  accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.zip,.png,.jpg,.jpeg,.webp,.mp4,.mov"
-                  className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 file:mr-3 file:rounded-md file:border-0 file:bg-slate-100 file:px-3 file:py-1.5 file:text-slate-700"
-                />
-                <div className="mt-2 text-xs text-slate-500 flex items-start gap-2">
-                  <Paperclip className="w-4 h-4 mt-0.5 shrink-0" />
-                  <span>添付ファイルの合計は10MB以内で送信してください。</span>
+                  <label className="block text-sm">
+                    <span className="font-medium text-slate-700">電話番号</span>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={phone}
+                      onChange={(event) => setPhone(event.target.value)}
+                      className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
+                      autoComplete="tel"
+                    />
+                  </label>
                 </div>
-                {attachments.length > 0 && (
-                  <p className="mt-2 text-xs text-slate-600">選択中: {attachmentSummary}</p>
-                )}
-              </label>
+              </div>
 
-              <label className="block text-sm">
-                <span className="font-medium text-slate-700">お問い合わせ内容 *</span>
-                <textarea
-                  name="message"
-                  value={form.message}
-                  onChange={(event) => updateField('message', event.target.value)}
-                  rows={7}
-                  className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
-                  required
-                />
-              </label>
+              <div className="rounded-3xl border border-slate-200 bg-white p-4 md:p-5">
+                <p className="text-sm font-semibold text-slate-500">相談内容</p>
+                <div className="mt-4 space-y-4">
+                  <label className="block text-sm">
+                    <span className="font-medium text-slate-700">お問い合わせ種別</span>
+                    <select
+                      name="inquiry_type"
+                      value={form.type}
+                      onChange={(event) => updateField('type', event.target.value)}
+                      className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
+                    >
+                      <option>お問い合わせ</option>
+                      <option>SNS管理事業部について</option>
+                      <option>音楽出版事業部について</option>
+                      <option>AIマーケティング戦略事業部について</option>
+                      <option>その他</option>
+                    </select>
+                  </label>
 
-              <label className="flex items-start gap-3 rounded-lg border border-slate-200 bg-slate-50 p-3 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={consent}
-                  onChange={(event) => setConsent(event.target.checked)}
-                  className="peer sr-only"
-                />
-                <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded border border-slate-300 bg-white text-brand-primary-700 transition-colors peer-checked:border-brand-primary-600 peer-checked:bg-brand-primary-50">
-                  {consent && <Check className="h-3.5 w-3.5" />}
-                </span>
-                <span className="text-sm text-slate-700 leading-relaxed">
-                  <a
-                    href={asset('privacy.html')}
-                    className="text-brand-primary-700 hover:text-brand-primary-800 underline underline-offset-2"
-                  >
-                    プライバシーポリシー
-                  </a>
-                  と{' '}
-                  <a
-                    href={asset('terms.html')}
-                    className="text-brand-primary-700 hover:text-brand-primary-800 underline underline-offset-2"
-                  >
-                    利用規約
-                  </a>
-                  に同意します。
-                </span>
-              </label>
+                  <label className="block text-sm">
+                    <span className="font-medium text-slate-700">お問い合わせ内容 *</span>
+                    <textarea
+                      name="message"
+                      value={form.message}
+                      onChange={(event) => updateField('message', event.target.value)}
+                      rows={7}
+                      className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
+                      required
+                    />
+                  </label>
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-slate-200 bg-slate-50/80 p-4 md:p-5">
+                <p className="text-sm font-semibold text-slate-500">添付と同意</p>
+                <div className="mt-4 space-y-4">
+                  <label className="block text-sm">
+                    <span className="font-medium text-slate-700">添付ファイル（任意）</span>
+                    <input
+                      type="file"
+                      name="attachment"
+                      multiple
+                      onChange={handleFileChange}
+                      accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.zip,.png,.jpg,.jpeg,.webp,.mp4,.mov"
+                      className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-slate-900 file:mr-3 file:rounded-md file:border-0 file:bg-slate-100 file:px-3 file:py-1.5 file:text-slate-700"
+                    />
+                    <div className="mt-2 flex items-start gap-2 text-xs text-slate-500">
+                      <Paperclip className="mt-0.5 h-4 w-4 shrink-0" />
+                      <span>添付ファイルの合計は10MB以内で送信してください。</span>
+                    </div>
+                    {attachments.length > 0 && (
+                      <p className="mt-2 text-xs text-slate-600">選択中: {attachmentSummary}</p>
+                    )}
+                  </label>
+
+                  <label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-slate-200 bg-white p-4">
+                    <input
+                      type="checkbox"
+                      checked={consent}
+                      onChange={(event) => setConsent(event.target.checked)}
+                      className="peer sr-only"
+                    />
+                    <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded border border-slate-300 bg-white text-brand-primary-700 transition-colors peer-checked:border-brand-primary-600 peer-checked:bg-brand-primary-50">
+                      {consent && <Check className="h-3.5 w-3.5" />}
+                    </span>
+                    <span className="text-sm leading-relaxed text-slate-700">
+                      <a
+                        href={asset('privacy.html')}
+                        className="text-brand-primary-700 underline underline-offset-2 transition-colors hover:text-brand-primary-800"
+                      >
+                        プライバシーポリシー
+                      </a>
+                      と{' '}
+                      <a
+                        href={asset('terms.html')}
+                        className="text-brand-primary-700 underline underline-offset-2 transition-colors hover:text-brand-primary-800"
+                      >
+                        利用規約
+                      </a>
+                      に同意します。
+                    </span>
+                  </label>
+                </div>
+              </div>
 
               {error && <p className="text-sm font-medium text-red-600">{error}</p>}
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-primary-700 px-6 py-3.5 font-semibold text-white transition-colors hover:bg-brand-primary-800 disabled:cursor-not-allowed disabled:opacity-70 md:w-auto"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-primary-700 px-6 py-3.5 font-semibold text-white transition-colors hover:bg-brand-primary-800 disabled:cursor-not-allowed disabled:opacity-70"
               >
                 {isSubmitting ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
                 {isSubmitting ? '送信中...' : 'お問い合わせを送信'}
@@ -432,92 +520,112 @@ const Contact: React.FC = () => {
           </div>
 
           <aside className="space-y-4">
-            <div className="bg-gradient-to-br from-white to-brand-primary-50/60 rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-5">
-              <h3 className="text-base font-semibold text-brand-ink">お電話でのお問い合わせ</h3>
-              <p className="text-xs text-slate-500 mt-2">TEL</p>
+            <div className="rounded-[32px] bg-slate-900 p-5 text-white shadow-xl shadow-slate-900/10">
+              <p className="text-xs font-semibold tracking-widest text-white/60">PHONE</p>
+              <h2 className="mt-3 text-xl font-semibold text-white">お電話でのお問い合わせ</h2>
               {companyPhoneHref ? (
                 <a
                   href={`tel:${companyPhoneHref}`}
                   onClick={() => trackEvent('phone_click', { placement: 'contact_sidebar' })}
-                  className="text-xl sm:text-2xl font-semibold text-brand-ink hover:text-brand-primary-700 tracking-wide"
+                  className="mt-4 block text-2xl font-semibold tracking-wide text-white hover:text-amber-200"
                 >
                   {companyPhoneDisplay}
                 </a>
               ) : (
-                <p className="text-lg font-semibold text-brand-ink">{companyPhoneDisplay}</p>
+                <p className="mt-4 text-lg font-semibold text-white">{companyPhoneDisplay}</p>
               )}
-              <div className="mt-3 flex items-center gap-2 text-sm text-slate-600">
-                <Clock className="w-4 h-4" />
+              <div className="mt-4 flex items-center gap-2 text-sm text-white/70">
+                <Clock3 className="h-4 w-4 text-amber-300" />
                 <span>{CONTACT_HOURS}</span>
               </div>
             </div>
 
-            <div className="bg-white/95 rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-5">
-              <div className="flex items-center gap-2">
-                <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-pink-50 border border-pink-100">
-                  <Instagram className="h-4 w-4 text-pink-700" />
-                </span>
-                <h3 className="text-base font-semibold text-brand-ink">Instagram</h3>
-              </div>
-              <p className="text-sm text-slate-600 mt-2">
-                最新の活動内容や制作事例はInstagramでも発信しています。
-              </p>
-              <a
-                href="https://www.instagram.com/regalo0610/"
-                target="_blank"
-                rel="noreferrer"
-                onClick={() =>
-                  trackEvent('external_link_click', {
-                    platform: 'instagram',
-                    placement: 'contact_sidebar',
-                  })
-                }
-                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-pink-600 text-pink-700 font-bold px-4 py-3 hover:bg-pink-50 transition-colors"
-              >
-                <ExternalLink size={16} />
-                Instagramを見る
-              </a>
-              <p className="mt-2 text-xs text-slate-500">@regalo0610</p>
+            <div className="rounded-3xl border border-amber-100 bg-[#fffaf7] p-5 shadow-sm">
+              <h3 className="text-base font-semibold text-brand-ink">相談前によくある状態</h3>
+              <ul className="mt-4 space-y-3">
+                {COMMON_ISSUES.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm leading-relaxed text-slate-700">
+                    <span className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber-100 text-amber-800">
+                      <ShieldCheck className="h-3.5 w-3.5" />
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <div className="bg-white/95 rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-5">
-              <div className="flex items-center gap-2">
-                <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-brand-primary-50 border border-brand-primary-100">
-                  <FileText className="h-4 w-4 text-brand-primary-700" />
-                </span>
-                <h3 className="text-base font-semibold text-brand-ink">Googleフォーム</h3>
-              </div>
-              <p className="text-sm text-slate-600 mt-2">
-                Googleフォームからも24時間受け付けています。
-              </p>
-              <a
-                href={siteConfig.contactFormUrl}
-                target="_blank"
-                rel="noreferrer"
-                onClick={() =>
-                  trackEvent('external_link_click', {
-                    platform: 'google_form',
-                    placement: 'contact_sidebar',
-                  })
-                }
-                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-brand-primary-700 text-brand-primary-700 font-bold px-4 py-3 hover:bg-brand-primary-50 transition-colors"
-              >
-                <ExternalLink size={16} />
-                Googleフォームを開く
-              </a>
-            </div>
+            <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+              <h3 className="text-base font-semibold text-brand-ink">他の連絡手段</h3>
+              <div className="mt-4 space-y-3">
+                <a
+                  href="https://www.instagram.com/regalo0610/"
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() =>
+                    trackEvent('external_link_click', {
+                      platform: 'instagram',
+                      placement: 'contact_sidebar',
+                    })
+                  }
+                  className="flex items-start gap-3 rounded-2xl border border-pink-100 bg-pink-50/70 p-4 transition-colors hover:bg-pink-50"
+                >
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white text-pink-700 shadow-sm">
+                    <Instagram className="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold text-brand-ink">Instagram</span>
+                    <span className="mt-1 block text-sm leading-relaxed text-slate-600">
+                      最新の活動内容や制作事例を発信しています。
+                    </span>
+                    <span className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-pink-700">
+                      Instagramを見る
+                      <ExternalLink className="h-4 w-4" />
+                    </span>
+                  </span>
+                </a>
 
-            <div className="bg-gradient-to-br from-white to-slate-50 rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-5">
-              <h3 className="text-base font-semibold text-brand-ink">メール</h3>
-              <p className="text-sm text-slate-600 mt-2">
-                フォームが使いづらい場合は、直接メールでも受け付けています。
-              </p>
-              <a
-                href={`mailto:${siteConfig.contactEmail}`}
-                className="mt-3 inline-block text-brand-primary-700 hover:text-brand-primary-800 font-semibold break-all"
-              >
-                {siteConfig.contactEmail}
-              </a>
+                <a
+                  href={siteConfig.contactFormUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() =>
+                    trackEvent('external_link_click', {
+                      platform: 'google_form',
+                      placement: 'contact_sidebar',
+                    })
+                  }
+                  className="flex items-start gap-3 rounded-2xl border border-brand-primary-100 bg-brand-primary-50/70 p-4 transition-colors hover:bg-brand-primary-50"
+                >
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white text-brand-primary-700 shadow-sm">
+                    <FileText className="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold text-brand-ink">Googleフォーム</span>
+                    <span className="mt-1 block text-sm leading-relaxed text-slate-600">
+                      Googleフォームからも24時間受け付けています。
+                    </span>
+                    <span className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-brand-primary-700">
+                      Googleフォームを開く
+                      <ExternalLink className="h-4 w-4" />
+                    </span>
+                  </span>
+                </a>
+
+                <a
+                  href={`mailto:${siteConfig.contactEmail}`}
+                  className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50/80 p-4 transition-colors hover:bg-slate-50"
+                >
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white text-brand-primary-700 shadow-sm">
+                    <Mail className="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold text-brand-ink">メール</span>
+                    <span className="mt-1 block break-all text-sm leading-relaxed text-slate-600">
+                      {siteConfig.contactEmail}
+                    </span>
+                  </span>
+                </a>
+              </div>
             </div>
           </aside>
         </div>

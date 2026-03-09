@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowRight, BadgeCheck, Building2, MapPin, ShieldCheck } from 'lucide-react';
 import { companyProfile, siteConfig } from '../site.config';
 import { SectionId } from '../types';
 import { serviceCatalog } from '../services.catalog';
@@ -35,84 +36,189 @@ const rows: Row[] = [
   },
 ];
 
+const companyHighlights = [
+  {
+    icon: MapPin,
+    label: '拠点',
+    value: '京都発の実務チーム',
+  },
+  {
+    icon: ShieldCheck,
+    label: '公開情報',
+    value: '法人番号・所在地を公開',
+  },
+  {
+    icon: Building2,
+    label: '支援体制',
+    value: siteConfig.positioning.crossFunctionalLabel,
+  },
+] as const;
+
+const representativeHighlights = [
+  '同志社大学卒業',
+  'JASRAC信託会員',
+  '音楽著作権管理者養成講座修了',
+  '在学中に法人設立',
+] as const;
+
+const serviceThemes: Record<string, string> = {
+  'sns-management': 'border-rose-100 bg-gradient-to-br from-rose-50 via-white to-white',
+  'music-publishing': 'border-amber-100 bg-gradient-to-br from-amber-50 via-white to-white',
+  'ai-marketing-strategy': 'border-cyan-100 bg-gradient-to-br from-cyan-50 via-white to-white',
+};
+
 const CompanyInfo: React.FC = () => {
   return (
     <section
       id={SectionId.COMPANY}
-      className="bg-white pt-28 pb-20 md:pb-24"
+      className="bg-[linear-gradient(180deg,_#ffffff_0%,_#fff8f1_100%)] pt-28 pb-20 md:pb-24"
     >
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 text-center md:mb-14">
-          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-brand-primary-200 bg-brand-primary-50 px-3 py-1 text-xs font-semibold text-brand-primary-700">
-            会社概要
-          </p>
-          <h2 className="text-3xl font-semibold text-brand-ink">会社情報</h2>
-        </div>
-        <p className="text-slate-700 leading-relaxed mb-8">
-          {siteConfig.positioning.companySummary}{' '}
-          「贈り物」の精神を軸に、相談段階から改善の定着まで、継続しやすい形で価値を届けます。
-        </p>
-        <section
-          className="mb-8 rounded-2xl border border-brand-primary-200 bg-brand-primary-50/40 p-5 shadow-sm sm:p-6"
-          aria-label="代表者について"
-        >
-          <p className="text-xs font-semibold tracking-wider text-brand-primary-700">代表者について</p>
-          <h3 className="mt-1 text-lg font-semibold text-brand-ink">{companyProfile.representative}について</h3>
-          <p className="mt-3 text-sm leading-relaxed text-slate-700">
-            代表取締役 塩田玲央｜同志社大学卒業。在学中にSNS事業で法人設立。JASRAC信託会員。音楽著作権管理者養成講座修了。現在はSNS運用支援と権利管理を展開。
-          </p>
-        </section>
-        <div className="mb-6 flex flex-wrap gap-2">
-          <span className="inline-flex rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700">
-            法人番号公開済み
-          </span>
-          {partnerBankCount > 0 && (
-            <span className="inline-flex rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700">
-              取引金融機関 {partnerBankCount}行
-            </span>
-          )}
-          <span className="inline-flex rounded-full border border-brand-primary-200 bg-brand-primary-50 px-3 py-1 text-xs font-semibold text-brand-primary-700">
-            {siteConfig.positioning.crossFunctionalLabel}
-          </span>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
+          <div className="rounded-[32px] border border-slate-200 bg-white/95 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)] md:p-8">
+            <p className="inline-flex rounded-full border border-brand-primary-200 bg-brand-primary-50 px-3 py-1 text-xs font-semibold text-brand-primary-700">
+              会社概要
+            </p>
+            <h1 className="mt-4 text-4xl font-semibold tracking-tight text-brand-ink md:text-5xl">会社情報</h1>
+            <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-600 md:text-base">
+              {siteConfig.positioning.companySummary}{' '}
+              「贈り物」の精神を軸に、相談段階から改善の定着まで、継続しやすい形で価値を届けます。
+            </p>
+
+            <div className="mt-6 grid gap-3 sm:grid-cols-3">
+              {companyHighlights.map((item) => (
+                <div key={item.label} className="rounded-3xl border border-slate-200 bg-slate-50 p-4">
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-brand-primary-700 shadow-sm">
+                    <item.icon className="h-5 w-5" />
+                  </span>
+                  <p className="mt-4 text-xs font-semibold tracking-wide text-slate-500">{item.label}</p>
+                  <p className="mt-2 text-sm font-semibold leading-relaxed text-brand-ink">{item.value}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-primary-700 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-primary-800"
+              >
+                無料相談する
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <a
+                href={`mailto:${companyProfile.contactEmail}`}
+                className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-800 transition-colors hover:bg-slate-50"
+              >
+                メールで問い合わせる
+              </a>
+            </div>
+          </div>
+
+          <aside className="rounded-[32px] bg-slate-900 p-6 text-white shadow-xl shadow-slate-900/10 md:p-8">
+            <p className="text-xs font-semibold tracking-widest text-white/60">COMPANY SNAPSHOT</p>
+            <h2 className="mt-4 text-2xl font-semibold text-white">{companyProfile.legalName}</h2>
+            <div className="mt-6 space-y-3">
+              <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
+                <p className="text-xs font-semibold tracking-wide text-white/60">代表者</p>
+                <p className="mt-2 text-lg font-semibold text-white">{companyProfile.representative}</p>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
+                <p className="text-xs font-semibold tracking-wide text-white/60">設立日</p>
+                <p className="mt-2 text-sm font-semibold text-white">{companyProfile.established}</p>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
+                <p className="text-xs font-semibold tracking-wide text-white/60">所在地</p>
+                <p className="mt-2 text-sm leading-relaxed text-white/80">{companyProfile.address}</p>
+              </div>
+              {companyProfile.phone && (
+                <a
+                  href={`tel:${phoneHref}`}
+                  className="block rounded-2xl border border-white/10 bg-white/10 p-4 transition-colors hover:bg-white/15"
+                >
+                  <p className="text-xs font-semibold tracking-wide text-white/60">電話番号</p>
+                  <p className="mt-2 text-lg font-semibold text-white">{companyProfile.phone}</p>
+                </a>
+              )}
+            </div>
+          </aside>
         </div>
 
-        <div className="bg-white/95 rounded-2xl border border-slate-200 shadow-lg shadow-slate-200/50 overflow-hidden">
-          <table className="w-full text-left text-sm">
-            <tbody>
-              {rows.map((row) => (
-                <tr key={row.label} className="border-b border-slate-100/90 last:border-b-0">
-                  <th className="px-5 md:px-6 py-4 font-medium text-slate-500 whitespace-nowrap w-1/3 bg-slate-50/80">
-                    {row.label}
-                  </th>
-                  <td className="px-5 md:px-6 py-4 text-slate-900">
-                    {row.isLink ? (
-                      <a
-                        href={row.isLink.href}
-                        className="text-brand-primary-700 hover:text-brand-primary-800 transition-colors"
-                      >
-                        {row.value}
-                      </a>
-                    ) : (
-                      row.value
-                    )}
-                  </td>
-                </tr>
+        <div className="mt-8 grid gap-6 lg:grid-cols-[360px_minmax(0,1fr)]">
+          <section
+            className="rounded-[32px] border border-amber-100 bg-[#fffaf7] p-6 shadow-sm shadow-amber-100/50 md:p-8"
+            aria-label="代表者について"
+          >
+            <p className="text-xs font-semibold tracking-wider text-amber-800">代表者について</p>
+            <h2 className="mt-2 text-2xl font-semibold text-brand-ink">{companyProfile.representative}について</h2>
+            <p className="mt-4 text-sm leading-relaxed text-slate-700">
+              代表取締役 塩田玲央。同志社大学在学中にSNS事業で法人設立。JASRAC信託会員、
+              音楽著作権管理者養成講座修了。現在はSNS運用支援と権利管理を横断して展開しています。
+            </p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {representativeHighlights.map((item) => (
+                <span
+                  key={item}
+                  className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700"
+                >
+                  <BadgeCheck className="h-3.5 w-3.5 text-amber-800" />
+                  {item}
+                </span>
               ))}
-            </tbody>
-          </table>
+            </div>
+          </section>
+
+          <section className="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-[0_18px_50px_rgba(15,23,42,0.06)]">
+            <div className="border-b border-slate-200 bg-slate-50/80 px-5 py-4 md:px-6">
+              <p className="text-xs font-semibold tracking-wide text-slate-500">法人情報</p>
+              <h2 className="mt-1 text-xl font-semibold text-brand-ink">公開している基本情報</h2>
+            </div>
+            <table className="w-full text-left text-sm">
+              <tbody>
+                {rows.map((row) => (
+                  <tr key={row.label} className="border-b border-slate-100/90 last:border-b-0">
+                    <th className="w-1/3 whitespace-nowrap bg-white px-5 py-4 font-medium text-slate-500 md:px-6">
+                      {row.label}
+                    </th>
+                    <td className="px-5 py-4 text-slate-900 md:px-6">
+                      {row.isLink ? (
+                        <a
+                          href={row.isLink.href}
+                          className="text-brand-primary-700 transition-colors hover:text-brand-primary-800"
+                        >
+                          {row.value}
+                        </a>
+                      ) : (
+                        row.value
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
         </div>
 
         <div className="mt-8">
-          <h3 className="mb-4 text-xl font-semibold text-brand-ink">事業一覧</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="mb-5 flex items-end justify-between gap-4">
+            <div>
+              <p className="text-xs font-semibold tracking-wide text-slate-500">対応領域</p>
+              <h2 className="mt-1 text-2xl font-semibold text-brand-ink">事業一覧</h2>
+            </div>
+            {partnerBankCount > 0 && (
+              <span className="inline-flex rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700">
+                取引金融機関 {partnerBankCount}行
+              </span>
+            )}
+          </div>
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {serviceCatalog.map((service) => (
               <Link
                 key={service.slug}
                 to={`/services/${service.slug}`}
-                className="rounded-xl border border-slate-200 bg-white/90 p-4 shadow-sm hover:shadow-md hover:border-brand-primary-300 hover:bg-brand-primary-50/40 transition-all"
+                className={`rounded-3xl border p-5 shadow-sm transition-all hover:-translate-y-px hover:shadow-md ${serviceThemes[service.slug] ?? 'border-slate-200 bg-white'}`}
               >
-                <p className="font-semibold text-brand-ink">{service.title}</p>
-                <p className="text-sm text-slate-600 mt-1 leading-relaxed">{service.description}</p>
+                <p className="text-lg font-semibold text-brand-ink">{service.title}</p>
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">{service.description}</p>
               </Link>
             ))}
           </div>
