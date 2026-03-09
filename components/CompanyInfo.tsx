@@ -114,29 +114,29 @@ const CompanyInfo: React.FC = () => {
             </div>
           </div>
 
-          <aside className="rounded-[32px] bg-slate-900 p-6 text-white shadow-xl shadow-slate-900/10 md:p-8">
-            <p className="text-xs font-semibold tracking-widest text-white/60">COMPANY SNAPSHOT</p>
-            <h2 className="mt-4 text-2xl font-semibold text-white">{companyProfile.legalName}</h2>
+          <aside className="rounded-[32px] border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#ffffff_52%,_#fff7ed_100%)] p-6 text-brand-ink shadow-sm shadow-brand-primary-100/60 md:p-8">
+            <p className="text-xs font-semibold tracking-widest text-slate-500">COMPANY SNAPSHOT</p>
+            <h2 className="mt-4 text-2xl font-semibold text-brand-ink">{companyProfile.legalName}</h2>
             <div className="mt-6 space-y-3">
-              <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
-                <p className="text-xs font-semibold tracking-wide text-white/60">代表者</p>
-                <p className="mt-2 text-lg font-semibold text-white">{companyProfile.representative}</p>
+              <div className="rounded-2xl border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
+                <p className="text-xs font-semibold tracking-wide text-slate-500">代表者</p>
+                <p className="mt-2 text-lg font-semibold text-brand-ink">{companyProfile.representative}</p>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
-                <p className="text-xs font-semibold tracking-wide text-white/60">設立日</p>
-                <p className="mt-2 text-sm font-semibold text-white">{companyProfile.established}</p>
+              <div className="rounded-2xl border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
+                <p className="text-xs font-semibold tracking-wide text-slate-500">設立日</p>
+                <p className="mt-2 text-sm font-semibold text-brand-ink">{companyProfile.established}</p>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
-                <p className="text-xs font-semibold tracking-wide text-white/60">所在地</p>
-                <p className="mt-2 text-sm leading-relaxed text-white/80">{companyProfile.address}</p>
+              <div className="rounded-2xl border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
+                <p className="text-xs font-semibold tracking-wide text-slate-500">所在地</p>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">{companyProfile.address}</p>
               </div>
               {companyProfile.phone && (
                 <a
                   href={`tel:${phoneHref}`}
-                  className="block rounded-2xl border border-white/10 bg-white/10 p-4 transition-colors hover:bg-white/15"
+                  className="block rounded-2xl border border-brand-primary-100 bg-white/85 p-4 shadow-sm transition-colors hover:bg-white"
                 >
-                  <p className="text-xs font-semibold tracking-wide text-white/60">電話番号</p>
-                  <p className="mt-2 text-lg font-semibold text-white">{companyProfile.phone}</p>
+                  <p className="text-xs font-semibold tracking-wide text-slate-500">電話番号</p>
+                  <p className="mt-2 text-lg font-semibold text-brand-ink">{companyProfile.phone}</p>
                 </a>
               )}
             </div>

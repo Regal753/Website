@@ -47,31 +47,31 @@ const TrustStats: React.FC = () => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-[0_18px_50px_rgba(15,23,42,0.08)]">
           <div className="grid lg:grid-cols-[340px_minmax(0,1fr)]">
-            <div className="relative overflow-hidden bg-slate-900 p-6 text-white md:p-8">
-              <div className="absolute left-[-3rem] top-[-2rem] h-32 w-32 rounded-full bg-white/10 blur-3xl" />
-              <div className="absolute bottom-[-2rem] right-[-2rem] h-36 w-36 rounded-full bg-brand-primary-500/20 blur-3xl" />
+            <div className="relative overflow-hidden border-b border-slate-200 bg-[linear-gradient(135deg,_#eef2ff_0%,_#f8fafc_48%,_#fff7ed_100%)] p-6 text-brand-ink lg:border-b-0 lg:border-r md:p-8">
+              <div className="absolute left-[-3rem] top-[-2rem] h-32 w-32 rounded-full bg-white/70 blur-3xl" />
+              <div className="absolute bottom-[-2rem] right-[-2rem] h-36 w-36 rounded-full bg-brand-primary-200/35 blur-3xl" />
 
-              <p className="inline-flex rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-semibold tracking-wide text-white/80">
+              <p className="inline-flex rounded-full border border-brand-primary-100 bg-white/80 px-3 py-1 text-xs font-semibold tracking-wide text-brand-primary-700">
                 相談前に伝えておきたいこと
               </p>
-              <h2 className="mt-4 text-3xl font-semibold leading-tight text-white">
+              <h2 className="mt-4 text-3xl font-semibold leading-tight text-brand-ink">
                 止まりにくい運用体制を、
                 <br />
                 最初から設計する
               </h2>
-              <p className="mt-4 text-sm leading-relaxed text-white/70">
+              <p className="mt-4 text-sm leading-relaxed text-slate-600">
                 相談の入口は一つにしつつ、運用、権利、共有のどこが詰まりやすいかを最初に切り分けます。
                 そのうえで、現場で続く形まで一緒に整えます。
               </p>
 
               <div className="mt-8 space-y-3">
-                <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
-                  <p className="text-xs font-semibold tracking-wide text-white/60">お問い合わせ窓口</p>
-                  <p className="mt-2 text-lg font-semibold text-white">{phone}</p>
+                <div className="rounded-2xl border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
+                  <p className="text-xs font-semibold tracking-wide text-slate-500">お問い合わせ窓口</p>
+                  <p className="mt-2 text-lg font-semibold text-brand-ink">{phone}</p>
                 </div>
-                <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
-                  <p className="text-xs font-semibold tracking-wide text-white/60">支援スタンス</p>
-                  <p className="mt-2 text-sm leading-relaxed text-white/80">
+                <div className="rounded-2xl border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
+                  <p className="text-xs font-semibold tracking-wide text-slate-500">支援スタンス</p>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600">
                     見栄えだけでなく、日々の運用負荷を下げるところまで設計します。
                   </p>
                 </div>

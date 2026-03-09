@@ -99,11 +99,11 @@ const Cases: React.FC = () => {
                     </div>
                   </div>
 
-                  <aside className="rounded-3xl bg-slate-900 p-5 text-white shadow-lg shadow-slate-900/10">
-                    <p className="text-sm font-semibold text-white/70">見えた変化</p>
+                  <aside className="rounded-3xl border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#ffffff_55%,_#fff7ed_100%)] p-5 text-brand-ink shadow-sm shadow-brand-primary-100/60">
+                    <p className="text-sm font-semibold text-slate-500">見えた変化</p>
                     <ul className="mt-4 space-y-3">
                       {c.results.map((item) => (
-                        <li key={item} className="rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm font-medium">
+                        <li key={item} className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700">
                           {item}
                         </li>
                       ))}

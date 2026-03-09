@@ -47,12 +47,12 @@ const TechStack: React.FC = () => {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[1.02fr_0.98fr]">
-          <div className="rounded-[32px] bg-slate-900 p-6 text-white shadow-xl shadow-slate-900/10 md:p-8">
-            <p className="inline-flex rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-semibold tracking-wide text-white/70">
+          <div className="rounded-[32px] border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#f8fafc_52%,_#fff7ed_100%)] p-6 text-brand-ink shadow-sm shadow-brand-primary-100/60 md:p-8">
+            <p className="inline-flex rounded-full border border-brand-primary-100 bg-white/80 px-3 py-1 text-xs font-semibold tracking-wide text-brand-primary-700">
               運用フローの考え方
             </p>
-            <h3 className="mt-4 text-2xl font-semibold text-white">情報が止まる場所を先に減らす</h3>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/70 md:text-base">
+            <h3 className="mt-4 text-2xl font-semibold text-brand-ink">情報が止まる場所を先に減らす</h3>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600 md:text-base">
               素材、権利、進行、通知が別々の場所にあると、判断が遅れます。
               まずは管理場所と通知経路を絞り、運用が止まりにくい導線を作ります。
             </p>
@@ -60,13 +60,13 @@ const TechStack: React.FC = () => {
             <div className="mt-8 space-y-4">
               {workflowNodes.map((item, index) => (
                 <div key={item.label}>
-                  <div className="rounded-3xl border border-white/10 bg-white/10 p-5">
-                    <p className="text-xs font-semibold tracking-widest text-white/60">{item.label}</p>
-                    <p className="mt-2 text-lg font-semibold text-white">{item.title}</p>
-                    <p className="mt-2 text-sm leading-relaxed text-white/70">{item.description}</p>
+                  <div className="rounded-3xl border border-brand-primary-100 bg-white/85 p-5 shadow-sm">
+                    <p className="text-xs font-semibold tracking-widest text-slate-500">{item.label}</p>
+                    <p className="mt-2 text-lg font-semibold text-brand-ink">{item.title}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.description}</p>
                   </div>
                   {index < workflowNodes.length - 1 && (
-                    <div className="mx-auto h-6 w-px bg-white/15" aria-hidden="true" />
+                    <div className="mx-auto h-6 w-px bg-brand-primary-100" aria-hidden="true" />
                   )}
                 </div>
               ))}

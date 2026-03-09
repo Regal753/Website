@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
   const phoneHref = phone.replace(/[^\d+]/g, '');
 
   return (
-    <footer className="relative mt-10 overflow-hidden bg-slate-950 py-14 text-white">
+    <footer className="relative mt-10 overflow-hidden bg-[linear-gradient(180deg,_#334155_0%,_#4338ca_100%)] py-14 text-white">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-primary-300/70 to-transparent" />
       <div className="absolute left-[-6rem] top-[-3rem] h-36 w-36 rounded-full bg-brand-primary-500/10 blur-3xl" />
       <div className="absolute bottom-[-4rem] right-[-4rem] h-40 w-40 rounded-full bg-amber-300/10 blur-3xl" />

@@ -271,44 +271,44 @@ const Contact: React.FC = () => {
               <p className="mt-4 text-xs text-slate-500">「*」は必須項目です。</p>
             </div>
 
-            <aside className="bg-slate-900 p-6 text-white md:p-8">
-              <p className="text-xs font-semibold tracking-widest text-white/60">RESPONSE</p>
-              <h2 className="mt-4 text-2xl font-semibold text-white">相談の入口は一つにまとめています</h2>
-              <p className="mt-3 text-sm leading-relaxed text-white/70">
+            <aside className="border-t border-slate-200 bg-[linear-gradient(135deg,_#eef2ff_0%,_#f8fafc_52%,_#fff7ed_100%)] p-6 text-brand-ink lg:border-l lg:border-t-0 md:p-8">
+              <p className="text-xs font-semibold tracking-widest text-slate-500">RESPONSE</p>
+              <h2 className="mt-4 text-2xl font-semibold text-brand-ink">相談の入口は一つにまとめています</h2>
+              <p className="mt-3 text-sm leading-relaxed text-slate-600">
                 SNS運用、権利管理、共有設計をまたいでいても、窓口を分けずに整理します。
               </p>
 
               <div className="mt-6 space-y-3">
-                <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
+                <div className="rounded-2xl border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
                   <div className="flex items-center gap-3">
-                    <Clock3 className="h-5 w-5 text-amber-300" />
+                    <Clock3 className="h-5 w-5 text-amber-700" />
                     <div>
-                      <p className="text-xs font-semibold tracking-wide text-white/60">返信目安</p>
-                      <p className="mt-1 text-lg font-semibold text-white">1営業日以内</p>
+                      <p className="text-xs font-semibold tracking-wide text-slate-500">返信目安</p>
+                      <p className="mt-1 text-lg font-semibold text-brand-ink">1営業日以内</p>
                     </div>
                   </div>
                 </div>
-                <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
+                <div className="rounded-2xl border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
                   <div className="flex items-center gap-3">
-                    <Phone className="h-5 w-5 text-amber-300" />
+                    <Phone className="h-5 w-5 text-amber-700" />
                     <div>
-                      <p className="text-xs font-semibold tracking-wide text-white/60">電話窓口</p>
+                      <p className="text-xs font-semibold tracking-wide text-slate-500">電話窓口</p>
                       {companyPhoneHref ? (
-                        <a href={`tel:${companyPhoneHref}`} className="mt-1 block text-lg font-semibold text-white hover:text-amber-200">
+                        <a href={`tel:${companyPhoneHref}`} className="mt-1 block text-lg font-semibold text-brand-ink hover:text-brand-primary-700">
                           {companyPhoneDisplay}
                         </a>
                       ) : (
-                        <p className="mt-1 text-lg font-semibold text-white">{companyPhoneDisplay}</p>
+                        <p className="mt-1 text-lg font-semibold text-brand-ink">{companyPhoneDisplay}</p>
                       )}
                     </div>
                   </div>
                 </div>
-                <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
+                <div className="rounded-2xl border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
                   <div className="flex items-center gap-3">
-                    <ShieldCheck className="h-5 w-5 text-amber-300" />
+                    <ShieldCheck className="h-5 w-5 text-amber-700" />
                     <div>
-                      <p className="text-xs font-semibold tracking-wide text-white/60">対応時間</p>
-                      <p className="mt-1 text-sm font-semibold leading-relaxed text-white">{CONTACT_HOURS}</p>
+                      <p className="text-xs font-semibold tracking-wide text-slate-500">対応時間</p>
+                      <p className="mt-1 text-sm font-semibold leading-relaxed text-brand-ink">{CONTACT_HOURS}</p>
                     </div>
                   </div>
                 </div>
@@ -520,22 +520,22 @@ const Contact: React.FC = () => {
           </div>
 
           <aside className="space-y-4">
-            <div className="rounded-[32px] bg-slate-900 p-5 text-white shadow-xl shadow-slate-900/10">
-              <p className="text-xs font-semibold tracking-widest text-white/60">PHONE</p>
-              <h2 className="mt-3 text-xl font-semibold text-white">お電話でのお問い合わせ</h2>
+            <div className="rounded-[32px] border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#ffffff_55%,_#fff7ed_100%)] p-5 text-brand-ink shadow-sm shadow-brand-primary-100/60">
+              <p className="text-xs font-semibold tracking-widest text-slate-500">PHONE</p>
+              <h2 className="mt-3 text-xl font-semibold text-brand-ink">お電話でのお問い合わせ</h2>
               {companyPhoneHref ? (
                 <a
                   href={`tel:${companyPhoneHref}`}
                   onClick={() => trackEvent('phone_click', { placement: 'contact_sidebar' })}
-                  className="mt-4 block text-2xl font-semibold tracking-wide text-white hover:text-amber-200"
+                  className="mt-4 block text-2xl font-semibold tracking-wide text-brand-ink hover:text-brand-primary-700"
                 >
                   {companyPhoneDisplay}
                 </a>
               ) : (
-                <p className="mt-4 text-lg font-semibold text-white">{companyPhoneDisplay}</p>
+                <p className="mt-4 text-lg font-semibold text-brand-ink">{companyPhoneDisplay}</p>
               )}
-              <div className="mt-4 flex items-center gap-2 text-sm text-white/70">
-                <Clock3 className="h-4 w-4 text-amber-300" />
+              <div className="mt-4 flex items-center gap-2 text-sm text-slate-600">
+                <Clock3 className="h-4 w-4 text-amber-700" />
                 <span>{CONTACT_HOURS}</span>
               </div>
             </div>

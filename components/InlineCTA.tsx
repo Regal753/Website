@@ -85,17 +85,17 @@ const InlineCTA: React.FC = () => {
                 </p>
               </div>
 
-              <div className="rounded-3xl border border-white/80 bg-slate-900 p-5 text-white shadow-lg shadow-slate-900/10">
+              <div className="rounded-3xl border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#ffffff_55%,_#fff7ed_100%)] p-5 text-brand-ink shadow-sm shadow-brand-primary-100/60">
                 <div className="flex items-center gap-3">
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-white">
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-brand-primary-700 shadow-sm">
                     <ShieldCheck className="h-5 w-5" />
                   </span>
                   <div>
-                    <p className="text-xs font-semibold tracking-wide text-white/60">相談の入口</p>
-                    <p className="text-lg font-semibold text-white">3領域をまとめて相談可能</p>
+                    <p className="text-xs font-semibold tracking-wide text-slate-500">相談の入口</p>
+                    <p className="text-lg font-semibold text-brand-ink">3領域をまとめて相談可能</p>
                   </div>
                 </div>
-                <p className="mt-3 text-sm leading-relaxed text-white/70">
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">
                   相談窓口を分けずに、運用、権利、共有設計を横断して切り分けます。
                 </p>
               </div>

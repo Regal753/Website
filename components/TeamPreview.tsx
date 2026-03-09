@@ -32,18 +32,18 @@ const TeamPreview: React.FC = () => {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[360px_minmax(0,1fr)]">
-          <div className="rounded-3xl bg-gradient-to-br from-slate-900 via-brand-primary-900 to-brand-primary-700 p-8 text-white shadow-xl shadow-brand-primary-900/10">
-            <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl border border-white/15 bg-white/10 text-2xl font-semibold">
+          <div className="rounded-3xl border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#ffffff_50%,_#fff7ed_100%)] p-8 text-brand-ink shadow-sm shadow-brand-primary-100/60">
+            <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl border border-brand-primary-100 bg-white text-2xl font-semibold text-brand-primary-700 shadow-sm">
               R
             </div>
-            <p className="mt-6 text-sm font-medium text-white/70">代表取締役</p>
+            <p className="mt-6 text-sm font-medium text-slate-500">代表取締役</p>
             <h3 className="mt-1 text-3xl font-semibold">{siteConfig.companyProfile.representative}</h3>
-            <p className="mt-4 text-sm leading-relaxed text-white/82">
+            <p className="mt-4 text-sm leading-relaxed text-slate-600">
               「数字だけ整えて終わり」にせず、運用が続く仕組みを残すことを重視しています。
               相談内容を整理し、実務に落ちるところまで一緒に設計します。
             </p>
-            <div className="mt-6 flex items-center gap-2 rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm text-white/82">
-              <MapPin className="h-4 w-4 text-amber-300" />
+            <div className="mt-6 flex items-center gap-2 rounded-2xl border border-brand-primary-100 bg-white px-4 py-3 text-sm text-slate-700 shadow-sm">
+              <MapPin className="h-4 w-4 text-amber-700" />
               京都発の実務チーム
             </div>
           </div>

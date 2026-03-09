@@ -51,9 +51,9 @@ const Hero: React.FC = () => {
           </div>
 
           <h1 className="text-4xl font-semibold leading-tight tracking-tight text-brand-ink sm:text-5xl md:text-7xl md:font-bold">
-            <span className="block">SNS運用・音楽権利管理の</span>
+            <span className="block">現場で回る</span>
             <span className="block bg-gradient-to-r from-amber-700 via-brand-primary-700 to-cyan-600 bg-clip-text text-transparent">
-              仕組みづくりを
+              仕組みをつくる
             </span>
           </h1>
 
@@ -157,10 +157,10 @@ const Hero: React.FC = () => {
           </div>
 
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-3xl border border-slate-200 bg-slate-900 p-5 text-white shadow-lg shadow-slate-900/10">
-              <p className="text-sm font-semibold text-white/70">代表窓口</p>
+            <div className="rounded-3xl border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#ffffff_52%,_#fff7ed_100%)] p-5 text-brand-ink shadow-sm shadow-brand-primary-100/60">
+              <p className="text-sm font-semibold text-slate-500">代表窓口</p>
               <h3 className="mt-2 text-2xl font-semibold">{siteConfig.companyProfile.representative}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/80">
+              <p className="mt-3 text-sm leading-relaxed text-slate-600">
                 運用だけでなく、権利や管理ルールまで含めて整理し、現場で回る形に整えます。
               </p>
             </div>

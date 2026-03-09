@@ -38,16 +38,16 @@ const Pricing: React.FC = () => {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[340px_minmax(0,1fr)]">
-          <div className="rounded-[32px] bg-gradient-to-br from-brand-primary-700 via-brand-primary-800 to-slate-900 p-8 text-white shadow-xl shadow-brand-primary-900/10">
-            <p className="inline-flex rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-semibold tracking-wide text-white/80">
+          <div className="rounded-[32px] border border-brand-primary-100 bg-[linear-gradient(135deg,_#e0e7ff_0%,_#ffffff_52%,_#fff7ed_100%)] p-8 text-brand-ink shadow-sm shadow-brand-primary-100/60">
+            <p className="inline-flex rounded-full border border-brand-primary-100 bg-white/80 px-3 py-1 text-xs font-semibold tracking-wide text-brand-primary-700">
               初回相談は無料
             </p>
-            <h3 className="mt-4 text-3xl font-semibold leading-tight text-white">
+            <h3 className="mt-4 text-3xl font-semibold leading-tight text-brand-ink">
               定額より、
               <br />
               必要な範囲を正確に出す
             </h3>
-            <p className="mt-4 text-sm leading-relaxed text-white/70">
+            <p className="mt-4 text-sm leading-relaxed text-slate-600">
               相談内容によって、必要な支援は大きく変わります。最初に作業範囲と期待値を揃え、過不足のない見積りにします。
             </p>
 
@@ -55,7 +55,7 @@ const Pricing: React.FC = () => {
               {pricingPoints.map((item) => (
                 <span
                   key={item}
-                  className="inline-flex rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-semibold text-white/80"
+                  className="inline-flex rounded-full border border-brand-primary-100 bg-white px-3 py-1 text-xs font-semibold text-slate-700"
                 >
                   {item}
                 </span>
@@ -64,7 +64,7 @@ const Pricing: React.FC = () => {
 
             <Link
               to="/contact"
-              className="mt-8 inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-brand-primary-700 transition-colors hover:bg-slate-100"
+              className="mt-8 inline-flex items-center gap-2 rounded-xl bg-brand-primary-700 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-primary-800"
             >
               まずは相談する
               <ArrowRight className="h-4 w-4" />
