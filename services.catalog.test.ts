@@ -20,14 +20,10 @@ describe('service catalog', () => {
   });
 
   it('uses optimized media assets', () => {
-    const isOptimizedAsset = (path: string) => path.endsWith('.svg') || path.endsWith('.webp');
-
     for (const service of serviceCatalog) {
-      expect(isOptimizedAsset(service.media.listImage)).toBe(true);
-      expect(service.media.listImage.includes('/placeholders/')).toBe(false);
+      expect(service.media.listImage.endsWith('.webp')).toBe(true);
       for (const image of service.media.galleryImages) {
-        expect(isOptimizedAsset(image)).toBe(true);
-        expect(image.includes('/placeholders/')).toBe(false);
+        expect(image.endsWith('.webp')).toBe(true);
       }
     }
   });

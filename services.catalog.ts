@@ -98,10 +98,10 @@ export const serviceCatalog: ServiceCatalogItem[] = [
     ],
     techStack: ['YouTube Analytics', 'Google Sheets', 'Looker Studio', 'Discord'],
     media: {
-      listImage: 'images/services/sns-cover.svg',
+      listImage: 'images/services/sns-cover.webp',
       galleryImages: [
-        'images/services/sns-gallery-1.svg',
-        'images/services/sns-gallery-2.svg',
+        'images/services/sns-gallery-1.webp',
+        'images/services/sns-gallery-2.webp',
       ],
     },
   },
@@ -160,10 +160,10 @@ export const serviceCatalog: ServiceCatalogItem[] = [
     ],
     techStack: ['Google Sheets', 'Google Drive', '契約管理台帳', '監査チェックリスト'],
     media: {
-      listImage: 'images/services/music-cover.svg',
+      listImage: 'images/services/music-cover.webp',
       galleryImages: [
-        'images/services/music-gallery-1.svg',
-        'images/services/music-gallery-2.svg',
+        'images/services/music-gallery-1.webp',
+        'images/services/music-gallery-2.webp',
       ],
     },
   },
@@ -222,10 +222,10 @@ export const serviceCatalog: ServiceCatalogItem[] = [
     ],
     techStack: ['Google Drive API', 'Google Sheets API', 'Discord Bot', 'n8n / GCP'],
     media: {
-      listImage: 'images/services/ai-cover.svg',
+      listImage: 'images/services/ai-cover.webp',
       galleryImages: [
-        'images/services/ai-gallery-1.svg',
-        'images/services/ai-gallery-2.svg',
+        'images/services/ai-gallery-1.webp',
+        'images/services/ai-gallery-2.webp',
       ],
     },
   },

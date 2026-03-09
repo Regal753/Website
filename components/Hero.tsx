@@ -137,7 +137,7 @@ const Hero: React.FC = () => {
                       loading={index === 0 ? 'eager' : 'lazy'}
                       fetchPriority={index === 0 ? 'high' : 'auto'}
                       decoding="async"
-                      className="h-20 w-24 rounded-2xl bg-white p-1 object-contain"
+                      className="h-20 w-24 rounded-2xl object-cover"
                     />
                     <div className="min-w-0">
                       <div className="flex items-center gap-2">
