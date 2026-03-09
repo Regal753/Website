@@ -115,7 +115,7 @@ const CompanyInfo: React.FC = () => {
           </div>
 
           <aside className="rounded-[32px] border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#ffffff_52%,_#fff7ed_100%)] p-6 text-brand-ink shadow-sm shadow-brand-primary-100/60 md:p-8">
-            <p className="text-xs font-semibold tracking-widest text-slate-500">COMPANY SNAPSHOT</p>
+            <p className="text-xs font-semibold tracking-widest text-slate-500">ひと目で分かる会社情報</p>
             <h2 className="mt-4 text-2xl font-semibold text-brand-ink">{companyProfile.legalName}</h2>
             <div className="mt-6 space-y-3">
               <div className="rounded-2xl border border-brand-primary-100 bg-white/85 p-4 shadow-sm">

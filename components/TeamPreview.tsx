@@ -23,7 +23,7 @@ const TeamPreview: React.FC = () => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center md:mb-14">
           <p className="mb-4 inline-flex rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-800">
-            誰がやるのかを見える形にする
+            代表と体制
           </p>
           <h2 className="text-3xl font-semibold text-brand-ink md:text-4xl">代表とチームの考え方</h2>
           <p className="mx-auto mt-4 max-w-3xl text-slate-600">

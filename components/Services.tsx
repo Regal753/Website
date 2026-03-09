@@ -50,7 +50,7 @@ const Services: React.FC = () => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center md:mb-14">
           <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-brand-primary-200 bg-brand-primary-50 px-3 py-1 text-xs font-semibold tracking-wide text-brand-primary-700">
-            何を頼める会社かを明確にする
+            支援領域
           </p>
           <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">3つの支援領域</h2>
           <p className="mx-auto max-w-2xl text-slate-600">

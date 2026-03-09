@@ -272,7 +272,7 @@ const Contact: React.FC = () => {
             </div>
 
             <aside className="border-t border-slate-200 bg-[linear-gradient(135deg,_#eef2ff_0%,_#f8fafc_52%,_#fff7ed_100%)] p-6 text-brand-ink lg:border-l lg:border-t-0 md:p-8">
-              <p className="text-xs font-semibold tracking-widest text-slate-500">RESPONSE</p>
+              <p className="text-xs font-semibold tracking-widest text-slate-500">ご相談の目安</p>
               <h2 className="mt-4 text-2xl font-semibold text-brand-ink">相談の入口は一つにまとめています</h2>
               <p className="mt-3 text-sm leading-relaxed text-slate-600">
                 SNS運用、権利管理、共有設計をまたいでいても、窓口を分けずに整理します。
@@ -521,7 +521,7 @@ const Contact: React.FC = () => {
 
           <aside className="space-y-4">
             <div className="rounded-[32px] border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#ffffff_55%,_#fff7ed_100%)] p-5 text-brand-ink shadow-sm shadow-brand-primary-100/60">
-              <p className="text-xs font-semibold tracking-widest text-slate-500">PHONE</p>
+              <p className="text-xs font-semibold tracking-widest text-slate-500">電話窓口</p>
               <h2 className="mt-3 text-xl font-semibold text-brand-ink">お電話でのお問い合わせ</h2>
               {companyPhoneHref ? (
                 <a

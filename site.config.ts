@@ -3,7 +3,7 @@ import { NavItem, CompanyProfile, CaseStudy, NewsItem } from './types';
 const CONTACT_EMAIL = 'contact@regalocom.net';
 const BRAND_POSITIONING = {
   homepageSummary:
-    'Regaloは、YouTubeを中心としたSNS運用、音楽著作権・BGM運用、AIを使った共有や進行の整備まで、実務と運用設計を同じチームで支援します。見た目だけでなく、日々の運用が止まらない形まで整えます。',
+    'Regaloは、SNS運用、音楽権利管理、共有や進行の整備までを横断し、相談から定着まで支援します。見た目だけでなく、日々の運用が止まらない形まで整えます。',
   companySummary:
     'Regaloは京都発の実務チームとして、SNS運用、音楽権利管理、AIを活用した共有と進行設計までを横断し、相談から改善まで一気通貫で支援します。',
   crossFunctionalLabel: '3つの支援領域を横断して支援',
@@ -77,7 +77,7 @@ export const siteConfig = {
   contactFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSdbqMVhTDUHcfhnrv5Vj96aBF9WhyAwysTfmG9CdgElhrGm1A/viewform',
   siteTitle: 'Regalo | SNS管理・音楽出版・AIマーケティング戦略',
   siteDescription:
-    'Regaloは京都発の実務チームとして、YouTubeを中心としたSNS運用、音楽著作権・BGM運用、AIを活用した共有と進行設計まで、仕組みづくりと改善を一気通貫で支援します。',
+    'Regaloは京都発の実務チームとして、SNS運用、音楽権利管理、共有と進行設計まで、現場で回る仕組みづくりを一気通貫で支援します。',
   positioning: BRAND_POSITIONING,
   companyProfile,
   cases,

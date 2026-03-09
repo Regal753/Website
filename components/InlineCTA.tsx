@@ -24,7 +24,7 @@ const InlineCTA: React.FC = () => {
           <div className="relative grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-center">
             <div>
               <p className="inline-flex rounded-full border border-amber-200 bg-white/80 px-3 py-1 text-xs font-semibold tracking-wide text-amber-800">
-                相談しやすさを前に出す
+                無料相談
               </p>
               <h2 className="mt-4 text-3xl font-semibold leading-tight text-brand-ink md:text-4xl">
                 まだ整理できていない段階でも、
