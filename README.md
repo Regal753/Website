@@ -6,13 +6,15 @@ React + Vite + TypeScript で構成されています。
 ## 開発
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
 ## ビルド
 
 ```bash
+npm run typecheck
+npm test
 npm run build
 npm run preview
 ```
