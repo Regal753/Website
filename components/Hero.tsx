@@ -65,7 +65,7 @@ const Hero: React.FC = () => {
             <span className="rounded-full border border-slate-200 bg-white/85 px-3 py-1.5">初回相談無料</span>
             <span className="rounded-full border border-slate-200 bg-white/85 px-3 py-1.5">1営業日以内に返信</span>
             <span className="rounded-full border border-slate-200 bg-white/85 px-3 py-1.5">
-              代表 {siteConfig.companyProfile.representative} が窓口
+              会社窓口で対応
             </span>
           </div>
 
@@ -158,8 +158,8 @@ const Hero: React.FC = () => {
 
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             <div className="rounded-3xl border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#ffffff_52%,_#fff7ed_100%)] p-5 text-brand-ink shadow-sm shadow-brand-primary-100/60">
-              <p className="text-sm font-semibold text-slate-500">代表窓口</p>
-              <h3 className="mt-2 text-2xl font-semibold">{siteConfig.companyProfile.representative}</h3>
+              <p className="text-sm font-semibold text-slate-500">相談窓口</p>
+              <h3 className="mt-2 text-2xl font-semibold">{siteConfig.companyName}</h3>
               <p className="mt-3 text-sm leading-relaxed text-slate-600">
                 運用だけでなく、権利や管理ルールまで含めて整理し、現場で回る形に整えます。
               </p>
