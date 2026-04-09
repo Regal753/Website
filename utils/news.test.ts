@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { NEWS_VISIBLE_DAYS, parseNewsDate, shouldDisplayNews, sortValidNewsItems } from './news';
+import { parseNewsDate, shouldDisplayNews, sortValidNewsItems } from './news';
 
 describe('news utils', () => {
   it('parses yyyy.mm.dd, yyyy/mm/dd, yyyy-mm-dd formats', () => {
@@ -30,17 +30,15 @@ describe('news utils', () => {
     expect(items[1].title).toBe('old');
   });
 
-  it('shows news when latest item is within visible days', () => {
+  it('shows news when items exist', () => {
     const items = sortValidNewsItems([{ date: '2026.02.18', title: 'latest' }]);
-    const now = new Date('2026-02-22T09:00:00+09:00');
 
-    expect(shouldDisplayNews(items, now)).toBe(true);
+    expect(shouldDisplayNews(items)).toBe(true);
   });
 
-  it('hides news when latest item is older than visible days', () => {
-    const items = sortValidNewsItems([{ date: '2025.01.01', title: 'old' }]);
-    const now = new Date('2026-02-22T09:00:00+09:00');
+  it('hides news when there are no valid items', () => {
+    const items = sortValidNewsItems([{ date: 'invalid', title: 'old' }]);
 
-    expect(shouldDisplayNews(items, now, NEWS_VISIBLE_DAYS)).toBe(false);
+    expect(shouldDisplayNews(items)).toBe(false);
   });
 });

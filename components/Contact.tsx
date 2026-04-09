@@ -5,7 +5,6 @@ import {
   Clock3,
   ExternalLink,
   FileText,
-  Instagram,
   Loader2,
   Mail,
   Paperclip,
@@ -36,6 +35,9 @@ const COMMON_ISSUES = [
   'SNS運用と権利管理が別々に散っている',
   '共有フローが属人化していて止まりやすい',
 ] as const;
+
+type ContactFieldErrorKey = 'name' | 'email' | 'message' | 'consent' | 'attachments';
+type ContactFieldErrors = Partial<Record<ContactFieldErrorKey, string>>;
 
 const formatBytes = (bytes: number): string => {
   if (bytes < 1024) return `${bytes} B`;
@@ -69,9 +71,17 @@ const Contact: React.FC = () => {
   const [attachments, setAttachments] = useState<File[]>([]);
   const [consent, setConsent] = useState(false);
   const [error, setError] = useState('');
+  const [fieldErrors, setFieldErrors] = useState<ContactFieldErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const hasTrackedSubmitSuccess = useRef(false);
+  const nameInputRef = useRef<HTMLInputElement>(null);
+  const emailInputRef = useRef<HTMLInputElement>(null);
+  const messageInputRef = useRef<HTMLTextAreaElement>(null);
+  const attachmentInputRef = useRef<HTMLInputElement>(null);
+  const consentInputRef = useRef<HTMLInputElement>(null);
+  const errorSummaryRef = useRef<HTMLDivElement>(null);
+  const successBannerRef = useRef<HTMLDivElement>(null);
 
   const companyPhoneDisplay =
     (siteConfig.companyProfile.phone || '').trim() || '現在準備中（メールでお問い合わせください）';
@@ -122,31 +132,83 @@ const Contact: React.FC = () => {
     [form.name, form.type]
   );
 
+  const clearFieldError = (key: ContactFieldErrorKey) => {
+    setFieldErrors((prev) => {
+      if (!prev[key]) return prev;
+      const next = { ...prev };
+      delete next[key];
+      return next;
+    });
+  };
+
+  const focusFirstInvalidField = (errors: ContactFieldErrors) => {
+    if (errors.name) {
+      nameInputRef.current?.focus();
+      return;
+    }
+    if (errors.email) {
+      emailInputRef.current?.focus();
+      return;
+    }
+    if (errors.message) {
+      messageInputRef.current?.focus();
+      return;
+    }
+    if (errors.attachments) {
+      attachmentInputRef.current?.focus();
+      return;
+    }
+    if (errors.consent) {
+      consentInputRef.current?.focus();
+      return;
+    }
+    errorSummaryRef.current?.focus();
+  };
+
   const updateField = (key: keyof ContactFormState, value: string) => {
+    if (key === 'name' || key === 'email' || key === 'message') {
+      clearFieldError(key);
+    }
+    setError('');
     setForm((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    clearFieldError('attachments');
+    setError('');
     setAttachments(Array.from(event.target.files || []));
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError('');
+    setFieldErrors({});
     trackEvent('contact_submit_attempt', {
       inquiry_type: form.type,
       has_attachment: attachments.length > 0,
     });
 
-    if (!consent) {
-      setError('プライバシーポリシーと利用規約への同意が必要です。');
-      trackEvent('contact_submit_blocked', { reason: 'consent_missing' });
-      return;
+    const nextFieldErrors: ContactFieldErrors = {};
+    if (!form.name.trim()) nextFieldErrors.name = 'お名前を入力してください。';
+    if (!form.email.trim()) {
+      nextFieldErrors.email = 'メールアドレスを入力してください。';
+    } else if (emailInputRef.current && !emailInputRef.current.checkValidity()) {
+      nextFieldErrors.email = 'メールアドレスの形式を確認してください。';
+    }
+    if (!form.message.trim()) nextFieldErrors.message = 'お問い合わせ内容を入力してください。';
+    if (!consent) nextFieldErrors.consent = 'プライバシーポリシーと利用規約への同意が必要です。';
+    if (totalAttachmentBytes > MAX_ATTACHMENT_BYTES) {
+      nextFieldErrors.attachments = '添付ファイルの合計サイズは10 MB以内にしてください。';
     }
 
-    if (totalAttachmentBytes > MAX_ATTACHMENT_BYTES) {
-      setError('添付ファイルの合計サイズは10MB以内にしてください。');
-      trackEvent('contact_submit_blocked', { reason: 'attachment_too_large' });
+    if (Object.keys(nextFieldErrors).length > 0) {
+      setFieldErrors(nextFieldErrors);
+      setError('入力内容を確認してください。');
+      trackEvent('contact_submit_blocked', {
+        reason: 'validation_error',
+        fields: Object.keys(nextFieldErrors).join(','),
+      });
+      window.requestAnimationFrame(() => focusFirstInvalidField(nextFieldErrors));
       return;
     }
 
@@ -214,6 +276,8 @@ const Contact: React.FC = () => {
         inquiry_type: form.type,
         has_attachment: attachments.length > 0,
       });
+      setError('');
+      setFieldErrors({});
       setForm(INITIAL_FORM);
       setCompany('');
       setPhone('');
@@ -235,6 +299,18 @@ const Contact: React.FC = () => {
     if (isSubmitted && !hasTrackedSubmitSuccess.current) {
       trackEvent('contact_submit_success_view');
       hasTrackedSubmitSuccess.current = true;
+    }
+  }, [isSubmitted]);
+
+  useEffect(() => {
+    if (error) {
+      errorSummaryRef.current?.focus();
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (isSubmitted) {
+      successBannerRef.current?.focus();
     }
   }, [isSubmitted]);
 
@@ -318,7 +394,13 @@ const Contact: React.FC = () => {
         </div>
 
         {isSubmitted && (
-          <div className="mt-6 rounded-[28px] border border-emerald-200 bg-emerald-50 px-5 py-4 shadow-sm">
+          <div
+            ref={successBannerRef}
+            role="status"
+            aria-live="polite"
+            tabIndex={-1}
+            className="mt-6 rounded-[28px] border border-emerald-200 bg-emerald-50 px-5 py-4 shadow-sm"
+          >
             <p className="text-sm font-semibold text-emerald-800">送信が完了しました。無料相談ありがとうございます。</p>
             <p className="mt-1 text-sm leading-relaxed text-emerald-900/90">
               通常1営業日以内にご連絡します。お急ぎの場合はお電話でも受け付けています。
@@ -358,6 +440,7 @@ const Contact: React.FC = () => {
               method="POST"
               encType="multipart/form-data"
               onSubmit={handleSubmit}
+              noValidate
               className="space-y-5"
             >
               <input type="hidden" name="_subject" value={mailSubject} />
@@ -372,14 +455,22 @@ const Contact: React.FC = () => {
                   <label className="block text-sm">
                     <span className="font-medium text-slate-700">お名前 *</span>
                     <input
+                      ref={nameInputRef}
                       type="text"
                       name="name"
                       value={form.name}
                       onChange={(event) => updateField('name', event.target.value)}
                       className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
                       autoComplete="name"
+                      aria-invalid={fieldErrors.name ? 'true' : 'false'}
+                      aria-describedby={fieldErrors.name ? 'contact-name-error' : undefined}
                       required
                     />
+                    {fieldErrors.name && (
+                      <p id="contact-name-error" className="mt-2 text-xs font-medium text-red-600">
+                        {fieldErrors.name}
+                      </p>
+                    )}
                   </label>
 
                   <label className="block text-sm">
@@ -397,14 +488,24 @@ const Contact: React.FC = () => {
                   <label className="block text-sm">
                     <span className="font-medium text-slate-700">メールアドレス *</span>
                     <input
+                      ref={emailInputRef}
                       type="email"
                       name="email"
                       value={form.email}
                       onChange={(event) => updateField('email', event.target.value)}
                       className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
                       autoComplete="email"
+                      inputMode="email"
+                      spellCheck={false}
+                      aria-invalid={fieldErrors.email ? 'true' : 'false'}
+                      aria-describedby={fieldErrors.email ? 'contact-email-error' : undefined}
                       required
                     />
+                    {fieldErrors.email && (
+                      <p id="contact-email-error" className="mt-2 text-xs font-medium text-red-600">
+                        {fieldErrors.email}
+                      </p>
+                    )}
                   </label>
 
                   <label className="block text-sm">
@@ -416,6 +517,7 @@ const Contact: React.FC = () => {
                       onChange={(event) => setPhone(event.target.value)}
                       className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
                       autoComplete="tel"
+                      inputMode="tel"
                     />
                   </label>
                 </div>
@@ -443,13 +545,21 @@ const Contact: React.FC = () => {
                   <label className="block text-sm">
                     <span className="font-medium text-slate-700">お問い合わせ内容 *</span>
                     <textarea
+                      ref={messageInputRef}
                       name="message"
                       value={form.message}
                       onChange={(event) => updateField('message', event.target.value)}
                       rows={7}
                       className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
+                      aria-invalid={fieldErrors.message ? 'true' : 'false'}
+                      aria-describedby={fieldErrors.message ? 'contact-message-error' : undefined}
                       required
                     />
+                    {fieldErrors.message && (
+                      <p id="contact-message-error" className="mt-2 text-xs font-medium text-red-600">
+                        {fieldErrors.message}
+                      </p>
+                    )}
                   </label>
                 </div>
               </div>
@@ -460,17 +570,25 @@ const Contact: React.FC = () => {
                   <label className="block text-sm">
                     <span className="font-medium text-slate-700">添付ファイル（任意）</span>
                     <input
+                      ref={attachmentInputRef}
                       type="file"
                       name="attachment"
                       multiple
                       onChange={handleFileChange}
                       accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.zip,.png,.jpg,.jpeg,.webp,.mp4,.mov"
                       className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-slate-900 file:mr-3 file:rounded-md file:border-0 file:bg-slate-100 file:px-3 file:py-1.5 file:text-slate-700"
+                      aria-invalid={fieldErrors.attachments ? 'true' : 'false'}
+                      aria-describedby={fieldErrors.attachments ? 'contact-attachments-error' : undefined}
                     />
                     <div className="mt-2 flex items-start gap-2 text-xs text-slate-500">
                       <Paperclip className="mt-0.5 h-4 w-4 shrink-0" />
                       <span>添付ファイルの合計は10MB以内で送信してください。</span>
                     </div>
+                    {fieldErrors.attachments && (
+                      <p id="contact-attachments-error" className="mt-2 text-xs font-medium text-red-600">
+                        {fieldErrors.attachments}
+                      </p>
+                    )}
                     {attachments.length > 0 && (
                       <p className="mt-2 text-xs text-slate-600">選択中: {attachmentSummary}</p>
                     )}
@@ -478,10 +596,18 @@ const Contact: React.FC = () => {
 
                   <label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-slate-200 bg-white p-4">
                     <input
+                      ref={consentInputRef}
                       type="checkbox"
+                      name="consent"
                       checked={consent}
-                      onChange={(event) => setConsent(event.target.checked)}
+                      onChange={(event) => {
+                        clearFieldError('consent');
+                        setError('');
+                        setConsent(event.target.checked);
+                      }}
                       className="peer sr-only"
+                      aria-invalid={fieldErrors.consent ? 'true' : 'false'}
+                      aria-describedby={fieldErrors.consent ? 'contact-consent-error' : undefined}
                     />
                     <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded border border-slate-300 bg-white text-brand-primary-700 transition-colors peer-checked:border-brand-primary-600 peer-checked:bg-brand-primary-50">
                       {consent && <Check className="h-3.5 w-3.5" />}
@@ -503,10 +629,25 @@ const Contact: React.FC = () => {
                       に同意します。
                     </span>
                   </label>
+                  {fieldErrors.consent && (
+                    <p id="contact-consent-error" className="text-xs font-medium text-red-600">
+                      {fieldErrors.consent}
+                    </p>
+                  )}
                 </div>
               </div>
 
-              {error && <p className="text-sm font-medium text-red-600">{error}</p>}
+              {error && (
+                <div
+                  ref={errorSummaryRef}
+                  role="alert"
+                  aria-live="assertive"
+                  tabIndex={-1}
+                  className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700"
+                >
+                  {error}
+                </div>
+              )}
 
               <button
                 type="submit"
@@ -514,7 +655,7 @@ const Contact: React.FC = () => {
                 className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-primary-700 px-6 py-3.5 font-semibold text-white transition-colors hover:bg-brand-primary-800 disabled:cursor-not-allowed disabled:opacity-70"
               >
                 {isSubmitting ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
-                {isSubmitting ? '送信中...' : 'お問い合わせを送信'}
+                {isSubmitting ? '送信中…' : 'お問い合わせを送信'}
               </button>
             </form>
           </div>
@@ -555,35 +696,11 @@ const Contact: React.FC = () => {
             </div>
 
             <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-              <h3 className="text-base font-semibold text-brand-ink">他の連絡手段</h3>
+              <h3 className="text-base font-semibold text-brand-ink">フォームが使えない場合</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                通常はこのページのフォームをご利用ください。開けない場合のみ、以下の補助導線をご利用ください。
+              </p>
               <div className="mt-4 space-y-3">
-                <a
-                  href="https://www.instagram.com/regalo0610/"
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() =>
-                    trackEvent('external_link_click', {
-                      platform: 'instagram',
-                      placement: 'contact_sidebar',
-                    })
-                  }
-                  className="flex items-start gap-3 rounded-2xl border border-pink-100 bg-pink-50/70 p-4 transition-colors hover:bg-pink-50"
-                >
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white text-pink-700 shadow-sm">
-                    <Instagram className="h-5 w-5" />
-                  </span>
-                  <span>
-                    <span className="block text-sm font-semibold text-brand-ink">Instagram</span>
-                    <span className="mt-1 block text-sm leading-relaxed text-slate-600">
-                      最新の活動内容や制作事例を発信しています。
-                    </span>
-                    <span className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-pink-700">
-                      Instagramを見る
-                      <ExternalLink className="h-4 w-4" />
-                    </span>
-                  </span>
-                </a>
-
                 <a
                   href={siteConfig.contactFormUrl}
                   target="_blank"
@@ -600,12 +717,12 @@ const Contact: React.FC = () => {
                     <FileText className="h-5 w-5" />
                   </span>
                   <span>
-                    <span className="block text-sm font-semibold text-brand-ink">Googleフォーム</span>
+                    <span className="block text-sm font-semibold text-brand-ink">予備フォーム</span>
                     <span className="mt-1 block text-sm leading-relaxed text-slate-600">
-                      Googleフォームからも24時間受け付けています。
+                      このページのフォームが使えない場合のみ、Googleフォームをご利用ください。
                     </span>
                     <span className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-brand-primary-700">
-                      Googleフォームを開く
+                      予備フォームを開く
                       <ExternalLink className="h-4 w-4" />
                     </span>
                   </span>

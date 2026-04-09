@@ -93,7 +93,7 @@ const getRouteMeta = (pathname: string): RouteMeta => {
       return {
         title: `会社情報 | ${siteConfig.companyName}`,
         description:
-          '京都発の実務チームRegaloの会社概要、代表者紹介、支援領域をご案内します。',
+          '京都発の実務チームRegaloの会社概要、公開情報、支援体制をご案内します。',
         canonicalPath: '/company',
       };
     case '/contact':

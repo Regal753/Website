@@ -63,16 +63,6 @@ const ServiceDetailPage: React.FC = () => {
     }
   }, [service?.slug]);
 
-  useEffect(() => {
-    if (slideImagePaths.length <= 1) {
-      return;
-    }
-    const timer = window.setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % slideImagePaths.length);
-    }, 2800);
-    return () => window.clearInterval(timer);
-  }, [slideImagePaths]);
-
   if (!service) {
     return <NotFoundPage />;
   }

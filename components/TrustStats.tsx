@@ -23,7 +23,7 @@ const trustItems = [
     icon: MapPin,
     label: '拠点',
     value: '京都発の少人数チーム',
-    description: '相談から改善まで、代表を含む近い距離感で伴走します。',
+    description: '相談から改善まで、距離の近い体制で伴走します。',
     surface: 'border-brand-primary-100 bg-brand-primary-50/80',
     iconSurface: 'bg-white text-brand-primary-700',
   },
@@ -31,13 +31,13 @@ const trustItems = [
     icon: ShieldCheck,
     label: '専門性',
     value: '権利管理まで実務対応',
-    description: 'JASRAC信託会員として、音楽権利や台帳整備も見られます。',
+    description: '音楽権利や台帳整備まで含めて、実務に落ちる形で整理します。',
     surface: 'border-cyan-100 bg-cyan-50/80',
     iconSurface: 'bg-white text-cyan-800',
   },
 ] as const;
 
-const supportHighlights = ['初回相談無料', '代表が一次窓口', '電話受付 9:00-20:00'] as const;
+const supportHighlights = ['初回相談無料', '会社窓口で整理', '電話受付 9:00-20:00'] as const;
 
 const TrustStats: React.FC = () => {
   const phone = siteConfig.companyProfile.phone || '現在準備中';

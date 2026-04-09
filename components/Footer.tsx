@@ -21,7 +21,7 @@ const Footer: React.FC = () => {
               京都発の実務チーム
             </span>
             <span className="inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white/75">
-              代表が一次窓口
+              会社窓口で対応
             </span>
           </div>
         </div>

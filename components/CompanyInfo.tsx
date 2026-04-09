@@ -55,10 +55,10 @@ const companyHighlights = [
 ] as const;
 
 const representativeHighlights = [
-  '同志社大学卒業',
   'JASRAC信託会員',
   '音楽著作権管理者養成講座修了',
-  '在学中に法人設立',
+  '2024年6月法人設立',
+  '京都発の実務チーム',
 ] as const;
 
 const serviceThemes: Record<string, string> = {
@@ -146,13 +146,13 @@ const CompanyInfo: React.FC = () => {
         <div className="mt-8 grid gap-6 lg:grid-cols-[360px_minmax(0,1fr)]">
           <section
             className="rounded-[32px] border border-amber-100 bg-[#fffaf7] p-6 shadow-sm shadow-amber-100/50 md:p-8"
-            aria-label="代表者について"
+            aria-label="支援体制について"
           >
-            <p className="text-xs font-semibold tracking-wider text-amber-800">代表者について</p>
-            <h2 className="mt-2 text-2xl font-semibold text-brand-ink">{companyProfile.representative}について</h2>
+            <p className="text-xs font-semibold tracking-wider text-amber-800">支援体制について</p>
+            <h2 className="mt-2 text-2xl font-semibold text-brand-ink">少人数チームで、相談から改善まで伴走</h2>
             <p className="mt-4 text-sm leading-relaxed text-slate-700">
-              代表取締役 塩田玲央。同志社大学在学中にSNS事業で法人設立。JASRAC信託会員、
-              音楽著作権管理者養成講座修了。現在はSNS運用支援と権利管理を横断して展開しています。
+              Regaloは、相談内容を最初に整理し、運用、権利、共有フローのどこを整えるべきかを切り分けます。
+              資格や権利管理の知見も含め、現場で続けやすい形に落とし込むことを重視しています。
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
               {representativeHighlights.map((item) => (

@@ -5,10 +5,10 @@ import { siteConfig } from '../site.config';
 import { trackEvent } from '../utils/analytics';
 
 const PROFILE_HIGHLIGHTS = [
-  '同志社大学卒業',
   'JASRAC信託会員',
   '音楽著作権管理者養成講座修了',
   '2024年6月法人設立',
+  '京都発の実務チーム',
 ];
 
 const TEAM_VALUES = [
@@ -23,9 +23,9 @@ const TeamPreview: React.FC = () => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center md:mb-14">
           <p className="mb-4 inline-flex rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-800">
-            代表と体制
+            体制と支援方針
           </p>
-          <h2 className="text-3xl font-semibold text-brand-ink md:text-4xl">代表とチームの考え方</h2>
+          <h2 className="text-3xl font-semibold text-brand-ink md:text-4xl">体制と支援方針</h2>
           <p className="mx-auto mt-4 max-w-3xl text-slate-600">
             {siteConfig.positioning.companySummary}
           </p>
@@ -36,11 +36,11 @@ const TeamPreview: React.FC = () => {
             <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl border border-brand-primary-100 bg-white text-2xl font-semibold text-brand-primary-700 shadow-sm">
               R
             </div>
-            <p className="mt-6 text-sm font-medium text-slate-500">代表取締役</p>
-            <h3 className="mt-1 text-3xl font-semibold">{siteConfig.companyProfile.representative}</h3>
+            <p className="mt-6 text-sm font-medium text-slate-500">運営体制</p>
+            <h3 className="mt-1 text-3xl font-semibold">{siteConfig.companyName}</h3>
             <p className="mt-4 text-sm leading-relaxed text-slate-600">
-              「数字だけ整えて終わり」にせず、運用が続く仕組みを残すことを重視しています。
-              相談内容を整理し、実務に落ちるところまで一緒に設計します。
+              少人数チームで、相談整理から運用定着までを連続して対応します。
+              運用、権利、共有フローのどこに課題があるかを切り分け、実務に落ちる形まで設計します。
             </p>
             <div className="mt-6 flex items-center gap-2 rounded-2xl border border-brand-primary-100 bg-white px-4 py-3 text-sm text-slate-700 shadow-sm">
               <MapPin className="h-4 w-4 text-amber-700" />
@@ -92,7 +92,7 @@ const TeamPreview: React.FC = () => {
                 onClick={() => trackEvent('cta_click', { placement: 'team_preview', target: 'company' })}
                 className="inline-flex items-center gap-2 text-sm font-semibold text-brand-primary-700 transition-colors hover:text-brand-primary-800"
               >
-                会社情報と代表者紹介を見る
+                会社情報と支援体制を見る
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
