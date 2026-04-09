@@ -22,6 +22,7 @@ export interface CaseStudy {
 export interface NewsItem {
   date: string;
   title: string;
+  href?: string;
 }
 
 export enum SectionId {

@@ -65,6 +65,11 @@ export const cases: CaseStudy[] = [
 ];
 
 export const newsItems: NewsItem[] = [
+  {
+    date: '2026.03.30',
+    title: 'クラウドワークス公式メディア「クラウドソーシングTimes」に掲載',
+    href: 'https://crowdworks.jp/times/interview/28780/',
+  },
   { date: '2026.02.18', title: 'AI戦略事業部発足' },
   { date: '2025.12.08', title: '音楽著作権管理者資格取得' },
   { date: '2025.04.12', title: 'ホームページリニューアル' },
