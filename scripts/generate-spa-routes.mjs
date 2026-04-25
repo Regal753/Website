@@ -20,14 +20,14 @@ const routeIndexPaths = [
 ];
 
 const redirectAliases = {
-  'company.html': 'company',
-  'contact.html': 'contact',
+  'company.html': '/company/',
+  'contact.html': '/contact/',
   // Legacy service detail URLs
-  'services/sns-operations.html': 'sns-management',
-  'services/music-publishing-bgm.html': 'music-publishing',
-  'services/bgm-production.html': 'music-publishing',
-  'services/rights-management.html': 'ai-marketing-strategy',
-  'services/workflow-automation.html': 'ai-marketing-strategy',
+  'services/sns-operations.html': '/services/sns-management/',
+  'services/music-publishing-bgm.html': '/services/music-publishing/',
+  'services/bgm-production.html': '/services/music-publishing/',
+  'services/rights-management.html': '/services/ai-marketing-strategy/',
+  'services/workflow-automation.html': '/services/ai-marketing-strategy/',
 };
 
 const writeEntrypoint = async (relativePath, content) => {

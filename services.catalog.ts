@@ -45,14 +45,14 @@ export interface ServiceCatalogItem {
 export const serviceCatalog: ServiceCatalogItem[] = [
   {
     slug: 'sns-management',
-    title: 'SNS管理事業部',
+    title: 'YouTube/SNS運用支援',
     description:
       'YouTubeを中心に、企画設計から制作進行、公開後の分析改善まで一気通貫で支援します。再現可能な運用体制を構築し、継続的な成果を目指します。',
     items: ['YouTube運用代行', '企画・台本設計', 'KPI分析/改善', '投稿運用オペレーション'],
     icon: Youtube,
     color: 'from-red-500 to-red-600',
     detailLead:
-      'SNS管理事業部では、運用担当者依存から脱却し、組織で成果を積み上げるための運用設計を提供します。特にYouTube運用代行では、企画・制作・分析を同一フローで回し、改善サイクルの定着まで伴走します。',
+      'YouTube/SNS運用支援では、運用担当者依存から脱却し、組織で成果を積み上げるための運用設計を提供します。特にYouTube運用では、企画・制作・分析を同一フローで回し、改善サイクルの定着まで伴走します。',
     detailSections: [
       {
         title: '主な提供内容',
@@ -107,14 +107,14 @@ export const serviceCatalog: ServiceCatalogItem[] = [
   },
   {
     slug: 'music-publishing',
-    title: '音楽出版事業部',
+    title: '音楽出版・BGM権利管理',
     description:
       '音楽著作権の管理を行い、制作から権利管理、実運用まで一貫して支援します。',
     items: ['音楽著作権管理', 'BGM制作', '利用許諾/台帳運用', '運用フロー整備'],
     icon: Music,
     color: 'from-brand-primary-500 to-brand-primary-600',
     detailLead:
-      '音楽出版事業部では、BGM制作だけでなく、著作権管理・利用許諾・契約情報の整備まで含めて設計します。権利トラブルを抑えつつ、制作現場で使いやすい形で音楽資産を運用できる体制を提供します。',
+      '音楽出版・BGM権利管理では、BGM制作だけでなく、著作権管理・利用許諾・契約情報の整備まで含めて設計します。権利トラブルを抑えつつ、制作現場で使いやすい形で音楽資産を運用できる体制を提供します。',
     detailSections: [
       {
         title: '主な提供内容',
@@ -169,14 +169,14 @@ export const serviceCatalog: ServiceCatalogItem[] = [
   },
   {
     slug: 'ai-marketing-strategy',
-    title: 'AIマーケティング戦略事業部',
+    title: '制作進行・運用自動化支援',
     description:
-      'レポート整備、進行共有、通知の自動化を通じて、マーケティング運用の品質とスピードを高めます。',
+      'AIやAPI連携は手段として使い、レポート整備、進行共有、通知の自動化を通じて、制作・運用の品質とスピードを高めます。',
     items: ['進行フロー設計', 'レポート自動化', '通知・共有設計', '運用監査/改善'],
     icon: Bot,
     color: 'from-cyan-500 to-cyan-600',
     detailLead:
-      'AIマーケティング戦略事業部では、週次レポート、進行共有、通知の自動化を通じて、実行速度と再現性を高めます。既存運用を壊さず、手作業依存を減らし、判断と実行が速いマーケティング体制を実現します。',
+      '制作進行・運用自動化支援では、AIやAPI連携を既存事業の改善手段として使い、週次レポート、進行共有、通知の自動化を通じて、実行速度と再現性を高めます。既存運用を壊さず、手作業依存を減らし、判断と実行が速い体制を実現します。',
     detailSections: [
       {
         title: '主な提供内容',

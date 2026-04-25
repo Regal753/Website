@@ -62,8 +62,24 @@ const upsertCanonicalLink = (href: string) => {
   element.setAttribute('href', href);
 };
 
-const getRouteMeta = (pathname: string): RouteMeta => {
-  const serviceMatch = pathname.match(/^\/services\/([^/]+)$/);
+const stripTrailingSlash = (pathname: string): string => {
+  if (pathname === '/') return pathname;
+  return pathname.replace(/\/+$/, '') || '/';
+};
+
+const legacyRouteAliases: Record<string, '/company' | '/contact'> = {
+  '/company.html': '/company',
+  '/contact.html': '/contact',
+};
+
+const normalizeRoutePathname = (pathname: string): string => {
+  const withoutTrailingSlash = stripTrailingSlash(pathname || '/');
+  return legacyRouteAliases[withoutTrailingSlash] || withoutTrailingSlash;
+};
+
+export const getRouteMeta = (pathname: string): RouteMeta => {
+  const normalizedPathname = normalizeRoutePathname(pathname);
+  const serviceMatch = normalizedPathname.match(/^\/services\/([^/]+)$/);
   if (serviceMatch) {
     const decodedSlug = decodeURIComponent(serviceMatch[1]);
     const service = getServiceBySlug(decodedSlug);
@@ -75,12 +91,6 @@ const getRouteMeta = (pathname: string): RouteMeta => {
       };
     }
   }
-
-  const legacyRouteAliases: Record<string, '/company' | '/contact'> = {
-    '/company.html': '/company',
-    '/contact.html': '/contact',
-  };
-  const normalizedPathname = legacyRouteAliases[pathname] || pathname;
 
   switch (normalizedPathname) {
     case '/':
@@ -100,7 +110,7 @@ const getRouteMeta = (pathname: string): RouteMeta => {
       return {
         title: `お問い合わせ | ${siteConfig.companyName}`,
         description:
-          'SNS運用、音楽権利管理、AIを活用した運用改善のご相談を24時間受け付けています。通常1営業日以内にご連絡します。',
+          'YouTube/SNS運用、音楽権利管理、制作進行や運用自動化のご相談を24時間受け付けています。通常1営業日以内にご連絡します。',
         canonicalPath: '/contact',
       };
     case '/privacy':
@@ -119,7 +129,7 @@ const getRouteMeta = (pathname: string): RouteMeta => {
       return {
         title: `ページが見つかりません | ${siteConfig.companyName}`,
         description: siteConfig.siteDescription,
-        canonicalPath: pathname || '/',
+        canonicalPath: normalizedPathname || '/',
       };
   }
 };

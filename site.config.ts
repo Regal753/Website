@@ -3,14 +3,14 @@ import { NavItem, CompanyProfile, CaseStudy, NewsItem } from './types';
 const CONTACT_EMAIL = 'contact@regalocom.net';
 const BRAND_POSITIONING = {
   homepageSummary:
-    'Regaloは、SNS運用、音楽権利管理、共有や進行の整備までを横断し、相談から定着まで支援します。見た目だけでなく、日々の運用が止まりにくい形まで整えます。',
+    'Regaloは、音楽出版・BGM権利管理とYouTube/SNS運用を軸に、制作進行や共有フローの自動化まで支援します。見た目だけでなく、日々の運用が止まりにくい形まで整えます。',
   companySummary:
-    'Regaloは京都発の実務チームとして、SNS運用、音楽権利管理、共有や進行の設計までを横断し、相談から改善まで一気通貫で支援します。',
-  crossFunctionalLabel: '3つの支援領域を横断して支援',
+    'Regaloは京都発の実務チームとして、音楽出版・BGM権利管理、YouTube/SNS運用、制作進行や共有フローの整備までを横断し、相談から改善まで一気通貫で支援します。',
+  crossFunctionalLabel: '主軸事業と運用改善を横断して支援',
   serviceDetailEyebrow: '支援内容',
   serviceDetailSummary:
     '課題の整理から設計、運用定着まで、現場で回る形を重視して伴走します。',
-  footerTagline: '3つの支援領域で、運用・権利管理・進行改善を一貫して支援します。',
+  footerTagline: '音楽出版・YouTube/SNS運用を軸に、権利管理と進行改善まで一貫して支援します。',
 } as const;
 
 export const companyProfile: CompanyProfile = {
@@ -24,9 +24,9 @@ export const companyProfile: CompanyProfile = {
   corporateNumber: '4130001077277',
   partnerBanks: ['住信SBIネット銀行', 'GMOあおぞら銀行', 'みずほ銀行'],
   business: [
-    'SNS管理事業部',
-    '音楽出版事業部',
-    'AIマーケティング戦略事業部',
+    'YouTube/SNS運用支援',
+    '音楽出版・BGM権利管理',
+    '制作進行・運用自動化支援',
   ],
   contactEmail: CONTACT_EMAIL,
 };
@@ -70,7 +70,7 @@ export const newsItems: NewsItem[] = [
     title: 'クラウドワークス公式メディア「クラウドソーシングTimes」に掲載',
     href: 'https://crowdworks.jp/times/interview/28780/',
   },
-  { date: '2026.02.18', title: 'AI戦略事業部発足' },
+  { date: '2026.02.18', title: '制作進行・運用自動化支援を開始' },
   { date: '2025.12.08', title: '音楽著作権管理者資格取得' },
   { date: '2025.04.12', title: 'ホームページリニューアル' },
 ];
@@ -80,18 +80,18 @@ export const siteConfig = {
   companyNameEn: 'Regalo Inc.',
   contactEmail: CONTACT_EMAIL,
   contactFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSdbqMVhTDUHcfhnrv5Vj96aBF9WhyAwysTfmG9CdgElhrGm1A/viewform',
-  siteTitle: 'Regalo | SNS管理・音楽出版・AIマーケティング戦略',
+  siteTitle: 'Regalo | YouTube/SNS運用・音楽出版・運用自動化',
   siteDescription:
-    'Regaloは京都発の実務チームとして、SNS運用、音楽権利管理、共有や進行の設計まで、現場で回る仕組みづくりを一気通貫で支援します。',
+    'Regaloは京都発の実務チームとして、音楽出版・BGM権利管理、YouTube/SNS運用、制作進行や共有フローの整備まで、現場で回る仕組みづくりを一気通貫で支援します。',
   positioning: BRAND_POSITIONING,
   companyProfile,
   cases,
   newsItems,
   navItems: [
     { label: 'ホーム', href: '/' },
-    { label: 'SNS管理事業部', href: '/services/sns-management' },
-    { label: '音楽出版事業部', href: '/services/music-publishing' },
-    { label: 'AIマーケティング戦略事業部', href: '/services/ai-marketing-strategy' },
+    { label: 'YouTube/SNS運用', href: '/services/sns-management' },
+    { label: '音楽出版・BGM権利管理', href: '/services/music-publishing' },
+    { label: '制作進行・運用自動化', href: '/services/ai-marketing-strategy' },
     { label: '会社情報', href: '/company' },
   ] as NavItem[],
 };

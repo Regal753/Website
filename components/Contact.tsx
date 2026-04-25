@@ -28,11 +28,12 @@ const MAX_ATTACHMENT_BYTES = 10 * 1024 * 1024;
 const AUTORESPONSE_MESSAGE =
   'お問い合わせありがとうございます。内容を確認のうえ、通常1営業日以内にご連絡いたします。';
 const GENERIC_SUBMIT_ERROR = '送信に失敗しました。時間をおいて再度お試しください。';
+const DEFAULT_CONTACT_ENDPOINT = '/api/contact';
 
 const CONTACT_PROMISES = ['通常1営業日以内に返信', '初回相談無料', 'フォームは24時間受付'] as const;
 const COMMON_ISSUES = [
   '何から相談すべきか整理できていない',
-  'SNS運用と権利管理が別々に散っている',
+  'YouTube/SNS運用と権利管理が別々に散っている',
   '共有フローが属人化していて止まりやすい',
 ] as const;
 
@@ -104,16 +105,16 @@ const Contact: React.FC = () => {
 
   const legacyFallbackEndpoint = useMemo(() => {
     const configured = (import.meta.env.VITE_CONTACT_LEGACY_ENDPOINT || '').trim();
-    return configured || `https://formsubmit.co/${siteConfig.contactEmail}`;
+    return configured;
   }, []);
 
   const contactEndpoint = useMemo(() => {
     const configured = (import.meta.env.VITE_CONTACT_ENDPOINT || '').trim();
-    return configured || legacyFallbackEndpoint;
+    return configured || DEFAULT_CONTACT_ENDPOINT;
   }, [legacyFallbackEndpoint]);
 
   const enableLegacyFallback = useMemo(() => {
-    const configured = (import.meta.env.VITE_CONTACT_ENABLE_LEGACY_FALLBACK || 'true').trim();
+    const configured = (import.meta.env.VITE_CONTACT_ENABLE_LEGACY_FALLBACK || 'false').trim();
     return configured.toLowerCase() === 'true';
   }, []);
 
@@ -245,8 +246,8 @@ const Contact: React.FC = () => {
         }
       }
 
-      if (!isSuccess && enableLegacyFallback && contactEndpoint !== legacyFallbackEndpoint) {
-        trackEvent('contact_submit_fallback', { to: 'legacy_formsubmit' });
+      if (!isSuccess && enableLegacyFallback && legacyFallbackEndpoint && contactEndpoint !== legacyFallbackEndpoint) {
+        trackEvent('contact_submit_fallback', { to: 'legacy_endpoint' });
         const fallbackPayload = new FormData(formElement);
         const fallbackResponse = await fetch(legacyFallbackEndpoint, {
           method: 'POST',
@@ -351,7 +352,7 @@ const Contact: React.FC = () => {
               <p className="text-xs font-semibold tracking-widest text-slate-500">ご相談の目安</p>
               <h2 className="mt-4 text-2xl font-semibold text-brand-ink">相談の入口は一つにまとめています</h2>
               <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                SNS運用、権利管理、共有設計をまたいでいても、窓口を分けずに整理します。
+                YouTube/SNS運用、権利管理、共有設計をまたいでいても、窓口を分けずに整理します。
               </p>
 
               <div className="mt-6 space-y-3">
@@ -535,9 +536,9 @@ const Contact: React.FC = () => {
                       className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
                     >
                       <option>お問い合わせ</option>
-                      <option>SNS管理事業部について</option>
-                      <option>音楽出版事業部について</option>
-                      <option>AIマーケティング戦略事業部について</option>
+                      <option>YouTube/SNS運用支援について</option>
+                      <option>音楽出版・BGM権利管理について</option>
+                      <option>制作進行・運用自動化支援について</option>
                       <option>その他</option>
                     </select>
                   </label>

@@ -6,7 +6,7 @@ import { trackEvent } from '../utils/analytics';
 
 const CTA_POINTS = [
   '相談内容がまとまっていなくても大丈夫です',
-  'SNS運用 / 権利管理 / 共有設計をまとめて相談できます',
+  'YouTube/SNS運用 / 権利管理 / 共有設計をまとめて相談できます',
   '初回相談は無料です',
 ] as const;
 
@@ -32,7 +32,7 @@ const InlineCTA: React.FC = () => {
                 そのままご相談ください。
               </h2>
               <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-600 md:text-base">
-                「SNS運用が止まりがち」「権利管理が不安」「共有や進行が属人化している」など、
+                「YouTube/SNS運用が止まりがち」「権利管理が不安」「共有や進行が属人化している」など、
                 課題が言語化しきれていなくても大丈夫です。現状の整理から一緒に進めます。
               </p>
 
