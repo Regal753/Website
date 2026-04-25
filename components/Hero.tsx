@@ -35,7 +35,7 @@ const Hero: React.FC = () => {
   return (
     <section
       id={SectionId.HOME}
-      className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(254,243,199,0.85),_transparent_35%),radial-gradient(circle_at_top_right,_rgba(224,231,255,0.9),_transparent_32%),linear-gradient(180deg,_#ffffff_0%,_#fffaf7_100%)] pt-32 pb-16 md:pb-24"
+      className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(254,243,199,0.85),_transparent_35%),radial-gradient(circle_at_top_right,_rgba(224,231,255,0.9),_transparent_32%),linear-gradient(180deg,_#ffffff_0%,_#fffaf7_100%)] pt-28 pb-14 md:pt-32 md:pb-24"
     >
       <div className="absolute inset-0 z-0">
         <div className="absolute left-[-8rem] top-[-7rem] h-72 w-72 rounded-full bg-amber-200/40 blur-3xl" />
@@ -89,7 +89,7 @@ const Hero: React.FC = () => {
             </button>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-3">
+          <div className="hidden gap-3 sm:grid sm:grid-cols-3">
             {quickPoints.map((point) => (
               <div
                 key={point.title}
@@ -106,7 +106,7 @@ const Hero: React.FC = () => {
         </div>
 
         <div className="relative">
-          <div className="rounded-3xl border border-slate-200 bg-white/90 p-5 shadow-xl shadow-slate-200/60 backdrop-blur md:p-6">
+          <div className="rounded-2xl border border-slate-200 bg-white/90 p-4 shadow-lg shadow-slate-200/50 backdrop-blur md:rounded-3xl md:p-6">
             <div className="flex items-center justify-between gap-3">
               <div>
                 <p className="text-sm font-semibold text-slate-500">ご相談が多いテーマ</p>
@@ -127,7 +127,7 @@ const Hero: React.FC = () => {
                     onClick={() =>
                       trackEvent('service_detail_click', { placement: 'hero_service_card', service: service.slug })
                     }
-                    className="grid grid-cols-[96px_minmax(0,1fr)] gap-4 rounded-2xl border border-slate-200 bg-slate-50/80 p-3 transition-all hover:border-brand-primary-200 hover:bg-white hover:shadow-sm"
+                    className="grid grid-cols-[80px_minmax(0,1fr)] gap-3 rounded-xl border border-slate-200 bg-slate-50/80 p-3 transition-all hover:border-brand-primary-200 hover:bg-white hover:shadow-sm"
                   >
                     <img
                       src={asset(service.media.listImage)}
@@ -137,7 +137,7 @@ const Hero: React.FC = () => {
                       loading={index === 0 ? 'eager' : 'lazy'}
                       fetchPriority={index === 0 ? 'high' : 'auto'}
                       decoding="async"
-                      className="h-20 w-24 rounded-2xl object-cover"
+                      className="h-20 w-20 rounded-xl object-cover"
                     />
                     <div className="min-w-0">
                       <div className="flex items-center gap-2">
@@ -156,8 +156,8 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-3xl border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#ffffff_52%,_#fff7ed_100%)] p-5 text-brand-ink shadow-sm shadow-brand-primary-100/60">
+          <div className="hidden mt-4 gap-4 sm:grid sm:grid-cols-2">
+            <div className="rounded-2xl border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#ffffff_52%,_#fff7ed_100%)] p-5 text-brand-ink shadow-sm shadow-brand-primary-100/60">
               <p className="text-sm font-semibold text-slate-500">相談窓口</p>
               <h3 className="mt-2 text-2xl font-semibold">{siteConfig.companyName}</h3>
               <p className="mt-3 text-sm leading-relaxed text-slate-600">
@@ -165,7 +165,7 @@ const Hero: React.FC = () => {
               </p>
             </div>
 
-            <div className="rounded-3xl border border-amber-200 bg-white/90 p-5 shadow-sm">
+            <div className="rounded-2xl border border-amber-200 bg-white/90 p-5 shadow-sm">
               <p className="text-sm font-semibold text-amber-800">初回相談について</p>
               <p className="mt-2 text-2xl font-semibold text-brand-ink">無料 / 1営業日以内に返信</p>
               <p className="mt-3 text-sm leading-relaxed text-slate-600">

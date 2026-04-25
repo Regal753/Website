@@ -89,9 +89,9 @@ export const siteConfig = {
   newsItems,
   navItems: [
     { label: 'ホーム', href: '/' },
-    { label: 'YouTube/SNS運用', href: '/services/sns-management' },
-    { label: '音楽出版・BGM権利管理', href: '/services/music-publishing' },
-    { label: '制作進行・運用自動化', href: '/services/ai-marketing-strategy' },
+    { label: 'YouTube運用', href: '/services/sns-management' },
+    { label: '音楽出版/BGM', href: '/services/music-publishing' },
+    { label: '運用自動化', href: '/services/ai-marketing-strategy' },
     { label: '会社情報', href: '/company' },
   ] as NavItem[],
 };
