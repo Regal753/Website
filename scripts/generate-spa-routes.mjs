@@ -7,6 +7,7 @@ const siteUrl = (process.env.VITE_SITE_URL || 'https://www.regalocom.net').repla
 
 const routeIndexPaths = [
   'company/index.html',
+  'column/index.html',
   'contact/index.html',
   'services/sns-management/index.html',
   'services/music-publishing/index.html',
@@ -15,6 +16,7 @@ const routeIndexPaths = [
 
 const redirectAliases = {
   'company.html': '/company/',
+  'column.html': '/column/',
   'contact.html': '/contact/',
   'services/index.html': '/#services',
   // Legacy service detail URLs
@@ -41,6 +43,11 @@ const routeMeta = {
     description:
       'YouTube/SNS運用、音楽権利管理、制作進行や業務整理のご相談を24時間受け付けています。通常1営業日以内にご連絡します。',
     canonicalPath: '/contact/',
+  },
+  'column/index.html': {
+    title: 'コラム | Regalo',
+    description: 'YouTube運用、BGM権利管理、制作進行でよく確認する実務メモを掲載しています。',
+    canonicalPath: '/column/',
   },
   'services/sns-management/index.html': {
     title: 'YouTube/SNS運用支援 | Regalo',

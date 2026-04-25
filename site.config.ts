@@ -1,9 +1,9 @@
-import { NavItem, CompanyProfile, CaseStudy, NewsItem } from './types';
+import { NavItem, CompanyProfile, CaseStudy, NewsItem, ColumnItem } from './types';
 
 const CONTACT_EMAIL = 'contact@regalocom.net';
 const BRAND_POSITIONING = {
   homepageSummary:
-    '株式会社Regaloは、音楽出版・BGM権利管理とYouTube/SNS運用を中心に、制作進行や共有ルールの整備まで実務で支援します。京都府長岡京市の法人として、相談窓口・所在地・法人番号を公開しています。',
+    '株式会社Regaloは、音楽出版・BGM権利管理とYouTube/SNS運用を中心に、制作進行や共有ルールの整備まで実務で支援します。見栄えだけでなく、権利・手順・数字を確認できる状態まで整えることを重視しています。',
   companySummary:
     'Regaloは京都発の実務チームとして、音楽出版・BGM権利管理、YouTube/SNS運用、制作進行や共有ルールの整備までを横断し、相談から改善まで一気通貫で支援します。',
   crossFunctionalLabel: '音楽権利・運用・進行管理を横断して支援',
@@ -75,6 +75,49 @@ export const newsItems: NewsItem[] = [
   { date: '2025.04.12', title: 'ホームページリニューアル' },
 ];
 
+export const columnItems: ColumnItem[] = [
+  {
+    date: '2026.04.25',
+    category: 'YouTube運用',
+    title: 'YouTube運用で最初に整えるべき権利・台帳・進行管理',
+    summary:
+      '投稿本数や企画の前に、BGM利用可否、素材の所在、公開前チェックの責任範囲を揃えると、運用停止や確認漏れを抑えやすくなります。',
+    points: ['BGM利用可否の確認手順', '素材と契約情報の保管場所', '公開前チェックの担当範囲'],
+    slug: 'youtube-rights-workflow',
+    readTime: '約4分',
+  },
+  {
+    date: '2026.04.18',
+    category: 'BGM権利管理',
+    title: 'BGMを安全に使うための管理表に入れておきたい項目',
+    summary:
+      '曲名や作曲者だけでなく、利用範囲、登録状況、許諾条件、差分ファイルの所在まで管理すると、後から確認できる状態を作れます。',
+    points: ['権利者・管理者の記録', '利用範囲と禁止事項', '納品ファイルと差分の整理'],
+    slug: 'bgm-rights-ledger',
+    readTime: '約3分',
+  },
+  {
+    date: '2026.04.12',
+    category: '制作進行',
+    title: '属人化した制作進行を減らすための共有ルール',
+    summary:
+      'Drive、Sheets、Discordなど既存ツールを使い、誰が見ても次の作業が分かる状態にするための最小ルールを整理します。',
+    points: ['案件ごとのフォルダ構成', '進捗ステータスの定義', '確認依頼と締切の通知'],
+    slug: 'production-shared-rules',
+    readTime: '約5分',
+  },
+  {
+    date: '2026.04.05',
+    category: '法人向け相談',
+    title: '外注運用を始める前に確認したい依頼範囲の切り分け',
+    summary:
+      '企画、制作、投稿、分析、権利確認を一括で外に出す前に、社内に残す判断と外部に任せる作業を分けると、費用対効果を見やすくなります。',
+    points: ['社内判断として残す項目', '外部化しやすい定型作業', '月次で確認する数字'],
+    slug: 'outsourcing-scope-check',
+    readTime: '約4分',
+  },
+];
+
 export const siteConfig = {
   companyName: 'Regalo',
   companyNameEn: 'Regalo Inc.',
@@ -87,11 +130,11 @@ export const siteConfig = {
   companyProfile,
   cases,
   newsItems,
+  columnItems,
   navItems: [
     { label: 'ホーム', href: '/' },
-    { label: 'YouTube運用', href: '/services/sns-management' },
-    { label: '音楽出版/BGM', href: '/services/music-publishing' },
-    { label: '業務整理', href: '/services/ai-marketing-strategy' },
+    { label: 'サービス', href: '/#services' },
+    { label: 'コラム', href: '/column' },
     { label: '会社情報', href: '/company' },
   ] as NavItem[],
 };

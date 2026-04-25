@@ -49,10 +49,10 @@ const Services: React.FC = () => {
     <section id={SectionId.SERVICES} className="bg-slate-50 py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center md:mb-14">
-          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-brand-primary-200 bg-brand-primary-50 px-3 py-1 text-xs font-semibold tracking-wide text-brand-primary-700">
-            支援領域
-          </p>
-          <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">3つの支援領域</h2>
+          <p className="mb-4 font-semibold text-brand-primary-700">Service</p>
+          <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">
+            事業内容
+          </h2>
           <p className="mx-auto max-w-2xl text-slate-600">
             企画や運用の改善、音楽権利の整理、共有フローの整備まで。
             課題の場所に合わせて入口を用意しています。
@@ -63,7 +63,7 @@ const Services: React.FC = () => {
           {serviceCatalog.map((service) => {
             const Icon = service.icon;
             const theme = themes[service.slug] ?? defaultTheme;
-            const images = [service.media.listImage, ...service.media.galleryImages];
+            const supportPoints = service.detailSections.flatMap((section) => section.points).slice(0, 2);
 
             return (
               <article
@@ -140,25 +140,21 @@ const Services: React.FC = () => {
 
                 <div className="grid grid-cols-2 gap-3">
                   <img
-                    src={asset(images[0])}
+                    src={asset(service.media.listImage)}
                     alt={`${service.title}のメインイメージ`}
                     width={1280}
                     height={720}
                     className={`col-span-2 h-44 w-full rounded-3xl border bg-white object-cover ${theme.imageBorder}`}
-                    loading="lazy"
+                    loading="eager"
                     decoding="async"
                   />
-                  {images.slice(1).map((imagePath, imageIndex) => (
-                    <img
-                      key={`${service.slug}-preview-${imageIndex}`}
-                      src={asset(imagePath)}
-                      alt={`${service.title}の参考イメージ${imageIndex + 1}`}
-                      width={640}
-                      height={360}
-                      className={`h-28 w-full rounded-2xl border bg-white object-cover ${theme.imageBorder}`}
-                      loading="lazy"
-                      decoding="async"
-                    />
+                  {supportPoints.map((point) => (
+                    <div
+                      key={point}
+                      className={`min-h-28 rounded-2xl border bg-white p-4 text-sm font-semibold leading-relaxed text-slate-700 ${theme.imageBorder}`}
+                    >
+                      {point}
+                    </div>
                   ))}
                 </div>
               </article>

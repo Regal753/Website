@@ -10,6 +10,10 @@ describe('getRouteMeta', () => {
     const contactMeta = getRouteMeta('/contact/');
     expect(contactMeta.title).toBe('お問い合わせ | Regalo');
     expect(contactMeta.canonicalPath).toBe('/contact/');
+
+    const columnMeta = getRouteMeta('/column/');
+    expect(columnMeta.title).toBe('コラム | Regalo');
+    expect(columnMeta.canonicalPath).toBe('/column/');
   });
 
   it('normalizes trailing slashes for service detail pages', () => {
@@ -21,5 +25,6 @@ describe('getRouteMeta', () => {
   it('keeps legacy top-level html aliases canonical', () => {
     expect(getRouteMeta('/company.html').canonicalPath).toBe('/company/');
     expect(getRouteMeta('/contact.html').canonicalPath).toBe('/contact/');
+    expect(getRouteMeta('/column.html').canonicalPath).toBe('/column/');
   });
 });

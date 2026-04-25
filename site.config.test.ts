@@ -19,4 +19,13 @@ describe('siteConfig cases', () => {
       expect(item.deliverables.length).toBeGreaterThan(0);
     }
   });
+
+  it('include useful column metadata', () => {
+    for (const item of siteConfig.columnItems) {
+      expect(item.slug.length).toBeGreaterThan(0);
+      expect(item.title.length).toBeGreaterThan(0);
+      expect(item.summary.length).toBeGreaterThan(0);
+      expect(item.points.length).toBeGreaterThanOrEqual(3);
+    }
+  });
 });

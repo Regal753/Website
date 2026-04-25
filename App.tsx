@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import { getServiceBySlug } from './services.catalog';
 import { siteConfig } from './site.config';
+import ColumnPage from './pages/ColumnPage';
 import CompanyPage from './pages/CompanyPage';
 import ContactPage from './pages/ContactPage';
 import HomePage from './pages/HomePage';
@@ -67,9 +68,10 @@ const stripTrailingSlash = (pathname: string): string => {
   return pathname.replace(/\/+$/, '') || '/';
 };
 
-const legacyRouteAliases: Record<string, '/company' | '/contact'> = {
+const legacyRouteAliases: Record<string, '/company' | '/contact' | '/column'> = {
   '/company.html': '/company',
   '/contact.html': '/contact',
+  '/column.html': '/column',
 };
 
 const normalizeRoutePathname = (pathname: string): string => {
@@ -112,6 +114,13 @@ export const getRouteMeta = (pathname: string): RouteMeta => {
         description:
           'YouTube/SNS運用、音楽権利管理、制作進行や業務整理のご相談を24時間受け付けています。通常1営業日以内にご連絡します。',
         canonicalPath: '/contact/',
+      };
+    case '/column':
+      return {
+        title: `コラム | ${siteConfig.companyName}`,
+        description:
+          'YouTube運用、BGM権利管理、制作進行でよく確認する実務メモを掲載しています。',
+        canonicalPath: '/column/',
       };
     case '/privacy':
       return {
@@ -166,8 +175,20 @@ const ScrollToTopOnRouteChange: React.FC = () => {
   const location = useLocation();
 
   React.useEffect(() => {
+    if (location.hash) {
+      window.setTimeout(() => {
+        const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+        if (target) {
+          target.scrollIntoView({ behavior: 'auto', block: 'start' });
+          return;
+        }
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      }, 0);
+      return;
+    }
+
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-  }, [location.pathname]);
+  }, [location.pathname, location.hash]);
 
   return null;
 };
@@ -190,6 +211,8 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/company" element={<CompanyPage />} />
             <Route path="/company.html" element={<Navigate to="/company/" replace />} />
+            <Route path="/column" element={<ColumnPage />} />
+            <Route path="/column.html" element={<Navigate to="/column/" replace />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/contact.html" element={<Navigate to="/contact/" replace />} />
             <Route path="/privacy" element={<PrivacyPage />} />

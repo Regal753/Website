@@ -20,9 +20,7 @@ const InlineCTA: React.FC = () => {
         <div className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm md:p-8">
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-center">
             <div>
-              <p className="inline-flex rounded-full border border-amber-200 bg-white/80 px-3 py-1 text-xs font-semibold tracking-wide text-amber-800">
-                無料相談
-              </p>
+              <p className="font-semibold text-brand-primary-700">Contact</p>
               <h2 className="mt-4 text-3xl font-semibold leading-tight text-brand-ink md:text-4xl">
                 相談内容が固まっていない段階でも、
                 <br className="hidden sm:block" />
@@ -73,7 +71,7 @@ const InlineCTA: React.FC = () => {
                     <Clock3 className="h-5 w-5" />
                   </span>
                   <div>
-                    <p className="text-xs font-semibold tracking-wide text-slate-500">返信目安</p>
+                    <p className="text-xs font-semibold text-slate-500">返信目安</p>
                     <p className="text-lg font-semibold text-brand-ink">1営業日以内</p>
                   </div>
                 </div>
@@ -88,7 +86,7 @@ const InlineCTA: React.FC = () => {
                     <ShieldCheck className="h-5 w-5" />
                   </span>
                   <div>
-                    <p className="text-xs font-semibold tracking-wide text-slate-500">相談の入口</p>
+                    <p className="text-xs font-semibold text-slate-500">相談の入口</p>
                     <p className="text-lg font-semibold text-brand-ink">3領域をまとめて相談可能</p>
                   </div>
                 </div>

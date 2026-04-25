@@ -36,9 +36,7 @@ const Cases: React.FC = () => {
     <section id={SectionId.CASES} className="bg-white py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center md:mb-14">
-          <p className="mb-4 inline-flex rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-800">
-            改善事例
-          </p>
+          <p className="mb-4 font-semibold text-brand-primary-700">Works</p>
           <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">解決事例</h2>
           <p className="mx-auto max-w-2xl text-slate-600">
             公開できる範囲で、何を整えて、どの変化が出たかを分かる形で掲載します。
@@ -74,17 +72,17 @@ const Cases: React.FC = () => {
 
                     <div className="mt-6 grid gap-4 md:grid-cols-2">
                       <div className="rounded-2xl border border-slate-200 bg-white p-5">
-                        <p className="text-xs font-semibold tracking-wider text-slate-500">背景</p>
+                        <p className="text-xs font-semibold text-slate-500">背景</p>
                         <p className="mt-2 text-sm leading-relaxed text-slate-700">{c.challenge}</p>
                       </div>
                       <div className="rounded-2xl border border-slate-200 bg-white p-5">
-                        <p className="text-xs font-semibold tracking-wider text-slate-500">対応内容</p>
+                        <p className="text-xs font-semibold text-slate-500">対応内容</p>
                         <p className="mt-2 text-sm leading-relaxed text-slate-700">{c.scope}</p>
                       </div>
                     </div>
 
                     <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-5">
-                      <p className="text-xs font-semibold tracking-wider text-slate-500">成果</p>
+                      <p className="text-xs font-semibold text-slate-500">成果</p>
                       <p className="mt-2 text-sm leading-relaxed text-slate-700">{c.outcome}</p>
                     </div>
 

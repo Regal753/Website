@@ -33,10 +33,18 @@ const Header: React.FC = () => {
     setIsMobileMenuOpen(false);
   };
 
+  const normalizePath = (value: string) => (value === '/' ? value : value.replace(/\/+$/, ''));
+
   const isActive = (href: string, matchPrefix?: boolean) => {
-    if (href === '/') return location.pathname === '/';
-    if (matchPrefix) return location.pathname.startsWith(href);
-    return location.pathname === href;
+    if (href.includes('#')) {
+      return `${normalizePath(location.pathname)}${location.hash}` === href;
+    }
+
+    const normalizedHref = normalizePath(href);
+    const normalizedPathname = normalizePath(location.pathname);
+    if (normalizedHref === '/') return normalizedPathname === '/';
+    if (matchPrefix) return normalizedPathname.startsWith(normalizedHref);
+    return normalizedPathname === normalizedHref;
   };
 
   return (

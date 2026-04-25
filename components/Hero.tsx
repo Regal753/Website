@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Clock3, MapPin, ShieldCheck } from 'lucide-react';
+import { ArrowRight, BookOpen, Clock3, MapPin, ShieldCheck } from 'lucide-react';
 import { serviceCatalog } from '../services.catalog';
 import { siteConfig } from '../site.config';
 import { SectionId } from '../types';
@@ -41,12 +41,13 @@ const Hero: React.FC = () => {
         <div className="space-y-6 md:space-y-8">
           <div className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm">
             <span className="inline-flex h-2.5 w-2.5 rounded-full bg-emerald-600" />
-            株式会社Regalo / 京都府長岡京市
+            株式会社Regalo / RIGHTS, OPERATIONS, GROWTH
           </div>
 
           <h1 className="text-4xl font-semibold leading-tight text-brand-ink sm:text-5xl md:text-6xl md:font-bold">
-            音楽出版・BGM権利管理と
-            <span className="block">YouTube運用を支援</span>
+            音楽権利と
+            <span className="block">YouTube運用を、</span>
+            <span className="block">実務から強くする。</span>
           </h1>
 
           <p className="max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
@@ -81,6 +82,26 @@ const Hero: React.FC = () => {
             </button>
           </div>
 
+          <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+            <div className="flex items-center gap-2 text-sm font-semibold text-brand-primary-700">
+              <BookOpen className="h-4 w-4" />
+              <span>Column</span>
+            </div>
+            <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm leading-relaxed text-slate-700">
+              {siteConfig.columnItems.slice(0, 3).map((item) => (
+                <Link
+                  key={item.slug}
+                  to={`/column#${item.slug}`}
+                  onClick={() => trackEvent('column_detail_click', { placement: 'hero_ticker', slug: item.slug })}
+                  className="inline-flex min-w-0 items-center gap-2 font-medium transition-colors hover:text-brand-primary-700"
+                >
+                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-slate-900" />
+                  <span>{item.title}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+
           <div className="hidden gap-3 sm:grid sm:grid-cols-3">
             {quickPoints.map((point) => (
               <div
@@ -101,8 +122,8 @@ const Hero: React.FC = () => {
           <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm shadow-slate-200/50 md:p-6">
             <div className="flex items-center justify-between gap-3">
               <div>
-                <p className="text-sm font-semibold text-slate-500">ご相談が多いテーマ</p>
-                <h2 className="mt-1 text-xl font-semibold text-brand-ink">3つの支援領域</h2>
+                <p className="text-sm font-semibold text-slate-500">Service</p>
+                <h2 className="mt-1 text-xl font-semibold text-brand-ink">支援領域</h2>
               </div>
               <span className="rounded-full border border-brand-primary-100 bg-brand-primary-50 px-3 py-1 text-xs font-semibold text-brand-primary-700">
                 会社窓口で対応

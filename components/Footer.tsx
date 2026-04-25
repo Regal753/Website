@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div>
-          <p className="mb-3 text-xs font-semibold tracking-widest text-white/50">事業一覧</p>
+          <p className="mb-3 text-xs font-semibold text-white/50">事業一覧</p>
           <div className="flex flex-col gap-2 text-sm">
             <Link to="/services/music-publishing" className="text-white/70 transition-colors hover:text-white">
               音楽出版・BGM権利管理
@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div>
-          <p className="mb-3 text-xs font-semibold tracking-widest text-white/50">お問い合わせ</p>
+          <p className="mb-3 text-xs font-semibold text-white/50">お問い合わせ</p>
           <div className="flex flex-col gap-2 text-sm">
             {phone && (
               <a href={`tel:${phoneHref}`} className="font-semibold text-white transition-colors hover:text-amber-200">
@@ -58,8 +58,11 @@ const Footer: React.FC = () => {
         </div>
 
         <div>
-          <p className="mb-3 text-xs font-semibold tracking-widest text-white/50">ガイド</p>
+          <p className="mb-3 text-xs font-semibold text-white/50">ガイド</p>
           <div className="flex flex-col gap-2 text-sm">
+            <Link to="/column" className="text-white/70 transition-colors hover:text-white">
+              コラム
+            </Link>
             <Link to="/company" className="text-white/70 transition-colors hover:text-white">
               会社情報
             </Link>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Cases from '../components/Cases';
+import Column from '../components/Column';
 import Hero from '../components/Hero';
 import InlineCTA from '../components/InlineCTA';
 import News from '../components/News';
@@ -15,13 +16,14 @@ const HomePage: React.FC = () => (
     <Hero />
     <TrustStats />
     <Services />
+    <Column />
+    <News />
     <Cases />
-    <InlineCTA />
     <TeamPreview />
     <Process />
     <TechStack />
     <Pricing />
-    <News />
+    <InlineCTA />
   </>
 );
 
