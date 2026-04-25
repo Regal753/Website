@@ -21,8 +21,8 @@ const caseStyles: Record<
     serviceChip: 'bg-brand-primary-100 text-brand-primary-800',
   },
   'ai-marketing-strategy': {
-    colorClass: 'text-cyan-700 bg-cyan-50 border-cyan-100',
-    serviceChip: 'bg-cyan-100 text-cyan-900',
+    colorClass: 'text-slate-700 bg-slate-50 border-slate-200',
+    serviceChip: 'bg-slate-100 text-slate-800',
   },
 };
 
@@ -41,7 +41,8 @@ const Cases: React.FC = () => {
           </p>
           <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">解決事例</h2>
           <p className="mx-auto max-w-2xl text-slate-600">
-            抽象的な「改善しました」ではなく、何を整えて、どの変化が出たかを分かる形で掲載します。
+            公開できる範囲で、何を整えて、どの変化が出たかを分かる形で掲載します。
+            実績は案件ごとの条件により変動します。
           </p>
         </div>
 

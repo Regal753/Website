@@ -1,4 +1,5 @@
 type KVBinding = {
+  get: (key: string) => Promise<string | null>;
   put: (key: string, value: string, options?: { expirationTtl?: number }) => Promise<void>;
 };
 
@@ -10,6 +11,10 @@ type Env = {
   CONTACT_LOG_WEBHOOK_URL?: string;
   CONTACT_LOG_RETENTION_DAYS?: string;
   CONTACT_LOGS?: KVBinding;
+  CONTACT_RATE_LIMITS?: KVBinding;
+  CONTACT_RATE_LIMIT_WINDOW_SECONDS?: string;
+  CONTACT_RATE_LIMIT_MAX_PER_IP?: string;
+  CONTACT_RATE_LIMIT_MAX_PER_EMAIL?: string;
 };
 
 type ExecutionContextLike = {
@@ -17,7 +22,26 @@ type ExecutionContextLike = {
 };
 
 const MAX_TOTAL_ATTACHMENT_BYTES = 10 * 1024 * 1024;
+const MAX_ATTACHMENT_FILES = 3;
 const DEFAULT_LOG_RETENTION_DAYS = 180;
+const DEFAULT_RATE_LIMIT_WINDOW_SECONDS = 15 * 60;
+const DEFAULT_RATE_LIMIT_MAX_PER_IP = 5;
+const DEFAULT_RATE_LIMIT_MAX_PER_EMAIL = 3;
+const ALLOWED_ATTACHMENT_EXTENSIONS = new Set([
+  'pdf',
+  'doc',
+  'docx',
+  'xls',
+  'xlsx',
+  'ppt',
+  'pptx',
+  'txt',
+  'csv',
+  'png',
+  'jpg',
+  'jpeg',
+  'webp',
+]);
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -45,6 +69,13 @@ const getAllowedOrigin = (request: Request, env: Env): string => {
   return requestOrigin || '*';
 };
 
+const isAllowedRequestOrigin = (request: Request, env: Env): boolean => {
+  const configured = (env.CONTACT_ALLOWED_ORIGIN || '').trim();
+  const requestOrigin = (request.headers.get('Origin') || '').trim();
+  if (!configured || !requestOrigin) return true;
+  return requestOrigin === configured;
+};
+
 const withCorsHeaders = (
   request: Request,
   env: Env,
@@ -60,15 +91,129 @@ const json = (
   request: Request,
   env: Env,
   body: Record<string, unknown>,
-  status = 200
+  status = 200,
+  extraHeaders: Record<string, string> = {}
 ): Response =>
   new Response(JSON.stringify(body), {
     status,
     headers: withCorsHeaders(request, env, {
       'Content-Type': 'application/json; charset=utf-8',
       'Cache-Control': 'no-store',
+      ...extraHeaders,
     }),
   });
+
+const parsePositiveInt = (value: string | undefined, fallback: number): number => {
+  const parsed = Number(value || '');
+  if (!Number.isFinite(parsed) || parsed < 1) return fallback;
+  return Math.floor(parsed);
+};
+
+const hashValue = async (value: string): Promise<string> => {
+  const normalized = value.trim().toLowerCase();
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(normalized));
+  return Array.from(new Uint8Array(digest))
+    .map((byte) => byte.toString(16).padStart(2, '0'))
+    .join('');
+};
+
+const getRateLimitStore = (env: Env): KVBinding | undefined =>
+  env.CONTACT_RATE_LIMITS || env.CONTACT_LOGS;
+
+const consumeRateLimit = async (
+  store: KVBinding,
+  key: string,
+  maxAttempts: number,
+  windowSeconds: number
+): Promise<{ ok: boolean; retryAfterSeconds?: number }> => {
+  const now = Date.now();
+  const existingRaw = await store.get(key);
+  let count = 0;
+  let resetAt = now + windowSeconds * 1000;
+
+  if (existingRaw) {
+    try {
+      const existing = JSON.parse(existingRaw) as { count?: number; resetAt?: number };
+      if (typeof existing.resetAt === 'number' && existing.resetAt > now) {
+        count = typeof existing.count === 'number' ? existing.count : 0;
+        resetAt = existing.resetAt;
+      }
+    } catch (_error) {
+      count = 0;
+    }
+  }
+
+  if (count >= maxAttempts) {
+    return { ok: false, retryAfterSeconds: Math.max(1, Math.ceil((resetAt - now) / 1000)) };
+  }
+
+  await store.put(
+    key,
+    JSON.stringify({
+      count: count + 1,
+      resetAt,
+    }),
+    { expirationTtl: windowSeconds + 60 }
+  );
+  return { ok: true };
+};
+
+const checkRateLimits = async (
+  env: Env,
+  ip: string,
+  email: string
+): Promise<{ ok: boolean; retryAfterSeconds?: number; reason?: string }> => {
+  const store = getRateLimitStore(env);
+  if (!store?.get || !store?.put) return { ok: true };
+
+  const windowSeconds = parsePositiveInt(
+    env.CONTACT_RATE_LIMIT_WINDOW_SECONDS,
+    DEFAULT_RATE_LIMIT_WINDOW_SECONDS
+  );
+  const maxPerIp = parsePositiveInt(env.CONTACT_RATE_LIMIT_MAX_PER_IP, DEFAULT_RATE_LIMIT_MAX_PER_IP);
+  const maxPerEmail = parsePositiveInt(
+    env.CONTACT_RATE_LIMIT_MAX_PER_EMAIL,
+    DEFAULT_RATE_LIMIT_MAX_PER_EMAIL
+  );
+
+  if (ip) {
+    const ipHash = await hashValue(ip);
+    const ipResult = await consumeRateLimit(
+      store,
+      `rate-limit/ip/${ipHash}`,
+      maxPerIp,
+      windowSeconds
+    );
+    if (!ipResult.ok) return { ...ipResult, reason: 'ip' };
+  }
+
+  const emailHash = await hashValue(email);
+  const emailResult = await consumeRateLimit(
+    store,
+    `rate-limit/email/${emailHash}`,
+    maxPerEmail,
+    windowSeconds
+  );
+  if (!emailResult.ok) return { ...emailResult, reason: 'email' };
+
+  return { ok: true };
+};
+
+const getFileExtension = (filename: string): string => {
+  const match = filename.toLowerCase().match(/\.([a-z0-9]+)$/);
+  return match?.[1] || '';
+};
+
+const sanitizeFilename = (filename: string): string =>
+  (filename || 'attachment.bin')
+    .replace(/[/\\?%*:|"<>]/g, '_')
+    .replace(/[\u0000-\u001f\u007f]/g, '')
+    .slice(0, 120);
+
+const isAllowedAttachment = (file: File): boolean => {
+  const extension = getFileExtension(file.name || '');
+  return ALLOWED_ATTACHMENT_EXTENSIONS.has(extension);
+};
 
 const sendViaResend = async (
   env: Env,
@@ -149,6 +294,10 @@ export default {
       return json(request, env, { ok: false, error: 'method_not_allowed' }, 405);
     }
 
+    if (!isAllowedRequestOrigin(request, env)) {
+      return json(request, env, { ok: false, error: 'origin_not_allowed' }, 403);
+    }
+
     if (!env.RESEND_API_KEY || !env.CONTACT_TO_EMAIL || !env.CONTACT_FROM_EMAIL) {
       return json(request, env, { ok: false, error: 'server_not_configured' }, 500);
     }
@@ -186,12 +335,29 @@ export default {
         return json(request, env, { ok: false, error: 'invalid_email' }, 422);
       }
 
+      const rateLimit = await checkRateLimits(env, ip, email);
+      if (!rateLimit.ok) {
+        return json(
+          request,
+          env,
+          { ok: false, error: 'rate_limited', reason: rateLimit.reason },
+          429,
+          { 'Retry-After': String(rateLimit.retryAfterSeconds || DEFAULT_RATE_LIMIT_WINDOW_SECONDS) }
+        );
+      }
+
       const files = formData
         .getAll('attachment')
         .filter((entry): entry is File => entry instanceof File && entry.size > 0);
+      if (files.length > MAX_ATTACHMENT_FILES) {
+        return json(request, env, { ok: false, error: 'too_many_attachments' }, 413);
+      }
       const totalAttachmentBytes = files.reduce((sum, file) => sum + file.size, 0);
       if (totalAttachmentBytes > MAX_TOTAL_ATTACHMENT_BYTES) {
         return json(request, env, { ok: false, error: 'attachment_too_large' }, 413);
+      }
+      if (files.some((file) => !isAllowedAttachment(file))) {
+        return json(request, env, { ok: false, error: 'attachment_type_not_allowed' }, 415);
       }
 
       const inquiryId = crypto.randomUUID();
@@ -201,7 +367,7 @@ export default {
         files.map(async (file) => {
           const bytes = new Uint8Array(await file.arrayBuffer());
           return {
-            filename: file.name || 'attachment.bin',
+            filename: sanitizeFilename(file.name),
             content: bytesToBase64(bytes),
             type: file.type || 'application/octet-stream',
           };

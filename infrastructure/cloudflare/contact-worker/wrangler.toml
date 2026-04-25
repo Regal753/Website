@@ -16,3 +16,15 @@ CONTACT_TO_EMAIL = "contact@regalocom.net"
 CONTACT_FROM_EMAIL = "Regalo Contact <noreply@regalocom.net>"
 CONTACT_ALLOWED_ORIGIN = "https://www.regalocom.net"
 CONTACT_LOG_RETENTION_DAYS = "180"
+CONTACT_RATE_LIMIT_WINDOW_SECONDS = "900"
+CONTACT_RATE_LIMIT_MAX_PER_IP = "5"
+CONTACT_RATE_LIMIT_MAX_PER_EMAIL = "3"
+
+# After creating KV namespaces, uncomment and set the generated ids.
+# [[kv_namespaces]]
+# binding = "CONTACT_LOGS"
+# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+#
+# [[kv_namespaces]]
+# binding = "CONTACT_RATE_LIMITS"
+# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"

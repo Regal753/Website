@@ -25,6 +25,8 @@ const INITIAL_FORM: ContactFormState = {
 
 const CONTACT_HOURS = '電話受付 9:00-20:00（フォームは24時間受付）';
 const MAX_ATTACHMENT_BYTES = 10 * 1024 * 1024;
+const MAX_ATTACHMENT_FILES = 3;
+const ACCEPTED_ATTACHMENT_TYPES = '.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.png,.jpg,.jpeg,.webp';
 const AUTORESPONSE_MESSAGE =
   'お問い合わせありがとうございます。内容を確認のうえ、通常1営業日以内にご連絡いたします。';
 const GENERIC_SUBMIT_ERROR =
@@ -199,6 +201,9 @@ const Contact: React.FC = () => {
     }
     if (!form.message.trim()) nextFieldErrors.message = 'お問い合わせ内容を入力してください。';
     if (!consent) nextFieldErrors.consent = 'プライバシーポリシーと利用規約への同意が必要です。';
+    if (attachments.length > MAX_ATTACHMENT_FILES) {
+      nextFieldErrors.attachments = `添付ファイルは${MAX_ATTACHMENT_FILES}点以内にしてください。`;
+    }
     if (totalAttachmentBytes > MAX_ATTACHMENT_BYTES) {
       nextFieldErrors.attachments = '添付ファイルの合計サイズは10 MB以内にしてください。';
     }
@@ -334,7 +339,7 @@ const Contact: React.FC = () => {
               <h1 className="mt-3 text-4xl font-semibold tracking-tight text-brand-ink md:text-5xl">お問い合わせ</h1>
               <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-600 md:text-base">
                 内容を確認のうえ、通常1営業日以内にメールまたはお電話でご連絡します。
-                何から相談すべきか整理できていない段階でも、そのまま送って問題ありません。
+                何から相談すべきか整理できていない段階でも、そのまま送って差し支えありません。
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {CONTACT_PROMISES.map((item) => (
@@ -418,7 +423,7 @@ const Contact: React.FC = () => {
             <div className="mb-6">
               <h2 className="text-2xl font-semibold text-brand-ink">お問い合わせフォーム</h2>
               <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                フォーム送信後、内容を確認して担当よりご連絡します。添付ファイルもそのまま送信できます。
+                フォーム送信後、内容を確認して担当よりご連絡します。PDFや資料画像も添付できます。
               </p>
             </div>
 
@@ -524,7 +529,7 @@ const Contact: React.FC = () => {
                       <option>お問い合わせ</option>
                       <option>YouTube/SNS運用支援について</option>
                       <option>音楽出版・BGM権利管理について</option>
-                      <option>制作進行・運用自動化支援について</option>
+                      <option>制作進行・業務整理支援について</option>
                       <option>その他</option>
                     </select>
                   </label>
@@ -562,14 +567,14 @@ const Contact: React.FC = () => {
                       name="attachment"
                       multiple
                       onChange={handleFileChange}
-                      accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.zip,.png,.jpg,.jpeg,.webp,.mp4,.mov"
+                      accept={ACCEPTED_ATTACHMENT_TYPES}
                       className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-slate-900 file:mr-3 file:rounded-md file:border-0 file:bg-slate-100 file:px-3 file:py-1.5 file:text-slate-700"
                       aria-invalid={fieldErrors.attachments ? 'true' : 'false'}
                       aria-describedby={fieldErrors.attachments ? 'contact-attachments-error' : undefined}
                     />
                     <div className="mt-2 flex items-start gap-2 text-xs text-slate-500">
                       <Paperclip className="mt-0.5 h-4 w-4 shrink-0" />
-                      <span>添付ファイルの合計は10MB以内で送信してください。</span>
+                      <span>添付は3点・合計10MB以内です。PDF、Office、テキスト、画像に対応しています。</span>
                     </div>
                     {fieldErrors.attachments && (
                       <p id="contact-attachments-error" className="mt-2 text-xs font-medium text-red-600">

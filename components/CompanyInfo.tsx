@@ -64,7 +64,7 @@ const representativeHighlights = [
 const serviceThemes: Record<string, string> = {
   'sns-management': 'border-rose-100 bg-gradient-to-br from-rose-50 via-white to-white',
   'music-publishing': 'border-amber-100 bg-gradient-to-br from-amber-50 via-white to-white',
-  'ai-marketing-strategy': 'border-cyan-100 bg-gradient-to-br from-cyan-50 via-white to-white',
+  'ai-marketing-strategy': 'border-slate-200 bg-gradient-to-br from-slate-50 via-white to-white',
 };
 
 const CompanyInfo: React.FC = () => {

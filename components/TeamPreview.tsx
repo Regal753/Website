@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BadgeCheck, MapPin, Sparkles } from 'lucide-react';
+import { ArrowRight, BadgeCheck, MapPin } from 'lucide-react';
 import { siteConfig } from '../site.config';
 import { trackEvent } from '../utils/analytics';
 
@@ -77,7 +77,7 @@ const TeamPreview: React.FC = () => {
                   {TEAM_VALUES.map((item) => (
                     <li key={item} className="flex items-start gap-3 text-sm leading-relaxed text-slate-700">
                       <span className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber-100 text-amber-800">
-                        <Sparkles className="h-3.5 w-3.5" />
+                        <BadgeCheck className="h-3.5 w-3.5" />
                       </span>
                       <span>{item}</span>
                     </li>

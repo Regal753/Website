@@ -28,10 +28,10 @@ const themes: Record<
     eyebrow: 'BGM制作と権利管理',
   },
   'ai-marketing-strategy': {
-    card: 'border-cyan-200 bg-gradient-to-br from-cyan-50 via-white to-white',
-    chip: 'bg-cyan-100 text-cyan-900',
-    imageBorder: 'border-cyan-100',
-    eyebrow: '共有・進行・自動化',
+    card: 'border-slate-200 bg-gradient-to-br from-slate-50 via-white to-white',
+    chip: 'bg-slate-100 text-slate-800',
+    imageBorder: 'border-slate-200',
+    eyebrow: '共有・進行・業務整理',
   },
 };
 
@@ -54,7 +54,7 @@ const Services: React.FC = () => {
           </p>
           <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">3つの支援領域</h2>
           <p className="mx-auto max-w-2xl text-slate-600">
-            企画や運用の改善、音楽権利の整理、共有フローの自動化まで。
+            企画や運用の改善、音楽権利の整理、共有フローの整備まで。
             課題の場所に合わせて入口を用意しています。
           </p>
         </div>

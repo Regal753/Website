@@ -1,4 +1,4 @@
-import { Bot, Music, Youtube } from 'lucide-react';
+import { FolderKanban, Music, Youtube } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 
 interface ServiceDetailSection {
@@ -169,21 +169,21 @@ export const serviceCatalog: ServiceCatalogItem[] = [
   },
   {
     slug: 'ai-marketing-strategy',
-    title: '制作進行・運用自動化支援',
+    title: '制作進行・業務整理支援',
     description:
-      'AIやAPI連携は手段として使い、レポート整備、進行共有、通知の自動化を通じて、制作・運用の品質とスピードを高めます。',
-    items: ['進行フロー設計', 'レポート自動化', '通知・共有設計', '運用監査/改善'],
-    icon: Bot,
-    color: 'from-cyan-500 to-cyan-600',
+      '制作進行、素材共有、確認依頼、レポート整備を見直し、担当者が変わっても追える運用手順を整えます。',
+    items: ['進行フロー設計', 'レポート整備', '通知・共有設計', '運用手順の見直し'],
+    icon: FolderKanban,
+    color: 'from-slate-600 to-slate-700',
     detailLead:
-      '制作進行・運用自動化支援では、AIやAPI連携を既存事業の改善手段として使い、週次レポート、進行共有、通知の自動化を通じて、実行速度と再現性を高めます。既存運用を壊さず、手作業依存を減らし、判断と実行が速い体制を実現します。',
+      '制作進行・業務整理支援では、週次レポート、素材共有、確認依頼、通知の流れを整理し、実行漏れや確認遅れを減らします。必要な場合だけツール連携を使い、既存運用を壊さずに担当者が追いやすい体制へ整えます。',
     detailSections: [
       {
         title: '主な提供内容',
         points: [
-          '週次/月次レポートの自動生成',
+          '週次/月次レポートの作成手順整備',
           'Drive/Sheets/Discord連携による進行共有',
-          '定例報告・リマインド・確認フロー自動化',
+          '定例報告・リマインド・確認フローの整理',
           '運用監査と改善サイクルの定着支援',
         ],
       },
@@ -198,29 +198,29 @@ export const serviceCatalog: ServiceCatalogItem[] = [
     ],
     caseHighlights: [
       {
-        title: '定例レポート作成を自動化',
-        summary: '集計と共有の自動化で、改善判断までの時間を短縮。',
+        title: '定例レポートの作成手順を整備',
+        summary: '集計と共有の手順を揃え、改善判断までの時間を短縮。',
       },
       {
-        title: '進行通知を自動化し対応速度を向上',
-        summary: '連携フロー構築により、共有漏れと報告工数を削減。',
+        title: '進行通知と確認依頼を整理',
+        summary: '共有場所と通知ルールを揃え、確認漏れと報告工数を削減。',
       },
     ],
     pricing: {
-      summary: '整備範囲・自動化対象業務・連携システム数に応じて個別見積りします。',
+      summary: '整備範囲・対象業務・連携システム数に応じて個別見積りします。',
       items: [
         '設計: 現行フロー整理、KPI定義、共有設計',
-        '自動化構築: レポート整備、通知導線、ワークフロー実装',
+        '運用整備: レポート整備、通知導線、ワークフロー実装',
         '運用改善: 定期レビュー、改善提案、保守対応',
       ],
     },
     processSteps: [
       { title: '業務診断', description: '現行フローとボトルネックを可視化します。' },
-      { title: '設計', description: '運用ルールと自動化要件を統合設計します。' },
+      { title: '設計', description: '運用ルールとツール連携要件を統合設計します。' },
       { title: '構築/試行', description: '段階導入で安全に構築し、実運用で検証します。' },
       { title: '本番定着', description: '監視と改善を継続し、品質を安定化します。' },
     ],
-    techStack: ['Google Drive API', 'Google Sheets API', 'Discord Bot', 'n8n / GCP'],
+    techStack: ['Google Drive', 'Google Sheets', 'Discord', '必要に応じたツール連携'],
     media: {
       listImage: 'images/services/ai-cover.webp',
       galleryImages: [

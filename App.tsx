@@ -87,7 +87,7 @@ export const getRouteMeta = (pathname: string): RouteMeta => {
       return {
         title: `${service.title} | ${siteConfig.companyName}`,
         description: service.description,
-        canonicalPath: `/services/${service.slug}`,
+        canonicalPath: `/services/${service.slug}/`,
       };
     }
   }
@@ -104,26 +104,26 @@ export const getRouteMeta = (pathname: string): RouteMeta => {
         title: `会社情報 | ${siteConfig.companyName}`,
         description:
           '京都発の実務チームRegaloの会社概要、公開情報、支援体制をご案内します。',
-        canonicalPath: '/company',
+        canonicalPath: '/company/',
       };
     case '/contact':
       return {
         title: `お問い合わせ | ${siteConfig.companyName}`,
         description:
-          'YouTube/SNS運用、音楽権利管理、制作進行や運用自動化のご相談を24時間受け付けています。通常1営業日以内にご連絡します。',
-        canonicalPath: '/contact',
+          'YouTube/SNS運用、音楽権利管理、制作進行や業務整理のご相談を24時間受け付けています。通常1営業日以内にご連絡します。',
+        canonicalPath: '/contact/',
       };
     case '/privacy':
       return {
         title: `プライバシーポリシー | ${siteConfig.companyName}`,
         description: `${siteConfig.companyName}の個人情報保護方針です。`,
-        canonicalPath: '/privacy',
+        canonicalPath: '/privacy.html',
       };
     case '/terms':
       return {
         title: `利用規約 | ${siteConfig.companyName}`,
         description: `${siteConfig.companyName}のサービス利用条件です。`,
-        canonicalPath: '/terms',
+        canonicalPath: '/terms.html',
       };
     default:
       return {
@@ -189,9 +189,9 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/company" element={<CompanyPage />} />
-            <Route path="/company.html" element={<Navigate to="/company" replace />} />
+            <Route path="/company.html" element={<Navigate to="/company/" replace />} />
             <Route path="/contact" element={<ContactPage />} />
-            <Route path="/contact.html" element={<Navigate to="/contact" replace />} />
+            <Route path="/contact.html" element={<Navigate to="/contact/" replace />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/services/:slug" element={<ServiceDetailPage />} />

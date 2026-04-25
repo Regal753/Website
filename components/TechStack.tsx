@@ -1,12 +1,12 @@
 import React from 'react';
-import { Bot, Cloud, Database, FolderKanban, MessageSquareShare } from 'lucide-react';
+import { Bell, Cloud, Database, FolderKanban } from 'lucide-react';
 import { SectionId } from '../types';
 
 const stackItems = [
   { icon: Cloud, label: 'Google Cloud / n8n', detail: '処理実行・通知ワークフロー', surface: 'border-cyan-100 bg-cyan-50/80' },
   { icon: Database, label: 'Google Sheets', detail: '進行管理・権利台帳管理', surface: 'border-amber-100 bg-amber-50/80' },
   { icon: FolderKanban, label: 'Google Drive', detail: '素材保管・納品管理', surface: 'border-brand-primary-100 bg-brand-primary-50/80' },
-  { icon: Bot, label: 'Discord Bot', detail: '進捗通知・リマインド', surface: 'border-rose-100 bg-rose-50/80' },
+  { icon: Bell, label: 'Discord通知', detail: '進捗通知・リマインド', surface: 'border-rose-100 bg-rose-50/80' },
 ] as const;
 
 const workflowNodes = [
@@ -40,7 +40,7 @@ const TechStack: React.FC = () => {
           <p className="mb-4 inline-flex rounded-full border border-brand-primary-200 bg-brand-primary-50 px-3 py-1 text-xs font-semibold text-brand-primary-700">
             実務で使う運用基盤
           </p>
-          <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">運用を支える技術基盤</h2>
+          <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">運用を支える実務基盤</h2>
           <p className="mx-auto max-w-2xl text-slate-600">
             管理台帳、進行共有、通知フローをばらばらにせず、現場で使うツール同士をつないで設計します。
           </p>

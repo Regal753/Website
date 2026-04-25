@@ -16,6 +16,19 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return undefined;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsMobileMenuOpen(false);
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isMobileMenuOpen]);
+
   const handleNavClick = () => {
     setIsMobileMenuOpen(false);
   };
@@ -96,39 +109,37 @@ const Header: React.FC = () => {
       </div>
 
       {/* Mobile Nav */}
-      <div
-        id="mobile-navigation"
-        className={`absolute top-full left-0 right-0 origin-top overflow-hidden transition-[max-height,opacity,transform] duration-300 lg:hidden ${
-          isMobileMenuOpen
-            ? 'max-h-[520px] opacity-100 translate-y-0'
-            : 'max-h-0 opacity-0 -translate-y-2 pointer-events-none'
-        }`}
-      >
-        <div className="rounded-b-2xl bg-white/95 backdrop-blur-xl border-t border-slate-200 shadow-xl p-4 flex flex-col gap-3">
-          {siteConfig.navItems.map((item) => (
+      {isMobileMenuOpen && (
+        <div
+          id="mobile-navigation"
+          className="absolute top-full left-0 right-0 origin-top overflow-hidden lg:hidden"
+        >
+          <div className="rounded-b-2xl bg-white/95 backdrop-blur-xl border-t border-slate-200 shadow-xl p-4 flex flex-col gap-3">
+            {siteConfig.navItems.map((item) => (
+              <Link
+                key={item.href}
+                to={item.href}
+                onClick={handleNavClick}
+                className={`text-left text-sm font-semibold p-2.5 rounded-lg border transition-colors ${
+                  isActive(item.href, item.matchPrefix)
+                    ? 'text-brand-primary-700 bg-brand-primary-50 border-brand-primary-100'
+                    : 'text-slate-700 bg-white border-slate-200 hover:bg-slate-50'
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
             <Link
-              key={item.href}
-              to={item.href}
+              to="/contact"
               onClick={handleNavClick}
-              className={`text-left text-sm font-semibold p-2.5 rounded-lg border transition-colors ${
-                isActive(item.href, item.matchPrefix)
-                  ? 'text-brand-primary-700 bg-brand-primary-50 border-brand-primary-100'
-                  : 'text-slate-700 bg-white border-slate-200 hover:bg-slate-50'
-              }`}
+              className="mt-1 inline-flex items-center justify-center gap-2 rounded-xl bg-brand-primary-700 px-4 py-3 text-sm font-semibold text-white"
             >
-              {item.label}
+              無料相談する
+              <ArrowRight className="h-4 w-4" />
             </Link>
-          ))}
-          <Link
-            to="/contact"
-            onClick={handleNavClick}
-            className="mt-1 inline-flex items-center justify-center gap-2 rounded-xl bg-brand-primary-700 px-4 py-3 text-sm font-semibold text-white"
-          >
-            無料相談する
-            <ArrowRight className="h-4 w-4" />
-          </Link>
+          </div>
         </div>
-      </div>
+      )}
     </header>
   );
 };
