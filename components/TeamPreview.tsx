@@ -32,8 +32,8 @@ const TeamPreview: React.FC = () => {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[360px_minmax(0,1fr)]">
-          <div className="rounded-3xl border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#ffffff_50%,_#fff7ed_100%)] p-8 text-brand-ink shadow-sm shadow-brand-primary-100/60">
-            <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl border border-brand-primary-100 bg-white text-2xl font-semibold text-brand-primary-700 shadow-sm">
+          <div className="rounded-lg border border-brand-primary-100 bg-[linear-gradient(135deg,_#f0fdfa_0%,_#ffffff_50%,_#fff7ed_100%)] p-8 text-brand-ink shadow-sm shadow-brand-primary-100/60">
+            <div className="inline-flex h-16 w-16 items-center justify-center rounded-lg border border-brand-primary-100 bg-white text-2xl font-semibold text-brand-primary-700 shadow-sm">
               R
             </div>
             <p className="mt-6 text-sm font-medium text-slate-500">運営体制</p>
@@ -42,13 +42,13 @@ const TeamPreview: React.FC = () => {
               少人数チームで、相談整理から運用定着までを連続して対応します。
               運用、権利、共有フローのどこに課題があるかを切り分け、実務に落ちる形まで設計します。
             </p>
-            <div className="mt-6 flex items-center gap-2 rounded-2xl border border-brand-primary-100 bg-white px-4 py-3 text-sm text-slate-700 shadow-sm">
+            <div className="mt-6 flex items-center gap-2 rounded-lg border border-brand-primary-100 bg-white px-4 py-3 text-sm text-slate-700 shadow-sm">
               <MapPin className="h-4 w-4 text-amber-700" />
               京都発の実務チーム
             </div>
           </div>
 
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+          <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm md:p-8">
             <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_280px]">
               <div>
                 <h3 className="text-2xl font-semibold text-brand-ink">相談から改善まで、同じ目線で伴走する</h3>
@@ -71,7 +71,7 @@ const TeamPreview: React.FC = () => {
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+              <div className="rounded-lg border border-slate-200 bg-slate-50 p-5">
                 <p className="text-sm font-semibold text-slate-500">大事にしていること</p>
                 <ul className="mt-4 space-y-3">
                   {TEAM_VALUES.map((item) => (

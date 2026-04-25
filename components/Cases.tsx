@@ -53,12 +53,12 @@ const Cases: React.FC = () => {
             return (
               <article
                 key={c.title}
-                className="rounded-3xl border border-slate-200 bg-[#fffaf7] p-6 shadow-sm transition-all hover:border-brand-primary-200 hover:shadow-md md:p-8"
+                className="rounded-lg border border-slate-200 bg-[#fffaf7] p-6 shadow-sm transition-all hover:border-brand-primary-200 hover:shadow-md md:p-8"
               >
                 <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_280px]">
                   <div>
                     <div className="flex items-start gap-4">
-                      <div className={`shrink-0 rounded-2xl border p-3 ${style.colorClass}`}>
+                      <div className={`shrink-0 rounded-lg border p-3 ${style.colorClass}`}>
                         <Icon size={20} />
                       </div>
                       <div>
@@ -71,17 +71,17 @@ const Cases: React.FC = () => {
                     </div>
 
                     <div className="mt-6 grid gap-4 md:grid-cols-2">
-                      <div className="rounded-2xl border border-slate-200 bg-white p-5">
+                      <div className="rounded-lg border border-slate-200 bg-white p-5">
                         <p className="text-xs font-semibold text-slate-500">背景</p>
                         <p className="mt-2 text-sm leading-relaxed text-slate-700">{c.challenge}</p>
                       </div>
-                      <div className="rounded-2xl border border-slate-200 bg-white p-5">
+                      <div className="rounded-lg border border-slate-200 bg-white p-5">
                         <p className="text-xs font-semibold text-slate-500">対応内容</p>
                         <p className="mt-2 text-sm leading-relaxed text-slate-700">{c.scope}</p>
                       </div>
                     </div>
 
-                    <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-5">
+                    <div className="mt-4 rounded-lg border border-slate-200 bg-white p-5">
                       <p className="text-xs font-semibold text-slate-500">成果</p>
                       <p className="mt-2 text-sm leading-relaxed text-slate-700">{c.outcome}</p>
                     </div>
@@ -98,11 +98,11 @@ const Cases: React.FC = () => {
                     </div>
                   </div>
 
-                  <aside className="rounded-3xl border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#ffffff_55%,_#fff7ed_100%)] p-5 text-brand-ink shadow-sm shadow-brand-primary-100/60">
+                  <aside className="rounded-lg border border-brand-primary-100 bg-[linear-gradient(135deg,_#f0fdfa_0%,_#ffffff_55%,_#fff7ed_100%)] p-5 text-brand-ink shadow-sm shadow-brand-primary-100/60">
                     <p className="text-sm font-semibold text-slate-500">見えた変化</p>
                     <ul className="mt-4 space-y-3">
                       {c.results.map((item) => (
-                        <li key={item} className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700">
+                        <li key={item} className="rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700">
                           {item}
                         </li>
                       ))}

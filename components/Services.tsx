@@ -68,12 +68,12 @@ const Services: React.FC = () => {
             return (
               <article
                 key={service.slug}
-                className={`grid gap-6 rounded-3xl border p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg md:grid-cols-[minmax(0,1fr)_320px] md:p-8 ${theme.card}`}
+                className={`grid gap-6 rounded-lg border p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg md:grid-cols-[minmax(0,1fr)_320px] md:p-8 ${theme.card}`}
               >
                 <div>
                   <div className="flex items-start gap-4">
                     <div
-                      className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl shadow-lg"
+                      className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg shadow-lg"
                       style={{ background: getGradientStyle(service.color) }}
                     >
                       <Icon className="h-6 w-6 text-white" />
@@ -144,14 +144,14 @@ const Services: React.FC = () => {
                     alt={`${service.title}のメインイメージ`}
                     width={1280}
                     height={720}
-                    className={`col-span-2 h-44 w-full rounded-3xl border bg-white object-cover ${theme.imageBorder}`}
+                    className={`col-span-2 h-44 w-full rounded-lg border bg-white object-cover ${theme.imageBorder}`}
                     loading="eager"
                     decoding="async"
                   />
                   {supportPoints.map((point) => (
                     <div
                       key={point}
-                      className={`min-h-28 rounded-2xl border bg-white p-4 text-sm font-semibold leading-relaxed text-slate-700 ${theme.imageBorder}`}
+                      className={`min-h-28 rounded-lg border bg-white p-4 text-sm font-semibold leading-relaxed text-slate-700 ${theme.imageBorder}`}
                     >
                       {point}
                     </div>

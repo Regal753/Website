@@ -9,9 +9,9 @@ type LegalRedirectProps = {
 
 const LegalRedirect: React.FC<LegalRedirectProps> = ({ title, target }) => {
   return (
-    <section className="bg-[linear-gradient(180deg,_#f8fafc_0%,_#ffffff_38%,_#eff6ff_100%)] pt-28 pb-20 md:pb-24">
+    <section className="bg-[linear-gradient(180deg,_#f8fafc_0%,_#ffffff_38%,_#f0fdfa_100%)] pt-28 pb-20 md:pb-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-3xl border border-slate-200 bg-white/95 p-8 shadow-xl shadow-slate-200/50 md:p-10">
+        <div className="rounded-lg border border-slate-200 bg-white/95 p-8 shadow-xl shadow-slate-200/50 md:p-10">
           <p className="inline-flex rounded-full border border-brand-primary-200 bg-brand-primary-50 px-3 py-1 text-xs font-semibold text-brand-primary-700">
             規約・方針
           </p>

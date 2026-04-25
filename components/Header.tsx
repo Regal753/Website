@@ -59,7 +59,7 @@ const Header: React.FC = () => {
         {/* Logo */}
         <Link
           to="/"
-          className="flex items-center gap-2 cursor-pointer group rounded-xl bg-white/80 border border-slate-200/80 px-2.5 py-1.5 shadow-sm"
+          className="flex items-center gap-2 cursor-pointer group rounded-lg bg-white/80 border border-slate-200/80 px-2.5 py-1.5 shadow-sm"
           onClick={handleNavClick}
           aria-label="トップページへ移動"
         >
@@ -122,7 +122,7 @@ const Header: React.FC = () => {
           id="mobile-navigation"
           className="absolute top-full left-0 right-0 origin-top overflow-hidden lg:hidden"
         >
-          <div className="rounded-b-2xl bg-white/95 backdrop-blur-xl border-t border-slate-200 shadow-xl p-4 flex flex-col gap-3">
+          <div className="rounded-b-lg bg-white/95 backdrop-blur-xl border-t border-slate-200 shadow-xl p-4 flex flex-col gap-3">
             {siteConfig.navItems.map((item) => (
               <Link
                 key={item.href}
@@ -140,7 +140,7 @@ const Header: React.FC = () => {
             <Link
               to="/contact"
               onClick={handleNavClick}
-              className="mt-1 inline-flex items-center justify-center gap-2 rounded-xl bg-brand-primary-700 px-4 py-3 text-sm font-semibold text-white"
+              className="mt-1 inline-flex items-center justify-center gap-2 rounded-lg bg-brand-primary-700 px-4 py-3 text-sm font-semibold text-white"
             >
               無料相談する
               <ArrowRight className="h-4 w-4" />

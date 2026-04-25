@@ -47,7 +47,7 @@ const TechStack: React.FC = () => {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[1.02fr_0.98fr]">
-          <div className="rounded-[32px] border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#f8fafc_52%,_#fff7ed_100%)] p-6 text-brand-ink shadow-sm shadow-brand-primary-100/60 md:p-8">
+          <div className="rounded-lg border border-brand-primary-100 bg-[linear-gradient(135deg,_#f0fdfa_0%,_#f8fafc_52%,_#fff7ed_100%)] p-6 text-brand-ink shadow-sm shadow-brand-primary-100/60 md:p-8">
             <p className="inline-flex rounded-full border border-brand-primary-100 bg-white/80 px-3 py-1 text-xs font-semibold tracking-wide text-brand-primary-700">
               運用フローの考え方
             </p>
@@ -60,7 +60,7 @@ const TechStack: React.FC = () => {
             <div className="mt-8 space-y-4">
               {workflowNodes.map((item, index) => (
                 <div key={item.label}>
-                  <div className="rounded-3xl border border-brand-primary-100 bg-white/85 p-5 shadow-sm">
+                  <div className="rounded-lg border border-brand-primary-100 bg-white/85 p-5 shadow-sm">
                     <p className="text-xs font-semibold tracking-widest text-slate-500">{item.label}</p>
                     <p className="mt-2 text-lg font-semibold text-brand-ink">{item.title}</p>
                     <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.description}</p>
@@ -78,9 +78,9 @@ const TechStack: React.FC = () => {
               {stackItems.map((item) => (
                 <article
                   key={item.label}
-                  className={`rounded-3xl border p-5 shadow-sm shadow-slate-200/40 ${item.surface}`}
+                  className={`rounded-lg border p-5 shadow-sm shadow-slate-200/40 ${item.surface}`}
                 >
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-brand-primary-700 shadow-sm">
+                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-white text-brand-primary-700 shadow-sm">
                     <item.icon className="h-5 w-5" />
                   </span>
                   <p className="mt-4 text-lg font-semibold text-brand-ink">{item.label}</p>
@@ -89,11 +89,11 @@ const TechStack: React.FC = () => {
               ))}
             </div>
 
-            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-7">
+            <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm md:p-7">
               <p className="text-sm font-semibold text-slate-500">設計方針</p>
               <div className="mt-4 grid gap-3 sm:grid-cols-3">
                 {designPrinciples.map((item) => (
-                  <div key={item} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                  <div key={item} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
                     <p className="text-sm font-semibold leading-relaxed text-brand-ink">{item}</p>
                   </div>
                 ))}

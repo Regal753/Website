@@ -75,7 +75,7 @@ const CompanyInfo: React.FC = () => {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
-          <div className="rounded-[32px] border border-slate-200 bg-white/95 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)] md:p-8">
+          <div className="rounded-lg border border-slate-200 bg-white/95 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)] md:p-8">
             <p className="inline-flex rounded-full border border-brand-primary-200 bg-brand-primary-50 px-3 py-1 text-xs font-semibold text-brand-primary-700">
               会社概要
             </p>
@@ -87,8 +87,8 @@ const CompanyInfo: React.FC = () => {
 
             <div className="mt-6 grid gap-3 sm:grid-cols-3">
               {companyHighlights.map((item) => (
-                <div key={item.label} className="rounded-3xl border border-slate-200 bg-slate-50 p-4">
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-brand-primary-700 shadow-sm">
+                <div key={item.label} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-white text-brand-primary-700 shadow-sm">
                     <item.icon className="h-5 w-5" />
                   </span>
                   <p className="mt-4 text-xs font-semibold tracking-wide text-slate-500">{item.label}</p>
@@ -100,40 +100,40 @@ const CompanyInfo: React.FC = () => {
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-primary-700 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-primary-800"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand-primary-700 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-primary-800"
               >
                 無料相談する
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <a
                 href={`mailto:${companyProfile.contactEmail}`}
-                className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-800 transition-colors hover:bg-slate-50"
+                className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-800 transition-colors hover:bg-slate-50"
               >
                 メールで問い合わせる
               </a>
             </div>
           </div>
 
-          <aside className="rounded-[32px] border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#ffffff_52%,_#fff7ed_100%)] p-6 text-brand-ink shadow-sm shadow-brand-primary-100/60 md:p-8">
+          <aside className="rounded-lg border border-brand-primary-100 bg-[linear-gradient(135deg,_#f0fdfa_0%,_#ffffff_52%,_#fff7ed_100%)] p-6 text-brand-ink shadow-sm shadow-brand-primary-100/60 md:p-8">
             <p className="text-xs font-semibold tracking-widest text-slate-500">ひと目で分かる会社情報</p>
             <h2 className="mt-4 text-2xl font-semibold text-brand-ink">{companyProfile.legalName}</h2>
             <div className="mt-6 space-y-3">
-              <div className="rounded-2xl border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
+              <div className="rounded-lg border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
                 <p className="text-xs font-semibold tracking-wide text-slate-500">代表者</p>
                 <p className="mt-2 text-lg font-semibold text-brand-ink">{companyProfile.representative}</p>
               </div>
-              <div className="rounded-2xl border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
+              <div className="rounded-lg border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
                 <p className="text-xs font-semibold tracking-wide text-slate-500">設立日</p>
                 <p className="mt-2 text-sm font-semibold text-brand-ink">{companyProfile.established}</p>
               </div>
-              <div className="rounded-2xl border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
+              <div className="rounded-lg border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
                 <p className="text-xs font-semibold tracking-wide text-slate-500">所在地</p>
                 <p className="mt-2 text-sm leading-relaxed text-slate-600">{companyProfile.address}</p>
               </div>
               {companyProfile.phone && (
                 <a
                   href={`tel:${phoneHref}`}
-                  className="block rounded-2xl border border-brand-primary-100 bg-white/85 p-4 shadow-sm transition-colors hover:bg-white"
+                  className="block rounded-lg border border-brand-primary-100 bg-white/85 p-4 shadow-sm transition-colors hover:bg-white"
                 >
                   <p className="text-xs font-semibold tracking-wide text-slate-500">電話番号</p>
                   <p className="mt-2 text-lg font-semibold text-brand-ink">{companyProfile.phone}</p>
@@ -145,7 +145,7 @@ const CompanyInfo: React.FC = () => {
 
         <div className="mt-8 grid gap-6 lg:grid-cols-[360px_minmax(0,1fr)]">
           <section
-            className="rounded-[32px] border border-amber-100 bg-[#fffaf7] p-6 shadow-sm shadow-amber-100/50 md:p-8"
+            className="rounded-lg border border-amber-100 bg-[#fffaf7] p-6 shadow-sm shadow-amber-100/50 md:p-8"
             aria-label="支援体制について"
           >
             <p className="text-xs font-semibold tracking-wider text-amber-800">支援体制について</p>
@@ -167,7 +167,7 @@ const CompanyInfo: React.FC = () => {
             </div>
           </section>
 
-          <section className="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-[0_18px_50px_rgba(15,23,42,0.06)]">
+          <section className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-[0_18px_50px_rgba(15,23,42,0.06)]">
             <div className="border-b border-slate-200 bg-slate-50/80 px-5 py-4 md:px-6">
               <p className="text-xs font-semibold tracking-wide text-slate-500">法人情報</p>
               <h2 className="mt-1 text-xl font-semibold text-brand-ink">公開している基本情報</h2>
@@ -215,7 +215,7 @@ const CompanyInfo: React.FC = () => {
               <Link
                 key={service.slug}
                 to={`/services/${service.slug}`}
-                className={`rounded-3xl border p-5 shadow-sm transition-all hover:-translate-y-px hover:shadow-md ${serviceThemes[service.slug] ?? 'border-slate-200 bg-white'}`}
+                className={`rounded-lg border p-5 shadow-sm transition-all hover:-translate-y-px hover:shadow-md ${serviceThemes[service.slug] ?? 'border-slate-200 bg-white'}`}
               >
                 <p className="text-lg font-semibold text-brand-ink">{service.title}</p>
                 <p className="mt-3 text-sm leading-relaxed text-slate-600">{service.description}</p>

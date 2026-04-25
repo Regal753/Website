@@ -17,7 +17,7 @@ const InlineCTA: React.FC = () => {
   return (
     <section className="bg-white py-8 md:py-10">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm md:p-8">
+        <div className="overflow-hidden rounded-lg border border-slate-200 bg-slate-50 p-6 shadow-sm md:p-8">
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-center">
             <div>
               <p className="font-semibold text-brand-primary-700">Contact</p>
@@ -46,7 +46,7 @@ const InlineCTA: React.FC = () => {
                 <Link
                   to="/contact"
                   onClick={() => trackEvent('cta_click', { placement: 'inline_cta_primary', target: 'contact' })}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-primary-700 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-brand-primary-700/20 transition-all hover:-translate-y-px hover:bg-brand-primary-800"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand-primary-700 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-brand-primary-700/20 transition-all hover:-translate-y-px hover:bg-brand-primary-800"
                 >
                   お問い合わせ
                   <ArrowRight className="h-4 w-4" />
@@ -55,7 +55,7 @@ const InlineCTA: React.FC = () => {
                   <a
                     href={`tel:${phoneHref}`}
                     onClick={() => trackEvent('phone_click', { placement: 'inline_cta_secondary' })}
-                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-sm font-semibold text-slate-800 transition-colors hover:bg-slate-50"
+                    className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-6 py-3.5 text-sm font-semibold text-slate-800 transition-colors hover:bg-slate-50"
                   >
                     <Phone className="h-4 w-4" />
                     電話で相談する
@@ -65,9 +65,9 @@ const InlineCTA: React.FC = () => {
             </div>
 
             <div className="grid gap-3">
-              <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+              <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
                 <div className="flex items-center gap-3">
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-100 text-amber-800">
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-amber-100 text-amber-800">
                     <Clock3 className="h-5 w-5" />
                   </span>
                   <div>
@@ -80,9 +80,9 @@ const InlineCTA: React.FC = () => {
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-brand-primary-100 bg-white p-5 text-brand-ink shadow-sm shadow-brand-primary-100/60">
+              <div className="rounded-lg border border-brand-primary-100 bg-white p-5 text-brand-ink shadow-sm shadow-brand-primary-100/60">
                 <div className="flex items-center gap-3">
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-brand-primary-700 shadow-sm">
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-white text-brand-primary-700 shadow-sm">
                     <ShieldCheck className="h-5 w-5" />
                   </span>
                   <div>

@@ -19,7 +19,7 @@ const News: React.FC = () => {
           </p>
         </div>
 
-          <div className="rounded-[28px] border border-slate-200 bg-[#fffaf7] p-5 shadow-sm md:p-6">
+          <div className="rounded-lg border border-slate-200 bg-[#fffaf7] p-5 shadow-sm md:p-6">
             <ul className="divide-y divide-slate-200/90">
               {items.map((item) => {
                 const isExternalLink = typeof item.href === 'string' && /^https?:\/\//.test(item.href);

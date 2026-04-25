@@ -45,7 +45,7 @@ const TrustStats: React.FC = () => {
   return (
     <section className="bg-slate-50 py-12 md:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
           <div className="grid lg:grid-cols-[340px_minmax(0,1fr)]">
             <div className="border-b border-slate-200 bg-slate-100 p-6 text-brand-ink lg:border-b-0 lg:border-r md:p-8">
               <p className="font-semibold text-brand-primary-700">
@@ -62,11 +62,11 @@ const TrustStats: React.FC = () => {
               </p>
 
               <div className="mt-8 space-y-3">
-                <div className="rounded-2xl border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
+                <div className="rounded-lg border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
                   <p className="text-xs font-semibold text-slate-500">お問い合わせ窓口</p>
                   <p className="mt-2 text-lg font-semibold text-brand-ink">{phone}</p>
                 </div>
-                <div className="rounded-2xl border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
+                <div className="rounded-lg border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
                   <p className="text-xs font-semibold text-slate-500">支援スタンス</p>
                   <p className="mt-2 text-sm leading-relaxed text-slate-600">
                     見栄えだけでなく、日々の運用負荷を下げるところまで設計します。
@@ -80,9 +80,9 @@ const TrustStats: React.FC = () => {
                 {trustItems.map((item) => (
                   <article
                     key={item.value}
-                    className={`rounded-2xl border p-5 shadow-sm shadow-slate-200/40 ${item.surface}`}
+                    className={`rounded-lg border p-5 shadow-sm shadow-slate-200/40 ${item.surface}`}
                   >
-                    <div className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl shadow-sm ${item.iconSurface}`}>
+                    <div className={`inline-flex h-12 w-12 items-center justify-center rounded-lg shadow-sm ${item.iconSurface}`}>
                       <item.icon className="h-5 w-5" />
                     </div>
                     <p className="mt-4 text-xs font-semibold text-slate-500">{item.label}</p>
@@ -92,7 +92,7 @@ const TrustStats: React.FC = () => {
                 ))}
               </div>
 
-              <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4">
+              <div className="mt-5 rounded-lg border border-slate-200 bg-slate-50 px-5 py-4">
                 <div className="flex flex-wrap gap-2">
                   {supportHighlights.map((item) => (
                     <span
