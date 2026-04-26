@@ -3,9 +3,9 @@ import { NavItem, CompanyProfile, CaseStudy, NewsItem, ColumnItem } from './type
 const CONTACT_EMAIL = 'contact@regalocom.net';
 const BRAND_POSITIONING = {
   homepageSummary:
-    '株式会社Regaloは、音楽出版・BGM権利管理とYouTube/SNS運用を中心に、制作進行や共有ルールの整備まで実務で支援します。見栄えだけでなく、権利・手順・数字を確認できる状態まで整えることを重視しています。',
+    '株式会社Regaloは、音楽出版・BGM権利管理とYouTube/SNS運用を中心に、制作進行や共有ルールの整備まで実務で支援します。初めての方にも説明しやすいよう、権利・手順・連絡先・数字を後から確認できる状態へ整えます。',
   companySummary:
-    'Regaloは京都発の実務チームとして、音楽出版・BGM権利管理、YouTube/SNS運用、制作進行や共有ルールの整備までを横断し、相談から改善まで一気通貫で支援します。',
+    'Regaloは京都府長岡京市を拠点に、音楽出版・BGM権利管理、YouTube/SNS運用、制作進行や共有ルールの整備までを横断し、相談から改善まで一気通貫で支援します。',
   crossFunctionalLabel: '音楽権利・運用・進行管理を横断して支援',
   serviceDetailEyebrow: '支援内容',
   serviceDetailSummary:
@@ -124,7 +124,7 @@ export const siteConfig = {
   contactFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSdbqMVhTDUHcfhnrv5Vj96aBF9WhyAwysTfmG9CdgElhrGm1A/viewform',
   siteTitle: 'Regalo | 音楽出版・BGM権利管理・YouTube運用',
   siteDescription:
-    '株式会社Regaloは京都府長岡京市の実務チームとして、音楽出版・BGM権利管理、YouTube/SNS運用、制作進行や共有ルールの整備まで支援します。',
+    '株式会社Regaloは京都府長岡京市を拠点に、音楽出版・BGM権利管理、YouTube/SNS運用、制作進行や共有ルールの整備まで支援します。法人情報を公開し、初回相談から実務で続く形へ整理します。',
   positioning: BRAND_POSITIONING,
   companyProfile,
   cases,
@@ -132,8 +132,8 @@ export const siteConfig = {
   columnItems,
   navItems: [
     { label: 'ホーム', href: '/' },
-    { label: 'サービス', href: '/#services' },
+    { label: '事業内容', href: '/#services' },
+    { label: '実績', href: '/#cases' },
     { label: 'コラム', href: '/column/' },
-    { label: '会社情報', href: '/company/' },
   ] as NavItem[],
 };

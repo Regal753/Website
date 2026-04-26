@@ -16,28 +16,28 @@ const themes: Record<
   }
 > = {
   'sns-management': {
-    card: 'border-rose-200 bg-gradient-to-br from-rose-50 via-white to-white',
-    chip: 'bg-rose-100 text-rose-800',
+    card: 'border-slate-200 bg-white',
+    chip: 'border border-rose-200 bg-rose-50 text-rose-800',
     imageBorder: 'border-rose-100',
     eyebrow: 'YouTube運用と改善',
   },
   'music-publishing': {
-    card: 'border-amber-200 bg-gradient-to-br from-amber-50 via-white to-white',
-    chip: 'bg-amber-100 text-amber-900',
+    card: 'border-slate-200 bg-white',
+    chip: 'border border-amber-200 bg-amber-50 text-amber-900',
     imageBorder: 'border-amber-100',
     eyebrow: 'BGM制作と権利管理',
   },
   'production-workflow': {
-    card: 'border-slate-200 bg-gradient-to-br from-slate-50 via-white to-white',
-    chip: 'bg-slate-100 text-slate-800',
+    card: 'border-slate-200 bg-white',
+    chip: 'border border-slate-200 bg-slate-50 text-slate-800',
     imageBorder: 'border-slate-200',
     eyebrow: '共有・進行・業務整理',
   },
 };
 
 const defaultTheme = {
-  card: 'border-slate-200 bg-gradient-to-br from-slate-50 via-white to-white',
-  chip: 'bg-slate-100 text-slate-800',
+  card: 'border-slate-200 bg-white',
+  chip: 'border border-slate-200 bg-slate-50 text-slate-800',
   imageBorder: 'border-slate-200',
   eyebrow: '運用設計と改善',
 };
@@ -68,18 +68,18 @@ const Services: React.FC = () => {
             return (
               <article
                 key={service.slug}
-                className={`grid gap-6 rounded-lg border p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg md:grid-cols-[minmax(0,1fr)_320px] md:p-8 ${theme.card}`}
+                className={`grid gap-6 border p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg md:grid-cols-[minmax(0,1fr)_320px] md:p-8 ${theme.card}`}
               >
                 <div>
                   <div className="flex items-start gap-4">
                     <div
-                      className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg shadow-lg"
+                      className="flex h-14 w-14 shrink-0 items-center justify-center shadow-lg"
                       style={{ background: getGradientStyle(service.color) }}
                     >
                       <Icon className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      <p className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${theme.chip}`}>
+                      <p className={`inline-flex px-3 py-1 text-xs font-semibold ${theme.chip}`}>
                         {theme.eyebrow}
                       </p>
                       <h3 className="mt-3 text-xl font-semibold text-brand-ink md:text-2xl">
@@ -117,7 +117,7 @@ const Services: React.FC = () => {
                     {service.techStack.slice(0, 4).map((item) => (
                       <span
                         key={item}
-                        className="inline-flex rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700"
+                        className="inline-flex border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700"
                       >
                         {item}
                       </span>
@@ -144,14 +144,14 @@ const Services: React.FC = () => {
                     alt={`${service.title}のメインイメージ`}
                     width={1280}
                     height={720}
-                    className={`col-span-2 h-44 w-full rounded-lg border bg-white object-cover ${theme.imageBorder}`}
+                    className={`col-span-2 h-44 w-full border bg-white object-cover ${theme.imageBorder}`}
                     loading="eager"
                     decoding="async"
                   />
                   {supportPoints.map((point) => (
                     <div
                       key={point}
-                      className={`min-h-28 rounded-lg border bg-white p-4 text-sm font-semibold leading-relaxed text-slate-700 ${theme.imageBorder}`}
+                      className={`min-h-28 border bg-white p-4 text-sm font-semibold leading-relaxed text-slate-700 ${theme.imageBorder}`}
                     >
                       {point}
                     </div>

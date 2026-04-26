@@ -43,12 +43,13 @@ const ProofChecklist: React.FC = () => {
           <div>
             <p className="font-semibold text-brand-primary-700">Trust</p>
             <h2 className="mt-3 text-3xl font-semibold leading-tight text-brand-ink md:text-4xl">
-              相談前に確認できる情報を
+              初めて見る人が確認する情報を
               <br />
               先に出しています
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-slate-600 md:text-base">
-              はじめての相談で不安になりやすい会社情報、権利管理の範囲、見積り前の進め方を、確認しやすい順番で置いています。
+              はじめて会った方、SNSで知った方、年上の方、知人のご家族が見ても確認しやすいように、
+              会社情報、権利管理の範囲、見積り前の進め方を順番に置いています。
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
               <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-700">
@@ -66,9 +67,9 @@ const ProofChecklist: React.FC = () => {
 
           <div className="grid gap-4 md:grid-cols-2">
             {proofItems.map((item) => (
-              <article key={item.title} className="rounded-lg border border-slate-200 bg-slate-50 p-5 shadow-sm">
+              <article key={item.title} className="border border-slate-200 bg-slate-50 p-5 shadow-sm">
                 <div className="flex items-start gap-4">
-                  <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-brand-primary-700">
+                  <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center border border-slate-200 bg-white text-brand-primary-700">
                     <item.icon className="h-5 w-5" />
                   </span>
                   <div>
@@ -82,7 +83,7 @@ const ProofChecklist: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-6 flex flex-col gap-3 rounded-lg border border-slate-200 bg-white px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-6 flex flex-col gap-3 border border-slate-200 bg-white px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm leading-relaxed text-slate-600">
             まず会社情報を確認したい場合は、所在地・法人番号・事業内容を掲載したページから確認できます。
           </p>

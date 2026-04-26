@@ -86,7 +86,7 @@ const Process: React.FC = () => {
               </p>
             </div>
             <Link
-              to="/contact"
+              to="/contact/"
               className="inline-flex items-center gap-2 text-sm font-semibold text-brand-primary-700 transition-colors hover:text-brand-primary-800"
             >
               無料相談から始める
