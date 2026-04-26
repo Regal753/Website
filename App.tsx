@@ -4,7 +4,6 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import { getServiceBySlug } from './services.catalog';
 import { siteConfig } from './site.config';
-import ColumnPage from './pages/ColumnPage';
 import CompanyPage from './pages/CompanyPage';
 import ContactPage from './pages/ContactPage';
 import HomePage from './pages/HomePage';
@@ -63,25 +62,8 @@ const upsertCanonicalLink = (href: string) => {
   element.setAttribute('href', href);
 };
 
-const stripTrailingSlash = (pathname: string): string => {
-  if (pathname === '/') return pathname;
-  return pathname.replace(/\/+$/, '') || '/';
-};
-
-const legacyRouteAliases: Record<string, '/company' | '/contact' | '/column'> = {
-  '/company.html': '/company',
-  '/contact.html': '/contact',
-  '/column.html': '/column',
-};
-
-const normalizeRoutePathname = (pathname: string): string => {
-  const withoutTrailingSlash = stripTrailingSlash(pathname || '/');
-  return legacyRouteAliases[withoutTrailingSlash] || withoutTrailingSlash;
-};
-
-export const getRouteMeta = (pathname: string): RouteMeta => {
-  const normalizedPathname = normalizeRoutePathname(pathname);
-  const serviceMatch = normalizedPathname.match(/^\/services\/([^/]+)$/);
+const getRouteMeta = (pathname: string): RouteMeta => {
+  const serviceMatch = pathname.match(/^\/services\/([^/]+)$/);
   if (serviceMatch) {
     const decodedSlug = decodeURIComponent(serviceMatch[1]);
     const service = getServiceBySlug(decodedSlug);
@@ -89,10 +71,16 @@ export const getRouteMeta = (pathname: string): RouteMeta => {
       return {
         title: `${service.title} | ${siteConfig.companyName}`,
         description: service.description,
-        canonicalPath: `/services/${service.slug}/`,
+        canonicalPath: `/services/${service.slug}`,
       };
     }
   }
+
+  const legacyRouteAliases: Record<string, '/company' | '/contact'> = {
+    '/company.html': '/company',
+    '/contact.html': '/contact',
+  };
+  const normalizedPathname = legacyRouteAliases[pathname] || pathname;
 
   switch (normalizedPathname) {
     case '/':
@@ -106,39 +94,32 @@ export const getRouteMeta = (pathname: string): RouteMeta => {
         title: `会社情報 | ${siteConfig.companyName}`,
         description:
           '京都発の実務チームRegaloの会社概要、公開情報、支援体制をご案内します。',
-        canonicalPath: '/company/',
+        canonicalPath: '/company',
       };
     case '/contact':
       return {
         title: `お問い合わせ | ${siteConfig.companyName}`,
         description:
-          'YouTube/SNS運用、音楽権利管理、制作進行や業務整理のご相談を24時間受け付けています。通常1営業日以内にご連絡します。',
-        canonicalPath: '/contact/',
-      };
-    case '/column':
-      return {
-        title: `コラム | ${siteConfig.companyName}`,
-        description:
-          'YouTube運用、BGM権利管理、制作進行でよく確認する実務メモを掲載しています。',
-        canonicalPath: '/column/',
+          'SNS運用、音楽権利管理、AIを活用した運用改善のご相談を24時間受け付けています。通常1営業日以内にご連絡します。',
+        canonicalPath: '/contact',
       };
     case '/privacy':
       return {
         title: `プライバシーポリシー | ${siteConfig.companyName}`,
         description: `${siteConfig.companyName}の個人情報保護方針です。`,
-        canonicalPath: '/privacy.html',
+        canonicalPath: '/privacy',
       };
     case '/terms':
       return {
         title: `利用規約 | ${siteConfig.companyName}`,
         description: `${siteConfig.companyName}のサービス利用条件です。`,
-        canonicalPath: '/terms.html',
+        canonicalPath: '/terms',
       };
     default:
       return {
         title: `ページが見つかりません | ${siteConfig.companyName}`,
         description: siteConfig.siteDescription,
-        canonicalPath: normalizedPathname || '/',
+        canonicalPath: pathname || '/',
       };
   }
 };
@@ -175,20 +156,8 @@ const ScrollToTopOnRouteChange: React.FC = () => {
   const location = useLocation();
 
   React.useEffect(() => {
-    if (location.hash) {
-      window.setTimeout(() => {
-        const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
-        if (target) {
-          target.scrollIntoView({ behavior: 'auto', block: 'start' });
-          return;
-        }
-        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-      }, 0);
-      return;
-    }
-
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-  }, [location.pathname, location.hash]);
+  }, [location.pathname]);
 
   return null;
 };
@@ -209,19 +178,13 @@ function App() {
         <main id="main-content">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/company" element={<Navigate to="/company/" replace />} />
-            <Route path="/company/" element={<CompanyPage />} />
-            <Route path="/company.html" element={<Navigate to="/company/" replace />} />
-            <Route path="/column" element={<Navigate to="/column/" replace />} />
-            <Route path="/column/" element={<ColumnPage />} />
-            <Route path="/column.html" element={<Navigate to="/column/" replace />} />
-            <Route path="/contact" element={<Navigate to="/contact/" replace />} />
-            <Route path="/contact/" element={<ContactPage />} />
-            <Route path="/contact.html" element={<Navigate to="/contact/" replace />} />
+            <Route path="/company" element={<CompanyPage />} />
+            <Route path="/company.html" element={<Navigate to="/company" replace />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/contact.html" element={<Navigate to="/contact" replace />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/services/:slug" element={<ServiceDetailPage />} />
-            <Route path="/services/:slug/" element={<ServiceDetailPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>

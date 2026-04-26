@@ -16,35 +16,14 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [location.pathname]);
-
-  useEffect(() => {
-    if (!isMobileMenuOpen) return undefined;
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setIsMobileMenuOpen(false);
-    };
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isMobileMenuOpen]);
-
   const handleNavClick = () => {
     setIsMobileMenuOpen(false);
   };
 
-  const normalizePath = (value: string) => (value === '/' ? value : value.replace(/\/+$/, ''));
-
   const isActive = (href: string, matchPrefix?: boolean) => {
-    if (href.includes('#')) {
-      return `${normalizePath(location.pathname)}${location.hash}` === href;
-    }
-
-    const normalizedHref = normalizePath(href);
-    const normalizedPathname = normalizePath(location.pathname);
-    if (normalizedHref === '/') return normalizedPathname === '/';
-    if (matchPrefix) return normalizedPathname.startsWith(normalizedHref);
-    return normalizedPathname === normalizedHref;
+    if (href === '/') return location.pathname === '/';
+    if (matchPrefix) return location.pathname.startsWith(href);
+    return location.pathname === href;
   };
 
   return (
@@ -59,7 +38,7 @@ const Header: React.FC = () => {
         {/* Logo */}
         <Link
           to="/"
-          className="flex items-center gap-2 cursor-pointer group rounded-lg bg-white/80 border border-slate-200/80 px-2.5 py-1.5 shadow-sm"
+          className="flex items-center gap-2 cursor-pointer group rounded-xl bg-white/80 border border-slate-200/80 px-2.5 py-1.5 shadow-sm"
           onClick={handleNavClick}
           aria-label="トップページへ移動"
         >
@@ -94,7 +73,7 @@ const Header: React.FC = () => {
           </nav>
 
           <Link
-            to="/contact/"
+            to="/contact"
             onClick={handleNavClick}
             className="inline-flex items-center gap-2 rounded-full bg-brand-primary-700 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-brand-primary-700/20 transition-all hover:-translate-y-px hover:bg-brand-primary-800"
           >
@@ -117,37 +96,39 @@ const Header: React.FC = () => {
       </div>
 
       {/* Mobile Nav */}
-      {isMobileMenuOpen && (
-        <div
-          id="mobile-navigation"
-          className="absolute top-full left-0 right-0 origin-top overflow-hidden lg:hidden"
-        >
-          <div className="rounded-b-lg bg-white/95 backdrop-blur-xl border-t border-slate-200 shadow-xl p-4 flex flex-col gap-3">
-            {siteConfig.navItems.map((item) => (
-              <Link
-                key={item.href}
-                to={item.href}
-                onClick={handleNavClick}
-                className={`text-left text-sm font-semibold p-2.5 rounded-lg border transition-colors ${
-                  isActive(item.href, item.matchPrefix)
-                    ? 'text-brand-primary-700 bg-brand-primary-50 border-brand-primary-100'
-                    : 'text-slate-700 bg-white border-slate-200 hover:bg-slate-50'
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
+      <div
+        id="mobile-navigation"
+        className={`absolute top-full left-0 right-0 origin-top overflow-hidden transition-[max-height,opacity,transform] duration-300 lg:hidden ${
+          isMobileMenuOpen
+            ? 'max-h-[520px] opacity-100 translate-y-0'
+            : 'max-h-0 opacity-0 -translate-y-2 pointer-events-none'
+        }`}
+      >
+        <div className="rounded-b-2xl bg-white/95 backdrop-blur-xl border-t border-slate-200 shadow-xl p-4 flex flex-col gap-3">
+          {siteConfig.navItems.map((item) => (
             <Link
-              to="/contact/"
+              key={item.href}
+              to={item.href}
               onClick={handleNavClick}
-              className="mt-1 inline-flex items-center justify-center gap-2 rounded-lg bg-brand-primary-700 px-4 py-3 text-sm font-semibold text-white"
+              className={`text-left text-sm font-semibold p-2.5 rounded-lg border transition-colors ${
+                isActive(item.href, item.matchPrefix)
+                  ? 'text-brand-primary-700 bg-brand-primary-50 border-brand-primary-100'
+                  : 'text-slate-700 bg-white border-slate-200 hover:bg-slate-50'
+              }`}
             >
-              無料相談する
-              <ArrowRight className="h-4 w-4" />
+              {item.label}
             </Link>
-          </div>
+          ))}
+          <Link
+            to="/contact"
+            onClick={handleNavClick}
+            className="mt-1 inline-flex items-center justify-center gap-2 rounded-xl bg-brand-primary-700 px-4 py-3 text-sm font-semibold text-white"
+          >
+            無料相談する
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
-      )}
+      </div>
     </header>
   );
 };

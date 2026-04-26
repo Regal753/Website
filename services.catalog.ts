@@ -1,4 +1,4 @@
-import { FolderKanban, Music, Youtube } from 'lucide-react';
+import { Bot, Music, Youtube } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 
 interface ServiceDetailSection {
@@ -45,14 +45,14 @@ export interface ServiceCatalogItem {
 export const serviceCatalog: ServiceCatalogItem[] = [
   {
     slug: 'sns-management',
-    title: 'YouTube/SNS運用支援',
+    title: 'SNS管理事業部',
     description:
       'YouTubeを中心に、企画設計から制作進行、公開後の分析改善まで一気通貫で支援します。再現可能な運用体制を構築し、継続的な成果を目指します。',
     items: ['YouTube運用代行', '企画・台本設計', 'KPI分析/改善', '投稿運用オペレーション'],
     icon: Youtube,
     color: 'from-red-500 to-red-600',
     detailLead:
-      'YouTube/SNS運用支援では、運用担当者依存から脱却し、組織で成果を積み上げるための運用設計を提供します。特にYouTube運用では、企画・制作・分析を同一フローで回し、改善サイクルの定着まで伴走します。',
+      'SNS管理事業部では、運用担当者依存から脱却し、組織で成果を積み上げるための運用設計を提供します。特にYouTube運用代行では、企画・制作・分析を同一フローで回し、改善サイクルの定着まで伴走します。',
     detailSections: [
       {
         title: '主な提供内容',
@@ -107,14 +107,14 @@ export const serviceCatalog: ServiceCatalogItem[] = [
   },
   {
     slug: 'music-publishing',
-    title: '音楽出版・BGM権利管理',
+    title: '音楽出版事業部',
     description:
       '音楽著作権の管理を行い、制作から権利管理、実運用まで一貫して支援します。',
     items: ['音楽著作権管理', 'BGM制作', '利用許諾/台帳運用', '運用フロー整備'],
     icon: Music,
     color: 'from-brand-primary-500 to-brand-primary-600',
     detailLead:
-      '音楽出版・BGM権利管理では、BGM制作だけでなく、著作権管理・利用許諾・契約情報の整備まで含めて設計します。権利トラブルを抑えつつ、制作現場で使いやすい形で音楽資産を運用できる体制を提供します。',
+      '音楽出版事業部では、BGM制作だけでなく、著作権管理・利用許諾・契約情報の整備まで含めて設計します。権利トラブルを抑えつつ、制作現場で使いやすい形で音楽資産を運用できる体制を提供します。',
     detailSections: [
       {
         title: '主な提供内容',
@@ -168,22 +168,22 @@ export const serviceCatalog: ServiceCatalogItem[] = [
     },
   },
   {
-    slug: 'production-workflow',
-    title: '制作進行・業務整理支援',
+    slug: 'ai-marketing-strategy',
+    title: 'AIマーケティング戦略事業部',
     description:
-      '制作進行、素材共有、確認依頼、レポート整備を見直し、担当者が変わっても追える運用手順を整えます。',
-    items: ['進行フロー設計', 'レポート整備', '通知・共有設計', '運用手順の見直し'],
-    icon: FolderKanban,
-    color: 'from-slate-600 to-slate-700',
+      'レポート整備、進行共有、通知の自動化を通じて、マーケティング運用の品質とスピードを高めます。',
+    items: ['進行フロー設計', 'レポート自動化', '通知・共有設計', '運用監査/改善'],
+    icon: Bot,
+    color: 'from-cyan-500 to-cyan-600',
     detailLead:
-      '制作進行・業務整理支援では、週次レポート、素材共有、確認依頼、通知の流れを整理し、実行漏れや確認遅れを減らします。必要な場合だけツール連携を使い、既存運用を壊さずに担当者が追いやすい体制へ整えます。',
+      'AIマーケティング戦略事業部では、週次レポート、進行共有、通知の自動化を通じて、実行速度と再現性を高めます。既存運用を壊さず、手作業依存を減らし、判断と実行が速いマーケティング体制を実現します。',
     detailSections: [
       {
         title: '主な提供内容',
         points: [
-          '週次/月次レポートの作成手順整備',
+          '週次/月次レポートの自動生成',
           'Drive/Sheets/Discord連携による進行共有',
-          '定例報告・リマインド・確認フローの整理',
+          '定例報告・リマインド・確認フロー自動化',
           '運用監査と改善サイクルの定着支援',
         ],
       },
@@ -198,34 +198,34 @@ export const serviceCatalog: ServiceCatalogItem[] = [
     ],
     caseHighlights: [
       {
-        title: '定例レポートの作成手順を整備',
-        summary: '集計と共有の手順を揃え、改善判断までの時間を短縮。',
+        title: '定例レポート作成を自動化',
+        summary: '集計と共有の自動化で、改善判断までの時間を短縮。',
       },
       {
-        title: '進行通知と確認依頼を整理',
-        summary: '共有場所と通知ルールを揃え、確認漏れと報告工数を削減。',
+        title: '進行通知を自動化し対応速度を向上',
+        summary: '連携フロー構築により、共有漏れと報告工数を削減。',
       },
     ],
     pricing: {
-      summary: '整備範囲・対象業務・連携システム数に応じて個別見積りします。',
+      summary: '整備範囲・自動化対象業務・連携システム数に応じて個別見積りします。',
       items: [
         '設計: 現行フロー整理、KPI定義、共有設計',
-        '運用整備: レポート整備、通知導線、ワークフロー実装',
+        '自動化構築: レポート整備、通知導線、ワークフロー実装',
         '運用改善: 定期レビュー、改善提案、保守対応',
       ],
     },
     processSteps: [
       { title: '業務診断', description: '現行フローとボトルネックを可視化します。' },
-      { title: '設計', description: '運用ルールとツール連携要件を統合設計します。' },
+      { title: '設計', description: '運用ルールと自動化要件を統合設計します。' },
       { title: '構築/試行', description: '段階導入で安全に構築し、実運用で検証します。' },
       { title: '本番定着', description: '監視と改善を継続し、品質を安定化します。' },
     ],
-    techStack: ['Google Drive', 'Google Sheets', 'Discord', '必要に応じたツール連携'],
+    techStack: ['Google Drive API', 'Google Sheets API', 'Discord Bot', 'n8n / GCP'],
     media: {
-      listImage: 'images/services/workflow-cover.webp',
+      listImage: 'images/services/ai-cover.webp',
       galleryImages: [
-        'images/services/workflow-gallery-1.webp',
-        'images/services/workflow-gallery-2.webp',
+        'images/services/ai-gallery-1.webp',
+        'images/services/ai-gallery-2.webp',
       ],
     },
   },
@@ -235,9 +235,8 @@ const legacySlugMap: Record<string, string> = {
   'sns-operations': 'sns-management',
   'music-publishing-bgm': 'music-publishing',
   'bgm-production': 'music-publishing',
-  'ai-marketing-strategy': 'production-workflow',
-  'rights-management': 'production-workflow',
-  'workflow-automation': 'production-workflow',
+  'rights-management': 'ai-marketing-strategy',
+  'workflow-automation': 'ai-marketing-strategy',
 };
 
 export const getServiceBySlug = (slug: string): ServiceCatalogItem | undefined => {

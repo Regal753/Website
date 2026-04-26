@@ -27,11 +27,11 @@ const themes: Record<
     imageBorder: 'border-amber-100',
     eyebrow: 'BGM制作と権利管理',
   },
-  'production-workflow': {
-    card: 'border-slate-200 bg-gradient-to-br from-slate-50 via-white to-white',
-    chip: 'bg-slate-100 text-slate-800',
-    imageBorder: 'border-slate-200',
-    eyebrow: '共有・進行・業務整理',
+  'ai-marketing-strategy': {
+    card: 'border-cyan-200 bg-gradient-to-br from-cyan-50 via-white to-white',
+    chip: 'bg-cyan-100 text-cyan-900',
+    imageBorder: 'border-cyan-100',
+    eyebrow: '共有・進行・自動化',
   },
 };
 
@@ -49,12 +49,12 @@ const Services: React.FC = () => {
     <section id={SectionId.SERVICES} className="bg-slate-50 py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center md:mb-14">
-          <p className="mb-4 font-semibold text-brand-primary-700">Service</p>
-          <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">
-            事業内容
-          </h2>
+          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-brand-primary-200 bg-brand-primary-50 px-3 py-1 text-xs font-semibold tracking-wide text-brand-primary-700">
+            支援領域
+          </p>
+          <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">3つの支援領域</h2>
           <p className="mx-auto max-w-2xl text-slate-600">
-            企画や運用の改善、音楽権利の整理、共有フローの整備まで。
+            企画や運用の改善、音楽権利の整理、共有フローの自動化まで。
             課題の場所に合わせて入口を用意しています。
           </p>
         </div>
@@ -63,17 +63,17 @@ const Services: React.FC = () => {
           {serviceCatalog.map((service) => {
             const Icon = service.icon;
             const theme = themes[service.slug] ?? defaultTheme;
-            const supportPoints = service.detailSections.flatMap((section) => section.points).slice(0, 2);
+            const images = [service.media.listImage, ...service.media.galleryImages];
 
             return (
               <article
                 key={service.slug}
-                className={`grid gap-6 rounded-lg border p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg md:grid-cols-[minmax(0,1fr)_320px] md:p-8 ${theme.card}`}
+                className={`grid gap-6 rounded-3xl border p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg md:grid-cols-[minmax(0,1fr)_320px] md:p-8 ${theme.card}`}
               >
                 <div>
                   <div className="flex items-start gap-4">
                     <div
-                      className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg shadow-lg"
+                      className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl shadow-lg"
                       style={{ background: getGradientStyle(service.color) }}
                     >
                       <Icon className="h-6 w-6 text-white" />
@@ -84,7 +84,7 @@ const Services: React.FC = () => {
                       </p>
                       <h3 className="mt-3 text-xl font-semibold text-brand-ink md:text-2xl">
                         <Link
-                          to={`/services/${service.slug}/`}
+                          to={`/services/${service.slug}`}
                           onClick={() =>
                             trackEvent('service_detail_click', { placement: 'services_title', service: service.slug })
                           }
@@ -126,7 +126,7 @@ const Services: React.FC = () => {
 
                   <div className="mt-5">
                     <Link
-                      to={`/services/${service.slug}/`}
+                      to={`/services/${service.slug}`}
                       onClick={() =>
                         trackEvent('service_detail_click', { placement: 'services_cta', service: service.slug })
                       }
@@ -140,21 +140,25 @@ const Services: React.FC = () => {
 
                 <div className="grid grid-cols-2 gap-3">
                   <img
-                    src={asset(service.media.listImage)}
+                    src={asset(images[0])}
                     alt={`${service.title}のメインイメージ`}
                     width={1280}
                     height={720}
-                    className={`col-span-2 h-44 w-full rounded-lg border bg-white object-cover ${theme.imageBorder}`}
-                    loading="eager"
+                    className={`col-span-2 h-44 w-full rounded-3xl border bg-white object-cover ${theme.imageBorder}`}
+                    loading="lazy"
                     decoding="async"
                   />
-                  {supportPoints.map((point) => (
-                    <div
-                      key={point}
-                      className={`min-h-28 rounded-lg border bg-white p-4 text-sm font-semibold leading-relaxed text-slate-700 ${theme.imageBorder}`}
-                    >
-                      {point}
-                    </div>
+                  {images.slice(1).map((imagePath, imageIndex) => (
+                    <img
+                      key={`${service.slug}-preview-${imageIndex}`}
+                      src={asset(imagePath)}
+                      alt={`${service.title}の参考イメージ${imageIndex + 1}`}
+                      width={640}
+                      height={360}
+                      className={`h-28 w-full rounded-2xl border bg-white object-cover ${theme.imageBorder}`}
+                      loading="lazy"
+                      decoding="async"
+                    />
                   ))}
                 </div>
               </article>

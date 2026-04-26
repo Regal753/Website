@@ -29,9 +29,6 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
-        env:
-          VITE_CONTACT_ENDPOINT: /api/contact
-          VITE_SITE_URL: https://www.regalocom.net
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

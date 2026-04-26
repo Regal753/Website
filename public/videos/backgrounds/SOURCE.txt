@@ -1,7 +1,7 @@
 Background video sources (Coverr):
 - bg-01.mp4 (SNS/analytics): https://cdn.coverr.co/videos/coverr-a-male-worker-conducts-a-meeting-by-showing-statistics-9981/720p.mp4
 - bg-02.mp4 (music recording): https://cdn.coverr.co/videos/coverr-a-guy-setting-up-his-phone-camera-to-record-his-music-performance-3437/720p.mp4
-- bg-03.mp4 (workflow automation / operations): https://cdn.coverr.co/videos/coverr-close-up-of-a-man-typing-on-the-keyboard-4926/720p.mp4
+- bg-03.mp4 (AI strategy / operations): https://cdn.coverr.co/videos/coverr-close-up-of-a-man-typing-on-the-keyboard-4926/720p.mp4
 
 License note:
 - Source platform: Coverr

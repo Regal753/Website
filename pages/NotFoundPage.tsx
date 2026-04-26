@@ -5,7 +5,7 @@ const NotFoundPage: React.FC = () => {
   return (
     <section className="pt-28 pb-20 bg-white">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-lg border border-slate-200 shadow-sm p-8 sm:p-10 text-center">
+        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 sm:p-10 text-center">
           <p className="text-sm text-slate-500 tracking-widest">404 NOT FOUND</p>
           <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mt-3">
             ページが見つかりません

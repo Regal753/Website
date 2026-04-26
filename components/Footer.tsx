@@ -7,8 +7,12 @@ const Footer: React.FC = () => {
   const phoneHref = phone.replace(/[^\d+]/g, '');
 
   return (
-    <footer className="mt-10 bg-slate-900 py-14 text-white">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-[1.2fr_0.8fr_0.8fr_0.8fr] lg:px-8">
+    <footer className="relative mt-10 overflow-hidden bg-[linear-gradient(180deg,_#334155_0%,_#4338ca_100%)] py-14 text-white">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-primary-300/70 to-transparent" />
+      <div className="absolute left-[-6rem] top-[-3rem] h-36 w-36 rounded-full bg-brand-primary-500/10 blur-3xl" />
+      <div className="absolute bottom-[-4rem] right-[-4rem] h-40 w-40 rounded-full bg-amber-300/10 blur-3xl" />
+
+      <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-[1.2fr_0.8fr_0.8fr_0.8fr] lg:px-8">
         <div>
           <h2 className="text-2xl font-semibold text-white">{siteConfig.companyName}</h2>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/70">{siteConfig.positioning.footerTagline}</p>
@@ -23,22 +27,22 @@ const Footer: React.FC = () => {
         </div>
 
         <div>
-          <p className="mb-3 text-xs font-semibold text-white/50">事業一覧</p>
+          <p className="mb-3 text-xs font-semibold tracking-widest text-white/50">事業一覧</p>
           <div className="flex flex-col gap-2 text-sm">
             <Link to="/services/music-publishing" className="text-white/70 transition-colors hover:text-white">
-              音楽出版・BGM権利管理
+              音楽出版事業部
             </Link>
             <Link to="/services/sns-management" className="text-white/70 transition-colors hover:text-white">
-              YouTube/SNS運用
+              SNS管理事業部
             </Link>
-            <Link to="/services/production-workflow/" className="text-white/70 transition-colors hover:text-white">
-              制作進行・業務整理
+            <Link to="/services/ai-marketing-strategy" className="text-white/70 transition-colors hover:text-white">
+              AIマーケティング戦略事業部
             </Link>
           </div>
         </div>
 
         <div>
-          <p className="mb-3 text-xs font-semibold text-white/50">お問い合わせ</p>
+          <p className="mb-3 text-xs font-semibold tracking-widest text-white/50">お問い合わせ</p>
           <div className="flex flex-col gap-2 text-sm">
             {phone && (
               <a href={`tel:${phoneHref}`} className="font-semibold text-white transition-colors hover:text-amber-200">
@@ -58,15 +62,12 @@ const Footer: React.FC = () => {
         </div>
 
         <div>
-          <p className="mb-3 text-xs font-semibold text-white/50">ガイド</p>
+          <p className="mb-3 text-xs font-semibold tracking-widest text-white/50">ガイド</p>
           <div className="flex flex-col gap-2 text-sm">
-            <Link to="/column/" className="text-white/70 transition-colors hover:text-white">
-              コラム
-            </Link>
-            <Link to="/company/" className="text-white/70 transition-colors hover:text-white">
+            <Link to="/company" className="text-white/70 transition-colors hover:text-white">
               会社情報
             </Link>
-            <Link to="/contact/" className="text-white/70 transition-colors hover:text-white">
+            <Link to="/contact" className="text-white/70 transition-colors hover:text-white">
               お問い合わせ
             </Link>
             <a
@@ -85,7 +86,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-      <div className="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="border-t border-white/10 pt-4 text-center text-sm text-white/40">
           &copy; {new Date().getFullYear()} {siteConfig.companyProfile.legalName}
         </div>

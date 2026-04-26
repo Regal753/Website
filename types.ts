@@ -25,20 +25,9 @@ export interface NewsItem {
   href?: string;
 }
 
-export interface ColumnItem {
-  date: string;
-  category: string;
-  title: string;
-  summary: string;
-  points: string[];
-  slug: string;
-  readTime: string;
-}
-
 export enum SectionId {
   HOME = 'home',
   SERVICES = 'services',
-  COLUMN = 'column',
   CASES = 'cases',
   PRICING = 'pricing',
   PROCESS = 'process',

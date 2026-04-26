@@ -1,12 +1,12 @@
 import React from 'react';
-import { Bell, Cloud, Database, FolderKanban } from 'lucide-react';
+import { Bot, Cloud, Database, FolderKanban, MessageSquareShare } from 'lucide-react';
 import { SectionId } from '../types';
 
 const stackItems = [
   { icon: Cloud, label: 'Google Cloud / n8n', detail: '処理実行・通知ワークフロー', surface: 'border-cyan-100 bg-cyan-50/80' },
   { icon: Database, label: 'Google Sheets', detail: '進行管理・権利台帳管理', surface: 'border-amber-100 bg-amber-50/80' },
   { icon: FolderKanban, label: 'Google Drive', detail: '素材保管・納品管理', surface: 'border-brand-primary-100 bg-brand-primary-50/80' },
-  { icon: Bell, label: 'Discord通知', detail: '進捗通知・リマインド', surface: 'border-rose-100 bg-rose-50/80' },
+  { icon: Bot, label: 'Discord Bot', detail: '進捗通知・リマインド', surface: 'border-rose-100 bg-rose-50/80' },
 ] as const;
 
 const workflowNodes = [
@@ -40,14 +40,14 @@ const TechStack: React.FC = () => {
           <p className="mb-4 inline-flex rounded-full border border-brand-primary-200 bg-brand-primary-50 px-3 py-1 text-xs font-semibold text-brand-primary-700">
             実務で使う運用基盤
           </p>
-          <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">運用を支える実務基盤</h2>
+          <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">運用を支える技術基盤</h2>
           <p className="mx-auto max-w-2xl text-slate-600">
             管理台帳、進行共有、通知フローをばらばらにせず、現場で使うツール同士をつないで設計します。
           </p>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[1.02fr_0.98fr]">
-          <div className="rounded-lg border border-brand-primary-100 bg-[linear-gradient(135deg,_#f0fdfa_0%,_#f8fafc_52%,_#fff7ed_100%)] p-6 text-brand-ink shadow-sm shadow-brand-primary-100/60 md:p-8">
+          <div className="rounded-[32px] border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#f8fafc_52%,_#fff7ed_100%)] p-6 text-brand-ink shadow-sm shadow-brand-primary-100/60 md:p-8">
             <p className="inline-flex rounded-full border border-brand-primary-100 bg-white/80 px-3 py-1 text-xs font-semibold tracking-wide text-brand-primary-700">
               運用フローの考え方
             </p>
@@ -60,7 +60,7 @@ const TechStack: React.FC = () => {
             <div className="mt-8 space-y-4">
               {workflowNodes.map((item, index) => (
                 <div key={item.label}>
-                  <div className="rounded-lg border border-brand-primary-100 bg-white/85 p-5 shadow-sm">
+                  <div className="rounded-3xl border border-brand-primary-100 bg-white/85 p-5 shadow-sm">
                     <p className="text-xs font-semibold tracking-widest text-slate-500">{item.label}</p>
                     <p className="mt-2 text-lg font-semibold text-brand-ink">{item.title}</p>
                     <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.description}</p>
@@ -78,9 +78,9 @@ const TechStack: React.FC = () => {
               {stackItems.map((item) => (
                 <article
                   key={item.label}
-                  className={`rounded-lg border p-5 shadow-sm shadow-slate-200/40 ${item.surface}`}
+                  className={`rounded-3xl border p-5 shadow-sm shadow-slate-200/40 ${item.surface}`}
                 >
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-white text-brand-primary-700 shadow-sm">
+                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-brand-primary-700 shadow-sm">
                     <item.icon className="h-5 w-5" />
                   </span>
                   <p className="mt-4 text-lg font-semibold text-brand-ink">{item.label}</p>
@@ -89,11 +89,11 @@ const TechStack: React.FC = () => {
               ))}
             </div>
 
-            <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm md:p-7">
+            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-7">
               <p className="text-sm font-semibold text-slate-500">設計方針</p>
               <div className="mt-4 grid gap-3 sm:grid-cols-3">
                 {designPrinciples.map((item) => (
-                  <div key={item} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+                  <div key={item} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
                     <p className="text-sm font-semibold leading-relaxed text-brand-ink">{item}</p>
                   </div>
                 ))}

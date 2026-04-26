@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Clock3, MapPin, Phone, ShieldCheck } from 'lucide-react';
 import NotFoundPage from './NotFoundPage';
 import { getServiceBySlug, serviceCatalog } from '../services.catalog';
@@ -27,20 +27,16 @@ const SERVICE_PROOF_POINTS = [
 
 const ServiceDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const location = useLocation();
   const navigate = useNavigate();
   const service = slug ? getServiceBySlug(slug) : undefined;
   const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
   const [activeSlide, setActiveSlide] = useState(0);
 
   useEffect(() => {
-    if (slug && service) {
-      const canonicalPath = `/services/${service.slug}/`;
-      if (location.pathname !== canonicalPath) {
-        navigate(`${canonicalPath}${location.search}${location.hash}`, { replace: true });
-      }
+    if (slug && service && slug !== service.slug) {
+      navigate(`/services/${service.slug}`, { replace: true });
     }
-  }, [slug, service, location.pathname, location.search, location.hash, navigate]);
+  }, [slug, service, navigate]);
 
   const slideImagePaths = useMemo(() => {
     if (!service) return [];
@@ -86,12 +82,12 @@ const ServiceDetailPage: React.FC = () => {
           トップへ戻る
         </Link>
 
-        <article className="mt-4 rounded-lg border border-slate-200 bg-white p-6 shadow-sm md:p-10">
+        <article className="mt-4 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-10">
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_280px] lg:items-start">
             <div>
               <div className="flex items-start gap-4">
                 <div
-                  className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg shadow-lg"
+                  className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl shadow-lg"
                   style={{ background: getGradientStyle(service.color) }}
                 >
                   <Icon className="h-7 w-7 text-white" />
@@ -121,13 +117,13 @@ const ServiceDetailPage: React.FC = () => {
               </div>
             </div>
 
-            <aside className="rounded-lg border border-amber-200 bg-gradient-to-br from-amber-50 via-white to-white p-5 shadow-sm">
+            <aside className="rounded-3xl border border-amber-200 bg-gradient-to-br from-amber-50 via-white to-white p-5 shadow-sm">
               <p className="text-sm font-semibold text-amber-800">ご相談の目安</p>
               <ul className="mt-4 space-y-3">
                 {SERVICE_PROOF_POINTS.map((item) => (
-                  <li key={item.label} className="rounded-lg border border-white bg-white/80 px-4 py-3">
+                  <li key={item.label} className="rounded-2xl border border-white bg-white/80 px-4 py-3">
                     <div className="flex items-center gap-3">
-                      <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-amber-100 text-amber-800">
+                      <span className="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-amber-100 text-amber-800">
                         <item.icon className="h-4 w-4" />
                       </span>
                       <div>
@@ -142,7 +138,7 @@ const ServiceDetailPage: React.FC = () => {
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5">
-            <div className="overflow-hidden rounded-lg border border-slate-200 bg-slate-50 md:col-span-2">
+            <div className="overflow-hidden rounded-xl border border-slate-200 bg-slate-50 md:col-span-2">
               <div className="relative aspect-video w-full bg-slate-100">
                 {slideImagePaths.map((imagePath, index) => (
                   <img
@@ -186,7 +182,7 @@ const ServiceDetailPage: React.FC = () => {
                     alt={`${service.title}の参考画像${index + 1}`}
                     width={960}
                     height={640}
-                    className="h-52 w-full rounded-lg border border-slate-200 object-cover"
+                    className="h-52 w-full rounded-xl border border-slate-200 object-cover"
                     loading="lazy"
                     decoding="async"
                   />
@@ -195,7 +191,7 @@ const ServiceDetailPage: React.FC = () => {
             </div>
 
             {service.detailSections.map((section) => (
-              <div key={section.title} className="rounded-lg border border-slate-200 bg-slate-50 p-5">
+              <div key={section.title} className="rounded-xl border border-slate-200 bg-slate-50 p-5">
                 <h2 className="text-lg font-semibold text-brand-ink">{section.title}</h2>
                 <ul className="mt-3 space-y-2">
                   {section.points.map((point) => (
@@ -214,7 +210,7 @@ const ServiceDetailPage: React.FC = () => {
               <h2 className="mb-4 text-xl font-semibold text-brand-ink">公開している改善事例</h2>
               <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
                 {relatedCases.map((item) => (
-                  <article key={item.title} className="rounded-lg border border-slate-200 bg-[#fffaf7] p-5">
+                  <article key={item.title} className="rounded-2xl border border-slate-200 bg-[#fffaf7] p-5">
                     <p className="text-sm font-semibold text-slate-500">{item.clientType}</p>
                     <h3 className="mt-1 text-lg font-semibold text-brand-ink">{item.title}</h3>
                     <p className="mt-3 text-sm leading-relaxed text-slate-700">{item.challenge}</p>
@@ -239,7 +235,7 @@ const ServiceDetailPage: React.FC = () => {
             <h2 className="mb-4 text-xl font-semibold text-brand-ink">支援のポイント</h2>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               {service.caseHighlights.map((item) => (
-                <div key={item.title} className="rounded-lg border border-slate-200 bg-white p-5">
+                <div key={item.title} className="rounded-xl border border-slate-200 bg-white p-5">
                   <h3 className="text-base font-semibold text-brand-ink">{item.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.summary}</p>
                 </div>
@@ -248,7 +244,7 @@ const ServiceDetailPage: React.FC = () => {
           </section>
 
           <section className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div className="rounded-lg border border-slate-200 bg-slate-50 p-5">
+            <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
               <h2 className="text-xl font-semibold text-brand-ink">料金</h2>
               <p className="mt-2 text-sm leading-relaxed text-slate-700">{service.pricing.summary}</p>
               <ul className="mt-3 space-y-2">
@@ -261,7 +257,7 @@ const ServiceDetailPage: React.FC = () => {
               </ul>
             </div>
 
-            <div className="rounded-lg border border-slate-200 bg-slate-50 p-5">
+            <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
               <h2 className="text-xl font-semibold text-brand-ink">技術</h2>
               <p className="mt-2 text-sm leading-relaxed text-slate-700">
                 既存運用との整合を重視し、必要な技術要素のみを選定して導入します。
@@ -279,7 +275,7 @@ const ServiceDetailPage: React.FC = () => {
             </div>
           </section>
 
-          <section className="mt-8 rounded-lg border border-slate-200 bg-white p-5">
+          <section className="mt-8 rounded-xl border border-slate-200 bg-white p-5">
             <h2 className="mb-4 text-xl font-semibold text-brand-ink">進め方</h2>
             <div className="space-y-3">
               {service.processSteps.map((step, index) => (
@@ -296,7 +292,7 @@ const ServiceDetailPage: React.FC = () => {
             </div>
           </section>
 
-          <div className="mt-8 rounded-lg border border-brand-primary-200 bg-brand-primary-50 p-5">
+          <div className="mt-8 rounded-xl border border-brand-primary-200 bg-brand-primary-50 p-5">
             <h2 className="text-xl font-semibold text-brand-ink">ご相談・お見積り</h2>
             <p className="mt-2 text-sm leading-relaxed text-slate-700">
               事業フェーズや運用体制に合わせて、最適な支援内容をご提案します。まずは現状課題をお聞かせください。
@@ -332,8 +328,8 @@ const ServiceDetailPage: React.FC = () => {
             {otherServices.map((item) => (
               <Link
                 key={item.slug}
-                to={`/services/${item.slug}/`}
-                className="rounded-lg border border-slate-200 bg-white p-4 transition-colors hover:border-brand-primary-300 hover:bg-brand-primary-50/40"
+                to={`/services/${item.slug}`}
+                className="rounded-xl border border-slate-200 bg-white p-4 transition-colors hover:border-brand-primary-300 hover:bg-brand-primary-50/40"
               >
                 <p className="font-semibold text-brand-ink">{item.title}</p>
                 <p className="mt-1 text-sm text-slate-600">{item.description}</p>

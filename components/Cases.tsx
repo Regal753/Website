@@ -20,9 +20,9 @@ const caseStyles: Record<
     colorClass: 'text-brand-primary-700 bg-brand-primary-50 border-brand-primary-100',
     serviceChip: 'bg-brand-primary-100 text-brand-primary-800',
   },
-  'production-workflow': {
-    colorClass: 'text-slate-700 bg-slate-50 border-slate-200',
-    serviceChip: 'bg-slate-100 text-slate-800',
+  'ai-marketing-strategy': {
+    colorClass: 'text-cyan-700 bg-cyan-50 border-cyan-100',
+    serviceChip: 'bg-cyan-100 text-cyan-900',
   },
 };
 
@@ -36,11 +36,12 @@ const Cases: React.FC = () => {
     <section id={SectionId.CASES} className="bg-white py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center md:mb-14">
-          <p className="mb-4 font-semibold text-brand-primary-700">Works</p>
+          <p className="mb-4 inline-flex rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-800">
+            改善事例
+          </p>
           <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">解決事例</h2>
           <p className="mx-auto max-w-2xl text-slate-600">
-            公開できる範囲で、何を整えて、どの変化が出たかを分かる形で掲載します。
-            実績は案件ごとの条件により変動します。
+            抽象的な「改善しました」ではなく、何を整えて、どの変化が出たかを分かる形で掲載します。
           </p>
         </div>
 
@@ -53,12 +54,12 @@ const Cases: React.FC = () => {
             return (
               <article
                 key={c.title}
-                className="rounded-lg border border-slate-200 bg-[#fffaf7] p-6 shadow-sm transition-all hover:border-brand-primary-200 hover:shadow-md md:p-8"
+                className="rounded-3xl border border-slate-200 bg-[#fffaf7] p-6 shadow-sm transition-all hover:border-brand-primary-200 hover:shadow-md md:p-8"
               >
                 <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_280px]">
                   <div>
                     <div className="flex items-start gap-4">
-                      <div className={`shrink-0 rounded-lg border p-3 ${style.colorClass}`}>
+                      <div className={`shrink-0 rounded-2xl border p-3 ${style.colorClass}`}>
                         <Icon size={20} />
                       </div>
                       <div>
@@ -71,18 +72,18 @@ const Cases: React.FC = () => {
                     </div>
 
                     <div className="mt-6 grid gap-4 md:grid-cols-2">
-                      <div className="rounded-lg border border-slate-200 bg-white p-5">
-                        <p className="text-xs font-semibold text-slate-500">背景</p>
+                      <div className="rounded-2xl border border-slate-200 bg-white p-5">
+                        <p className="text-xs font-semibold tracking-wider text-slate-500">背景</p>
                         <p className="mt-2 text-sm leading-relaxed text-slate-700">{c.challenge}</p>
                       </div>
-                      <div className="rounded-lg border border-slate-200 bg-white p-5">
-                        <p className="text-xs font-semibold text-slate-500">対応内容</p>
+                      <div className="rounded-2xl border border-slate-200 bg-white p-5">
+                        <p className="text-xs font-semibold tracking-wider text-slate-500">対応内容</p>
                         <p className="mt-2 text-sm leading-relaxed text-slate-700">{c.scope}</p>
                       </div>
                     </div>
 
-                    <div className="mt-4 rounded-lg border border-slate-200 bg-white p-5">
-                      <p className="text-xs font-semibold text-slate-500">成果</p>
+                    <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-5">
+                      <p className="text-xs font-semibold tracking-wider text-slate-500">成果</p>
                       <p className="mt-2 text-sm leading-relaxed text-slate-700">{c.outcome}</p>
                     </div>
 
@@ -98,11 +99,11 @@ const Cases: React.FC = () => {
                     </div>
                   </div>
 
-                  <aside className="rounded-lg border border-brand-primary-100 bg-[linear-gradient(135deg,_#f0fdfa_0%,_#ffffff_55%,_#fff7ed_100%)] p-5 text-brand-ink shadow-sm shadow-brand-primary-100/60">
+                  <aside className="rounded-3xl border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#ffffff_55%,_#fff7ed_100%)] p-5 text-brand-ink shadow-sm shadow-brand-primary-100/60">
                     <p className="text-sm font-semibold text-slate-500">見えた変化</p>
                     <ul className="mt-4 space-y-3">
                       {c.results.map((item) => (
-                        <li key={item} className="rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700">
+                        <li key={item} className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700">
                           {item}
                         </li>
                       ))}

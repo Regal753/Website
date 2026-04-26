@@ -12,14 +12,16 @@ const News: React.FC = () => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-6 lg:grid-cols-[300px_minmax(0,1fr)]">
           <div>
-          <p className="font-semibold text-brand-primary-700">News</p>
+            <p className="inline-flex rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-700">
+              更新情報
+            </p>
           <h2 className="mt-4 text-3xl font-semibold text-brand-ink">お知らせ</h2>
           <p className="mt-3 text-sm leading-relaxed text-slate-600 md:text-base">
             外部掲載、資格取得、体制変更、サイト更新など、公開している動きをここにまとめています。
           </p>
         </div>
 
-          <div className="rounded-lg border border-slate-200 bg-[#fffaf7] p-5 shadow-sm md:p-6">
+          <div className="rounded-[28px] border border-slate-200 bg-[#fffaf7] p-5 shadow-sm md:p-6">
             <ul className="divide-y divide-slate-200/90">
               {items.map((item) => {
                 const isExternalLink = typeof item.href === 'string' && /^https?:\/\//.test(item.href);

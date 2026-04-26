@@ -25,18 +25,14 @@ const INITIAL_FORM: ContactFormState = {
 
 const CONTACT_HOURS = '電話受付 9:00-20:00（フォームは24時間受付）';
 const MAX_ATTACHMENT_BYTES = 10 * 1024 * 1024;
-const MAX_ATTACHMENT_FILES = 3;
-const ACCEPTED_ATTACHMENT_TYPES = '.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.png,.jpg,.jpeg,.webp';
 const AUTORESPONSE_MESSAGE =
   'お問い合わせありがとうございます。内容を確認のうえ、通常1営業日以内にご連絡いたします。';
-const GENERIC_SUBMIT_ERROR =
-  '送信に失敗しました。時間をおいて再度お試しいただくか、予備フォームまたはメールをご利用ください。';
-const DEFAULT_CONTACT_ENDPOINT = '/api/contact';
+const GENERIC_SUBMIT_ERROR = '送信に失敗しました。時間をおいて再度お試しください。';
 
 const CONTACT_PROMISES = ['通常1営業日以内に返信', '初回相談無料', 'フォームは24時間受付'] as const;
 const COMMON_ISSUES = [
   '何から相談すべきか整理できていない',
-  'YouTube/SNS運用と権利管理が別々に散っている',
+  'SNS運用と権利管理が別々に散っている',
   '共有フローが属人化していて止まりやすい',
 ] as const;
 
@@ -47,6 +43,23 @@ const formatBytes = (bytes: number): string => {
   if (bytes < 1024) return `${bytes} B`;
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
   return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+};
+
+const parseLegacyFormResponse = async (
+  response: Response
+): Promise<{ ok: boolean; reason?: string; status?: number }> => {
+  const responseBody = await response.text();
+  const requiresActivation = /needs Activation|Activate Form/i.test(responseBody);
+  const genericFormSubmitPage =
+    /<title>FormSubmit/i.test(responseBody) && !/thank|success|submitted/i.test(responseBody);
+
+  if (requiresActivation || genericFormSubmitPage) {
+    return { ok: false, reason: 'formsubmit_not_activated' };
+  }
+  if (!response.ok) {
+    return { ok: false, reason: 'http_error', status: response.status };
+  }
+  return { ok: true };
 };
 
 const Contact: React.FC = () => {
@@ -89,10 +102,35 @@ const Contact: React.FC = () => {
     return hasSubmitted || byQuery;
   }, [hasSubmitted, location.search]);
 
+  const legacyFallbackEndpoint = useMemo(() => {
+    const configured = (import.meta.env.VITE_CONTACT_LEGACY_ENDPOINT || '').trim();
+    return configured || `https://formsubmit.co/${siteConfig.contactEmail}`;
+  }, []);
+
   const contactEndpoint = useMemo(() => {
     const configured = (import.meta.env.VITE_CONTACT_ENDPOINT || '').trim();
-    return configured || DEFAULT_CONTACT_ENDPOINT;
+    return configured || legacyFallbackEndpoint;
+  }, [legacyFallbackEndpoint]);
+
+  const enableLegacyFallback = useMemo(() => {
+    const configured = (import.meta.env.VITE_CONTACT_ENABLE_LEGACY_FALLBACK || 'true').trim();
+    return configured.toLowerCase() === 'true';
   }, []);
+
+  const nextUrl = useMemo(() => {
+    const configuredSiteUrl = (import.meta.env.VITE_SITE_URL || '').trim();
+    const origin =
+      configuredSiteUrl ||
+      (typeof window !== 'undefined' ? window.location.origin : 'https://www.regalocom.net');
+    const baseOrigin = origin.replace(/\/$/, '');
+    const baseUrl = import.meta.env.BASE_URL || '/';
+    return new URL(`${baseUrl}contact?submitted=1`, `${baseOrigin}/`).toString();
+  }, []);
+
+  const mailSubject = useMemo(
+    () => `[お問い合わせ] ${form.type} / ${form.name || 'お名前未入力'}`,
+    [form.name, form.type]
+  );
 
   const clearFieldError = (key: ContactFieldErrorKey) => {
     setFieldErrors((prev) => {
@@ -159,9 +197,6 @@ const Contact: React.FC = () => {
     }
     if (!form.message.trim()) nextFieldErrors.message = 'お問い合わせ内容を入力してください。';
     if (!consent) nextFieldErrors.consent = 'プライバシーポリシーと利用規約への同意が必要です。';
-    if (attachments.length > MAX_ATTACHMENT_FILES) {
-      nextFieldErrors.attachments = `添付ファイルは${MAX_ATTACHMENT_FILES}点以内にしてください。`;
-    }
     if (totalAttachmentBytes > MAX_ATTACHMENT_BYTES) {
       nextFieldErrors.attachments = '添付ファイルの合計サイズは10 MB以内にしてください。';
     }
@@ -192,18 +227,37 @@ const Contact: React.FC = () => {
         body: payload,
       });
       const primaryContentType = (primaryResponse.headers.get('content-type') || '').toLowerCase();
-      const primaryJson = primaryContentType.includes('application/json')
-        ? await primaryResponse.json().catch(() => null)
-        : null;
 
-      if (!primaryJson) {
-        failureReason = 'unexpected_response';
-        failureStatus = primaryResponse.status;
-      } else if (primaryResponse.ok && (primaryJson.ok ?? true)) {
-        isSuccess = true;
+      if (primaryContentType.includes('application/json')) {
+        const primaryJson = await primaryResponse.json().catch(() => null);
+        if (primaryResponse.ok && (primaryJson?.ok ?? true)) {
+          isSuccess = true;
+        } else {
+          failureReason = primaryJson?.error || 'api_error';
+          failureStatus = primaryResponse.status;
+        }
       } else {
-        failureReason = primaryJson.error || 'api_error';
-        failureStatus = primaryResponse.status;
+        const legacyResult = await parseLegacyFormResponse(primaryResponse);
+        isSuccess = legacyResult.ok;
+        if (!legacyResult.ok) {
+          failureReason = legacyResult.reason || 'legacy_error';
+          failureStatus = legacyResult.status;
+        }
+      }
+
+      if (!isSuccess && enableLegacyFallback && contactEndpoint !== legacyFallbackEndpoint) {
+        trackEvent('contact_submit_fallback', { to: 'legacy_formsubmit' });
+        const fallbackPayload = new FormData(formElement);
+        const fallbackResponse = await fetch(legacyFallbackEndpoint, {
+          method: 'POST',
+          body: fallbackPayload,
+        });
+        const fallbackResult = await parseLegacyFormResponse(fallbackResponse);
+        isSuccess = fallbackResult.ok;
+        if (!fallbackResult.ok) {
+          failureReason = `fallback_${fallbackResult.reason || 'failed'}`;
+          failureStatus = fallbackResult.status;
+        }
       }
 
       if (!isSuccess) {
@@ -263,24 +317,24 @@ const Contact: React.FC = () => {
   return (
     <section
       id={SectionId.CONTACT}
-      className="bg-[linear-gradient(180deg,_#ffffff_0%,_#fff8f1_100%)] pt-24 pb-16 md:pt-28 md:pb-24"
+      className="bg-[linear-gradient(180deg,_#ffffff_0%,_#fff8f1_100%)] pt-28 pb-20 md:pb-24"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
-          <div className="grid lg:grid-cols-[minmax(0,1fr)_300px]">
-            <div className="p-6 md:p-7 lg:p-8">
+        <div className="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-[0_18px_50px_rgba(15,23,42,0.08)]">
+          <div className="grid lg:grid-cols-[minmax(0,1fr)_320px]">
+            <div className="p-6 md:p-8">
               <p className="inline-flex rounded-full border border-brand-primary-200 bg-brand-primary-50 px-3 py-1 text-xs font-semibold text-brand-primary-700">
                 お問い合わせ
               </p>
-              <div className="mt-3 inline-flex items-center justify-center rounded-full bg-brand-primary-50 p-3">
+              <div className="mt-4 inline-flex items-center justify-center rounded-full bg-brand-primary-50 p-3">
                 <Mail className="h-6 w-6 text-brand-primary-700" />
               </div>
-              <h1 className="mt-3 text-4xl font-semibold tracking-tight text-brand-ink md:text-5xl">お問い合わせ</h1>
-              <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-600 md:text-base">
+              <h1 className="mt-4 text-4xl font-semibold tracking-tight text-brand-ink md:text-5xl">お問い合わせ</h1>
+              <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-600 md:text-base">
                 内容を確認のうえ、通常1営業日以内にメールまたはお電話でご連絡します。
-                何から相談すべきか整理できていない段階でも、そのまま送って差し支えありません。
+                何から相談すべきか整理できていない段階でも、そのまま送って問題ありません。
               </p>
-              <div className="mt-4 flex flex-wrap gap-2">
+              <div className="mt-5 flex flex-wrap gap-2">
                 {CONTACT_PROMISES.map((item) => (
                   <span
                     key={item}
@@ -290,34 +344,49 @@ const Contact: React.FC = () => {
                   </span>
                 ))}
               </div>
-              <p className="mt-3 text-xs text-slate-500">「*」は必須項目です。</p>
+              <p className="mt-4 text-xs text-slate-500">「*」は必須項目です。</p>
             </div>
 
-            <aside className="hidden border-t border-slate-200 bg-[linear-gradient(135deg,_#f0fdfa_0%,_#f8fafc_52%,_#fff7ed_100%)] p-5 text-brand-ink md:p-6 lg:block lg:border-l lg:border-t-0">
+            <aside className="border-t border-slate-200 bg-[linear-gradient(135deg,_#eef2ff_0%,_#f8fafc_52%,_#fff7ed_100%)] p-6 text-brand-ink lg:border-l lg:border-t-0 md:p-8">
               <p className="text-xs font-semibold tracking-widest text-slate-500">ご相談の目安</p>
-              <h2 className="mt-3 text-lg font-semibold text-brand-ink">窓口を分けずに整理します</h2>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                運用、権利管理、共有設計がまたがっていても、このフォームからで問題ありません。
+              <h2 className="mt-4 text-2xl font-semibold text-brand-ink">相談の入口は一つにまとめています</h2>
+              <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                SNS運用、権利管理、共有設計をまたいでいても、窓口を分けずに整理します。
               </p>
 
-              <div className="mt-4 space-y-2 text-sm font-semibold text-brand-ink">
-                <div className="flex items-center gap-3 rounded-lg border border-brand-primary-100 bg-white/85 px-3 py-2 shadow-sm">
-                  <Clock3 className="h-5 w-5 text-amber-700" />
-                  <span>返信: 1営業日以内</span>
+              <div className="mt-6 space-y-3">
+                <div className="rounded-2xl border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
+                  <div className="flex items-center gap-3">
+                    <Clock3 className="h-5 w-5 text-amber-700" />
+                    <div>
+                      <p className="text-xs font-semibold tracking-wide text-slate-500">返信目安</p>
+                      <p className="mt-1 text-lg font-semibold text-brand-ink">1営業日以内</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex items-center gap-3 rounded-lg border border-brand-primary-100 bg-white/85 px-3 py-2 shadow-sm">
-                  <Phone className="h-5 w-5 text-amber-700" />
-                  {companyPhoneHref ? (
-                    <a href={`tel:${companyPhoneHref}`} className="hover:text-brand-primary-700">
-                      {companyPhoneDisplay}
-                    </a>
-                  ) : (
-                    <span>{companyPhoneDisplay}</span>
-                  )}
+                <div className="rounded-2xl border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
+                  <div className="flex items-center gap-3">
+                    <Phone className="h-5 w-5 text-amber-700" />
+                    <div>
+                      <p className="text-xs font-semibold tracking-wide text-slate-500">電話窓口</p>
+                      {companyPhoneHref ? (
+                        <a href={`tel:${companyPhoneHref}`} className="mt-1 block text-lg font-semibold text-brand-ink hover:text-brand-primary-700">
+                          {companyPhoneDisplay}
+                        </a>
+                      ) : (
+                        <p className="mt-1 text-lg font-semibold text-brand-ink">{companyPhoneDisplay}</p>
+                      )}
+                    </div>
+                  </div>
                 </div>
-                <div className="flex items-center gap-3 rounded-lg border border-brand-primary-100 bg-white/85 px-3 py-2 shadow-sm">
-                  <ShieldCheck className="h-5 w-5 text-amber-700" />
-                  <span>電話受付 9:00-20:00</span>
+                <div className="rounded-2xl border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
+                  <div className="flex items-center gap-3">
+                    <ShieldCheck className="h-5 w-5 text-amber-700" />
+                    <div>
+                      <p className="text-xs font-semibold tracking-wide text-slate-500">対応時間</p>
+                      <p className="mt-1 text-sm font-semibold leading-relaxed text-brand-ink">{CONTACT_HOURS}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </aside>
@@ -330,7 +399,7 @@ const Contact: React.FC = () => {
             role="status"
             aria-live="polite"
             tabIndex={-1}
-            className="mt-6 rounded-lg border border-emerald-200 bg-emerald-50 px-5 py-4 shadow-sm"
+            className="mt-6 rounded-[28px] border border-emerald-200 bg-emerald-50 px-5 py-4 shadow-sm"
           >
             <p className="text-sm font-semibold text-emerald-800">送信が完了しました。無料相談ありがとうございます。</p>
             <p className="mt-1 text-sm leading-relaxed text-emerald-900/90">
@@ -357,12 +426,12 @@ const Contact: React.FC = () => {
           </div>
         )}
 
-        <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.12fr)_340px]">
-          <div className="rounded-lg border border-slate-200 bg-white/95 p-6 shadow-sm md:p-8">
+        <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.12fr)_340px]">
+          <div className="rounded-[32px] border border-slate-200 bg-white/95 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.06)] md:p-8">
             <div className="mb-6">
               <h2 className="text-2xl font-semibold text-brand-ink">お問い合わせフォーム</h2>
               <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                フォーム送信後、内容を確認して担当よりご連絡します。PDFや資料画像も添付できます。
+                フォーム送信後、内容を確認して担当よりご連絡します。添付ファイルもそのまま送信できます。
               </p>
             </div>
 
@@ -374,10 +443,13 @@ const Contact: React.FC = () => {
               noValidate
               className="space-y-5"
             >
+              <input type="hidden" name="_subject" value={mailSubject} />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_next" value={nextUrl} />
               <input type="hidden" name="_autoresponse" value={AUTORESPONSE_MESSAGE} />
               <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
 
-              <div className="rounded-lg border border-slate-200 bg-slate-50/80 p-4 md:p-5">
+              <div className="rounded-3xl border border-slate-200 bg-slate-50/80 p-4 md:p-5">
                 <p className="text-sm font-semibold text-slate-500">基本情報</p>
                 <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
                   <label className="block text-sm">
@@ -388,7 +460,7 @@ const Contact: React.FC = () => {
                       name="name"
                       value={form.name}
                       onChange={(event) => updateField('name', event.target.value)}
-                      className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
+                      className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
                       autoComplete="name"
                       aria-invalid={fieldErrors.name ? 'true' : 'false'}
                       aria-describedby={fieldErrors.name ? 'contact-name-error' : undefined}
@@ -408,7 +480,7 @@ const Contact: React.FC = () => {
                       name="company"
                       value={company}
                       onChange={(event) => setCompany(event.target.value)}
-                      className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
+                      className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
                       autoComplete="organization"
                     />
                   </label>
@@ -421,7 +493,7 @@ const Contact: React.FC = () => {
                       name="email"
                       value={form.email}
                       onChange={(event) => updateField('email', event.target.value)}
-                      className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
+                      className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
                       autoComplete="email"
                       inputMode="email"
                       spellCheck={false}
@@ -443,7 +515,7 @@ const Contact: React.FC = () => {
                       name="phone"
                       value={phone}
                       onChange={(event) => setPhone(event.target.value)}
-                      className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
+                      className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
                       autoComplete="tel"
                       inputMode="tel"
                     />
@@ -451,7 +523,7 @@ const Contact: React.FC = () => {
                 </div>
               </div>
 
-              <div className="rounded-lg border border-slate-200 bg-white p-4 md:p-5">
+              <div className="rounded-3xl border border-slate-200 bg-white p-4 md:p-5">
                 <p className="text-sm font-semibold text-slate-500">相談内容</p>
                 <div className="mt-4 space-y-4">
                   <label className="block text-sm">
@@ -460,12 +532,12 @@ const Contact: React.FC = () => {
                       name="inquiry_type"
                       value={form.type}
                       onChange={(event) => updateField('type', event.target.value)}
-                      className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
+                      className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
                     >
                       <option>お問い合わせ</option>
-                      <option>YouTube/SNS運用支援について</option>
-                      <option>音楽出版・BGM権利管理について</option>
-                      <option>制作進行・業務整理支援について</option>
+                      <option>SNS管理事業部について</option>
+                      <option>音楽出版事業部について</option>
+                      <option>AIマーケティング戦略事業部について</option>
                       <option>その他</option>
                     </select>
                   </label>
@@ -478,7 +550,7 @@ const Contact: React.FC = () => {
                       value={form.message}
                       onChange={(event) => updateField('message', event.target.value)}
                       rows={7}
-                      className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
+                      className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
                       aria-invalid={fieldErrors.message ? 'true' : 'false'}
                       aria-describedby={fieldErrors.message ? 'contact-message-error' : undefined}
                       required
@@ -492,7 +564,7 @@ const Contact: React.FC = () => {
                 </div>
               </div>
 
-              <div className="rounded-lg border border-slate-200 bg-slate-50/80 p-4 md:p-5">
+              <div className="rounded-3xl border border-slate-200 bg-slate-50/80 p-4 md:p-5">
                 <p className="text-sm font-semibold text-slate-500">添付と同意</p>
                 <div className="mt-4 space-y-4">
                   <label className="block text-sm">
@@ -503,14 +575,14 @@ const Contact: React.FC = () => {
                       name="attachment"
                       multiple
                       onChange={handleFileChange}
-                      accept={ACCEPTED_ATTACHMENT_TYPES}
-                      className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 file:mr-3 file:rounded-md file:border-0 file:bg-slate-100 file:px-3 file:py-1.5 file:text-slate-700"
+                      accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.zip,.png,.jpg,.jpeg,.webp,.mp4,.mov"
+                      className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-slate-900 file:mr-3 file:rounded-md file:border-0 file:bg-slate-100 file:px-3 file:py-1.5 file:text-slate-700"
                       aria-invalid={fieldErrors.attachments ? 'true' : 'false'}
                       aria-describedby={fieldErrors.attachments ? 'contact-attachments-error' : undefined}
                     />
                     <div className="mt-2 flex items-start gap-2 text-xs text-slate-500">
                       <Paperclip className="mt-0.5 h-4 w-4 shrink-0" />
-                      <span>添付は3点・合計10MB以内です。PDF、Office、テキスト、画像に対応しています。</span>
+                      <span>添付ファイルの合計は10MB以内で送信してください。</span>
                     </div>
                     {fieldErrors.attachments && (
                       <p id="contact-attachments-error" className="mt-2 text-xs font-medium text-red-600">
@@ -522,7 +594,7 @@ const Contact: React.FC = () => {
                     )}
                   </label>
 
-                  <label className="flex cursor-pointer items-start gap-3 rounded-lg border border-slate-200 bg-white p-4">
+                  <label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-slate-200 bg-white p-4">
                     <input
                       ref={consentInputRef}
                       type="checkbox"
@@ -571,40 +643,16 @@ const Contact: React.FC = () => {
                   role="alert"
                   aria-live="assertive"
                   tabIndex={-1}
-                  className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
+                  className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700"
                 >
-                  <p className="font-semibold">{error}</p>
-                  <div className="mt-3 flex flex-col gap-2 sm:flex-row">
-                    <a
-                      href={siteConfig.contactFormUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      onClick={() =>
-                        trackEvent('external_link_click', {
-                          platform: 'google_form',
-                          placement: 'contact_error',
-                        })
-                      }
-                      className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-red-800 ring-1 ring-red-200 transition-colors hover:bg-red-100"
-                    >
-                      予備フォームを開く
-                      <ExternalLink className="h-4 w-4" />
-                    </a>
-                    <a
-                      href={`mailto:${siteConfig.contactEmail}`}
-                      className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-red-800 ring-1 ring-red-200 transition-colors hover:bg-red-100"
-                    >
-                      メールで送る
-                      <Mail className="h-4 w-4" />
-                    </a>
-                  </div>
+                  {error}
                 </div>
               )}
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-primary-700 px-6 py-3.5 font-semibold text-white transition-colors hover:bg-brand-primary-800 disabled:cursor-not-allowed disabled:opacity-70"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-primary-700 px-6 py-3.5 font-semibold text-white transition-colors hover:bg-brand-primary-800 disabled:cursor-not-allowed disabled:opacity-70"
               >
                 {isSubmitting ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
                 {isSubmitting ? '送信中…' : 'お問い合わせを送信'}
@@ -612,8 +660,8 @@ const Contact: React.FC = () => {
             </form>
           </div>
 
-          <aside className="flex flex-col gap-4">
-            <div className="rounded-lg border border-brand-primary-100 bg-[linear-gradient(135deg,_#f0fdfa_0%,_#ffffff_55%,_#fff7ed_100%)] p-5 text-brand-ink shadow-sm shadow-brand-primary-100/60">
+          <aside className="space-y-4">
+            <div className="rounded-[32px] border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#ffffff_55%,_#fff7ed_100%)] p-5 text-brand-ink shadow-sm shadow-brand-primary-100/60">
               <p className="text-xs font-semibold tracking-widest text-slate-500">電話窓口</p>
               <h2 className="mt-3 text-xl font-semibold text-brand-ink">お電話でのお問い合わせ</h2>
               {companyPhoneHref ? (
@@ -633,7 +681,7 @@ const Contact: React.FC = () => {
               </div>
             </div>
 
-            <div className="order-3 rounded-lg border border-amber-100 bg-[#fffaf7] p-5 shadow-sm">
+            <div className="rounded-3xl border border-amber-100 bg-[#fffaf7] p-5 shadow-sm">
               <h3 className="text-base font-semibold text-brand-ink">相談前によくある状態</h3>
               <ul className="mt-4 space-y-3">
                 {COMMON_ISSUES.map((item) => (
@@ -647,7 +695,7 @@ const Contact: React.FC = () => {
               </ul>
             </div>
 
-            <div className="order-2 rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
               <h3 className="text-base font-semibold text-brand-ink">フォームが使えない場合</h3>
               <p className="mt-2 text-sm leading-relaxed text-slate-600">
                 通常はこのページのフォームをご利用ください。開けない場合のみ、以下の補助導線をご利用ください。
@@ -663,9 +711,9 @@ const Contact: React.FC = () => {
                       placement: 'contact_sidebar',
                     })
                   }
-                  className="flex items-start gap-3 rounded-lg border border-brand-primary-100 bg-brand-primary-50/70 p-4 transition-colors hover:bg-brand-primary-50"
+                  className="flex items-start gap-3 rounded-2xl border border-brand-primary-100 bg-brand-primary-50/70 p-4 transition-colors hover:bg-brand-primary-50"
                 >
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white text-brand-primary-700 shadow-sm">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white text-brand-primary-700 shadow-sm">
                     <FileText className="h-5 w-5" />
                   </span>
                   <span>
@@ -682,9 +730,9 @@ const Contact: React.FC = () => {
 
                 <a
                   href={`mailto:${siteConfig.contactEmail}`}
-                  className="flex items-start gap-3 rounded-lg border border-slate-200 bg-slate-50/80 p-4 transition-colors hover:bg-slate-50"
+                  className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50/80 p-4 transition-colors hover:bg-slate-50"
                 >
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white text-brand-primary-700 shadow-sm">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white text-brand-primary-700 shadow-sm">
                     <Mail className="h-5 w-5" />
                   </span>
                   <span>

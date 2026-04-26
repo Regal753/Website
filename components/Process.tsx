@@ -59,10 +59,10 @@ const Process: React.FC = () => {
             {STEPS.map((step, index) => (
               <article
                 key={step.title}
-                className={`relative rounded-lg border p-6 shadow-sm shadow-slate-200/40 ${step.surface}`}
+                className={`relative rounded-3xl border p-6 shadow-sm shadow-slate-200/40 ${step.surface}`}
               >
                 <div className="flex items-start justify-between gap-4">
-                  <span className={`inline-flex h-12 w-12 items-center justify-center rounded-lg ${step.iconSurface}`}>
+                  <span className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl ${step.iconSurface}`}>
                     <step.icon className="h-5 w-5" />
                   </span>
                   <span className="inline-flex rounded-full border border-white/80 bg-white/80 px-3 py-1 text-xs font-semibold text-slate-500">
@@ -77,7 +77,7 @@ const Process: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-8 rounded-lg border border-slate-200 bg-[#fffaf7] p-5 shadow-sm md:p-6">
+        <div className="mt-8 rounded-3xl border border-slate-200 bg-[#fffaf7] p-5 shadow-sm md:p-6">
           <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
             <div>
               <p className="text-sm font-semibold text-slate-500">着手前に明確にすること</p>

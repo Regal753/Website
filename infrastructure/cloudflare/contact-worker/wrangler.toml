@@ -4,11 +4,11 @@ compatibility_date = "2026-02-22"
 workers_dev = false
 
 [[routes]]
-pattern = "www.regalocom.net/api/contact"
+pattern = "www.regalocom.net/api/contact*"
 zone_name = "regalocom.net"
 
 [[routes]]
-pattern = "regalocom.net/api/contact"
+pattern = "regalocom.net/api/contact*"
 zone_name = "regalocom.net"
 
 [vars]
@@ -16,14 +16,3 @@ CONTACT_TO_EMAIL = "contact@regalocom.net"
 CONTACT_FROM_EMAIL = "Regalo Contact <noreply@regalocom.net>"
 CONTACT_ALLOWED_ORIGIN = "https://www.regalocom.net"
 CONTACT_LOG_RETENTION_DAYS = "180"
-CONTACT_RATE_LIMIT_WINDOW_SECONDS = "900"
-CONTACT_RATE_LIMIT_MAX_PER_IP = "5"
-CONTACT_RATE_LIMIT_MAX_PER_EMAIL = "3"
-
-[[kv_namespaces]]
-binding = "CONTACT_LOGS"
-id = "__CONTACT_LOGS_KV_ID__"
-
-[[kv_namespaces]]
-binding = "CONTACT_RATE_LIMITS"
-id = "__CONTACT_RATE_LIMITS_KV_ID__"

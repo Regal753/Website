@@ -2,38 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.regalocom.net/</loc>
-    <lastmod>2026-04-26</lastmod>
+    <lastmod>2026-02-22</lastmod>
   </url>
   <url>
-    <loc>https://www.regalocom.net/company/</loc>
-    <lastmod>2026-04-26</lastmod>
+    <loc>https://www.regalocom.net/company</loc>
+    <lastmod>2026-02-22</lastmod>
   </url>
   <url>
-    <loc>https://www.regalocom.net/column/</loc>
-    <lastmod>2026-04-26</lastmod>
+    <loc>https://www.regalocom.net/contact</loc>
+    <lastmod>2026-02-22</lastmod>
   </url>
   <url>
-    <loc>https://www.regalocom.net/contact/</loc>
-    <lastmod>2026-04-26</lastmod>
+    <loc>https://www.regalocom.net/services/sns-management</loc>
+    <lastmod>2026-02-22</lastmod>
   </url>
   <url>
-    <loc>https://www.regalocom.net/services/sns-management/</loc>
-    <lastmod>2026-04-26</lastmod>
+    <loc>https://www.regalocom.net/services/music-publishing</loc>
+    <lastmod>2026-02-22</lastmod>
   </url>
   <url>
-    <loc>https://www.regalocom.net/services/music-publishing/</loc>
-    <lastmod>2026-04-26</lastmod>
+    <loc>https://www.regalocom.net/services/ai-marketing-strategy</loc>
+    <lastmod>2026-02-22</lastmod>
   </url>
   <url>
-    <loc>https://www.regalocom.net/services/production-workflow/</loc>
-    <lastmod>2026-04-26</lastmod>
+    <loc>https://www.regalocom.net/privacy</loc>
+    <lastmod>2026-02-22</lastmod>
   </url>
   <url>
-    <loc>https://www.regalocom.net/privacy.html</loc>
-    <lastmod>2026-04-26</lastmod>
-  </url>
-  <url>
-    <loc>https://www.regalocom.net/terms.html</loc>
-    <lastmod>2026-04-26</lastmod>
+    <loc>https://www.regalocom.net/terms</loc>
+    <lastmod>2026-02-22</lastmod>
   </url>
 </urlset>

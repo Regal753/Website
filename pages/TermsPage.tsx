@@ -1,10 +1,10 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import LegalRedirect from '../components/LegalRedirect';
 
 const TermsPage: React.FC = () => {
   const target = `${import.meta.env.BASE_URL}terms.html`;
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     window.location.replace(target);
   }, [target]);
 

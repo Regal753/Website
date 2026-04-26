@@ -31,9 +31,7 @@ describe('service catalog', () => {
   it('resolves legacy slugs including .html suffix', () => {
     expect(getServiceBySlug('music-publishing-bgm')?.slug).toBe('music-publishing');
     expect(getServiceBySlug('music-publishing-bgm.html')?.slug).toBe('music-publishing');
-    expect(getServiceBySlug('ai-marketing-strategy')?.slug).toBe('production-workflow');
-    expect(getServiceBySlug('ai-marketing-strategy.html')?.slug).toBe('production-workflow');
-    expect(getServiceBySlug('rights-management')?.slug).toBe('production-workflow');
-    expect(getServiceBySlug('rights-management.html')?.slug).toBe('production-workflow');
+    expect(getServiceBySlug('rights-management')?.slug).toBe('ai-marketing-strategy');
+    expect(getServiceBySlug('rights-management.html')?.slug).toBe('ai-marketing-strategy');
   });
 });

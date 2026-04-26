@@ -38,7 +38,7 @@ const Pricing: React.FC = () => {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[340px_minmax(0,1fr)]">
-          <div className="rounded-lg border border-brand-primary-100 bg-[linear-gradient(135deg,_#ccfbf1_0%,_#ffffff_52%,_#fff7ed_100%)] p-8 text-brand-ink shadow-sm shadow-brand-primary-100/60">
+          <div className="rounded-[32px] border border-brand-primary-100 bg-[linear-gradient(135deg,_#e0e7ff_0%,_#ffffff_52%,_#fff7ed_100%)] p-8 text-brand-ink shadow-sm shadow-brand-primary-100/60">
             <p className="inline-flex rounded-full border border-brand-primary-100 bg-white/80 px-3 py-1 text-xs font-semibold tracking-wide text-brand-primary-700">
               初回相談は無料
             </p>
@@ -64,7 +64,7 @@ const Pricing: React.FC = () => {
 
             <Link
               to="/contact"
-              className="mt-8 inline-flex items-center gap-2 rounded-lg bg-brand-primary-700 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-primary-800"
+              className="mt-8 inline-flex items-center gap-2 rounded-xl bg-brand-primary-700 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-primary-800"
             >
               まずは相談する
               <ArrowRight className="h-4 w-4" />
@@ -73,9 +73,9 @@ const Pricing: React.FC = () => {
 
           <div className="grid gap-4 md:grid-cols-3">
             {pricingSteps.map((step, index) => (
-              <article key={step.title} className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm shadow-slate-200/40">
+              <article key={step.title} className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-200/40">
                 <div className="flex items-center justify-between gap-3">
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-brand-primary-50 text-brand-primary-700">
+                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-primary-50 text-brand-primary-700">
                     <step.icon className="h-5 w-5" />
                   </span>
                   <span className="inline-flex rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-500">
