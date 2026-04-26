@@ -20,11 +20,10 @@ CONTACT_RATE_LIMIT_WINDOW_SECONDS = "900"
 CONTACT_RATE_LIMIT_MAX_PER_IP = "5"
 CONTACT_RATE_LIMIT_MAX_PER_EMAIL = "3"
 
-# After creating KV namespaces, uncomment and set the generated ids.
-# [[kv_namespaces]]
-# binding = "CONTACT_LOGS"
-# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-#
-# [[kv_namespaces]]
-# binding = "CONTACT_RATE_LIMITS"
-# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+[[kv_namespaces]]
+binding = "CONTACT_LOGS"
+id = "__CONTACT_LOGS_KV_ID__"
+
+[[kv_namespaces]]
+binding = "CONTACT_RATE_LIMITS"
+id = "__CONTACT_RATE_LIMITS_KV_ID__"

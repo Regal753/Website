@@ -21,6 +21,13 @@ type ExecutionContextLike = {
   waitUntil: (promise: Promise<unknown>) => void;
 };
 
+type RateLimitResult = {
+  ok: boolean;
+  retryAfterSeconds?: number;
+  reason?: string;
+  status?: number;
+};
+
 const MAX_TOTAL_ATTACHMENT_BYTES = 10 * 1024 * 1024;
 const MAX_ATTACHMENT_FILES = 3;
 const DEFAULT_LOG_RETENTION_DAYS = 180;
@@ -117,8 +124,7 @@ const hashValue = async (value: string): Promise<string> => {
     .join('');
 };
 
-const getRateLimitStore = (env: Env): KVBinding | undefined =>
-  env.CONTACT_RATE_LIMITS || env.CONTACT_LOGS;
+const getRateLimitStore = (env: Env): KVBinding | undefined => env.CONTACT_RATE_LIMITS;
 
 const consumeRateLimit = async (
   store: KVBinding,
@@ -162,9 +168,11 @@ const checkRateLimits = async (
   env: Env,
   ip: string,
   email: string
-): Promise<{ ok: boolean; retryAfterSeconds?: number; reason?: string }> => {
+): Promise<RateLimitResult> => {
   const store = getRateLimitStore(env);
-  if (!store?.get || !store?.put) return { ok: true };
+  if (!store?.get || !store?.put) {
+    return { ok: false, reason: 'not_configured', status: 500 };
+  }
 
   const windowSeconds = parsePositiveInt(
     env.CONTACT_RATE_LIMIT_WINDOW_SECONDS,
@@ -290,6 +298,29 @@ export default {
       });
     }
 
+    if (request.method === 'HEAD') {
+      return new Response(null, {
+        status: 204,
+        headers: withCorsHeaders(request, env, {
+          'Cache-Control': 'no-store',
+        }),
+      });
+    }
+
+    if (request.method === 'GET') {
+      return json(request, env, {
+        ok: true,
+        service: 'regalo-contact-api',
+        configured: Boolean(
+          env.RESEND_API_KEY &&
+            env.CONTACT_TO_EMAIL &&
+            env.CONTACT_FROM_EMAIL &&
+            env.CONTACT_RATE_LIMITS?.get &&
+            env.CONTACT_RATE_LIMITS?.put
+        ),
+      });
+    }
+
     if (request.method !== 'POST') {
       return json(request, env, { ok: false, error: 'method_not_allowed' }, 405);
     }
@@ -337,12 +368,21 @@ export default {
 
       const rateLimit = await checkRateLimits(env, ip, email);
       if (!rateLimit.ok) {
+        const status = rateLimit.status || 429;
+        const headers =
+          status === 429
+            ? { 'Retry-After': String(rateLimit.retryAfterSeconds || DEFAULT_RATE_LIMIT_WINDOW_SECONDS) }
+            : {};
         return json(
           request,
           env,
-          { ok: false, error: 'rate_limited', reason: rateLimit.reason },
-          429,
-          { 'Retry-After': String(rateLimit.retryAfterSeconds || DEFAULT_RATE_LIMIT_WINDOW_SECONDS) }
+          {
+            ok: false,
+            error: status === 500 ? 'rate_limit_not_configured' : 'rate_limited',
+            reason: rateLimit.reason,
+          },
+          status,
+          headers
         );
       }
 

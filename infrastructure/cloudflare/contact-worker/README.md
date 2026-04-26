@@ -1,64 +1,62 @@
 # Contact API Worker
 
-`/api/contact` を独自ドメイン配下で処理するための Cloudflare Worker です。  
-問い合わせ内容はメール送信（Resend）し、KVで短期レート制限と監査ログ保存を行えます。
+`/api/contact` を自社ドメイン配下で受ける Cloudflare Worker です。
+問い合わせ内容は Resend でメール送信し、KV に短期レート制限と監査ログを保存します。
 
 ## 1. 前提
 
 - Cloudflare で `regalocom.net` を管理していること
-- [Wrangler](https://developers.cloudflare.com/workers/wrangler/install-and-update/) を利用できること
-- Resend の API キーを発行済みであること
+- GitHub Actions から Cloudflare Workers をデプロイできる API token があること
+- Resend の API key があること
 
-## 2. 初期設定
+## 2. KV namespace
 
-```bash
-cd infrastructure/cloudflare/contact-worker
-```
-
-1. 必要なら `routes.pattern` と `CONTACT_ALLOWED_ORIGIN` を環境に合わせて変更
-
-### KV 作成例
+Cloudflare 側で2つのKV namespaceを作成します。
 
 ```bash
 wrangler kv namespace create CONTACT_LOGS
 wrangler kv namespace create CONTACT_RATE_LIMITS
 ```
 
-作成後、出力された `id` を `wrangler.toml` の `[[kv_namespaces]]` に追加してください。
+作成後、出力された `id` を GitHub repository secrets に保存します。
 
-## 3. シークレット登録
+- `CONTACT_LOGS_KV_ID`
+- `CONTACT_RATE_LIMITS_KV_ID`
 
-```bash
-wrangler secret put RESEND_API_KEY
-```
+`wrangler.toml` には `__CONTACT_LOGS_KV_ID__` と `__CONTACT_RATE_LIMITS_KV_ID__` の
+placeholder を置いています。GitHub Actions が deploy 前に secrets の値で差し替えます。
 
-必要に応じて Slack/Discord 等への通知ログを使う場合:
+## 3. GitHub repository secrets
 
-```bash
-wrangler secret put CONTACT_LOG_WEBHOOK_URL
-```
-
-## 4. デプロイ
-
-```bash
-wrangler deploy
-```
-
-デプロイ後、`https://www.regalocom.net/api/contact` で POST を受けられます。
-
-GitHub Actions で自動デプロイする場合は以下の Secrets を設定してください:
+Contact Worker の自動デプロイには以下が必須です。
 
 - `CLOUDFLARE_API_TOKEN`
 - `CLOUDFLARE_ACCOUNT_ID`
+- `CONTACT_LOGS_KV_ID`
+- `CONTACT_RATE_LIMITS_KV_ID`
+- `RESEND_API_KEY`
 
-Worker 側で別途必要な Secrets / Vars:
+いずれかが空の場合、`.github/workflows/contact-worker.yml` は fail-fast します。
+KV が Worker に bind されていない場合も、POST は `rate_limit_not_configured` で失敗します。
+スパム対策なしで公開しないための挙動です。
 
-- `RESEND_API_KEY`（必須）
-- `CONTACT_TO_EMAIL` / `CONTACT_FROM_EMAIL` / `CONTACT_ALLOWED_ORIGIN`（`wrangler.toml` の vars で管理）
+## 4. Worker vars
 
-## 5. フロント側設定
+通常は `wrangler.toml` の `[vars]` で管理します。
 
-`.env` で以下を利用します:
+- `CONTACT_TO_EMAIL`
+- `CONTACT_FROM_EMAIL`
+- `CONTACT_ALLOWED_ORIGIN`
+- `CONTACT_LOG_RETENTION_DAYS`
+- `CONTACT_RATE_LIMIT_WINDOW_SECONDS`
+- `CONTACT_RATE_LIMIT_MAX_PER_IP`
+- `CONTACT_RATE_LIMIT_MAX_PER_EMAIL`
+
+既定では IP 単位で15分5件、メール単位で15分3件までに制限します。
+
+## 5. フロント側
+
+本番のフロントは `/api/contact` に送信します。
 
 ```env
 VITE_CONTACT_ENDPOINT=/api/contact
@@ -67,17 +65,24 @@ VITE_CONTACT_LEGACY_ENDPOINT=
 VITE_SITE_URL=https://www.regalocom.net
 ```
 
-- `VITE_CONTACT_ENDPOINT` は独自ドメインAPIを指定
-- `VITE_CONTACT_ENABLE_LEGACY_FALLBACK=true` に明示変更した場合だけ、API障害時に旧フォーム送信へフォールバック
+## 6. 本番確認
 
-## 6. 監査ログ
+デプロイ後は以下を確認します。
 
-KVには `contact/YYYY-MM-DD/<uuid>.json` で保存されます。  
-保存期間は `CONTACT_LOG_RETENTION_DAYS`（既定180日）です。
+```bash
+curl -i https://www.regalocom.net/api/contact
+curl -i -X OPTIONS \
+  -H "Origin: https://www.regalocom.net" \
+  -H "Access-Control-Request-Method: POST" \
+  https://www.regalocom.net/api/contact
+```
 
-## 7. スパム・添付制限
+GET は route 疎通確認用に `200` JSON を返します。
+OPTIONS は CORS preflight として `204` を返します。
+POST はフォームからのみ利用します。
 
-- `CONTACT_RATE_LIMITS` が設定されている場合、既定で IP 単位 15分5件、メール単位 15分3件までに制限します。
-- 上限は `CONTACT_RATE_LIMIT_WINDOW_SECONDS`、`CONTACT_RATE_LIMIT_MAX_PER_IP`、`CONTACT_RATE_LIMIT_MAX_PER_EMAIL` で調整できます。
-- 添付は3点、合計10MBまでです。
-- 許可する添付拡張子は PDF / Office / txt / csv / png / jpg / jpeg / webp です。
+## 7. 添付制限
+
+- 添付は3点まで
+- 合計10MBまで
+- 許可拡張子は PDF / Office / txt / csv / png / jpg / jpeg / webp
