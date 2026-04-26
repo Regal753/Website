@@ -116,7 +116,7 @@ const Cases: React.FC = () => {
 
         <div className="mt-8 text-center">
           <Link
-            to="/contact/"
+            to="/contact"
             onClick={() => trackEvent('cta_click', { placement: 'cases_section', target: 'contact' })}
             className="inline-flex items-center gap-2 text-sm font-semibold text-brand-primary-700 transition-colors hover:text-brand-primary-800"
           >

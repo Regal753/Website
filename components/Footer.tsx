@@ -25,10 +25,10 @@ const Footer: React.FC = () => {
         <div>
           <p className="mb-3 text-xs font-semibold text-white/50">事業一覧</p>
           <div className="flex flex-col gap-2 text-sm">
-            <Link to="/services/music-publishing/" className="text-white/70 transition-colors hover:text-white">
+            <Link to="/services/music-publishing" className="text-white/70 transition-colors hover:text-white">
               音楽出版・BGM権利管理
             </Link>
-            <Link to="/services/sns-management/" className="text-white/70 transition-colors hover:text-white">
+            <Link to="/services/sns-management" className="text-white/70 transition-colors hover:text-white">
               YouTube/SNS運用
             </Link>
             <Link to="/services/production-workflow/" className="text-white/70 transition-colors hover:text-white">
