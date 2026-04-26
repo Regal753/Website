@@ -34,7 +34,7 @@ BASE_PATH=/Website/ npm run build
 ## 問い合わせフォーム
 
 フロントは `VITE_CONTACT_ENDPOINT`（既定 `/api/contact`）へ送信します。  
-API障害時は任意で旧フォーム送信にフォールバックできます。
+APIが未接続または未設定の場合は画面上で検知し、予備のGoogleフォームと入力内容を引き継いだ `mailto:` 導線を表示します。
 
 `.env` 例:
 

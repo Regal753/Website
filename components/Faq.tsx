@@ -39,11 +39,11 @@ const Faq: React.FC = () => (
             はじめて問い合わせる前に確認されやすい内容をまとめています。
           </p>
           <Link
-            to="/contact"
+            to="/contact/"
             onClick={() => trackEvent('cta_click', { placement: 'faq_section', target: 'contact' })}
-            className="mt-6 inline-flex items-center gap-2 rounded-lg bg-brand-primary-700 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-primary-800"
+            className="mt-6 inline-flex items-center gap-2 bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-slate-800"
           >
-            相談してみる
+            ご相談・お問い合わせ
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

@@ -31,6 +31,8 @@ const AUTORESPONSE_MESSAGE =
   'お問い合わせありがとうございます。内容を確認のうえ、通常1営業日以内にご連絡いたします。';
 const GENERIC_SUBMIT_ERROR =
   '送信に失敗しました。時間をおいて再度お試しいただくか、予備フォームまたはメールをご利用ください。';
+const CONTACT_ENDPOINT_UNAVAILABLE_ERROR =
+  '現在このページのフォーム送信が一時的に利用できません。入力内容をメール本文に入れた状態で送れます。予備フォームまたはメールをご利用ください。';
 const DEFAULT_CONTACT_ENDPOINT = '/api/contact';
 
 const CONTACT_PROMISES = ['通常1営業日以内に返信', '初回相談無料', 'フォームは24時間受付'] as const;
@@ -42,6 +44,7 @@ const COMMON_ISSUES = [
 
 type ContactFieldErrorKey = 'name' | 'email' | 'message' | 'consent' | 'attachments';
 type ContactFieldErrors = Partial<Record<ContactFieldErrorKey, string>>;
+type ContactEndpointStatus = 'checking' | 'ready' | 'degraded';
 
 const formatBytes = (bytes: number): string => {
   if (bytes < 1024) return `${bytes} B`;
@@ -61,6 +64,7 @@ const Contact: React.FC = () => {
   const [fieldErrors, setFieldErrors] = useState<ContactFieldErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [contactEndpointStatus, setContactEndpointStatus] = useState<ContactEndpointStatus>('checking');
   const hasTrackedSubmitSuccess = useRef(false);
   const nameInputRef = useRef<HTMLInputElement>(null);
   const emailInputRef = useRef<HTMLInputElement>(null);
@@ -93,6 +97,40 @@ const Contact: React.FC = () => {
     const configured = (import.meta.env.VITE_CONTACT_ENDPOINT || '').trim();
     return configured || DEFAULT_CONTACT_ENDPOINT;
   }, []);
+
+  const fallbackMailSubject = useMemo(() => {
+    const name = form.name.trim() || 'お名前未入力';
+    return `【Web問い合わせ】${form.type} / ${name}`;
+  }, [form.name, form.type]);
+
+  const fallbackMailBody = useMemo(
+    () =>
+      [
+        'Regalo お問い合わせ',
+        '',
+        `お名前: ${form.name || ''}`,
+        `会社名: ${company || ''}`,
+        `メールアドレス: ${form.email || ''}`,
+        `電話番号: ${phone || ''}`,
+        `お問い合わせ種別: ${form.type}`,
+        '',
+        'お問い合わせ内容:',
+        form.message || '',
+        '',
+        `添付ファイル: ${attachmentSummary}`,
+        '',
+        '※このメールは公式サイトの補助導線から作成されています。',
+      ].join('\n'),
+    [attachmentSummary, company, form.email, form.message, form.name, form.type, phone]
+  );
+
+  const fallbackMailtoHref = useMemo(
+    () =>
+      `mailto:${siteConfig.contactEmail}?subject=${encodeURIComponent(fallbackMailSubject)}&body=${encodeURIComponent(
+        fallbackMailBody
+      )}`,
+    [fallbackMailBody, fallbackMailSubject]
+  );
 
   const clearFieldError = (key: ContactFieldErrorKey) => {
     setFieldErrors((prev) => {
@@ -174,6 +212,15 @@ const Contact: React.FC = () => {
         fields: Object.keys(nextFieldErrors).join(','),
       });
       window.requestAnimationFrame(() => focusFirstInvalidField(nextFieldErrors));
+      return;
+    }
+
+    if (contactEndpointStatus === 'degraded') {
+      setError(CONTACT_ENDPOINT_UNAVAILABLE_ERROR);
+      trackEvent('contact_submit_blocked', {
+        reason: 'endpoint_degraded',
+        endpoint: contactEndpoint,
+      });
       return;
     }
 
@@ -260,9 +307,34 @@ const Contact: React.FC = () => {
     }
   }, [isSubmitted]);
 
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const verifyEndpoint = async () => {
+      try {
+        const response = await fetch(contactEndpoint, {
+          method: 'GET',
+          headers: { Accept: 'application/json' },
+          cache: 'no-store',
+          signal: controller.signal,
+        });
+        const contentType = (response.headers.get('content-type') || '').toLowerCase();
+        const payload = contentType.includes('application/json') ? await response.json().catch(() => null) : null;
+        setContactEndpointStatus(response.ok && payload?.ok && payload?.configured ? 'ready' : 'degraded');
+      } catch (err) {
+        if ((err as Error).name !== 'AbortError') setContactEndpointStatus('degraded');
+      }
+    };
+
+    verifyEndpoint();
+
+    return () => controller.abort();
+  }, [contactEndpoint]);
+
   return (
     <section
       id={SectionId.CONTACT}
+      data-contact-endpoint-status={contactEndpointStatus}
       className="bg-[linear-gradient(180deg,_#ffffff_0%,_#fff8f1_100%)] pt-24 pb-16 md:pt-28 md:pb-24"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -332,7 +404,7 @@ const Contact: React.FC = () => {
             tabIndex={-1}
             className="mt-6 rounded-lg border border-emerald-200 bg-emerald-50 px-5 py-4 shadow-sm"
           >
-            <p className="text-sm font-semibold text-emerald-800">送信が完了しました。無料相談ありがとうございます。</p>
+            <p className="text-sm font-semibold text-emerald-800">送信が完了しました。お問い合わせありがとうございます。</p>
             <p className="mt-1 text-sm leading-relaxed text-emerald-900/90">
               通常1営業日以内にご連絡します。お急ぎの場合はお電話でも受け付けています。
             </p>
@@ -364,6 +436,14 @@ const Contact: React.FC = () => {
               <p className="mt-2 text-sm leading-relaxed text-slate-600">
                 フォーム送信後、内容を確認して担当よりご連絡します。PDFや資料画像も添付できます。
               </p>
+              {contactEndpointStatus === 'degraded' && (
+                <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+                  <p className="font-semibold">現在、フォーム送信の補助導線を優先しています。</p>
+                  <p className="mt-1 leading-relaxed">
+                    入力内容は保持されます。下部の「メールで送る」から、入力内容入りのメールを作成できます。
+                  </p>
+                </div>
+              )}
             </div>
 
             <form
@@ -591,7 +671,8 @@ const Contact: React.FC = () => {
                       <ExternalLink className="h-4 w-4" />
                     </a>
                     <a
-                      href={`mailto:${siteConfig.contactEmail}`}
+                      href={fallbackMailtoHref}
+                      onClick={() => trackEvent('mailto_click', { placement: 'contact_error' })}
                       className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-red-800 ring-1 ring-red-200 transition-colors hover:bg-red-100"
                     >
                       メールで送る
@@ -650,7 +731,7 @@ const Contact: React.FC = () => {
             <div className="order-2 rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
               <h3 className="text-base font-semibold text-brand-ink">フォームが使えない場合</h3>
               <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                通常はこのページのフォームをご利用ください。開けない場合のみ、以下の補助導線をご利用ください。
+                通常はこのページのフォームをご利用ください。送信できない場合は、以下の補助導線をご利用ください。
               </p>
               <div className="mt-4 space-y-3">
                 <a
@@ -681,7 +762,8 @@ const Contact: React.FC = () => {
                 </a>
 
                 <a
-                  href={`mailto:${siteConfig.contactEmail}`}
+                  href={fallbackMailtoHref}
+                  onClick={() => trackEvent('mailto_click', { placement: 'contact_sidebar' })}
                   className="flex items-start gap-3 rounded-lg border border-slate-200 bg-slate-50/80 p-4 transition-colors hover:bg-slate-50"
                 >
                   <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white text-brand-primary-700 shadow-sm">
