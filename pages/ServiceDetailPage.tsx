@@ -303,13 +303,13 @@ const ServiceDetailPage: React.FC = () => {
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
               <Link
-                to="/contact/"
+                to="/contact"
                 onClick={() =>
                   trackEvent('cta_click', { placement: 'service_detail', service: service.slug, target: 'contact' })
                 }
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand-primary-700 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-primary-800"
               >
-                お問い合わせフォームへ
+                無料相談フォームへ
                 <ArrowRight className="h-4 w-4" />
               </Link>
               {phoneHref && (

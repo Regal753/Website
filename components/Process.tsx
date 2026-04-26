@@ -89,7 +89,7 @@ const Process: React.FC = () => {
               to="/contact/"
               className="inline-flex items-center gap-2 text-sm font-semibold text-brand-primary-700 transition-colors hover:text-brand-primary-800"
             >
-              お問い合わせから始める
+              無料相談から始める
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
