@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Clock3, MapPin, Phone, ShieldCheck } from 'lucide-react';
 import NotFoundPage from './NotFoundPage';
 import { getServiceBySlug, serviceCatalog } from '../services.catalog';
@@ -27,16 +27,20 @@ const SERVICE_PROOF_POINTS = [
 
 const ServiceDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
+  const location = useLocation();
   const navigate = useNavigate();
   const service = slug ? getServiceBySlug(slug) : undefined;
   const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
   const [activeSlide, setActiveSlide] = useState(0);
 
   useEffect(() => {
-    if (slug && service && slug !== service.slug) {
-      navigate(`/services/${service.slug}`, { replace: true });
+    if (slug && service) {
+      const canonicalPath = `/services/${service.slug}/`;
+      if (location.pathname !== canonicalPath) {
+        navigate(`${canonicalPath}${location.search}${location.hash}`, { replace: true });
+      }
     }
-  }, [slug, service, navigate]);
+  }, [slug, service, location.pathname, location.search, location.hash, navigate]);
 
   const slideImagePaths = useMemo(() => {
     if (!service) return [];
@@ -328,7 +332,7 @@ const ServiceDetailPage: React.FC = () => {
             {otherServices.map((item) => (
               <Link
                 key={item.slug}
-                to={`/services/${item.slug}`}
+                to={`/services/${item.slug}/`}
                 className="rounded-lg border border-slate-200 bg-white p-4 transition-colors hover:border-brand-primary-300 hover:bg-brand-primary-50/40"
               >
                 <p className="font-semibold text-brand-ink">{item.title}</p>

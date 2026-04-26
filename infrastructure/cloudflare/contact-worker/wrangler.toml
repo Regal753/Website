@@ -4,11 +4,11 @@ compatibility_date = "2026-02-22"
 workers_dev = false
 
 [[routes]]
-pattern = "www.regalocom.net/api/contact*"
+pattern = "www.regalocom.net/api/contact"
 zone_name = "regalocom.net"
 
 [[routes]]
-pattern = "regalocom.net/api/contact*"
+pattern = "regalocom.net/api/contact"
 zone_name = "regalocom.net"
 
 [vars]

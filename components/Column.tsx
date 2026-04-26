@@ -55,7 +55,7 @@ const Column: React.FC = () => {
                 </div>
                 <h3 className="mt-4 text-lg font-semibold leading-snug text-brand-ink transition-colors group-hover:text-brand-primary-700">
                   <Link
-                    to={`/column#${item.slug}`}
+                    to={`/column/#${item.slug}`}
                     onClick={() => trackEvent('column_detail_click', { placement: 'home_column_card', slug: item.slug })}
                   >
                     {item.title}

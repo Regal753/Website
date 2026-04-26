@@ -168,7 +168,7 @@ export const serviceCatalog: ServiceCatalogItem[] = [
     },
   },
   {
-    slug: 'ai-marketing-strategy',
+    slug: 'production-workflow',
     title: '制作進行・業務整理支援',
     description:
       '制作進行、素材共有、確認依頼、レポート整備を見直し、担当者が変わっても追える運用手順を整えます。',
@@ -222,10 +222,10 @@ export const serviceCatalog: ServiceCatalogItem[] = [
     ],
     techStack: ['Google Drive', 'Google Sheets', 'Discord', '必要に応じたツール連携'],
     media: {
-      listImage: 'images/services/ai-cover.webp',
+      listImage: 'images/services/workflow-cover.webp',
       galleryImages: [
-        'images/services/ai-gallery-1.webp',
-        'images/services/ai-gallery-2.webp',
+        'images/services/workflow-gallery-1.webp',
+        'images/services/workflow-gallery-2.webp',
       ],
     },
   },
@@ -235,8 +235,9 @@ const legacySlugMap: Record<string, string> = {
   'sns-operations': 'sns-management',
   'music-publishing-bgm': 'music-publishing',
   'bgm-production': 'music-publishing',
-  'rights-management': 'ai-marketing-strategy',
-  'workflow-automation': 'ai-marketing-strategy',
+  'ai-marketing-strategy': 'production-workflow',
+  'rights-management': 'production-workflow',
+  'workflow-automation': 'production-workflow',
 };
 
 export const getServiceBySlug = (slug: string): ServiceCatalogItem | undefined => {

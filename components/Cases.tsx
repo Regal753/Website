@@ -20,7 +20,7 @@ const caseStyles: Record<
     colorClass: 'text-brand-primary-700 bg-brand-primary-50 border-brand-primary-100',
     serviceChip: 'bg-brand-primary-100 text-brand-primary-800',
   },
-  'ai-marketing-strategy': {
+  'production-workflow': {
     colorClass: 'text-slate-700 bg-slate-50 border-slate-200',
     serviceChip: 'bg-slate-100 text-slate-800',
   },

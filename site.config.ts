@@ -53,7 +53,7 @@ export const cases: CaseStudy[] = [
     deliverables: ['運用フロー', '編集ガイドライン', 'KPI定義', 'ダッシュボード'],
   },
   {
-    serviceSlug: 'ai-marketing-strategy',
+    serviceSlug: 'production-workflow',
     title: '制作進行をDrive/Sheets/Discordで整理',
     clientType: 'クリエイター事務所',
     challenge: '素材収集・進捗共有・リマインドが手作業で、共有漏れや遅延が起きる。',
@@ -120,7 +120,6 @@ export const columnItems: ColumnItem[] = [
 
 export const siteConfig = {
   companyName: 'Regalo',
-  companyNameEn: 'Regalo Inc.',
   contactEmail: CONTACT_EMAIL,
   contactFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSdbqMVhTDUHcfhnrv5Vj96aBF9WhyAwysTfmG9CdgElhrGm1A/viewform',
   siteTitle: 'Regalo | 音楽出版・BGM権利管理・YouTube運用',
@@ -134,7 +133,7 @@ export const siteConfig = {
   navItems: [
     { label: 'ホーム', href: '/' },
     { label: 'サービス', href: '/#services' },
-    { label: 'コラム', href: '/column' },
-    { label: '会社情報', href: '/company' },
+    { label: 'コラム', href: '/column/' },
+    { label: '会社情報', href: '/company/' },
   ] as NavItem[],
 };

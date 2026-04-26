@@ -49,23 +49,6 @@ const formatBytes = (bytes: number): string => {
   return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
 };
 
-const parseLegacyFormResponse = async (
-  response: Response
-): Promise<{ ok: boolean; reason?: string; status?: number }> => {
-  const responseBody = await response.text();
-  const requiresActivation = /needs Activation|Activate Form/i.test(responseBody);
-  const genericFormSubmitPage =
-    /<title>FormSubmit/i.test(responseBody) && !/thank|success|submitted/i.test(responseBody);
-
-  if (requiresActivation || genericFormSubmitPage) {
-    return { ok: false, reason: 'formsubmit_not_activated' };
-  }
-  if (!response.ok) {
-    return { ok: false, reason: 'http_error', status: response.status };
-  }
-  return { ok: true };
-};
-
 const Contact: React.FC = () => {
   const location = useLocation();
   const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
@@ -106,35 +89,10 @@ const Contact: React.FC = () => {
     return hasSubmitted || byQuery;
   }, [hasSubmitted, location.search]);
 
-  const legacyFallbackEndpoint = useMemo(() => {
-    const configured = (import.meta.env.VITE_CONTACT_LEGACY_ENDPOINT || '').trim();
-    return configured;
-  }, []);
-
   const contactEndpoint = useMemo(() => {
     const configured = (import.meta.env.VITE_CONTACT_ENDPOINT || '').trim();
     return configured || DEFAULT_CONTACT_ENDPOINT;
-  }, [legacyFallbackEndpoint]);
-
-  const enableLegacyFallback = useMemo(() => {
-    const configured = (import.meta.env.VITE_CONTACT_ENABLE_LEGACY_FALLBACK || 'false').trim();
-    return configured.toLowerCase() === 'true';
   }, []);
-
-  const nextUrl = useMemo(() => {
-    const configuredSiteUrl = (import.meta.env.VITE_SITE_URL || '').trim();
-    const origin =
-      configuredSiteUrl ||
-      (typeof window !== 'undefined' ? window.location.origin : 'https://www.regalocom.net');
-    const baseOrigin = origin.replace(/\/$/, '');
-    const baseUrl = import.meta.env.BASE_URL || '/';
-    return new URL(`${baseUrl}contact?submitted=1`, `${baseOrigin}/`).toString();
-  }, []);
-
-  const mailSubject = useMemo(
-    () => `[お問い合わせ] ${form.type} / ${form.name || 'お名前未入力'}`,
-    [form.name, form.type]
-  );
 
   const clearFieldError = (key: ContactFieldErrorKey) => {
     setFieldErrors((prev) => {
@@ -234,37 +192,18 @@ const Contact: React.FC = () => {
         body: payload,
       });
       const primaryContentType = (primaryResponse.headers.get('content-type') || '').toLowerCase();
+      const primaryJson = primaryContentType.includes('application/json')
+        ? await primaryResponse.json().catch(() => null)
+        : null;
 
-      if (primaryContentType.includes('application/json')) {
-        const primaryJson = await primaryResponse.json().catch(() => null);
-        if (primaryResponse.ok && (primaryJson?.ok ?? true)) {
-          isSuccess = true;
-        } else {
-          failureReason = primaryJson?.error || 'api_error';
-          failureStatus = primaryResponse.status;
-        }
+      if (!primaryJson) {
+        failureReason = 'unexpected_response';
+        failureStatus = primaryResponse.status;
+      } else if (primaryResponse.ok && (primaryJson.ok ?? true)) {
+        isSuccess = true;
       } else {
-        const legacyResult = await parseLegacyFormResponse(primaryResponse);
-        isSuccess = legacyResult.ok;
-        if (!legacyResult.ok) {
-          failureReason = legacyResult.reason || 'legacy_error';
-          failureStatus = legacyResult.status;
-        }
-      }
-
-      if (!isSuccess && enableLegacyFallback && legacyFallbackEndpoint && contactEndpoint !== legacyFallbackEndpoint) {
-        trackEvent('contact_submit_fallback', { to: 'legacy_endpoint' });
-        const fallbackPayload = new FormData(formElement);
-        const fallbackResponse = await fetch(legacyFallbackEndpoint, {
-          method: 'POST',
-          body: fallbackPayload,
-        });
-        const fallbackResult = await parseLegacyFormResponse(fallbackResponse);
-        isSuccess = fallbackResult.ok;
-        if (!fallbackResult.ok) {
-          failureReason = `fallback_${fallbackResult.reason || 'failed'}`;
-          failureStatus = fallbackResult.status;
-        }
+        failureReason = primaryJson.error || 'api_error';
+        failureStatus = primaryResponse.status;
       }
 
       if (!isSuccess) {
@@ -435,9 +374,6 @@ const Contact: React.FC = () => {
               noValidate
               className="space-y-5"
             >
-              <input type="hidden" name="_subject" value={mailSubject} />
-              <input type="hidden" name="_template" value="table" />
-              <input type="hidden" name="_next" value={nextUrl} />
               <input type="hidden" name="_autoresponse" value={AUTORESPONSE_MESSAGE} />
               <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
 

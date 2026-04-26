@@ -27,7 +27,7 @@ const themes: Record<
     imageBorder: 'border-amber-100',
     eyebrow: 'BGM制作と権利管理',
   },
-  'ai-marketing-strategy': {
+  'production-workflow': {
     card: 'border-slate-200 bg-gradient-to-br from-slate-50 via-white to-white',
     chip: 'bg-slate-100 text-slate-800',
     imageBorder: 'border-slate-200',
@@ -84,7 +84,7 @@ const Services: React.FC = () => {
                       </p>
                       <h3 className="mt-3 text-xl font-semibold text-brand-ink md:text-2xl">
                         <Link
-                          to={`/services/${service.slug}`}
+                          to={`/services/${service.slug}/`}
                           onClick={() =>
                             trackEvent('service_detail_click', { placement: 'services_title', service: service.slug })
                           }
@@ -126,7 +126,7 @@ const Services: React.FC = () => {
 
                   <div className="mt-5">
                     <Link
-                      to={`/services/${service.slug}`}
+                      to={`/services/${service.slug}/`}
                       onClick={() =>
                         trackEvent('service_detail_click', { placement: 'services_cta', service: service.slug })
                       }

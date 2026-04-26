@@ -48,10 +48,7 @@
     <script>
       (function () {
         var path = window.location.pathname + window.location.search + window.location.hash;
-        var segments = window.location.pathname.split('/').filter(Boolean);
-        var rootRoutes = { company: true, contact: true, privacy: true, terms: true, services: true };
-        var basePath =
-          segments.length > 1 && !rootRoutes[segments[0]] ? '/' + segments[0] + '/' : '/';
+        var basePath = '/';
         var homeLink = document.getElementById('home-link');
         if (homeLink) {
           homeLink.setAttribute('href', basePath);

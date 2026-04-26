@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
             <Link to="/services/sns-management" className="text-white/70 transition-colors hover:text-white">
               YouTube/SNS運用
             </Link>
-            <Link to="/services/ai-marketing-strategy" className="text-white/70 transition-colors hover:text-white">
+            <Link to="/services/production-workflow/" className="text-white/70 transition-colors hover:text-white">
               制作進行・業務整理
             </Link>
           </div>
@@ -60,13 +60,13 @@ const Footer: React.FC = () => {
         <div>
           <p className="mb-3 text-xs font-semibold text-white/50">ガイド</p>
           <div className="flex flex-col gap-2 text-sm">
-            <Link to="/column" className="text-white/70 transition-colors hover:text-white">
+            <Link to="/column/" className="text-white/70 transition-colors hover:text-white">
               コラム
             </Link>
-            <Link to="/company" className="text-white/70 transition-colors hover:text-white">
+            <Link to="/company/" className="text-white/70 transition-colors hover:text-white">
               会社情報
             </Link>
-            <Link to="/contact" className="text-white/70 transition-colors hover:text-white">
+            <Link to="/contact/" className="text-white/70 transition-colors hover:text-white">
               お問い合わせ
             </Link>
             <a

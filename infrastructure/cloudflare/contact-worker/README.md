@@ -60,8 +60,6 @@ KV が Worker に bind されていない場合も、POST は `rate_limit_not_co
 
 ```env
 VITE_CONTACT_ENDPOINT=/api/contact
-VITE_CONTACT_ENABLE_LEGACY_FALLBACK=false
-VITE_CONTACT_LEGACY_ENDPOINT=
 VITE_SITE_URL=https://www.regalocom.net
 ```
 

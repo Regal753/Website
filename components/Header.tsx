@@ -94,7 +94,7 @@ const Header: React.FC = () => {
           </nav>
 
           <Link
-            to="/contact"
+            to="/contact/"
             onClick={handleNavClick}
             className="inline-flex items-center gap-2 rounded-full bg-brand-primary-700 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-brand-primary-700/20 transition-all hover:-translate-y-px hover:bg-brand-primary-800"
           >
@@ -138,7 +138,7 @@ const Header: React.FC = () => {
               </Link>
             ))}
             <Link
-              to="/contact"
+              to="/contact/"
               onClick={handleNavClick}
               className="mt-1 inline-flex items-center justify-center gap-2 rounded-lg bg-brand-primary-700 px-4 py-3 text-sm font-semibold text-white"
             >

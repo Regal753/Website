@@ -91,7 +91,7 @@ const Hero: React.FC = () => {
               {siteConfig.columnItems.slice(0, 3).map((item) => (
                 <Link
                   key={item.slug}
-                  to={`/column#${item.slug}`}
+                  to={`/column/#${item.slug}`}
                   onClick={() => trackEvent('column_detail_click', { placement: 'hero_ticker', slug: item.slug })}
                   className="inline-flex min-w-0 items-center gap-2 font-medium transition-colors hover:text-brand-primary-700"
                 >
@@ -136,7 +136,7 @@ const Hero: React.FC = () => {
                 return (
                   <Link
                     key={service.slug}
-                    to={`/services/${service.slug}`}
+                    to={`/services/${service.slug}/`}
                     onClick={() =>
                       trackEvent('service_detail_click', { placement: 'hero_service_card', service: service.slug })
                     }

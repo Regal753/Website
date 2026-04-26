@@ -209,15 +209,19 @@ function App() {
         <main id="main-content">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/company" element={<CompanyPage />} />
+            <Route path="/company" element={<Navigate to="/company/" replace />} />
+            <Route path="/company/" element={<CompanyPage />} />
             <Route path="/company.html" element={<Navigate to="/company/" replace />} />
-            <Route path="/column" element={<ColumnPage />} />
+            <Route path="/column" element={<Navigate to="/column/" replace />} />
+            <Route path="/column/" element={<ColumnPage />} />
             <Route path="/column.html" element={<Navigate to="/column/" replace />} />
-            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/contact" element={<Navigate to="/contact/" replace />} />
+            <Route path="/contact/" element={<ContactPage />} />
             <Route path="/contact.html" element={<Navigate to="/contact/" replace />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/services/:slug" element={<ServiceDetailPage />} />
+            <Route path="/services/:slug/" element={<ServiceDetailPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>

@@ -55,8 +55,8 @@ const companyHighlights = [
 ] as const;
 
 const representativeHighlights = [
-  'JASRAC信託会員',
   '音楽著作権管理者養成講座修了',
+  'BGM権利台帳の整備に対応',
   '2024年6月法人設立',
   '京都発の実務チーム',
 ] as const;
@@ -64,7 +64,7 @@ const representativeHighlights = [
 const serviceThemes: Record<string, string> = {
   'sns-management': 'border-rose-100 bg-gradient-to-br from-rose-50 via-white to-white',
   'music-publishing': 'border-amber-100 bg-gradient-to-br from-amber-50 via-white to-white',
-  'ai-marketing-strategy': 'border-slate-200 bg-gradient-to-br from-slate-50 via-white to-white',
+  'production-workflow': 'border-slate-200 bg-gradient-to-br from-slate-50 via-white to-white',
 };
 
 const CompanyInfo: React.FC = () => {
@@ -214,7 +214,7 @@ const CompanyInfo: React.FC = () => {
             {serviceCatalog.map((service) => (
               <Link
                 key={service.slug}
-                to={`/services/${service.slug}`}
+                to={`/services/${service.slug}/`}
                 className={`rounded-lg border p-5 shadow-sm transition-all hover:-translate-y-px hover:shadow-md ${serviceThemes[service.slug] ?? 'border-slate-200 bg-white'}`}
               >
                 <p className="text-lg font-semibold text-brand-ink">{service.title}</p>

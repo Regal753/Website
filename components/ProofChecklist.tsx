@@ -17,7 +17,7 @@ const proofItems = [
     icon: ShieldCheck,
     title: '権利管理の実務に対応',
     description: 'BGM制作だけでなく、利用許諾、権利台帳、確認フローまで現場で使う形に整理します。',
-    meta: 'JASRAC信託会員 / 講座修了',
+    meta: '講座修了 / 台帳整備対応',
   },
   {
     icon: FileCheck2,
@@ -87,7 +87,7 @@ const ProofChecklist: React.FC = () => {
             まず会社情報を確認したい場合は、所在地・法人番号・事業内容を掲載したページから確認できます。
           </p>
           <Link
-            to="/company"
+            to="/company/"
             onClick={() => trackEvent('cta_click', { placement: 'proof_checklist', target: 'company' })}
             className="inline-flex items-center gap-2 text-sm font-semibold text-brand-primary-700 transition-colors hover:text-brand-primary-800"
           >

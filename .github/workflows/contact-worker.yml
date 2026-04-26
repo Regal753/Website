@@ -45,6 +45,10 @@ jobs:
           CONTACT_RATE_LIMITS_KV_ID: ${{ secrets.CONTACT_RATE_LIMITS_KV_ID }}
         run: |
           perl -0pi -e 's/__CONTACT_LOGS_KV_ID__/$ENV{CONTACT_LOGS_KV_ID}/g; s/__CONTACT_RATE_LIMITS_KV_ID__/$ENV{CONTACT_RATE_LIMITS_KV_ID}/g' wrangler.toml
+          if grep -F "__CONTACT_" wrangler.toml; then
+            echo "::error::Worker KV placeholders were not fully replaced."
+            exit 1
+          fi
 
       - name: Deploy Worker
         uses: cloudflare/wrangler-action@v3

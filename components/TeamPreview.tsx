@@ -5,8 +5,8 @@ import { siteConfig } from '../site.config';
 import { trackEvent } from '../utils/analytics';
 
 const PROFILE_HIGHLIGHTS = [
-  'JASRAC信託会員',
   '音楽著作権管理者養成講座修了',
+  'BGM権利台帳の整備に対応',
   '2024年6月法人設立',
   '京都発の実務チーム',
 ];

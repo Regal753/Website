@@ -31,7 +31,6 @@ jobs:
       - run: npm run build
         env:
           VITE_CONTACT_ENDPOINT: /api/contact
-          VITE_CONTACT_ENABLE_LEGACY_FALLBACK: "false"
           VITE_SITE_URL: https://www.regalocom.net
 
       - uses: actions/configure-pages@v5
