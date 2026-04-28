@@ -35,11 +35,10 @@ const Hero: React.FC = () => {
   return (
     <section
       id={SectionId.HOME}
-      className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,_rgba(254,243,199,0.85),_transparent_35%),radial-gradient(circle_at_top_right,_rgba(224,231,255,0.9),_transparent_32%),linear-gradient(180deg,_#ffffff_0%,_#fffaf7_100%)] pt-32 pb-16 md:pb-24"
+      className="relative overflow-hidden bg-[linear-gradient(135deg,_#fffdf8_0%,_#ffffff_48%,_#f5f8ff_100%)] pt-32 pb-16 md:pb-24"
     >
       <div className="absolute inset-0 z-0">
-        <div className="absolute left-[-8rem] top-[-7rem] h-72 w-72 rounded-full bg-amber-200/40 blur-3xl" />
-        <div className="absolute right-[-10rem] top-10 h-80 w-80 rounded-full bg-brand-primary-200/35 blur-3xl" />
+        <div className="absolute inset-x-0 top-24 h-px bg-gradient-to-r from-transparent via-slate-200/70 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white to-transparent" />
       </div>
 
@@ -117,7 +116,7 @@ const Hero: React.FC = () => {
               </span>
             </div>
 
-            <div className="mt-5 space-y-3">
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
               {serviceCatalog.map((service, index) => {
                 const Icon = service.icon;
                 return (
@@ -127,28 +126,39 @@ const Hero: React.FC = () => {
                     onClick={() =>
                       trackEvent('service_detail_click', { placement: 'hero_service_card', service: service.slug })
                     }
-                    className="grid grid-cols-[96px_minmax(0,1fr)] gap-4 rounded-2xl border border-slate-200 bg-slate-50/80 p-3 transition-all hover:border-brand-primary-200 hover:bg-white hover:shadow-sm"
+                    className={`group overflow-hidden rounded-2xl border border-slate-200 bg-slate-950/95 transition-all hover:-translate-y-0.5 hover:border-brand-primary-200 hover:shadow-md ${
+                      index === 0 ? 'sm:col-span-2' : ''
+                    }`}
                   >
-                    <img
-                      src={asset(service.media.listImage)}
-                      alt={`${service.title}のイメージ`}
-                      width={640}
-                      height={360}
-                      loading={index === 0 ? 'eager' : 'lazy'}
-                      fetchPriority={index === 0 ? 'high' : 'auto'}
-                      decoding="async"
-                      className="h-20 w-24 rounded-2xl object-cover"
-                    />
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-2">
-                        <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-white text-brand-primary-700 shadow-sm">
-                          <Icon className="h-4 w-4" />
-                        </span>
-                        <p className="truncate text-sm font-semibold text-brand-ink">{service.title}</p>
+                    <div className={`relative overflow-hidden ${index === 0 ? 'h-48' : 'h-36'}`}>
+                      <img
+                        src={asset(service.media.listImage)}
+                        alt={service.title}
+                        width={1280}
+                        height={720}
+                        loading={index === 0 ? 'eager' : 'lazy'}
+                        fetchPriority={index === 0 ? 'high' : 'auto'}
+                        decoding="async"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/18 to-transparent" />
+                      <div className="absolute inset-x-0 bottom-0 p-4 text-white">
+                        <div className="flex items-center gap-2">
+                          <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-white/92 text-brand-primary-700 shadow-sm">
+                            <Icon className="h-4 w-4" />
+                          </span>
+                          <p
+                            className={`min-w-0 font-semibold leading-tight ${
+                              index === 0 ? 'text-sm' : 'text-xs'
+                            }`}
+                          >
+                            {service.title}
+                          </p>
+                        </div>
+                        <p className="mt-2 text-xs leading-relaxed text-white/82">
+                          {service.items.slice(0, 2).join(' / ')}
+                        </p>
                       </div>
-                      <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                        {service.items.slice(0, 2).join(' / ')}
-                      </p>
                     </div>
                   </Link>
                 );
