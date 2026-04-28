@@ -63,12 +63,11 @@ const Services: React.FC = () => {
           {serviceCatalog.map((service) => {
             const Icon = service.icon;
             const theme = themes[service.slug] ?? defaultTheme;
-            const images = [service.media.listImage, ...service.media.galleryImages];
 
             return (
               <article
                 key={service.slug}
-                className={`grid gap-6 rounded-3xl border p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg md:grid-cols-[minmax(0,1fr)_320px] md:p-8 ${theme.card}`}
+                className={`grid gap-6 rounded-3xl border p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg md:grid-cols-[minmax(0,1fr)_340px] md:p-8 ${theme.card}`}
               >
                 <div>
                   <div className="flex items-start gap-4">
@@ -138,28 +137,16 @@ const Services: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className={`h-60 overflow-hidden rounded-3xl border bg-white md:h-full md:min-h-[260px] ${theme.imageBorder}`}>
                   <img
-                    src={asset(images[0])}
+                    src={asset(service.media.listImage)}
                     alt={`${service.title}のメインイメージ`}
                     width={1280}
                     height={720}
-                    className={`col-span-2 h-44 w-full rounded-3xl border bg-white object-cover ${theme.imageBorder}`}
+                    className="h-full w-full object-cover"
                     loading="lazy"
                     decoding="async"
                   />
-                  {images.slice(1).map((imagePath, imageIndex) => (
-                    <img
-                      key={`${service.slug}-preview-${imageIndex}`}
-                      src={asset(imagePath)}
-                      alt={`${service.title}の参考イメージ${imageIndex + 1}`}
-                      width={640}
-                      height={360}
-                      className={`h-28 w-full rounded-2xl border bg-white object-cover ${theme.imageBorder}`}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  ))}
                 </div>
               </article>
             );
