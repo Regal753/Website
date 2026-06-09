@@ -89,9 +89,9 @@ export const siteConfig = {
   newsItems,
   navItems: [
     { label: 'ホーム', href: '/' },
-    { label: 'SNS管理事業部', href: '/services/sns-management' },
-    { label: '音楽出版事業部', href: '/services/music-publishing' },
-    { label: 'AIマーケティング戦略事業部', href: '/services/ai-marketing-strategy' },
+    { label: 'SNS管理事業部', href: '/services/sns-management/' },
+    { label: '音楽出版事業部', href: '/services/music-publishing/' },
+    { label: 'AIマーケティング戦略事業部', href: '/services/ai-marketing-strategy/' },
     { label: '会社情報', href: '/company' },
   ] as NavItem[],
 };

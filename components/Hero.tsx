@@ -122,7 +122,7 @@ const Hero: React.FC = () => {
                 return (
                   <Link
                     key={service.slug}
-                    to={`/services/${service.slug}`}
+                    to={`/services/${service.slug}/`}
                     onClick={() =>
                       trackEvent('service_detail_click', { placement: 'hero_service_card', service: service.slug })
                     }

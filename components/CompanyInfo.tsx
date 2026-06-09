@@ -214,7 +214,7 @@ const CompanyInfo: React.FC = () => {
             {serviceCatalog.map((service) => (
               <Link
                 key={service.slug}
-                to={`/services/${service.slug}`}
+                to={`/services/${service.slug}/`}
                 className={`rounded-3xl border p-5 shadow-sm transition-all hover:-translate-y-px hover:shadow-md ${serviceThemes[service.slug] ?? 'border-slate-200 bg-white'}`}
               >
                 <p className="text-lg font-semibold text-brand-ink">{service.title}</p>

@@ -83,7 +83,7 @@ const Services: React.FC = () => {
                       </p>
                       <h3 className="mt-3 text-xl font-semibold text-brand-ink md:text-2xl">
                         <Link
-                          to={`/services/${service.slug}`}
+                          to={`/services/${service.slug}/`}
                           onClick={() =>
                             trackEvent('service_detail_click', { placement: 'services_title', service: service.slug })
                           }
@@ -125,7 +125,7 @@ const Services: React.FC = () => {
 
                   <div className="mt-5">
                     <Link
-                      to={`/services/${service.slug}`}
+                      to={`/services/${service.slug}/`}
                       onClick={() =>
                         trackEvent('service_detail_click', { placement: 'services_cta', service: service.slug })
                       }

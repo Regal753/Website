@@ -240,7 +240,7 @@ const legacySlugMap: Record<string, string> = {
 };
 
 export const getServiceBySlug = (slug: string): ServiceCatalogItem | undefined => {
-  const slugWithoutHtml = slug.replace(/\.html$/i, '');
+  const slugWithoutHtml = slug.replace(/^\/+|\/+$/g, '').replace(/\.html$/i, '');
   const normalizedSlug = legacySlugMap[slugWithoutHtml] || slugWithoutHtml;
   return serviceCatalog.find((service) => service.slug === normalizedSlug);
 };

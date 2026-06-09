@@ -63,7 +63,7 @@ const upsertCanonicalLink = (href: string) => {
 };
 
 const getRouteMeta = (pathname: string): RouteMeta => {
-  const serviceMatch = pathname.match(/^\/services\/([^/]+)$/);
+  const serviceMatch = pathname.match(/^\/services\/([^/]+)\/?$/);
   if (serviceMatch) {
     const decodedSlug = decodeURIComponent(serviceMatch[1]);
     const service = getServiceBySlug(decodedSlug);
@@ -71,7 +71,7 @@ const getRouteMeta = (pathname: string): RouteMeta => {
       return {
         title: `${service.title} | ${siteConfig.companyName}`,
         description: service.description,
-        canonicalPath: `/services/${service.slug}`,
+        canonicalPath: `/services/${service.slug}/`,
       };
     }
   }
@@ -185,6 +185,7 @@ function App() {
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/services/:slug" element={<ServiceDetailPage />} />
+            <Route path="/services/:slug/" element={<ServiceDetailPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
