@@ -23,6 +23,19 @@ const INITIAL_FORM: ContactFormState = {
   message: '',
 };
 
+const INQUIRY_TYPE_OPTIONS = [
+  'お問い合わせ',
+  'YouTube BGM・権利運用の初期診断について',
+  'SNS管理事業部について',
+  '音楽出版事業部について',
+  'AIマーケティング戦略事業部について',
+  'その他',
+] as const;
+
+const INQUIRY_TYPE_PRESETS: Record<string, (typeof INQUIRY_TYPE_OPTIONS)[number]> = {
+  'music-rights-review': 'YouTube BGM・権利運用の初期診断について',
+};
+
 const CONTACT_HOURS = '電話受付 9:00-20:00（フォームは24時間受付）';
 const MAX_ATTACHMENT_BYTES = 10 * 1024 * 1024;
 const AUTORESPONSE_MESSAGE =
@@ -101,6 +114,14 @@ const Contact: React.FC = () => {
     const byQuery = new URLSearchParams(location.search).get('submitted') === '1';
     return hasSubmitted || byQuery;
   }, [hasSubmitted, location.search]);
+
+  useEffect(() => {
+    const presetKey = new URLSearchParams(location.search).get('type');
+    if (!presetKey) return;
+    const preset = INQUIRY_TYPE_PRESETS[presetKey];
+    if (!preset) return;
+    setForm((previous) => ({ ...previous, type: preset }));
+  }, [location.search]);
 
   const legacyFallbackEndpoint = useMemo(() => {
     const configured = (import.meta.env.VITE_CONTACT_LEGACY_ENDPOINT || '').trim();
@@ -534,11 +555,9 @@ const Contact: React.FC = () => {
                       onChange={(event) => updateField('type', event.target.value)}
                       className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
                     >
-                      <option>お問い合わせ</option>
-                      <option>SNS管理事業部について</option>
-                      <option>音楽出版事業部について</option>
-                      <option>AIマーケティング戦略事業部について</option>
-                      <option>その他</option>
+                      {INQUIRY_TYPE_OPTIONS.map((option) => (
+                        <option key={option}>{option}</option>
+                      ))}
                     </select>
                   </label>
 

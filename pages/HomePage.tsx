@@ -1,7 +1,8 @@
 import React from 'react';
+import BusinessFAQ from '../components/BusinessFAQ';
 import Cases from '../components/Cases';
 import Hero from '../components/Hero';
-import InlineCTA from '../components/InlineCTA';
+import MusicRightsReview from '../components/MusicRightsReview';
 import News from '../components/News';
 import Process from '../components/Process';
 import Services from '../components/Services';
@@ -12,9 +13,10 @@ const HomePage: React.FC = () => (
     <Hero />
     <Services />
     <Cases />
-    <InlineCTA />
+    <MusicRightsReview />
     <TeamPreview />
     <Process />
+    <BusinessFAQ />
     <News />
   </>
 );
