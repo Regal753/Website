@@ -36,4 +36,12 @@ describe('service catalog', () => {
     expect(getServiceBySlug('rights-management.html')?.slug).toBe('ai-marketing-strategy');
     expect(getServiceBySlug('/rights-management/')?.slug).toBe('ai-marketing-strategy');
   });
+
+  it('puts music publishing first without dropping the other divisions', () => {
+    expect(serviceCatalog.map((service) => service.slug)).toEqual([
+      'music-publishing',
+      'sns-management',
+      'ai-marketing-strategy',
+    ]);
+  });
 });

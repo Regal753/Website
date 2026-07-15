@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Clock3, MapPin, ShieldCheck } from 'lucide-react';
 import { serviceCatalog } from '../services.catalog';
-import { siteConfig } from '../site.config';
+import { JASRAC_RELATION_LABEL, siteConfig } from '../site.config';
 import { SectionId } from '../types';
 import { trackEvent } from '../utils/analytics';
 
@@ -22,8 +22,8 @@ const Hero: React.FC = () => {
     },
     {
       icon: ShieldCheck,
-      title: '権利管理まで実務対応',
-      description: '音楽著作権や台帳設計など、裏側の管理もまとめて整理します。',
+      title: JASRAC_RELATION_LABEL,
+      description: 'JASRACとの管理委託契約に基づく著作権管理や利用台帳を、実務で整理します。',
     },
     {
       icon: Clock3,
@@ -63,9 +63,7 @@ const Hero: React.FC = () => {
           <div className="flex flex-wrap gap-2 text-sm font-medium text-slate-700">
             <span className="rounded-full border border-slate-200 bg-white/85 px-3 py-1.5">初回相談無料</span>
             <span className="rounded-full border border-slate-200 bg-white/85 px-3 py-1.5">1営業日以内に返信</span>
-            <span className="rounded-full border border-slate-200 bg-white/85 px-3 py-1.5">
-              会社窓口で対応
-            </span>
+            <span className="rounded-full border border-slate-200 bg-white/85 px-3 py-1.5">{JASRAC_RELATION_LABEL}</span>
           </div>
 
           <div className="flex flex-col flex-wrap gap-4 sm:flex-row">

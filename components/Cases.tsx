@@ -37,11 +37,11 @@ const Cases: React.FC = () => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center md:mb-14">
           <p className="mb-4 inline-flex rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-800">
-            改善事例
+            実務から作った支援例
           </p>
-          <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">解決事例</h2>
+          <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">支援の組み立て方</h2>
           <p className="mx-auto max-w-2xl text-slate-600">
-            抽象的な「改善しました」ではなく、何を整えて、どの変化が出たかを分かる形で掲載します。
+            自社運用やこれまで扱ってきた課題をもとに、どこを整理し、何を納品物として残すかを紹介します。
           </p>
         </div>
 

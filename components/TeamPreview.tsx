@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, BadgeCheck, MapPin, Sparkles } from 'lucide-react';
-import { siteConfig } from '../site.config';
+import { JASRAC_RELATION_LABEL, siteConfig } from '../site.config';
 import { trackEvent } from '../utils/analytics';
 
 const PROFILE_HIGHLIGHTS = [
-  'JASRAC信託会員',
+  JASRAC_RELATION_LABEL,
   '音楽著作権管理者養成講座修了',
   '2024年6月法人設立',
   '京都発の実務チーム',

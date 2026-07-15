@@ -42,7 +42,7 @@ export interface ServiceCatalogItem {
   media: ServiceMediaAssets;
 }
 
-export const serviceCatalog: ServiceCatalogItem[] = [
+const serviceCatalogBase: ServiceCatalogItem[] = [
   {
     slug: 'sns-management',
     title: 'SNS管理事業部',
@@ -230,6 +230,16 @@ export const serviceCatalog: ServiceCatalogItem[] = [
     },
   },
 ];
+
+const servicePriority = new Map(
+  ['music-publishing', 'sns-management', 'ai-marketing-strategy'].map((slug, index) => [slug, index]),
+);
+
+export const serviceCatalog: ServiceCatalogItem[] = [...serviceCatalogBase].sort(
+  (a, b) =>
+    (servicePriority.get(a.slug) ?? Number.MAX_SAFE_INTEGER) -
+    (servicePriority.get(b.slug) ?? Number.MAX_SAFE_INTEGER),
+);
 
 const legacySlugMap: Record<string, string> = {
   'sns-operations': 'sns-management',

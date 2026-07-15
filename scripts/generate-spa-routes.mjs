@@ -8,12 +8,14 @@ const siteUrl = 'https://www.regalocom.net';
 const routeEntrypoints = [
   {
     path: 'company/index.html',
+    aliases: ['company.html'],
     title: '会社情報 | Regalo',
     description: '京都発の実務チームRegaloの会社概要、公開情報、支援体制をご案内します。',
     canonicalPath: '/company',
   },
   {
     path: 'contact/index.html',
+    aliases: ['contact.html'],
     title: 'お問い合わせ | Regalo',
     description:
       'SNS運用、音楽権利管理、AIを活用した運用改善のご相談を24時間受け付けています。通常1営業日以内にご連絡します。',
@@ -76,8 +78,6 @@ const routeEntrypoints = [
 ];
 
 const redirectAliases = {
-  'company.html': '/company',
-  'contact.html': '/contact',
   // Legacy service detail URLs
   'services/sns-operations.html': '/services/sns-management/',
   'services/music-publishing-bgm.html': '/services/music-publishing/',
@@ -159,15 +159,24 @@ const main = async () => {
   await writeEntrypoint('services/index.html', indexHtml);
 
   for (const route of routeEntrypoints) {
-    await writeEntrypoint(route.path, withRouteMeta(indexHtml, route));
+    const routeHtml = withRouteMeta(indexHtml, route);
+    await writeEntrypoint(route.path, routeHtml);
+
+    for (const aliasPath of route.aliases ?? []) {
+      await writeEntrypoint(aliasPath, routeHtml);
+    }
   }
 
   for (const [aliasPath, redirectTarget] of Object.entries(redirectAliases)) {
     await writeEntrypoint(aliasPath, createRedirectHtml(redirectTarget));
   }
 
+  const flatEntrypointCount = routeEntrypoints.reduce(
+    (count, route) => count + (route.aliases?.length ?? 0),
+    0,
+  );
   console.info(
-    `[build:routes] generated ${routeEntrypoints.length + 1} SPA entrypoints and ${Object.keys(redirectAliases).length} redirect aliases`,
+    `[build:routes] generated ${routeEntrypoints.length + flatEntrypointCount + 1} SPA entrypoints and ${Object.keys(redirectAliases).length} redirect aliases`,
   );
 };
 
