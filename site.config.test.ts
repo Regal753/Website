@@ -8,6 +8,12 @@ describe('siteConfig cases', () => {
     expect(JASRAC_RELATION_LABEL).not.toContain('会員');
   });
 
+  it('keeps published trust copy aligned with verified evidence', () => {
+    expect(siteConfig.companyProfile.business[0]).toBe('音楽出版事業部');
+    expect(siteConfig.newsItems.some((item) => item.title.includes('音楽著作権管理者養成講座を修了'))).toBe(true);
+    expect(siteConfig.newsItems.some((item) => item.title.includes('資格取得'))).toBe(false);
+  });
+
   it('reference valid services', () => {
     const serviceSlugs = new Set(serviceCatalog.map((service) => service.slug));
 
