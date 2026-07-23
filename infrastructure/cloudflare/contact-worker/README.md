@@ -54,13 +54,12 @@ GitHub Actions で自動デプロイする場合は以下の Secrets を設定�
 
 ```env
 VITE_CONTACT_ENDPOINT=
-VITE_CONTACT_ENABLE_LEGACY_FALLBACK=true
-VITE_CONTACT_LEGACY_ENDPOINT=
 VITE_SITE_URL=https://www.regalocom.net
 ```
 
 - `VITE_CONTACT_ENDPOINT` は独自ドメインAPIを優先
-- `VITE_CONTACT_ENABLE_LEGACY_FALLBACK=true` の場合、API障害時に旧フォーム送信へフォールバック
+- 未指定時も同一オリジンの `/api/contact` を利用
+- API障害時に第三者フォームへ自動転送しない。予備Googleフォームは利用者が画面上で明示的に選ぶ
 
 ## 6. 監査ログ
 

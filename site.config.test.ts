@@ -3,9 +3,10 @@ import { serviceCatalog } from './services.catalog';
 import { JASRAC_RELATION_LABEL, siteConfig } from './site.config';
 
 describe('siteConfig cases', () => {
-  it('uses the official JASRAC trustor term instead of conflating it with membership', () => {
-    expect(JASRAC_RELATION_LABEL).toBe('JASRAC信託者');
+  it('describes the JASRAC relationship as a management contract, not an endorsement', () => {
+    expect(JASRAC_RELATION_LABEL).toBe('JASRAC管理委託契約');
     expect(JASRAC_RELATION_LABEL).not.toContain('会員');
+    expect(JASRAC_RELATION_LABEL).not.toContain('認定');
   });
 
   it('keeps published trust copy aligned with verified evidence', () => {

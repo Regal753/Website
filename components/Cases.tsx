@@ -44,7 +44,7 @@ const Cases: React.FC = () => {
         <div className="mb-10 grid gap-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)] lg:items-end lg:gap-16 md:mb-14">
           <div>
             <p className="inline-flex rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-800">
-              支援イメージ
+              支援設計例
             </p>
             <h2 className="mt-4 text-3xl font-semibold leading-tight text-brand-ink md:text-5xl">
               課題を、運用に残る
@@ -53,8 +53,8 @@ const Cases: React.FC = () => {
             </h2>
           </div>
           <p className="max-w-2xl text-base leading-8 text-slate-600">
-            自社運用やこれまで扱ってきた課題をもとに、相談前の状態から、何を整え、
-            どの納品物として残すのかを3つの例で紹介します。
+            自社運用とこれまで扱ってきた課題を抽象化・再構成し、相談前の状態から何を整え、
+            どの納品物として残すのかを3つの設計例で紹介します。
           </p>
         </div>
 
@@ -124,6 +124,10 @@ const Cases: React.FC = () => {
             );
           })}
         </div>
+
+        <p className="mt-6 text-center text-xs leading-6 text-slate-500">
+          ※ 特定顧客の実績数値や成果保証を示すものではありません。実際の支援範囲は資料と契約状況を確認して決定します。
+        </p>
 
         <div className="mt-10 flex justify-center">
           <Link

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BadgeCheck, Building2, Clock3, Music2, ShieldCheck } from 'lucide-react';
+import { ArrowRight, BadgeCheck, Building2, ExternalLink, Music2, Newspaper, ShieldCheck } from 'lucide-react';
 import { serviceCatalog } from '../services.catalog';
 import { JASRAC_RELATION_LABEL, siteConfig } from '../site.config';
 import { SectionId } from '../types';
@@ -10,12 +10,12 @@ const PROOF_POINTS = [
   {
     icon: ShieldCheck,
     title: JASRAC_RELATION_LABEL,
-    description: '管理委託契約に基づき、権利情報と利用条件を整理',
+    description: '自社管理楽曲の著作権管理をJASRACへ委託',
   },
   {
     icon: BadgeCheck,
-    title: '養成講座修了',
-    description: '音楽著作権管理者養成講座の修了証書を確認済み',
+    title: 'MPA講座修了',
+    description: '日本音楽出版社協会主催・2025年度修了',
   },
   {
     icon: Building2,
@@ -23,9 +23,10 @@ const PROOF_POINTS = [
     description: '2024年6月設立。京都から会社窓口で対応',
   },
   {
-    icon: Clock3,
-    title: '初回相談無料',
-    description: 'フォームは24時間受付、通常1営業日以内に返信',
+    icon: Newspaper,
+    title: '外部メディア掲載',
+    description: 'クラウドワークス公式メディアに掲載',
+    href: 'https://crowdworks.jp/times/interview/28780/',
   },
 ] as const;
 
@@ -182,18 +183,43 @@ const Hero: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-9 grid overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 shadow-sm sm:grid-cols-2 lg:grid-cols-4">
-          {PROOF_POINTS.map((point) => (
-            <div key={point.title} className="bg-white/95 p-5">
+        <div className="mt-9 grid grid-cols-2 overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 shadow-sm lg:grid-cols-4">
+          {PROOF_POINTS.map((point) => {
+            const content = (
+              <>
               <div className="flex items-center gap-3">
-                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-amber-50 text-amber-800">
+                <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-amber-50 text-amber-800 sm:h-10 sm:w-10 sm:rounded-2xl">
                   <point.icon className="h-5 w-5" />
                 </span>
-                <p className="font-semibold text-brand-ink">{point.title}</p>
+                <p className="text-sm font-semibold leading-tight text-brand-ink sm:text-base">{point.title}</p>
               </div>
-              <p className="mt-3 text-sm leading-relaxed text-slate-600">{point.description}</p>
-            </div>
-          ))}
+              <p className="mt-3 text-xs leading-relaxed text-slate-600 sm:text-sm">{point.description}</p>
+              {'href' in point && (
+                <span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-brand-primary-700">
+                  掲載記事を確認
+                  <ExternalLink className="h-3.5 w-3.5" />
+                </span>
+              )}
+              </>
+            );
+
+            return 'href' in point ? (
+              <a
+                key={point.title}
+                href={point.href}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => trackEvent('external_link_click', { platform: 'crowdworks_times', placement: 'hero_proof' })}
+                className="bg-white/95 p-4 transition-colors hover:bg-amber-50/70 sm:p-5"
+              >
+                {content}
+              </a>
+            ) : (
+              <div key={point.title} className="bg-white/95 p-4 sm:p-5">
+                {content}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

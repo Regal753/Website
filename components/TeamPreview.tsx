@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BadgeCheck, MapPin, Sparkles } from 'lucide-react';
+import { ArrowRight, BadgeCheck, ExternalLink, MapPin, Sparkles } from 'lucide-react';
 import { JASRAC_RELATION_LABEL, siteConfig } from '../site.config';
 import { trackEvent } from '../utils/analytics';
 
 const PROFILE_HIGHLIGHTS = [
   JASRAC_RELATION_LABEL,
-  '音楽著作権管理者養成講座修了',
+  'MPA音楽著作権管理者養成講座 2025年度修了',
   '2024年6月法人設立',
   '京都発の実務チーム',
 ];
@@ -23,7 +23,7 @@ const TeamPreview: React.FC = () => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center md:mb-14">
           <p className="mb-4 inline-flex rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-800">
-            体制と支援方針
+            会社体制
           </p>
           <h2 className="text-3xl font-semibold text-brand-ink md:text-4xl">体制と支援方針</h2>
           <p className="mx-auto mt-4 max-w-3xl text-slate-600">
@@ -37,14 +37,17 @@ const TeamPreview: React.FC = () => {
               R
             </div>
             <p className="mt-6 text-sm font-medium text-slate-500">運営体制</p>
-            <h3 className="mt-1 text-3xl font-semibold">{siteConfig.companyName}</h3>
+            <h3 className="mt-1 text-3xl font-semibold">株式会社Regalo</h3>
+            <p className="mt-2 text-sm font-semibold text-brand-primary-700">
+              代表者 {siteConfig.companyProfile.representative}
+            </p>
             <p className="mt-4 text-sm leading-relaxed text-slate-600">
-              少人数チームで、相談整理から運用定着までを連続して対応します。
+              小規模法人として、相談整理から運用定着までを連続して対応します。
               運用、権利、共有フローのどこに課題があるかを切り分け、実務に落ちる形まで設計します。
             </p>
             <div className="mt-6 flex items-center gap-2 rounded-2xl border border-brand-primary-100 bg-white px-4 py-3 text-sm text-slate-700 shadow-sm">
               <MapPin className="h-4 w-4 text-amber-700" />
-              京都発の実務チーム
+              京都府長岡京市の法人
             </div>
           </div>
 
@@ -86,7 +89,7 @@ const TeamPreview: React.FC = () => {
               </div>
             </div>
 
-            <div className="mt-8">
+            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
               <Link
                 to="/company"
                 onClick={() => trackEvent('cta_click', { placement: 'team_preview', target: 'company' })}
@@ -95,6 +98,18 @@ const TeamPreview: React.FC = () => {
                 会社情報と支援体制を見る
                 <ArrowRight className="h-4 w-4" />
               </Link>
+              <a
+                href="https://crowdworks.jp/times/interview/28780/"
+                target="_blank"
+                rel="noreferrer"
+                onClick={() =>
+                  trackEvent('external_link_click', { platform: 'crowdworks_times', placement: 'team_preview' })
+                }
+                className="inline-flex items-center gap-2 text-sm font-semibold text-brand-primary-700 transition-colors hover:text-brand-primary-800"
+              >
+                クラウドワークス掲載記事を見る
+                <ExternalLink className="h-4 w-4" />
+              </a>
             </div>
           </div>
         </div>

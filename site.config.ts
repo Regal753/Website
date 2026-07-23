@@ -1,7 +1,7 @@
 import { NavItem, CompanyProfile, CaseStudy, NewsItem } from './types';
 
 const CONTACT_EMAIL = 'contact@regalocom.net';
-export const JASRAC_RELATION_LABEL = 'JASRAC信託者';
+export const JASRAC_RELATION_LABEL = 'JASRAC管理委託契約';
 const BRAND_POSITIONING = {
   homepageSummary:
     'Regaloは、YouTubeで使う音楽の権利管理を起点に、SNS運用と制作進行までを一つの窓口で整えます。相談から台帳・運用ルールの定着まで、現場で使える形にします。',
@@ -36,7 +36,7 @@ export const cases: CaseStudy[] = [
   {
     serviceSlug: 'music-publishing',
     title: 'BGM運用と権利管理を整理',
-    clientType: 'YouTube・BGM運用の支援例',
+    clientType: 'YouTube・BGM運用の支援設計例',
     challenge: 'BGM利用可否の判断が人依存で、公開前確認に時間がかかる。',
     scope: 'BGMカタログ構築・権利台帳整備・利用許諾フロー設計',
     outcome: '権利情報と利用条件を一つの台帳へ集約し、公開前に確認できる運用へ整理。',
@@ -46,7 +46,7 @@ export const cases: CaseStudy[] = [
   {
     serviceSlug: 'sns-management',
     title: 'YouTube運用の属人化を標準化',
-    clientType: 'YouTube運用の支援例',
+    clientType: 'YouTube運用の支援設計例',
     challenge: '企画や改善が担当者依存で、数値を見ながら運用改善を回せない。',
     scope: 'YouTube運用設計・編集ガイドライン策定・KPIダッシュボード構築',
     outcome: '企画、制作、確認、公開後の振り返りを一つの流れにし、担当者が変わっても追える形へ整理。',
@@ -56,7 +56,7 @@ export const cases: CaseStudy[] = [
   {
     serviceSlug: 'ai-marketing-strategy',
     title: '制作進行をDrive/Sheets/Discordで自動化',
-    clientType: '制作進行の支援例',
+    clientType: '制作進行の支援設計例',
     challenge: '素材収集・進捗共有・リマインドが手作業で、共有漏れや遅延が起きる。',
     scope: 'Google Drive / Sheets / Discord を連携した制作進行自動化',
     outcome: '素材共有、進捗更新、確認依頼をつなぎ、手作業の転記と連絡漏れを減らす運用へ整理。',
