@@ -23,6 +23,19 @@ const INITIAL_FORM: ContactFormState = {
   message: '',
 };
 
+const INQUIRY_TYPE_OPTIONS = [
+  'お問い合わせ',
+  'YouTube BGM・権利運用の初期診断について',
+  'SNS管理事業部について',
+  '音楽出版事業部について',
+  'AIマーケティング戦略事業部について',
+  'その他',
+] as const;
+
+const INQUIRY_TYPE_PRESETS: Record<string, (typeof INQUIRY_TYPE_OPTIONS)[number]> = {
+  'music-rights-review': 'YouTube BGM・権利運用の初期診断について',
+};
+
 const CONTACT_HOURS = '電話受付 9:00-20:00（フォームは24時間受付）';
 const MAX_ATTACHMENT_BYTES = 10 * 1024 * 1024;
 const AUTORESPONSE_MESSAGE =
@@ -43,23 +56,6 @@ const formatBytes = (bytes: number): string => {
   if (bytes < 1024) return `${bytes} B`;
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
   return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
-};
-
-const parseLegacyFormResponse = async (
-  response: Response
-): Promise<{ ok: boolean; reason?: string; status?: number }> => {
-  const responseBody = await response.text();
-  const requiresActivation = /needs Activation|Activate Form/i.test(responseBody);
-  const genericFormSubmitPage =
-    /<title>FormSubmit/i.test(responseBody) && !/thank|success|submitted/i.test(responseBody);
-
-  if (requiresActivation || genericFormSubmitPage) {
-    return { ok: false, reason: 'formsubmit_not_activated' };
-  }
-  if (!response.ok) {
-    return { ok: false, reason: 'http_error', status: response.status };
-  }
-  return { ok: true };
 };
 
 const Contact: React.FC = () => {
@@ -102,19 +98,17 @@ const Contact: React.FC = () => {
     return hasSubmitted || byQuery;
   }, [hasSubmitted, location.search]);
 
-  const legacyFallbackEndpoint = useMemo(() => {
-    const configured = (import.meta.env.VITE_CONTACT_LEGACY_ENDPOINT || '').trim();
-    return configured || `https://formsubmit.co/${siteConfig.contactEmail}`;
-  }, []);
+  useEffect(() => {
+    const presetKey = new URLSearchParams(location.search).get('type');
+    if (!presetKey) return;
+    const preset = INQUIRY_TYPE_PRESETS[presetKey];
+    if (!preset) return;
+    setForm((previous) => ({ ...previous, type: preset }));
+  }, [location.search]);
 
   const contactEndpoint = useMemo(() => {
     const configured = (import.meta.env.VITE_CONTACT_ENDPOINT || '').trim();
-    return configured || legacyFallbackEndpoint;
-  }, [legacyFallbackEndpoint]);
-
-  const enableLegacyFallback = useMemo(() => {
-    const configured = (import.meta.env.VITE_CONTACT_ENABLE_LEGACY_FALLBACK || 'true').trim();
-    return configured.toLowerCase() === 'true';
+    return configured || '/api/contact';
   }, []);
 
   const nextUrl = useMemo(() => {
@@ -237,27 +231,8 @@ const Contact: React.FC = () => {
           failureStatus = primaryResponse.status;
         }
       } else {
-        const legacyResult = await parseLegacyFormResponse(primaryResponse);
-        isSuccess = legacyResult.ok;
-        if (!legacyResult.ok) {
-          failureReason = legacyResult.reason || 'legacy_error';
-          failureStatus = legacyResult.status;
-        }
-      }
-
-      if (!isSuccess && enableLegacyFallback && contactEndpoint !== legacyFallbackEndpoint) {
-        trackEvent('contact_submit_fallback', { to: 'legacy_formsubmit' });
-        const fallbackPayload = new FormData(formElement);
-        const fallbackResponse = await fetch(legacyFallbackEndpoint, {
-          method: 'POST',
-          body: fallbackPayload,
-        });
-        const fallbackResult = await parseLegacyFormResponse(fallbackResponse);
-        isSuccess = fallbackResult.ok;
-        if (!fallbackResult.ok) {
-          failureReason = `fallback_${fallbackResult.reason || 'failed'}`;
-          failureStatus = fallbackResult.status;
-        }
+        failureReason = 'invalid_api_response';
+        failureStatus = primaryResponse.status;
       }
 
       if (!isSuccess) {
@@ -534,11 +509,9 @@ const Contact: React.FC = () => {
                       onChange={(event) => updateField('type', event.target.value)}
                       className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
                     >
-                      <option>お問い合わせ</option>
-                      <option>SNS管理事業部について</option>
-                      <option>音楽出版事業部について</option>
-                      <option>AIマーケティング戦略事業部について</option>
-                      <option>その他</option>
+                      {INQUIRY_TYPE_OPTIONS.map((option) => (
+                        <option key={option}>{option}</option>
+                      ))}
                     </select>
                   </label>
 
@@ -634,6 +607,9 @@ const Contact: React.FC = () => {
                       {fieldErrors.consent}
                     </p>
                   )}
+                  <p className="text-xs leading-6 text-slate-500">
+                    入力内容は株式会社Regaloの問い合わせ窓口へ送信します。予備フォームへ自動転送することはありません。
+                  </p>
                 </div>
               </div>
 

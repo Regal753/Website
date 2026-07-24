@@ -34,14 +34,12 @@ BASE_PATH=/Website/ npm run build
 ## 問い合わせフォーム
 
 フロントは `VITE_CONTACT_ENDPOINT`（既定 `/api/contact`）へ送信します。  
-API障害時は任意で旧フォーム送信にフォールバックできます。
+第三者フォームへの自動フォールバックは行いません。障害時は画面上の予備Googleフォームを利用者が明示的に選びます。
 
 `.env` 例:
 
 ```env
 VITE_CONTACT_ENDPOINT=
-VITE_CONTACT_ENABLE_LEGACY_FALLBACK=true
-VITE_CONTACT_LEGACY_ENDPOINT=
 VITE_SITE_URL=https://www.regalocom.net
 ```
 

@@ -30,8 +30,8 @@ const Header: React.FC = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/92 backdrop-blur-xl shadow-[0_8px_26px_rgba(15,23,42,0.08)] border-b border-slate-200/80 py-3.5'
-          : 'bg-white/65 backdrop-blur-md border-b border-white/30 py-5'
+          ? 'bg-white/92 backdrop-blur-xl shadow-[0_8px_26px_rgba(15,23,42,0.08)] border-b border-slate-200/80 py-3'
+          : 'bg-white/72 backdrop-blur-md border-b border-white/40 py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
@@ -82,17 +82,26 @@ const Header: React.FC = () => {
           </Link>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          type="button"
-          className="lg:hidden text-slate-600 hover:text-slate-900 rounded-lg bg-white/85 border border-slate-200 p-2"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label={isMobileMenuOpen ? 'メニューを閉じる' : 'メニューを開く'}
-          aria-expanded={isMobileMenuOpen}
-          aria-controls="mobile-navigation"
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="flex items-center gap-2 lg:hidden">
+          <Link
+            to="/contact"
+            onClick={handleNavClick}
+            className="inline-flex items-center gap-1.5 rounded-full bg-brand-primary-700 px-3.5 py-2 text-sm font-semibold text-white shadow-md shadow-brand-primary-700/20"
+          >
+            無料相談
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+          <button
+            type="button"
+            className="rounded-lg border border-slate-200 bg-white/85 p-2 text-slate-600 hover:text-slate-900"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? 'メニューを閉じる' : 'メニューを開く'}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-navigation"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Nav */}
@@ -100,9 +109,10 @@ const Header: React.FC = () => {
         id="mobile-navigation"
         className={`absolute top-full left-0 right-0 origin-top overflow-hidden transition-[max-height,opacity,transform] duration-300 lg:hidden ${
           isMobileMenuOpen
-            ? 'max-h-[520px] opacity-100 translate-y-0'
-            : 'max-h-0 opacity-0 -translate-y-2 pointer-events-none'
+            ? 'visible max-h-[520px] translate-y-0 opacity-100'
+            : 'invisible max-h-0 -translate-y-2 opacity-0 pointer-events-none'
         }`}
+        aria-hidden={!isMobileMenuOpen}
       >
         <div className="rounded-b-2xl bg-white/95 backdrop-blur-xl border-t border-slate-200 shadow-xl p-4 flex flex-col gap-3">
           {siteConfig.navItems.map((item) => (
