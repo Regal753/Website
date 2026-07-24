@@ -48,6 +48,10 @@ GitHub Actions で自動デプロイする場合は以下の Secrets を設定�
 - `CLOUDFLARE_API_TOKEN`
 - `CLOUDFLARE_ACCOUNT_ID`
 
+GitHub Actionsの`Deploy Contact API Worker`は、誤公開を避けるため
+`workflow_dispatch`からの手動実行だけを受け付けます。上記Secretsを設定した後、
+Actions画面から明示的に実行してください。通常の`main` pushでは起動しません。
+
 ## 5. フロント側設定
 
 `.env` で以下を利用します:
