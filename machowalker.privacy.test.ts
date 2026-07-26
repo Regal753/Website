@@ -18,5 +18,7 @@ describe('MachoWalker app privacy page', () => {
     expect(privacyPage).toContain('利用者情報を収集しません');
     expect(privacyPage).toContain('contact@regalocom.net');
     expect(privacyPage).toContain('Motion &amp; Fitness');
+    expect(privacyPage).toContain('Appleの共有シート');
+    expect(privacyPage).toContain('本アプリが自動的に送信することはありません');
   });
 });
