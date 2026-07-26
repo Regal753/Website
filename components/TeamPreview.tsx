@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { ArrowRight, BadgeCheck, ExternalLink, MapPin, Sparkles } from 'lucide-react';
 import { JASRAC_RELATION_LABEL, siteConfig } from '../site.config';
 import { trackEvent } from '../utils/analytics';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight, Check, ClipboardList, FileCheck2, Route } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { trackEvent } from '../utils/analytics';
 
 const commonSituations = [

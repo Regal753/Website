@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { ArrowDown, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { serviceCatalog } from '../services.catalog';
 import { siteConfig } from '../site.config';
