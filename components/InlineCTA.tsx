@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { ArrowRight, Clock3, Phone, ShieldCheck } from 'lucide-react';
 import { siteConfig } from '../site.config';
 import { trackEvent } from '../utils/analytics';

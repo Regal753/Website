@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { ArrowRight, BadgeCheck, Building2, MapPin, ShieldCheck } from 'lucide-react';
 import { companyProfile, JASRAC_RELATION_LABEL, siteConfig } from '../site.config';
 import { SectionId } from '../types';

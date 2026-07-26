@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { ArrowRight, BadgeCheck, Building2, ExternalLink, Music2, Newspaper, ShieldCheck } from 'lucide-react';
 import { serviceCatalog } from '../services.catalog';
 import { JASRAC_RELATION_LABEL, siteConfig } from '../site.config';

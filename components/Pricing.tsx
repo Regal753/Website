@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight, BadgeCheck, FileText, MessageSquare } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { SectionId } from '../types';
 
 const pricingSteps = [
