@@ -95,7 +95,7 @@ const MusicRightsReview: React.FC = () => {
                       <item.icon className="h-5 w-5" />
                     </span>
                     <div>
-                      <p className="text-xs font-semibold text-slate-400">0{index + 1}</p>
+                      <p className="text-xs font-semibold text-slate-600">0{index + 1}</p>
                       <h4 className="mt-1 font-semibold text-slate-900">{item.label}</h4>
                       <p className="mt-1 text-sm leading-6 text-slate-600">{item.description}</p>
                     </div>

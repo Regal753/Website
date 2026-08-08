@@ -23,9 +23,10 @@ describe('siteConfig cases', () => {
     }
   });
 
-  it('include proof details for each published case', () => {
+  it('includes clear structure for each support-design sample', () => {
     for (const item of siteConfig.cases) {
       expect(item.title.length).toBeGreaterThan(0);
+      expect(item.clientType).toContain('実績紹介ではありません');
       expect(item.challenge.length).toBeGreaterThan(0);
       expect(item.results.length).toBeGreaterThan(0);
       expect(item.deliverables.length).toBeGreaterThan(0);
@@ -39,5 +40,11 @@ describe('siteConfig cases', () => {
     for (const pattern of forbiddenPatterns) {
       expect(serialized).not.toMatch(pattern);
     }
+  });
+
+  it('links company proof only to named public sources', () => {
+    expect(siteConfig.verificationLinks.corporateRegistry).toContain('houjin-bangou.nta.go.jp');
+    expect(siteConfig.verificationLinks.corporateRegistry).toContain(siteConfig.companyProfile.corporateNumber);
+    expect(siteConfig.verificationLinks.mediaCoverage).toBe('https://crowdworks.jp/times/interview/28780/');
   });
 });

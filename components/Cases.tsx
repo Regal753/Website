@@ -44,7 +44,7 @@ const Cases: React.FC = () => {
         <div className="mb-10 grid gap-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)] lg:items-end lg:gap-16 md:mb-14">
           <div>
             <p className="inline-flex rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-800">
-              支援設計例
+              支援設計のサンプル
             </p>
             <h2 className="mt-4 text-3xl font-semibold leading-tight text-brand-ink md:text-5xl">
               課題を、運用に残る
@@ -53,8 +53,8 @@ const Cases: React.FC = () => {
             </h2>
           </div>
           <p className="max-w-2xl text-base leading-8 text-slate-600">
-            自社運用とこれまで扱ってきた課題を抽象化・再構成し、相談前の状態から何を整え、
-            どの納品物として残すのかを3つの設計例で紹介します。
+            特定顧客の実績紹介ではありません。自社運用とこれまで扱ってきた課題を抽象化・再構成し、
+            相談前の状態から何を整え、どの納品物として残すのかを3つのサンプルで紹介します。
           </p>
         </div>
 
@@ -83,7 +83,7 @@ const Cases: React.FC = () => {
                 <h3 className="mt-2 text-2xl font-semibold leading-tight text-brand-ink">{c.title}</h3>
 
                 <div className="mt-6 rounded-2xl border border-slate-200 bg-white/90 p-4">
-                  <p className="text-xs font-semibold tracking-[0.12em] text-slate-400">BEFORE / 課題</p>
+                  <p className="text-xs font-semibold tracking-[0.12em] text-slate-600">BEFORE / 課題</p>
                   <p className="mt-2 text-sm leading-7 text-slate-700">{c.challenge}</p>
                 </div>
 
@@ -92,12 +92,12 @@ const Cases: React.FC = () => {
                 </div>
 
                 <div className="rounded-2xl bg-slate-950 p-4 text-white">
-                  <p className="text-xs font-semibold tracking-[0.12em] text-white/45">DESIGN / 整えるもの</p>
+                  <p className="text-xs font-semibold tracking-[0.12em] text-white/75">DESIGN / 整えるもの</p>
                   <p className="mt-2 text-sm leading-7 text-white/80">{c.scope}</p>
                 </div>
 
                 <div className="mt-5">
-                  <p className="text-xs font-semibold tracking-[0.12em] text-slate-400">AFTER / 整った状態</p>
+                  <p className="text-xs font-semibold tracking-[0.12em] text-slate-600">AFTER / 整った状態例</p>
                   <p className="mt-2 text-sm leading-7 text-slate-700">{c.outcome}</p>
                 </div>
 
@@ -126,7 +126,7 @@ const Cases: React.FC = () => {
         </div>
 
         <p className="mt-6 text-center text-xs leading-6 text-slate-500">
-          ※ 特定顧客の実績数値や成果保証を示すものではありません。実際の支援範囲は資料と契約状況を確認して決定します。
+          ※ 特定顧客の実績・実績数値・成果保証を示すものではありません。実際の支援範囲とお見積りは、資料と契約状況を確認して個別にご案内します。
         </p>
 
         <div className="mt-10 flex justify-center">

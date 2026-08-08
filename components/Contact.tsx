@@ -387,7 +387,9 @@ const Contact: React.FC = () => {
                   </span>
                 ))}
               </div>
-              <p className="mt-4 text-xs text-slate-500">「*」は必須項目です。</p>
+              {contactEndpointState === 'available' && (
+                <p className="mt-4 text-xs text-slate-500">「*」は必須項目です。</p>
+              )}
             </div>
 
             <aside className="border-t border-slate-200 bg-[linear-gradient(135deg,_#eef2ff_0%,_#f8fafc_52%,_#fff7ed_100%)] p-6 text-brand-ink lg:border-l lg:border-t-0 md:p-8">
@@ -478,7 +480,7 @@ const Contact: React.FC = () => {
               <p className="mt-2 text-sm leading-relaxed text-slate-600">
                 {contactEndpointState === 'available'
                   ? 'フォーム送信後、内容を確認して担当よりご連絡します。添付ファイルもそのまま送信できます。'
-                  : '現在は確認済みのGoogleフォーム、メール、電話で受け付けています。送信できない画面に入力させることはありません。'}
+                  : 'Googleフォーム、メール、電話で受け付けています。ご都合のよい方法をお選びください。'}
               </p>
             </div>
 
@@ -492,7 +494,7 @@ const Contact: React.FC = () => {
                   {contactEndpointState === 'checking' ? '送信経路を確認中' : '受付中の連絡方法'}
                 </p>
                 <h3 className="mt-3 text-xl font-semibold text-brand-ink">
-                  Googleフォームから安全に送信できます
+                  Googleフォームから送信できます
                 </h3>
                 <p className="mt-2 text-sm leading-7 text-slate-600">
                   別タブでRegaloの問い合わせフォームを開きます。通常1営業日以内に確認します。
@@ -703,19 +705,19 @@ const Contact: React.FC = () => {
                       {consent && <Check className="h-3.5 w-3.5" />}
                     </span>
                     <span className="text-sm leading-relaxed text-slate-700">
-                      <a
-                        href={asset('privacy.html')}
+                      <Link
+                        to="/privacy"
                         className="text-brand-primary-700 underline underline-offset-2 transition-colors hover:text-brand-primary-800"
                       >
                         プライバシーポリシー
-                      </a>
+                      </Link>
                       と{' '}
-                      <a
-                        href={asset('terms.html')}
+                      <Link
+                        to="/terms"
                         className="text-brand-primary-700 underline underline-offset-2 transition-colors hover:text-brand-primary-800"
                       >
                         利用規約
-                      </a>
+                      </Link>
                       に同意します。
                     </span>
                   </label>

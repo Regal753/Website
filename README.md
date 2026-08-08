@@ -52,3 +52,10 @@ Cloudflare Workerを公開した後、GitHub Actions repository variable
 Cloudflare Worker 版の実装とセットアップは以下:
 
 - `infrastructure/cloudflare/contact-worker/README.md`
+
+## アクセス解析
+
+Cloudflare Web AnalyticsのサイトトークンをGitHub Actions repository variable
+`VITE_CLOUDFLARE_WEB_ANALYTICS_TOKEN`へ設定した場合だけ、公式beaconを読み込みます。
+未設定時は外部解析スクリプトを読み込まず、表示や問い合わせ導線にも影響しません。
+このbeaconはSPAのページ遷移と実利用時の表示性能を計測します。フォームの入力値はイベントへ渡しません。
