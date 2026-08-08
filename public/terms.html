@@ -3,16 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; img-src 'self' data:; style-src 'unsafe-inline'; font-src 'self' data:; script-src 'none'; upgrade-insecure-requests"
+    />
     <title>利用規約 | Regalo</title>
     <meta name="description" content="Regaloのサービス利用条件です。" />
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <link rel="canonical" href="https://www.regalocom.net/terms" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <style>
       :root {
         color-scheme: light;
@@ -23,7 +23,7 @@
       }
       body {
         margin: 0;
-        font-family: "Noto Sans JP", sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Yu Gothic UI", "Yu Gothic", Meiryo, sans-serif;
         background: linear-gradient(180deg, #f1f5f9 0%, #ffffff 34%, #eff6ff 100%);
         color: var(--ink-subtle);
       }

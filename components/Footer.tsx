@@ -70,18 +70,12 @@ const Footer: React.FC = () => {
             <Link to="/contact" className="text-white/70 transition-colors hover:text-white">
               お問い合わせ
             </Link>
-            <a
-              href={`${import.meta.env.BASE_URL}privacy.html`}
-              className="text-white/70 transition-colors hover:text-white"
-            >
+            <Link to="/privacy" className="text-white/70 transition-colors hover:text-white">
               プライバシーポリシー
-            </a>
-            <a
-              href={`${import.meta.env.BASE_URL}terms.html`}
-              className="text-white/70 transition-colors hover:text-white"
-            >
+            </Link>
+            <Link to="/terms" className="text-white/70 transition-colors hover:text-white">
               利用規約
-            </a>
+            </Link>
           </div>
         </div>
       </div>
