@@ -40,7 +40,10 @@ const CONTACT_HOURS = '電話受付 9:00-20:00（フォームは24時間受付�
 const MAX_ATTACHMENT_BYTES = 10 * 1024 * 1024;
 const AUTORESPONSE_MESSAGE =
   'お問い合わせありがとうございます。内容を確認のうえ、通常1営業日以内にご連絡いたします。';
-const GENERIC_SUBMIT_ERROR = '送信に失敗しました。時間をおいて再度お試しください。';
+const GENERIC_SUBMIT_ERROR =
+  'サイト内フォームから送信できませんでした。入力内容を残したまま、下のメール導線またはGoogleフォームをご利用ください。';
+const CONFIGURED_CONTACT_ENDPOINT = (import.meta.env.VITE_CONTACT_ENDPOINT || '').trim();
+const CONTACT_HEALTH_TIMEOUT_MS = 4500;
 
 const CONTACT_PROMISES = ['通常1営業日以内に返信', '初回相談無料', 'フォームは24時間受付'] as const;
 const COMMON_ISSUES = [
@@ -51,6 +54,7 @@ const COMMON_ISSUES = [
 
 type ContactFieldErrorKey = 'name' | 'email' | 'message' | 'consent' | 'attachments';
 type ContactFieldErrors = Partial<Record<ContactFieldErrorKey, string>>;
+type ContactEndpointState = 'checking' | 'available' | 'unavailable';
 
 const formatBytes = (bytes: number): string => {
   if (bytes < 1024) return `${bytes} B`;
@@ -70,6 +74,9 @@ const Contact: React.FC = () => {
   const [fieldErrors, setFieldErrors] = useState<ContactFieldErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [contactEndpointState, setContactEndpointState] = useState<ContactEndpointState>(
+    CONFIGURED_CONTACT_ENDPOINT ? 'checking' : 'unavailable'
+  );
   const hasTrackedSubmitSuccess = useRef(false);
   const nameInputRef = useRef<HTMLInputElement>(null);
   const emailInputRef = useRef<HTMLInputElement>(null);
@@ -106,10 +113,49 @@ const Contact: React.FC = () => {
     setForm((previous) => ({ ...previous, type: preset }));
   }, [location.search]);
 
-  const contactEndpoint = useMemo(() => {
-    const configured = (import.meta.env.VITE_CONTACT_ENDPOINT || '').trim();
-    return configured || '/api/contact';
-  }, []);
+  const contactEndpoint = CONFIGURED_CONTACT_ENDPOINT;
+
+  useEffect(() => {
+    if (!contactEndpoint) return;
+
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), CONTACT_HEALTH_TIMEOUT_MS);
+    let isCurrent = true;
+
+    const verifyContactEndpoint = async () => {
+      try {
+        const response = await fetch(contactEndpoint, {
+          method: 'GET',
+          headers: { Accept: 'application/json' },
+          cache: 'no-store',
+          signal: controller.signal,
+        });
+        const contentType = (response.headers.get('content-type') || '').toLowerCase();
+        const payload = contentType.includes('application/json')
+          ? await response.json().catch(() => null)
+          : null;
+
+        if (isCurrent) {
+          setContactEndpointState(
+            response.ok && payload?.ok === true && payload?.accepting === true
+              ? 'available'
+              : 'unavailable'
+          );
+        }
+      } catch (_error) {
+        if (isCurrent) setContactEndpointState('unavailable');
+      } finally {
+        window.clearTimeout(timeoutId);
+      }
+    };
+
+    void verifyContactEndpoint();
+    return () => {
+      isCurrent = false;
+      window.clearTimeout(timeoutId);
+      controller.abort();
+    };
+  }, [contactEndpoint]);
 
   const nextUrl = useMemo(() => {
     const configuredSiteUrl = (import.meta.env.VITE_SITE_URL || '').trim();
@@ -125,6 +171,20 @@ const Contact: React.FC = () => {
     () => `[お問い合わせ] ${form.type} / ${form.name || 'お名前未入力'}`,
     [form.name, form.type]
   );
+
+  const fallbackMailHref = useMemo(() => {
+    const body = [
+      `お名前: ${form.name || '-'}`,
+      `会社名: ${company || '-'}`,
+      `メールアドレス: ${form.email || '-'}`,
+      `電話番号: ${phone || '-'}`,
+      `お問い合わせ種別: ${form.type}`,
+      '',
+      'お問い合わせ内容:',
+      form.message || '-',
+    ].join('\n');
+    return `mailto:${siteConfig.contactEmail}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(body)}`;
+  }, [company, form.email, form.message, form.name, form.type, mailSubject, phone]);
 
   const clearFieldError = (key: ContactFieldErrorKey) => {
     setFieldErrors((prev) => {
@@ -203,6 +263,14 @@ const Contact: React.FC = () => {
         fields: Object.keys(nextFieldErrors).join(','),
       });
       window.requestAnimationFrame(() => focusFirstInvalidField(nextFieldErrors));
+      return;
+    }
+
+    if (!contactEndpoint || contactEndpointState !== 'available') {
+      setError(GENERIC_SUBMIT_ERROR);
+      trackEvent('contact_submit_blocked', {
+        reason: 'contact_api_unavailable',
+      });
       return;
     }
 
@@ -401,15 +469,64 @@ const Contact: React.FC = () => {
           </div>
         )}
 
-        <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.12fr)_340px]">
+        <div className="mt-8 grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1.12fr)_340px]">
           <div className="rounded-[32px] border border-slate-200 bg-white/95 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.06)] md:p-8">
             <div className="mb-6">
-              <h2 className="text-2xl font-semibold text-brand-ink">お問い合わせフォーム</h2>
+              <h2 className="text-2xl font-semibold text-brand-ink">
+                {contactEndpointState === 'available' ? 'お問い合わせフォーム' : 'お問い合わせはこちら'}
+              </h2>
               <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                フォーム送信後、内容を確認して担当よりご連絡します。添付ファイルもそのまま送信できます。
+                {contactEndpointState === 'available'
+                  ? 'フォーム送信後、内容を確認して担当よりご連絡します。添付ファイルもそのまま送信できます。'
+                  : '現在は確認済みのGoogleフォーム、メール、電話で受け付けています。送信できない画面に入力させることはありません。'}
               </p>
             </div>
 
+            {contactEndpointState !== 'available' ? (
+              <div
+                data-contact-fallback="active"
+                role="status"
+                className="rounded-3xl border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#ffffff_62%,_#fff7ed_100%)] p-5 md:p-6"
+              >
+                <p className="text-xs font-semibold tracking-widest text-brand-primary-700">
+                  {contactEndpointState === 'checking' ? '送信経路を確認中' : '受付中の連絡方法'}
+                </p>
+                <h3 className="mt-3 text-xl font-semibold text-brand-ink">
+                  Googleフォームから安全に送信できます
+                </h3>
+                <p className="mt-2 text-sm leading-7 text-slate-600">
+                  別タブでRegaloの問い合わせフォームを開きます。通常1営業日以内に確認します。
+                </p>
+                <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+                  <a
+                    href={siteConfig.contactFormUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() =>
+                      trackEvent('external_link_click', {
+                        platform: 'google_form',
+                        placement: 'contact_primary_fallback',
+                      })
+                    }
+                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-primary-700 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-primary-800"
+                  >
+                    <FileText className="h-4 w-4" />
+                    Googleフォームで問い合わせる
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                  <a
+                    href={fallbackMailHref}
+                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-brand-ink transition-colors hover:bg-slate-50"
+                  >
+                    <Mail className="h-4 w-4" />
+                    メールで問い合わせる
+                  </a>
+                </div>
+                <p className="mt-4 text-xs leading-6 text-slate-500">
+                  添付ファイルがある場合はメールへ直接添付してください。
+                </p>
+              </div>
+            ) : (
             <form
               action={contactEndpoint}
               method="POST"
@@ -621,7 +738,25 @@ const Contact: React.FC = () => {
                   tabIndex={-1}
                   className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700"
                 >
-                  {error}
+                  <p>{error}</p>
+                  <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+                    <a
+                      href={fallbackMailHref}
+                      className="inline-flex items-center justify-center gap-2 rounded-lg border border-red-300 bg-white px-4 py-2 text-xs font-semibold text-red-800 hover:bg-red-100"
+                    >
+                      <Mail className="h-4 w-4" />
+                      入力内容をメールで続ける
+                    </a>
+                    <a
+                      href={siteConfig.contactFormUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center justify-center gap-2 rounded-lg border border-red-300 bg-white px-4 py-2 text-xs font-semibold text-red-800 hover:bg-red-100"
+                    >
+                      <FileText className="h-4 w-4" />
+                      Googleフォームを開く
+                    </a>
+                  </div>
                 </div>
               )}
 
@@ -634,6 +769,7 @@ const Contact: React.FC = () => {
                 {isSubmitting ? '送信中…' : 'お問い合わせを送信'}
               </button>
             </form>
+            )}
           </div>
 
           <aside className="space-y-4">
@@ -672,9 +808,13 @@ const Contact: React.FC = () => {
             </div>
 
             <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-              <h3 className="text-base font-semibold text-brand-ink">フォームが使えない場合</h3>
+              <h3 className="text-base font-semibold text-brand-ink">
+                {contactEndpointState === 'available' ? 'フォームが使えない場合' : 'ほかの連絡方法'}
+              </h3>
               <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                通常はこのページのフォームをご利用ください。開けない場合のみ、以下の補助導線をご利用ください。
+                {contactEndpointState === 'available'
+                  ? '通常はこのページのフォームをご利用ください。開けない場合は、以下の連絡方法をご利用ください。'
+                  : 'Googleフォームのほか、メールでもお問い合わせいただけます。'}
               </p>
               <div className="mt-4 space-y-3">
                 <a
@@ -693,19 +833,19 @@ const Contact: React.FC = () => {
                     <FileText className="h-5 w-5" />
                   </span>
                   <span>
-                    <span className="block text-sm font-semibold text-brand-ink">予備フォーム</span>
+                    <span className="block text-sm font-semibold text-brand-ink">Googleフォーム</span>
                     <span className="mt-1 block text-sm leading-relaxed text-slate-600">
-                      このページのフォームが使えない場合のみ、Googleフォームをご利用ください。
+                      必要事項を入力して送信できる、確認済みの問い合わせ窓口です。
                     </span>
                     <span className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-brand-primary-700">
-                      予備フォームを開く
+                      Googleフォームを開く
                       <ExternalLink className="h-4 w-4" />
                     </span>
                   </span>
                 </a>
 
                 <a
-                  href={`mailto:${siteConfig.contactEmail}`}
+                  href={fallbackMailHref}
                   className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50/80 p-4 transition-colors hover:bg-slate-50"
                 >
                   <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white text-brand-primary-700 shadow-sm">

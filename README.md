@@ -33,8 +33,10 @@ BASE_PATH=/Website/ npm run build
 
 ## 問い合わせフォーム
 
-フロントは `VITE_CONTACT_ENDPOINT`（既定 `/api/contact`）へ送信します。  
-第三者フォームへの自動フォールバックは行いません。障害時は画面上の予備Googleフォームを利用者が明示的に選びます。
+フロントは、`VITE_CONTACT_ENDPOINT` が設定され、GET health check が
+`{"ok":true,"accepting":true}` を返す場合だけサイト内フォームを表示します。
+未設定・タイムアウト・異常応答の場合は、壊れた入力欄を表示せず、確認済みのGoogleフォームと
+入力内容を引き継ぐメール導線を表示します。第三者サービスへ自動送信はしません。
 
 `.env` 例:
 
@@ -42,6 +44,10 @@ BASE_PATH=/Website/ npm run build
 VITE_CONTACT_ENDPOINT=
 VITE_SITE_URL=https://www.regalocom.net
 ```
+
+Cloudflare Workerを公開した後、GitHub Actions repository variable
+`VITE_CONTACT_ENDPOINT=https://www.regalocom.net/api/contact` を設定してPagesを再実行すると、
+サイト内フォームが有効になります。未設定の間も問い合わせ導線は停止しません。
 
 Cloudflare Worker 版の実装とセットアップは以下:
 

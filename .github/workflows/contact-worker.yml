@@ -19,9 +19,10 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
         run: |
-          if [[ -z "${CLOUDFLARE_API_TOKEN}" || -z "${CLOUDFLARE_ACCOUNT_ID}" ]]; then
-            echo "::error::Configure CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID before manual deployment."
+          if [[ -z "${CLOUDFLARE_API_TOKEN}" || -z "${CLOUDFLARE_ACCOUNT_ID}" || -z "${RESEND_API_KEY}" ]]; then
+            echo "::error::Configure CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID, and RESEND_API_KEY before manual deployment."
             exit 1
           fi
 
@@ -33,3 +34,14 @@ jobs:
           wranglerVersion: "4.114.0"
           command: deploy
           workingDirectory: infrastructure/cloudflare/contact-worker
+          secrets: |
+            RESEND_API_KEY
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+
+      - name: Verify production contact API health
+        shell: bash
+        run: |
+          response="$(curl --fail --silent --show-error https://www.regalocom.net/api/contact)"
+          echo "${response}" | grep -q '"ok":true'
+          echo "${response}" | grep -q '"accepting":true'

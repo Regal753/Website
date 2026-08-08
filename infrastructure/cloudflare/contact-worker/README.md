@@ -41,16 +41,19 @@ wrangler secret put CONTACT_LOG_WEBHOOK_URL
 wrangler deploy
 ```
 
-デプロイ後、`https://www.regalocom.net/api/contact` で POST を受けられます。
+デプロイ後、`https://www.regalocom.net/api/contact` でGET health checkとPOSTを受けられます。
+GETが `{"ok":true,"accepting":true}` を返すことを確認してから、フロント側を有効化します。
 
 GitHub Actions で自動デプロイする場合は以下の Secrets を設定してください:
 
 - `CLOUDFLARE_API_TOKEN`
 - `CLOUDFLARE_ACCOUNT_ID`
+- `RESEND_API_KEY`
 
 GitHub Actionsの`Deploy Contact API Worker`は、誤公開を避けるため
 `workflow_dispatch`からの手動実行だけを受け付けます。上記Secretsを設定した後、
-Actions画面から明示的に実行してください。通常の`main` pushでは起動しません。
+Actions画面から明示的に実行してください。デプロイ時に`RESEND_API_KEY`をWorker secretへ同期し、
+本番health checkが`accepting:true`でなければ失敗します。通常の`main` pushでは起動しません。
 
 ## 5. フロント側設定
 
@@ -61,9 +64,9 @@ VITE_CONTACT_ENDPOINT=
 VITE_SITE_URL=https://www.regalocom.net
 ```
 
-- `VITE_CONTACT_ENDPOINT` は独自ドメインAPIを優先
-- 未指定時も同一オリジンの `/api/contact` を利用
-- API障害時に第三者フォームへ自動転送しない。予備Googleフォームは利用者が画面上で明示的に選ぶ
+- `VITE_CONTACT_ENDPOINT` はWorker公開とhealth check成功後だけ設定する
+- 未指定またはAPI異常時は、Googleフォームとメールの明示導線を表示する
+- API障害時に第三者フォームへ自動送信しない。利用者自身が送信先を選ぶ
 
 ## 6. 監査ログ
 
