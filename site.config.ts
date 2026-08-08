@@ -81,6 +81,8 @@ export const siteConfig = {
   companyNameEn: 'Regalo Inc.',
   contactEmail: CONTACT_EMAIL,
   contactFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSdbqMVhTDUHcfhnrv5Vj96aBF9WhyAwysTfmG9CdgElhrGm1A/viewform',
+  representativeProfile:
+    '株式会社Regalo代表の塩田玲央です。京都を拠点に、YouTubeで使用する動画の権利管理を起点として、SNS運用と制作進行の整備に取り組んでいます。日本音楽出版社協会主催の音楽著作権管理者養成講座を2025年度に修了しました。権利情報や進行状況をこと細かくチェックしていきます。',
   verificationLinks: {
     corporateRegistry:
       'https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=4130001077277',

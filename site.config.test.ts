@@ -47,4 +47,10 @@ describe('siteConfig cases', () => {
     expect(siteConfig.verificationLinks.corporateRegistry).toContain(siteConfig.companyProfile.corporateNumber);
     expect(siteConfig.verificationLinks.mediaCoverage).toBe('https://crowdworks.jp/times/interview/28780/');
   });
+
+  it('publishes the representative profile exactly as approved', () => {
+    expect(siteConfig.representativeProfile).toBe(
+      '株式会社Regalo代表の塩田玲央です。京都を拠点に、YouTubeで使用する動画の権利管理を起点として、SNS運用と制作進行の整備に取り組んでいます。日本音楽出版社協会主催の音楽著作権管理者養成講座を2025年度に修了しました。権利情報や進行状況をこと細かくチェックしていきます。',
+    );
+  });
 });

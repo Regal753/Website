@@ -143,6 +143,27 @@ const CompanyInfo: React.FC = () => {
           </aside>
         </div>
 
+        <section
+          className="mt-8 rounded-[32px] border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#ffffff_50%,_#fff7ed_100%)] p-6 shadow-sm md:p-8"
+          aria-labelledby="representative-profile-title"
+        >
+          <div className="grid gap-6 md:grid-cols-[240px_minmax(0,1fr)] md:items-center md:gap-10">
+            <div className="rounded-3xl border border-white/80 bg-white/85 p-5 shadow-sm">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-primary-700 text-2xl font-semibold text-white shadow-lg shadow-brand-primary-700/20">
+                R
+              </div>
+              <p className="mt-5 text-xs font-semibold tracking-wide text-brand-primary-700">代表者プロフィール</p>
+              <h2 id="representative-profile-title" className="mt-2 text-2xl font-semibold text-brand-ink">
+                {companyProfile.representative}
+              </h2>
+              <p className="mt-1 text-sm text-slate-600">株式会社Regalo 代表</p>
+            </div>
+            <p className="text-base leading-8 text-slate-700 md:text-lg md:leading-9">
+              {siteConfig.representativeProfile}
+            </p>
+          </div>
+        </section>
+
         <div className="mt-8 grid gap-6 lg:grid-cols-[360px_minmax(0,1fr)]">
           <section
             className="rounded-[32px] border border-amber-100 bg-[#fffaf7] p-6 shadow-sm shadow-amber-100/50 md:p-8"
