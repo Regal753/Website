@@ -12,6 +12,7 @@ const sitemap = read('./public/sitemap.xml');
 const contactSource = read('./components/Contact.tsx');
 const serviceDetailSource = read('./pages/ServiceDetailPage.tsx');
 const pagesWorkflow = read('./.github/workflows/pages.yml');
+const cloudflareHeaders = read('./public/_headers');
 
 describe('site audit remediation', () => {
   it('does not block first paint on external font CSS or an unrelated image preload', () => {
@@ -53,12 +54,20 @@ describe('site audit remediation', () => {
       (match) => match[1],
     );
     expect(lastModifiedDates).toHaveLength(9);
-    expect(lastModifiedDates.filter((date) => date === '2026-08-08')).toHaveLength(8);
-    expect(lastModifiedDates.filter((date) => date === '2026-08-10')).toHaveLength(1);
+    expect(lastModifiedDates.filter((date) => date === '2026-08-08')).toHaveLength(7);
+    expect(lastModifiedDates.filter((date) => date === '2026-08-10')).toHaveLength(2);
   });
 
   it('supports optional privacy-first production analytics without a secret', () => {
     expect(pagesWorkflow).toContain('VITE_CLOUDFLARE_WEB_ANALYTICS_TOKEN');
     expect(indexHtml).toContain('https://static.cloudflareinsights.com');
+  });
+
+  it('defines production response headers for the Cloudflare static deployment', () => {
+    expect(cloudflareHeaders).toContain('Strict-Transport-Security: max-age=31536000');
+    expect(cloudflareHeaders).toContain('X-Content-Type-Options: nosniff');
+    expect(cloudflareHeaders).toContain('Referrer-Policy: strict-origin-when-cross-origin');
+    expect(cloudflareHeaders).toContain("frame-ancestors 'none'");
+    expect(cloudflareHeaders).toContain('https://*.workers.dev');
   });
 });

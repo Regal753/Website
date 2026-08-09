@@ -1,13 +1,14 @@
 # Contact API Worker
 
-`/api/contact` を独自ドメイン配下で処理するための Cloudflare Worker です。
-問い合わせ内容はメール送信（Resend）し、監査ログをKVに保存できます。
+サイト内の問い合わせを処理するCloudflare Workerです。既定では、既存の確認済み
+Googleフォームへ中継します。Resendを設定した場合はメール送信を優先し、監査ログを
+KVへ保存できます。
 
 ## 1. 前提
 
 - Cloudflare で `regalocom.net` を管理していること
 - [Wrangler](https://developers.cloudflare.com/workers/wrangler/install-and-update/) を利用できること
-- Resend の API キーを発行済みであること
+- CloudflareアカウントでWorkersを利用できること
 
 ## 2. 初期設定
 
@@ -15,7 +16,7 @@
 cd infrastructure/cloudflare/contact-worker
 ```
 
-1. 必要なら `routes.pattern` と `CONTACT_ALLOWED_ORIGIN` を環境に合わせて変更
+1. 必要なら `CONTACT_ALLOWED_ORIGIN` とGoogleフォームの項目IDを環境に合わせて変更
 
 ### KV 作成例
 
@@ -23,7 +24,10 @@ cd infrastructure/cloudflare/contact-worker
 wrangler kv namespace create CONTACT_LOGS
 ```
 
-## 3. シークレット登録
+## 3. 任意のシークレット登録
+
+既定のGoogleフォーム中継にはシークレットは不要です。添付ファイル本体の転送と
+自動返信を使う場合だけ、ResendのAPIキーを登録します。
 
 ```bash
 wrangler secret put RESEND_API_KEY
@@ -41,19 +45,20 @@ wrangler secret put CONTACT_LOG_WEBHOOK_URL
 wrangler deploy
 ```
 
-デプロイ後、`https://www.regalocom.net/api/contact` でGET health checkとPOSTを受けられます。
+初回デプロイ後は、表示された`https://regalo-contact-api.<subdomain>.workers.dev`で
+GET health checkとPOSTを受けられます。
 GETが `{"ok":true,"accepting":true}` を返すことを確認してから、フロント側を有効化します。
 
-GitHub Actions で自動デプロイする場合は以下の Secrets を設定してください:
+GitHub Actionsで手動デプロイする場合は、次のSecretsとrepository variableを設定してください:
 
 - `CLOUDFLARE_API_TOKEN`
 - `CLOUDFLARE_ACCOUNT_ID`
-- `RESEND_API_KEY`
+- `VITE_CONTACT_ENDPOINT` repository variable（初回デプロイ後のWorker URL）
 
 GitHub Actionsの`Deploy Contact API Worker`は、誤公開を避けるため
-`workflow_dispatch`からの手動実行だけを受け付けます。上記Secretsを設定した後、
-Actions画面から明示的に実行してください。デプロイ時に`RESEND_API_KEY`をWorker secretへ同期し、
-本番health checkが`accepting:true`でなければ失敗します。通常の`main` pushでは起動しません。
+`workflow_dispatch`からの手動実行だけを受け付けます。上記設定を保存した後、
+Actions画面から明示的に実行してください。本番health checkが`accepting:true`でなければ
+失敗します。通常の`main` pushでは起動しません。
 
 ## 5. フロント側設定
 
