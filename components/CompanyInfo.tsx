@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { ArrowRight, BadgeCheck, Building2, MapPin, ShieldCheck } from 'lucide-react';
+import { ArrowRight, BadgeCheck, Building2, ExternalLink, MapPin, ShieldCheck } from 'lucide-react';
 import { companyProfile, JASRAC_RELATION_LABEL, siteConfig } from '../site.config';
 import { SectionId } from '../types';
 import { serviceCatalog } from '../services.catalog';
@@ -143,6 +143,27 @@ const CompanyInfo: React.FC = () => {
           </aside>
         </div>
 
+        <section
+          className="mt-8 rounded-[32px] border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#ffffff_50%,_#fff7ed_100%)] p-6 shadow-sm md:p-8"
+          aria-labelledby="representative-profile-title"
+        >
+          <div className="grid gap-6 md:grid-cols-[240px_minmax(0,1fr)] md:items-center md:gap-10">
+            <div className="rounded-3xl border border-white/80 bg-white/85 p-5 shadow-sm">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-primary-700 text-2xl font-semibold text-white shadow-lg shadow-brand-primary-700/20">
+                R
+              </div>
+              <p className="mt-5 text-xs font-semibold tracking-wide text-brand-primary-700">代表者プロフィール</p>
+              <h2 id="representative-profile-title" className="mt-2 text-2xl font-semibold text-brand-ink">
+                {companyProfile.representative}
+              </h2>
+              <p className="mt-1 text-sm text-slate-600">株式会社Regalo 代表</p>
+            </div>
+            <p className="text-base leading-8 text-slate-700 md:text-lg md:leading-9">
+              {siteConfig.representativeProfile}
+            </p>
+          </div>
+        </section>
+
         <div className="mt-8 grid gap-6 lg:grid-cols-[360px_minmax(0,1fr)]">
           <section
             className="rounded-[32px] border border-amber-100 bg-[#fffaf7] p-6 shadow-sm shadow-amber-100/50 md:p-8"
@@ -197,6 +218,44 @@ const CompanyInfo: React.FC = () => {
             </table>
           </section>
         </div>
+
+        <section className="mt-8 rounded-[32px] border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+          <p className="text-xs font-semibold tracking-wide text-slate-500">公開情報の確認先</p>
+          <h2 className="mt-1 text-2xl font-semibold text-brand-ink">外部サイトで確認できる情報</h2>
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-600">
+            法人の基本情報と外部メディア掲載は、以下の公開ページから確認できます。
+          </p>
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
+            <a
+              href={siteConfig.verificationLinks.corporateRegistry}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition-colors hover:border-brand-primary-200 hover:bg-brand-primary-50/40"
+            >
+              <span className="inline-flex items-center gap-2 font-semibold text-brand-ink">
+                国税庁 法人番号公表サイト
+                <ExternalLink className="h-4 w-4" />
+              </span>
+              <span className="mt-2 block text-sm leading-relaxed text-slate-600">
+                法人番号 {companyProfile.corporateNumber} の公開情報を確認できます。
+              </span>
+            </a>
+            <a
+              href={siteConfig.verificationLinks.mediaCoverage}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition-colors hover:border-brand-primary-200 hover:bg-brand-primary-50/40"
+            >
+              <span className="inline-flex items-center gap-2 font-semibold text-brand-ink">
+                クラウドワークス公式メディア掲載
+                <ExternalLink className="h-4 w-4" />
+              </span>
+              <span className="mt-2 block text-sm leading-relaxed text-slate-600">
+                「クラウドソーシングTimes」の掲載記事を確認できます。
+              </span>
+            </a>
+          </div>
+        </section>
 
         <div className="mt-8">
           <div className="mb-5 flex items-end justify-between gap-4">

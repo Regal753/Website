@@ -51,8 +51,9 @@ const withCorsHeaders = (
   headers: Record<string, string> = {}
 ): Record<string, string> => ({
   'Access-Control-Allow-Origin': getAllowedOrigin(request, env),
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type, Accept',
+  'X-Content-Type-Options': 'nosniff',
   ...headers,
 });
 
@@ -143,6 +144,25 @@ export default {
         status: 204,
         headers: withCorsHeaders(request, env),
       });
+    }
+
+    if (request.method === 'GET') {
+      const accepting = Boolean(
+        env.RESEND_API_KEY && env.CONTACT_TO_EMAIL && env.CONTACT_FROM_EMAIL
+      );
+      return json(
+        request,
+        env,
+        accepting
+          ? { ok: true, accepting: true, service: 'regalo-contact-api' }
+          : {
+              ok: false,
+              accepting: false,
+              service: 'regalo-contact-api',
+              error: 'server_not_configured',
+            },
+        accepting ? 200 : 503
+      );
     }
 
     if (request.method !== 'POST') {

@@ -29,9 +29,9 @@ const Pricing: React.FC = () => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center md:mb-14">
           <p className="mb-4 inline-flex rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-800">
-            料金の考え方
+            お見積りの考え方
           </p>
-          <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">料金について</h2>
+          <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">お見積りについて</h2>
           <p className="mx-auto max-w-2xl text-slate-600">
             定額メニューを先に置くのではなく、必要な支援範囲を整理したうえで個別にお見積りします。
           </p>

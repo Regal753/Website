@@ -71,7 +71,7 @@ const Process: React.FC = () => {
                 </div>
                 <h3 className="mt-6 text-xl font-semibold text-brand-ink">{step.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-slate-600">{step.description}</p>
-                <p className="mt-5 text-xs font-semibold tracking-wide text-slate-500">{step.note}</p>
+                <p className="mt-5 text-xs font-semibold tracking-wide text-slate-600">{step.note}</p>
               </article>
             ))}
           </div>

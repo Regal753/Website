@@ -112,7 +112,7 @@ const Hero: React.FC = () => {
 
             <div className="relative flex items-end justify-between gap-4 px-1 pb-4">
               <div>
-                <p className="text-xs font-semibold tracking-[0.2em] text-white/45">SERVICE MAP</p>
+                <p className="text-xs font-semibold tracking-[0.2em] text-white/75">SERVICE MAP</p>
                 <h2 className="mt-2 text-xl font-semibold text-white">3つの領域を、1つの窓口で</h2>
               </div>
               <span className="hidden rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white/70 sm:inline-flex">

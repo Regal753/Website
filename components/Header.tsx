@@ -40,7 +40,7 @@ const Header: React.FC = () => {
           to="/"
           className="flex items-center gap-2 cursor-pointer group rounded-xl bg-white/80 border border-slate-200/80 px-2.5 py-1.5 shadow-sm"
           onClick={handleNavClick}
-          aria-label="トップページへ移動"
+          aria-label="Regalo トップページへ移動"
         >
           <img
             src={import.meta.env.BASE_URL + 'images/logo.webp'}

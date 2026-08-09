@@ -211,7 +211,11 @@ const ServiceDetailPage: React.FC = () => {
 
           {relatedCases.length > 0 && (
             <section className="mt-8">
-              <h2 className="mb-4 text-xl font-semibold text-brand-ink">公開している改善事例</h2>
+              <h2 className="text-xl font-semibold text-brand-ink">支援設計のサンプル</h2>
+              <p className="mt-2 mb-4 text-sm leading-relaxed text-slate-600">
+                特定顧客の実績紹介ではありません。自社運用とこれまで扱ってきた課題を抽象化し、
+                ご相談時に整理する内容と納品物のイメージを示しています。
+              </p>
               <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
                 {relatedCases.map((item) => (
                   <article key={item.title} className="rounded-2xl border border-slate-200 bg-[#fffaf7] p-5">
@@ -232,6 +236,9 @@ const ServiceDetailPage: React.FC = () => {
                   </article>
                 ))}
               </div>
+              <p className="mt-4 text-xs leading-6 text-slate-600">
+                ※ 実際の支援範囲とお見積りは、資料・権利関係・現在の運用体制を確認したうえで個別にご案内します。
+              </p>
             </section>
           )}
 
@@ -249,7 +256,7 @@ const ServiceDetailPage: React.FC = () => {
 
           <section className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
-              <h2 className="text-xl font-semibold text-brand-ink">料金</h2>
+              <h2 className="text-xl font-semibold text-brand-ink">お見積り</h2>
               <p className="mt-2 text-sm leading-relaxed text-slate-700">{service.pricing.summary}</p>
               <ul className="mt-3 space-y-2">
                 {service.pricing.items.map((item) => (

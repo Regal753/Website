@@ -36,7 +36,7 @@ export const cases: CaseStudy[] = [
   {
     serviceSlug: 'music-publishing',
     title: 'BGM運用と権利管理を整理',
-    clientType: 'YouTube・BGM運用の支援設計例',
+    clientType: 'YouTube・BGM運用の支援設計サンプル（実績紹介ではありません）',
     challenge: 'BGM利用可否の判断が人依存で、公開前確認に時間がかかる。',
     scope: 'BGMカタログ構築・権利台帳整備・利用許諾フロー設計',
     outcome: '権利情報と利用条件を一つの台帳へ集約し、公開前に確認できる運用へ整理。',
@@ -46,7 +46,7 @@ export const cases: CaseStudy[] = [
   {
     serviceSlug: 'sns-management',
     title: 'YouTube運用の属人化を標準化',
-    clientType: 'YouTube運用の支援設計例',
+    clientType: 'YouTube運用の支援設計サンプル（実績紹介ではありません）',
     challenge: '企画や改善が担当者依存で、数値を見ながら運用改善を回せない。',
     scope: 'YouTube運用設計・編集ガイドライン策定・KPIダッシュボード構築',
     outcome: '企画、制作、確認、公開後の振り返りを一つの流れにし、担当者が変わっても追える形へ整理。',
@@ -56,7 +56,7 @@ export const cases: CaseStudy[] = [
   {
     serviceSlug: 'ai-marketing-strategy',
     title: '制作進行をDrive/Sheets/Discordで自動化',
-    clientType: '制作進行の支援設計例',
+    clientType: '制作進行の支援設計サンプル（実績紹介ではありません）',
     challenge: '素材収集・進捗共有・リマインドが手作業で、共有漏れや遅延が起きる。',
     scope: 'Google Drive / Sheets / Discord を連携した制作進行自動化',
     outcome: '素材共有、進捗更新、確認依頼をつなぎ、手作業の転記と連絡漏れを減らす運用へ整理。',
@@ -81,6 +81,13 @@ export const siteConfig = {
   companyNameEn: 'Regalo Inc.',
   contactEmail: CONTACT_EMAIL,
   contactFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSdbqMVhTDUHcfhnrv5Vj96aBF9WhyAwysTfmG9CdgElhrGm1A/viewform',
+  representativeProfile:
+    '株式会社Regalo代表の塩田玲央です。京都を拠点に、YouTubeで使用する動画の権利管理を起点として、SNS運用と制作進行の整備に取り組んでいます。日本音楽出版社協会主催の音楽著作権管理者養成講座を2025年度に修了しました。権利情報や進行状況をこと細かくチェックしていきます。',
+  verificationLinks: {
+    corporateRegistry:
+      'https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=4130001077277',
+    mediaCoverage: 'https://crowdworks.jp/times/interview/28780/',
+  },
   siteTitle: 'Regalo | 音楽出版・SNS管理・AIマーケティング戦略',
   siteDescription:
     'Regaloは京都発の実務チームとして、音楽権利管理、SNS運用、共有や進行の設計まで、現場で回る仕組みづくりを一気通貫で支援します。',
