@@ -7,6 +7,7 @@ const read = (relativePath: string): string =>
 const indexHtml = read('./index.html');
 const privacyHtml = read('./public/privacy.html');
 const termsHtml = read('./public/terms.html');
+const machoWalkerPrivacyHtml = read('./public/apps/machowalker/privacy/index.html');
 const sitemap = read('./public/sitemap.xml');
 const contactSource = read('./components/Contact.tsx');
 const serviceDetailSource = read('./pages/ServiceDetailPage.tsx');
@@ -17,12 +18,14 @@ describe('site audit remediation', () => {
     expect(indexHtml).not.toContain('fonts.googleapis.com');
     expect(indexHtml).not.toContain('fonts.gstatic.com');
     expect(indexHtml).not.toContain('rel="preload"');
-    expect(privacyHtml).not.toContain('fonts.googleapis.com');
-    expect(termsHtml).not.toContain('fonts.googleapis.com');
+    for (const html of [privacyHtml, termsHtml, machoWalkerPrivacyHtml]) {
+      expect(html).not.toContain('fonts.googleapis.com');
+      expect(html).not.toContain('fonts.gstatic.com');
+    }
   });
 
   it('ships browser-enforced policy metadata and legal-page favicons', () => {
-    for (const html of [indexHtml, privacyHtml, termsHtml]) {
+    for (const html of [indexHtml, privacyHtml, termsHtml, machoWalkerPrivacyHtml]) {
       expect(html).toContain('Content-Security-Policy');
       expect(html).toContain('strict-origin-when-cross-origin');
       expect(html).toContain('rel="icon"');
@@ -49,8 +52,9 @@ describe('site audit remediation', () => {
     const lastModifiedDates = [...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map(
       (match) => match[1],
     );
-    expect(lastModifiedDates).toHaveLength(8);
-    expect(new Set(lastModifiedDates)).toEqual(new Set(['2026-08-08']));
+    expect(lastModifiedDates).toHaveLength(9);
+    expect(lastModifiedDates.filter((date) => date === '2026-08-08')).toHaveLength(8);
+    expect(lastModifiedDates.filter((date) => date === '2026-08-10')).toHaveLength(1);
   });
 
   it('supports optional privacy-first production analytics without a secret', () => {
