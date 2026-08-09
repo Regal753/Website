@@ -3,10 +3,15 @@ type KVBinding = {
 };
 
 type Env = {
-  RESEND_API_KEY: string;
+  RESEND_API_KEY?: string;
   CONTACT_TO_EMAIL: string;
   CONTACT_FROM_EMAIL: string;
   CONTACT_ALLOWED_ORIGIN?: string;
+  CONTACT_GOOGLE_FORM_ACTION?: string;
+  CONTACT_GOOGLE_FORM_NAME_FIELD?: string;
+  CONTACT_GOOGLE_FORM_EMAIL_FIELD?: string;
+  CONTACT_GOOGLE_FORM_TYPE_FIELD?: string;
+  CONTACT_GOOGLE_FORM_MESSAGE_FIELD?: string;
   CONTACT_LOG_WEBHOOK_URL?: string;
   CONTACT_LOG_RETENTION_DAYS?: string;
   CONTACT_LOGS?: KVBinding;
@@ -20,6 +25,44 @@ const MAX_TOTAL_ATTACHMENT_BYTES = 10 * 1024 * 1024;
 const DEFAULT_LOG_RETENTION_DAYS = 180;
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const googleFormFieldPattern = /^entry\.\d+$/;
+
+const getGoogleFormConfig = (env: Env) => {
+  const action = (env.CONTACT_GOOGLE_FORM_ACTION || '').trim();
+  const fields = {
+    name: (env.CONTACT_GOOGLE_FORM_NAME_FIELD || '').trim(),
+    email: (env.CONTACT_GOOGLE_FORM_EMAIL_FIELD || '').trim(),
+    type: (env.CONTACT_GOOGLE_FORM_TYPE_FIELD || '').trim(),
+    message: (env.CONTACT_GOOGLE_FORM_MESSAGE_FIELD || '').trim(),
+  };
+
+  try {
+    const url = new URL(action);
+    const validAction =
+      url.protocol === 'https:' &&
+      url.hostname === 'docs.google.com' &&
+      /^\/forms\/d\/e\/[^/]+\/formResponse$/.test(url.pathname);
+    const validFields = Object.values(fields).every((field) => googleFormFieldPattern.test(field));
+    return validAction && validFields ? { action: url.toString(), fields } : null;
+  } catch (_error) {
+    return null;
+  }
+};
+
+const hasResendDelivery = (env: Env): boolean =>
+  Boolean(env.RESEND_API_KEY && env.CONTACT_TO_EMAIL && env.CONTACT_FROM_EMAIL);
+
+const getGoogleFormInquiryType = (inquiryType: string): string => {
+  if (inquiryType.includes('YouTube')) return 'YouTube運用について';
+  if (inquiryType.includes('BGM') || inquiryType.includes('音楽出版')) {
+    return 'BGM制作・利用について';
+  }
+  if (inquiryType.includes('権利')) return '権利管理のご相談';
+  if (inquiryType.includes('自動化') || inquiryType.includes('ツール')) {
+    return '業務自動化・ツール開発';
+  }
+  return 'その他';
+};
 
 const escapeHtml = (value: string): string =>
   value
@@ -103,6 +146,48 @@ const sendViaResend = async (
   return { ok: response.ok, status: response.status, body };
 };
 
+const sendViaGoogleForm = async (
+  env: Env,
+  payload: {
+    name: string;
+    company: string;
+    email: string;
+    phone: string;
+    inquiryType: string;
+    message: string;
+    attachmentNames: string[];
+  }
+): Promise<{ ok: boolean; status: number }> => {
+  const config = getGoogleFormConfig(env);
+  if (!config) return { ok: false, status: 503 };
+
+  const details = [
+    payload.message,
+    '',
+    `会社名: ${payload.company || '-'}`,
+    `電話番号: ${payload.phone || '-'}`,
+    `サイト内お問い合わせ種別: ${payload.inquiryType}`,
+    `添付ファイル名: ${payload.attachmentNames.join(', ') || 'なし'}`,
+    '※添付ファイル本体は送信されません。必要な場合はサイトのメール導線からお送りください。',
+  ].join('\n');
+
+  const body = new URLSearchParams({
+    [config.fields.name]: payload.name,
+    [config.fields.email]: payload.email,
+    [config.fields.type]: getGoogleFormInquiryType(payload.inquiryType),
+    [config.fields.message]: details,
+  });
+
+  const response = await fetch(config.action, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+    body: body.toString(),
+    redirect: 'manual',
+  });
+
+  return { ok: response.ok || response.status === 302 || response.status === 303, status: response.status };
+};
+
 const createLogWriterTask = (
   env: Env,
   record: Record<string, unknown>
@@ -139,6 +224,12 @@ const createWebhookLogTask = (
 
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContextLike): Promise<Response> {
+    const requestOrigin = (request.headers.get('Origin') || '').trim();
+    const allowedOrigin = (env.CONTACT_ALLOWED_ORIGIN || '').trim();
+    if (requestOrigin && allowedOrigin && requestOrigin !== allowedOrigin) {
+      return json(request, env, { ok: false, error: 'forbidden_origin' }, 403);
+    }
+
     if (request.method === 'OPTIONS') {
       return new Response(null, {
         status: 204,
@@ -147,14 +238,17 @@ export default {
     }
 
     if (request.method === 'GET') {
-      const accepting = Boolean(
-        env.RESEND_API_KEY && env.CONTACT_TO_EMAIL && env.CONTACT_FROM_EMAIL
-      );
+      const delivery = hasResendDelivery(env)
+        ? 'resend'
+        : getGoogleFormConfig(env)
+          ? 'google_forms'
+          : null;
+      const accepting = delivery !== null;
       return json(
         request,
         env,
         accepting
-          ? { ok: true, accepting: true, service: 'regalo-contact-api' }
+          ? { ok: true, accepting: true, service: 'regalo-contact-api', delivery }
           : {
               ok: false,
               accepting: false,
@@ -169,7 +263,7 @@ export default {
       return json(request, env, { ok: false, error: 'method_not_allowed' }, 405);
     }
 
-    if (!env.RESEND_API_KEY || !env.CONTACT_TO_EMAIL || !env.CONTACT_FROM_EMAIL) {
+    if (!hasResendDelivery(env) && !getGoogleFormConfig(env)) {
       return json(request, env, { ok: false, error: 'server_not_configured' }, 500);
     }
 
@@ -255,26 +349,36 @@ export default {
         <p><strong>内容:</strong><br />${escapeHtml(message).replaceAll('\n', '<br />')}</p>
       `;
 
-      const mainMail = await sendViaResend(env, {
-        to: [env.CONTACT_TO_EMAIL],
-        subject: `[Webお問い合わせ] ${inquiryType} / ${name}`,
-        text: messageText,
-        html: messageHtml,
-        replyTo: email,
-        attachments,
-      });
+      const mainDelivery = hasResendDelivery(env)
+        ? await sendViaResend(env, {
+            to: [env.CONTACT_TO_EMAIL],
+            subject: `[Webお問い合わせ] ${inquiryType} / ${name}`,
+            text: messageText,
+            html: messageHtml,
+            replyTo: email,
+            attachments,
+          })
+        : await sendViaGoogleForm(env, {
+            name,
+            company,
+            email,
+            phone,
+            inquiryType,
+            message,
+            attachmentNames: files.map((file) => file.name || 'attachment.bin'),
+          });
 
-      if (!mainMail.ok) {
+      if (!mainDelivery.ok) {
         return json(
           request,
           env,
-          { ok: false, error: 'email_send_failed', status: mainMail.status },
+          { ok: false, error: 'delivery_failed', status: mainDelivery.status },
           502
         );
       }
 
       let autoReplySent = false;
-      if (autoResponse) {
+      if (autoResponse && hasResendDelivery(env)) {
         const autoReply = await sendViaResend(env, {
           to: [email],
           subject: 'お問い合わせありがとうございます',

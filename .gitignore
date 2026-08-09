@@ -16,6 +16,8 @@ node_modules
 dist
 dist-ssr
 output/
+.playwright-cli/
+**/.wrangler/
 *.local
 
 # Editor directories and files

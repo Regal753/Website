@@ -1,18 +1,15 @@
 name = "regalo-contact-api"
 main = "src/index.ts"
 compatibility_date = "2026-02-22"
-workers_dev = false
-
-[[routes]]
-pattern = "www.regalocom.net/api/contact*"
-zone_name = "regalocom.net"
-
-[[routes]]
-pattern = "regalocom.net/api/contact*"
-zone_name = "regalocom.net"
+workers_dev = true
 
 [vars]
 CONTACT_TO_EMAIL = "contact@regalocom.net"
 CONTACT_FROM_EMAIL = "Regalo Contact <noreply@regalocom.net>"
 CONTACT_ALLOWED_ORIGIN = "https://www.regalocom.net"
 CONTACT_LOG_RETENTION_DAYS = "180"
+CONTACT_GOOGLE_FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSdbqMVhTDUHcfhnrv5Vj96aBF9WhyAwysTfmG9CdgElhrGm1A/formResponse"
+CONTACT_GOOGLE_FORM_NAME_FIELD = "entry.1575891572"
+CONTACT_GOOGLE_FORM_EMAIL_FIELD = "entry.792018302"
+CONTACT_GOOGLE_FORM_TYPE_FIELD = "entry.682548109"
+CONTACT_GOOGLE_FORM_MESSAGE_FIELD = "entry.2044776107"
