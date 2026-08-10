@@ -68,6 +68,8 @@ describe('site audit remediation', () => {
     expect(cloudflareHeaders).toContain('X-Content-Type-Options: nosniff');
     expect(cloudflareHeaders).toContain('Referrer-Policy: strict-origin-when-cross-origin');
     expect(cloudflareHeaders).toContain("frame-ancestors 'none'");
+    expect(indexHtml).toContain('https://contact-api.regalocom.net');
+    expect(cloudflareHeaders).toContain('https://contact-api.regalocom.net');
     expect(cloudflareHeaders).toContain('https://*.workers.dev');
   });
 });

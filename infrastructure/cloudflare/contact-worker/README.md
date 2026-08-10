@@ -49,6 +49,9 @@ wrangler deploy
 GET health checkとPOSTを受けられます。
 GETが `{"ok":true,"accepting":true}` を返すことを確認してから、フロント側を有効化します。
 
+本番はWorker Custom Domainの`https://contact-api.regalocom.net`を利用します。DNSと
+TLS証明書はCloudflareが管理し、フロント側の`VITE_CONTACT_ENDPOINT`もこのURLへ固定します。
+
 GitHub Actionsで手動デプロイする場合は、次のSecretsとrepository variableを設定してください:
 
 - `CLOUDFLARE_API_TOKEN`
