@@ -46,6 +46,7 @@ describe('siteConfig cases', () => {
     expect(siteConfig.verificationLinks.corporateRegistry).toContain('houjin-bangou.nta.go.jp');
     expect(siteConfig.verificationLinks.corporateRegistry).toContain(siteConfig.companyProfile.corporateNumber);
     expect(siteConfig.verificationLinks.mediaCoverage).toBe('https://crowdworks.jp/times/interview/28780/');
+    expect(siteConfig.verificationLinks.trainingProgram).toContain('mpaj.or.jp');
   });
 
   it('publishes the representative profile exactly as approved', () => {
