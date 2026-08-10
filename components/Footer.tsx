@@ -49,6 +49,12 @@ const Footer: React.FC = () => {
                 TEL: {phone}
               </a>
             )}
+            <a
+              href={`mailto:${siteConfig.companyProfile.contactEmail}`}
+              className="text-white/70 transition-colors hover:text-white"
+            >
+              {siteConfig.companyProfile.contactEmail}
+            </a>
             <p className="text-white/60">受付時間 9:00-20:00</p>
             <a
               href="https://www.instagram.com/regalo0610/"
@@ -81,7 +87,17 @@ const Footer: React.FC = () => {
       </div>
 
       <div className="relative mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="border-t border-white/10 pt-4 text-center text-sm text-white/40">
+        <div className="grid gap-3 border-t border-white/10 pt-5 text-xs text-white/50 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
+          <div className="flex flex-wrap gap-x-4 gap-y-2">
+            <span>{siteConfig.companyProfile.legalName}</span>
+            <span>代表者 {siteConfig.companyProfile.representative}</span>
+            <span>法人番号 {siteConfig.companyProfile.corporateNumber}</span>
+          </div>
+          <Link to="/company" className="font-semibold text-white/70 transition-colors hover:text-white">
+            法人情報・外部確認先を見る
+          </Link>
+        </div>
+        <div className="mt-4 text-center text-sm text-white/40">
           &copy; {new Date().getFullYear()} {siteConfig.companyProfile.legalName}
         </div>
       </div>

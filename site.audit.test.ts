@@ -11,6 +11,9 @@ const machoWalkerPrivacyHtml = read('./public/apps/machowalker/privacy/index.htm
 const sitemap = read('./public/sitemap.xml');
 const contactSource = read('./components/Contact.tsx');
 const serviceDetailSource = read('./pages/ServiceDetailPage.tsx');
+const homePageSource = read('./pages/HomePage.tsx');
+const businessTrustSource = read('./components/BusinessTrust.tsx');
+const footerSource = read('./components/Footer.tsx');
 const pagesWorkflow = read('./.github/workflows/pages.yml');
 const cloudflareHeaders = read('./public/_headers');
 
@@ -54,8 +57,29 @@ describe('site audit remediation', () => {
       (match) => match[1],
     );
     expect(lastModifiedDates).toHaveLength(9);
-    expect(lastModifiedDates.filter((date) => date === '2026-08-08')).toHaveLength(7);
+    expect(lastModifiedDates.filter((date) => date === '2026-08-08')).toHaveLength(5);
     expect(lastModifiedDates.filter((date) => date === '2026-08-10')).toHaveLength(2);
+    expect(lastModifiedDates.filter((date) => date === '2026-08-11')).toHaveLength(2);
+  });
+
+  it('publishes decision-ready corporate trust information without inventing customer proof', () => {
+    expect(homePageSource).toContain('<BusinessTrust />');
+    expect(businessTrustSource).toContain('稟議前に確認したい情報を、公開しています');
+    expect(businessTrustSource).toContain('国税庁 法人番号公表サイト');
+    expect(businessTrustSource).toContain('クラウドワークス公式メディア');
+    expect(businessTrustSource).toContain('日本音楽出版社協会');
+    expect(businessTrustSource).toContain("href: '#process'");
+    expect(businessTrustSource).not.toMatch(/導入社数|顧客満足度|成功率|実績\s*\d+/);
+    expect(footerSource).toContain('法人情報・外部確認先を見る');
+    expect(footerSource).toContain('法人番号');
+  });
+
+  it('describes the legal entity in Organization structured data', () => {
+    expect(indexHtml).toContain('"legalName": "株式会社Regalo"');
+    expect(indexHtml).toContain('"foundingDate": "2024-06-10"');
+    expect(indexHtml).toContain('"name": "塩田玲央"');
+    expect(indexHtml).toContain('houjin-bangou.nta.go.jp');
+    expect(indexHtml).toContain('crowdworks.jp/times/interview/28780/');
   });
 
   it('supports optional privacy-first production analytics without a secret', () => {

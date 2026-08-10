@@ -225,7 +225,7 @@ const CompanyInfo: React.FC = () => {
           <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-600">
             法人の基本情報と外部メディア掲載は、以下の公開ページから確認できます。
           </p>
-          <div className="mt-5 grid gap-4 md:grid-cols-2">
+          <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             <a
               href={siteConfig.verificationLinks.corporateRegistry}
               target="_blank"
@@ -252,6 +252,20 @@ const CompanyInfo: React.FC = () => {
               </span>
               <span className="mt-2 block text-sm leading-relaxed text-slate-600">
                 「クラウドソーシングTimes」の掲載記事を確認できます。
+              </span>
+            </a>
+            <a
+              href={siteConfig.verificationLinks.trainingProgram}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition-colors hover:border-brand-primary-200 hover:bg-brand-primary-50/40"
+            >
+              <span className="inline-flex items-center gap-2 font-semibold text-brand-ink">
+                日本音楽出版社協会
+                <ExternalLink className="h-4 w-4" />
+              </span>
+              <span className="mt-2 block text-sm leading-relaxed text-slate-600">
+                2025年度音楽著作権管理者養成講座の主催・内容を確認できます。
               </span>
             </a>
           </div>

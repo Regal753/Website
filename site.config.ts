@@ -87,6 +87,7 @@ export const siteConfig = {
     corporateRegistry:
       'https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=4130001077277',
     mediaCoverage: 'https://crowdworks.jp/times/interview/28780/',
+    trainingProgram: 'https://mpaj.or.jp/news/17695',
   },
   siteTitle: 'Regalo | 音楽出版・SNS管理・AIマーケティング戦略',
   siteDescription:
