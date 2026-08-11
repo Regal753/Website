@@ -5,6 +5,7 @@ const read = (relativePath: string): string =>
   readFileSync(new URL(relativePath, import.meta.url), 'utf8');
 
 const indexHtml = read('./index.html');
+const entrySource = read('./index.tsx');
 const privacyHtml = read('./public/privacy.html');
 const termsHtml = read('./public/terms.html');
 const machoWalkerPrivacyHtml = read('./public/apps/machowalker/privacy/index.html');
@@ -14,6 +15,9 @@ const serviceDetailSource = read('./pages/ServiceDetailPage.tsx');
 const homePageSource = read('./pages/HomePage.tsx');
 const businessTrustSource = read('./components/BusinessTrust.tsx');
 const footerSource = read('./components/Footer.tsx');
+const heroSource = read('./components/Hero.tsx');
+const corporateFontStyles = read('./styles/corporate-font.css');
+const staticFontInjector = read('./scripts/inject-static-font-styles.mjs');
 const pagesWorkflow = read('./.github/workflows/pages.yml');
 const cloudflareHeaders = read('./public/_headers');
 
@@ -21,11 +25,39 @@ describe('site audit remediation', () => {
   it('does not block first paint on external font CSS or an unrelated image preload', () => {
     expect(indexHtml).not.toContain('fonts.googleapis.com');
     expect(indexHtml).not.toContain('fonts.gstatic.com');
-    expect(indexHtml).not.toContain('rel="preload"');
+    expect(indexHtml).not.toContain('rel="preload" as="image"');
     for (const html of [privacyHtml, termsHtml, machoWalkerPrivacyHtml]) {
       expect(html).not.toContain('fonts.googleapis.com');
       expect(html).not.toContain('fonts.gstatic.com');
     }
+  });
+
+  it('keeps the Vite module entry resolvable when a deployment base path is configured', () => {
+    expect(indexHtml).toContain('src="/index.tsx"');
+    expect(indexHtml).not.toContain('%BASE_URL%index.tsx');
+  });
+
+  it('self-hosts one corporate Japanese typeface across the SPA and legal pages', () => {
+    expect(entrySource).toContain("./styles/corporate-font.css");
+    expect(corporateFontStyles).toContain("font-family: 'Regalo Corporate Sans'");
+    expect(corporateFontStyles).toContain('noto-sans-jp-regalo-home.woff2');
+    expect(corporateFontStyles).toContain('noto-sans-jp-regalo-extra.woff2');
+    expect(corporateFontStyles).toContain('font-display: swap');
+    expect(corporateFontStyles).toContain('unicode-range:');
+    expect(indexHtml).toContain("font-family: 'Regalo Corporate Sans'");
+    expect(indexHtml).toContain('font-synthesis: none');
+    expect(heroSource).toContain('corporate-display');
+    expect(heroSource).not.toContain("tracking-[-0.04em]");
+    for (const html of [privacyHtml, termsHtml, machoWalkerPrivacyHtml]) {
+      expect(html).toContain('Regalo Corporate Sans');
+      expect(html).toContain("style-src 'self' 'unsafe-inline'");
+      expect(html).toContain("font-src 'self' data:");
+    }
+    expect(staticFontInjector).toContain("'privacy.html'");
+    expect(staticFontInjector).toContain("'terms.html'");
+    expect(staticFontInjector).toContain("'machowalker'");
+    expect(staticFontInjector).toContain('rel="preload"');
+    expect(staticFontInjector).toContain('as="font"');
   });
 
   it('ships browser-enforced policy metadata and legal-page favicons', () => {

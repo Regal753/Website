@@ -10,6 +10,16 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: [
+          '"Regalo Corporate Sans"',
+          '"Noto Sans JP"',
+          '"Hiragino Sans"',
+          '"Yu Gothic"',
+          'Meiryo',
+          'sans-serif',
+        ],
+      },
       colors: {
         brand: {
           primary: {
