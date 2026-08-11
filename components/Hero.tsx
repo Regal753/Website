@@ -57,7 +57,7 @@ const Hero: React.FC = () => {
               音楽出版を軸にした運用支援
             </p>
 
-            <h1 className="mt-6 text-[2.3rem] font-bold leading-[1.08] tracking-[-0.04em] text-brand-ink sm:text-5xl md:text-6xl lg:text-[4.15rem]">
+            <h1 className="corporate-display mt-6 text-[2.3rem] font-bold text-brand-ink sm:text-5xl md:text-6xl lg:text-[4.15rem]">
               <span className="block">音楽とYouTubeを、</span>
               <span className="mt-2 block bg-gradient-to-r from-amber-700 via-brand-primary-700 to-cyan-600 bg-clip-text text-transparent">
                 止まらない運用へ。
@@ -156,7 +156,15 @@ const Hero: React.FC = () => {
                           <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-white/90 text-brand-primary-700">
                             <Icon className="h-4 w-4" />
                           </span>
-                          <p className="font-semibold">{service.title}</p>
+                          <p
+                            className={`font-semibold leading-snug ${
+                              service.slug === 'ai-marketing-strategy'
+                                ? 'text-sm tracking-[-0.025em]'
+                                : ''
+                            }`}
+                          >
+                            {service.title}
+                          </p>
                         </div>
                         <p className="mt-2 text-xs leading-relaxed text-white/70">
                           {service.items.slice(0, 2).join(' / ')}

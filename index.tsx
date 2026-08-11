@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import './styles/corporate-font.css';
 import App from './App';
 import { initializeAnalytics } from './utils/analytics';
 
