@@ -41,7 +41,7 @@ const Hero: React.FC = () => {
   return (
     <section
       id={SectionId.HOME}
-      className="relative overflow-hidden bg-[linear-gradient(135deg,_#fffdf8_0%,_#ffffff_45%,_#f4f7ff_100%)] pb-14 pt-28 md:pb-20 md:pt-32"
+      className="relative overflow-hidden bg-[linear-gradient(135deg,_#f3f6fb_0%,_#f8fafc_52%,_#fff8f1_100%)] pb-14 pt-28 md:pb-20 md:pt-32"
     >
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div className="absolute -left-24 top-24 h-72 w-72 rounded-full bg-amber-200/30 blur-3xl" />
