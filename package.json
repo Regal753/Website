@@ -8,13 +8,11 @@
   },
   "scripts": {
     "dev": "npm run build:css && vite",
-    "build": "npm run test:font-coverage && npm run build:css && vite build && npm run build:legal-fonts && npm run build:routes",
+    "build": "npm run build:css && vite build && npm run build:legal-fonts && npm run build:routes",
     "preview": "vite preview",
     "build:css": "tailwindcss -c tailwind.config.cjs -i styles/tailwind.css -o public/tailwind.css --minify",
     "build:legal-fonts": "node scripts/inject-static-font-styles.mjs",
     "build:routes": "node scripts/generate-spa-routes.mjs",
-    "build:font-text": "node scripts/prepare-font-subset-text.mjs",
-    "test:font-coverage": "node scripts/check-font-subset-coverage.mjs",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },

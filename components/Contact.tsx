@@ -26,9 +26,9 @@ const INITIAL_FORM: ContactFormState = {
 const INQUIRY_TYPE_OPTIONS = [
   'お問い合わせ',
   'YouTube BGM・権利運用の初期診断について',
-  '音楽権利管理・BGM制作について',
-  'YouTube運用・制作進行について',
-  '業務改善・自動化について',
+  'SNS管理事業部について',
+  '音楽出版事業部について',
+  'AIマーケティング戦略事業部について',
   'その他',
 ] as const;
 
@@ -48,8 +48,8 @@ const CONTACT_HEALTH_TIMEOUT_MS = 4500;
 const CONTACT_PROMISES = ['通常1営業日以内に返信', '初回相談無料', 'フォームは24時間受付'] as const;
 const COMMON_ISSUES = [
   '何から相談すべきか整理できていない',
-  '楽曲の権利情報や利用条件が分からない',
-  '制作の担当者・期限・確認状況が追えない',
+  'SNS運用と権利管理が別々に散っている',
+  '共有フローが属人化していて止まりやすい',
 ] as const;
 
 type ContactFieldErrorKey = 'name' | 'email' | 'message' | 'consent' | 'attachments';
