@@ -1,93 +1,162 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import { SectionId } from '../types';
 import { serviceCatalog } from '../services.catalog';
 import { trackEvent } from '../utils/analytics';
+import { getGradientStyle } from '../utils/gradient';
 
-const SERVICE_NOTES: Record<string, { label: string; note: string }> = {
+const themes: Record<
+  string,
+  {
+    card: string;
+    chip: string;
+    eyebrow: string;
+  }
+> = {
   'music-publishing': {
-    label: '権利情報を確認する仕事',
-    note: '楽曲・契約・利用先を照合し、確認済みと未確認を分けます。',
+    card: 'border-amber-200 bg-gradient-to-br from-amber-50 via-white to-white',
+    chip: 'bg-amber-100 text-amber-900',
+    eyebrow: '主力事業 / BGM制作と権利管理',
   },
   'sns-management': {
-    label: '制作を予定どおり進める仕事',
-    note: '企画から公開後の記録まで、担当者と期限を明確にします。',
+    card: 'border-rose-200 bg-gradient-to-br from-rose-50 via-white to-white',
+    chip: 'bg-rose-100 text-rose-800',
+    eyebrow: 'YouTube運用と改善',
   },
   'ai-marketing-strategy': {
-    label: '繰り返し作業を減らす仕事',
-    note: '転記、定例報告、確認依頼など、対象を絞って自動化します。',
+    card: 'border-cyan-200 bg-gradient-to-br from-cyan-50 via-white to-white',
+    chip: 'bg-cyan-100 text-cyan-900',
+    eyebrow: '共有・進行・自動化',
   },
 };
 
-const Services: React.FC = () => (
-  <section id={SectionId.SERVICES} className="bg-[#f6f7f9] py-16 md:py-24">
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)] lg:items-end lg:gap-16">
-        <div>
-          <p className="text-sm font-semibold text-brand-primary-700">対応している仕事</p>
-          <h2 className="mt-3 text-3xl font-semibold leading-tight text-brand-ink md:text-5xl">
-            依頼できる内容と、
-            <br />
-            受け取れるもの
-          </h2>
+const defaultTheme = {
+  card: 'border-slate-200 bg-gradient-to-br from-slate-50 via-white to-white',
+  chip: 'bg-slate-100 text-slate-800',
+  eyebrow: '運用設計と改善',
+};
+
+const Services: React.FC = () => {
+  const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
+
+  return (
+    <section id={SectionId.SERVICES} className="bg-[#f6f8fc] py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-10 grid gap-6 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:items-end lg:gap-16 md:mb-14">
+          <div>
+            <p className="inline-flex items-center gap-2 rounded-full border border-brand-primary-200 bg-white px-3 py-1 text-xs font-semibold tracking-wide text-brand-primary-700 shadow-sm">
+              SERVICE
+            </p>
+            <h2 className="mt-4 text-3xl font-semibold leading-tight text-brand-ink md:text-5xl">
+              音楽出版を軸に、
+              <br />
+              必要な領域を組み合わせる
+            </h2>
+          </div>
+          <div>
+            <p className="max-w-2xl text-base leading-8 text-slate-600">
+              BGMの制作・権利管理、YouTubeの企画と運用、共有や進行の整備まで。
+              相談窓口を分けず、いま詰まっている場所から必要な支援を組み立てます。
+            </p>
+            <p className="mt-3 text-sm font-semibold text-brand-primary-700">
+              相談先が分からなくても、課題整理から対応します。
+            </p>
+          </div>
         </div>
-        <p className="max-w-2xl text-base leading-8 text-slate-600">
-          相談内容を大きな言葉でまとめず、確認する資料、担当する作業、納品物を分けてお伝えします。
-          複数の領域にまたがる場合も窓口はRegaloに一本化できます。
-        </p>
-      </div>
 
-      <div className="mt-12 border-t-2 border-slate-900">
-        {serviceCatalog.map((service, index) => {
-          const Icon = service.icon;
-          const note = SERVICE_NOTES[service.slug];
+        <div className="grid gap-6 lg:grid-cols-2">
+          {serviceCatalog.map((service, index) => {
+            const Icon = service.icon;
+            const theme = themes[service.slug] ?? defaultTheme;
+            const isPrimary = index === 0;
 
-          return (
-            <article
-              key={service.slug}
-              className="grid gap-6 border-b border-slate-300 py-8 md:grid-cols-[90px_minmax(0,1.15fr)_minmax(260px,0.85fr)_auto] md:items-start md:gap-8"
-            >
-              <div className="flex items-center gap-3 md:block">
-                <span className="text-sm font-semibold tabular-nums text-slate-500">0{index + 1}</span>
-                <Icon className="h-6 w-6 text-brand-primary-700 md:mt-5" />
-              </div>
-
-              <div>
-                <p className="text-sm font-semibold text-slate-500">{note?.label}</p>
-                <h3 className="mt-2 text-2xl font-semibold text-brand-ink md:text-3xl">{service.title}</h3>
-                <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-600 md:text-base">{service.description}</p>
-              </div>
-
-              <div>
-                <p className="text-xs font-semibold text-slate-500">主な納品物・確認資料</p>
-                <ul className="mt-3 space-y-2">
-                  {service.items.map((item) => (
-                    <li key={item} className="flex items-center gap-2 text-sm font-semibold text-slate-700">
-                      <span className="h-px w-4 bg-brand-primary-700" aria-hidden="true" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-4 text-xs leading-5 text-slate-500">{note?.note}</p>
-              </div>
-
-              <Link
-                to={`/services/${service.slug}/`}
-                onClick={() =>
-                  trackEvent('service_detail_click', { placement: 'services_cta', service: service.slug })
-                }
-                className="inline-flex items-center gap-2 whitespace-nowrap text-sm font-semibold text-brand-primary-700 transition-colors hover:text-brand-primary-900 md:mt-7"
+            return (
+              <article
+                key={service.slug}
+                className={`grid overflow-hidden rounded-[32px] border shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl ${
+                  isPrimary ? 'lg:col-span-2 lg:grid-cols-[minmax(0,1.02fr)_minmax(360px,0.98fr)]' : ''
+                } ${theme.card}`}
               >
-                詳細を見る
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </article>
-          );
-        })}
+                <div className={`order-2 p-6 md:p-8 ${isPrimary ? 'lg:order-1 lg:p-10' : ''}`}>
+                  <div className="flex items-start gap-4">
+                    <div
+                      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl shadow-lg md:h-14 md:w-14"
+                      style={{ background: getGradientStyle(service.color) }}
+                    >
+                      <Icon className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <p className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${theme.chip}`}>
+                        {theme.eyebrow}
+                      </p>
+                      <h3 className={`mt-3 font-semibold text-brand-ink ${isPrimary ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'}`}>
+                        {service.title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <p className="mt-5 text-sm leading-7 text-slate-600 md:text-base">
+                    {service.description}
+                  </p>
+
+                  <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+                    {service.items.map((item) => (
+                      <li key={item} className="flex items-center gap-2 text-sm font-semibold text-slate-700">
+                        <span className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white text-brand-primary-700 shadow-sm">
+                          <Check className="h-3.5 w-3.5" />
+                        </span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {service.techStack.slice(0, 3).map((item) => (
+                      <span
+                        key={item}
+                        className="inline-flex rounded-full border border-slate-200/90 bg-white/85 px-3 py-1 text-xs font-medium text-slate-600"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+
+                  <Link
+                    to={`/services/${service.slug}/`}
+                    onClick={() =>
+                      trackEvent('service_detail_click', { placement: 'services_cta', service: service.slug })
+                    }
+                    className="mt-7 inline-flex items-center gap-2 rounded-xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-brand-primary-800"
+                  >
+                    詳しい支援内容を見る
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+
+                <div
+                  className={`order-1 relative overflow-hidden bg-slate-200 ${
+                    isPrimary ? 'min-h-[270px] lg:order-2 lg:min-h-full' : 'h-56 md:h-64'
+                  }`}
+                >
+                  <img
+                    src={asset(service.media.listImage)}
+                    alt={`${service.title}のメインイメージ`}
+                    width={1280}
+                    height={720}
+                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/25 via-transparent to-white/5" />
+                </div>
+              </article>
+            );
+          })}
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default Services;

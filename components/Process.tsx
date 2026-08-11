@@ -1,68 +1,102 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, FileSearch, MessageSquare, Rocket, Send } from 'lucide-react';
 import { Link } from 'react-router';
 import { SectionId } from '../types';
 
 const STEPS = [
   {
-    title: '相談内容を送る',
-    description: '分かる範囲で、対象のチャンネル、楽曲、現在使っている資料などをお知らせください。',
-    note: '初回相談は無料です',
+    icon: Send,
+    title: 'フォーム送信',
+    description: 'お問い合わせフォームから、ご相談内容をお送りください。簡単な概要で構いません。',
+    note: 'ここまでは最短数分で完了',
+    surface: 'border-amber-100 bg-amber-50/80',
+    iconSurface: 'bg-amber-100 text-amber-800',
   },
   {
-    title: '資料と担当範囲を確認する',
-    description: '通常1営業日以内に返信し、不足資料、Regaloが担当する作業、依頼者側で確認する項目を分けます。',
-    note: '必要な場合のみオンラインで確認します',
+    icon: MessageSquare,
+    title: 'ヒアリング・返信',
+    description: '通常1営業日以内にご連絡します。必要に応じてオンラインミーティングを設定します。',
+    note: '相談整理とヒアリングは無料',
+    surface: 'border-rose-100 bg-rose-50/80',
+    iconSurface: 'bg-rose-100 text-rose-700',
   },
   {
-    title: '見積書を確認する',
-    description: '作業項目、納品物、日程、費用を記載した見積書をお送りします。',
-    note: '内容に合意いただくまで着手しません',
+    icon: FileSearch,
+    title: 'ご提案・お見積り',
+    description: '課題を整理し、作業範囲・スケジュール・費用を明記したご提案をお送りします。',
+    note: 'スコープと費用感を先に明示',
+    surface: 'border-brand-primary-100 bg-brand-primary-50/80',
+    iconSurface: 'bg-brand-primary-100 text-brand-primary-700',
   },
   {
-    title: '発注後に作業を始める',
-    description: '窓口と連絡方法を決め、見積書に記載した範囲から作業を開始します。',
-    note: '変更がある場合は事前に確認します',
+    icon: Rocket,
+    title: '着手',
+    description: 'ご発注確定後、キックオフミーティングを経てプロジェクトを開始します。',
+    note: '着手後も改善の定着まで伴走',
+    surface: 'border-cyan-100 bg-cyan-50/80',
+    iconSurface: 'bg-cyan-100 text-cyan-800',
   },
 ] as const;
 
-const Process: React.FC = () => (
-  <section id={SectionId.PROCESS} className="bg-[#f6f7f9] py-16 md:py-24">
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div className="grid gap-8 lg:grid-cols-[320px_minmax(0,1fr)] lg:gap-16">
-        <div>
-          <p className="text-sm font-semibold text-brand-primary-700">ご相談から着手まで</p>
-          <h2 className="mt-3 text-3xl font-semibold leading-tight text-brand-ink md:text-4xl">先に見積りをお送りします</h2>
-          <p className="mt-4 text-sm leading-7 text-slate-600">
-            価格表は設けていません。資料の量と担当範囲を確認し、作業を始める前に費用と納品物を明記します。
+const Process: React.FC = () => {
+  return (
+    <section id={SectionId.PROCESS} className="bg-white py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-10 text-center md:mb-14">
+          <p className="mb-4 inline-flex rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-700">
+            ご相談から着手までの流れ
+          </p>
+          <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">進め方</h2>
+          <p className="mx-auto max-w-2xl text-slate-600">
+            相談の入口はシンプルにして、着手前にスコープと費用を明確にします。
+            「何から話せばいいか分からない」状態でも進められる流れにしています。
           </p>
         </div>
 
-        <ol className="border-t-2 border-slate-900">
-          {STEPS.map((step, index) => (
-            <li key={step.title} className="grid gap-3 border-b border-slate-300 py-6 sm:grid-cols-[56px_minmax(0,1fr)_220px] sm:gap-6">
-              <span className="text-sm font-semibold tabular-nums text-brand-primary-700">0{index + 1}</span>
-              <div>
-                <h3 className="text-lg font-semibold text-brand-ink">{step.title}</h3>
-                <p className="mt-2 text-sm leading-7 text-slate-600">{step.description}</p>
-              </div>
-              <p className="text-xs leading-5 text-slate-500 sm:pt-1">{step.note}</p>
-            </li>
-          ))}
-        </ol>
-      </div>
+        <div className="relative">
+          <div className="absolute left-0 right-0 top-16 hidden h-px bg-gradient-to-r from-amber-200 via-brand-primary-200 to-cyan-200 xl:block" />
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {STEPS.map((step, index) => (
+              <article
+                key={step.title}
+                className={`relative rounded-3xl border p-6 shadow-sm shadow-slate-200/40 ${step.surface}`}
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <span className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl ${step.iconSurface}`}>
+                    <step.icon className="h-5 w-5" />
+                  </span>
+                  <span className="inline-flex rounded-full border border-white/80 bg-white/80 px-3 py-1 text-xs font-semibold text-slate-500">
+                    STEP {index + 1}
+                  </span>
+                </div>
+                <h3 className="mt-6 text-xl font-semibold text-brand-ink">{step.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">{step.description}</p>
+                <p className="mt-5 text-xs font-semibold tracking-wide text-slate-600">{step.note}</p>
+              </article>
+            ))}
+          </div>
+        </div>
 
-      <div className="mt-10 flex flex-col gap-4 border-l-4 border-brand-primary-700 bg-white px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm leading-7 text-slate-700">
-          相談内容が整理できていなくても構いません。分かる資料から確認します。
-        </p>
-        <Link to="/contact" className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-brand-primary-700">
-          見積りを相談する
-          <ArrowRight className="h-4 w-4" />
-        </Link>
+        <div className="mt-8 rounded-3xl border border-slate-200 bg-[#fffaf7] p-5 shadow-sm md:p-6">
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+            <div>
+              <p className="text-sm font-semibold text-slate-500">着手前に明確にすること</p>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600 md:text-base">
+                相談段階で「どこから手を付けるべきか」を一緒に整理し、作業範囲、優先順位、費用感を明確にしてから着手します。
+              </p>
+            </div>
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-brand-primary-700 transition-colors hover:text-brand-primary-800"
+            >
+              無料相談から始める
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default Process;

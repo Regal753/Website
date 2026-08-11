@@ -1,307 +1,353 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router';
-import { ArrowLeft, ArrowRight, Check, Phone } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Clock3, MapPin, Phone, ShieldCheck } from 'lucide-react';
 import NotFoundPage from './NotFoundPage';
 import { getServiceBySlug, serviceCatalog } from '../services.catalog';
 import { siteConfig } from '../site.config';
 import { trackEvent } from '../utils/analytics';
+import { getGradientStyle } from '../utils/gradient';
 
-type WorkPanelProps = {
-  slug: string;
-};
-
-const MusicWorkPanel: React.FC = () => {
-  const checks = [
-    ['01', '楽曲', '曲名・音源・用途を確認'],
-    ['02', '権利情報', '作詞者・作曲者・出版社・管理事業者を照合'],
-    ['03', '利用条件', '利用先・期間・地域・収益化条件を記録'],
-    ['04', '公開前確認', '未確認事項と確認先を一覧化'],
-  ] as const;
-
-  return (
-    <section aria-labelledby="music-work-title" className="border-y border-slate-300 bg-amber-50/45 px-5 py-8 sm:px-8">
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-12">
-        <div>
-          <p className="text-sm font-semibold text-amber-900">権利確認の順番</p>
-          <h2 id="music-work-title" className="mt-2 text-2xl font-semibold text-brand-ink">楽曲名だけで利用可否を決めません</h2>
-          <ol className="mt-6 border-t-2 border-amber-900">
-            {checks.map(([number, title, description]) => (
-              <li key={number} className="grid gap-2 border-b border-amber-200 py-4 sm:grid-cols-[44px_150px_minmax(0,1fr)]">
-                <span className="text-xs font-semibold text-amber-900">{number}</span>
-                <span className="font-semibold text-slate-900">{title}</span>
-                <span className="text-sm leading-6 text-slate-600">{description}</span>
-              </li>
-            ))}
-          </ol>
-        </div>
-        <aside className="border-l-4 border-amber-800 bg-white px-5 py-6">
-          <p className="text-xs font-semibold text-slate-500">納品物の例</p>
-          <ul className="mt-4 space-y-3 text-sm font-semibold text-slate-800">
-            <li>楽曲・権利者一覧</li>
-            <li>利用条件・未確認事項一覧</li>
-            <li>公開前チェックリスト</li>
-            <li>追加確認先と質問事項</li>
-          </ul>
-        </aside>
-      </div>
-    </section>
-  );
-};
-
-const YoutubeWorkPanel: React.FC = () => {
-  const stages = [
-    { name: '企画', record: '企画表・公開予定日', check: '狙う視聴者と動画の要点' },
-    { name: '制作', record: '台本・素材・編集進捗', check: '担当者と確認期限' },
-    { name: '公開', record: 'タイトル・概要欄・設定', check: '公開前チェック' },
-    { name: '振り返り', record: '再生数・CTR・維持率', check: '次月に続ける内容' },
-  ] as const;
-
-  return (
-    <section aria-labelledby="youtube-work-title" className="border-y border-slate-300 bg-rose-50/35 px-5 py-8 sm:px-8">
-      <p className="text-sm font-semibold text-rose-800">一本の動画が公開されるまで</p>
-      <h2 id="youtube-work-title" className="mt-2 text-2xl font-semibold text-brand-ink">担当者と確認日を工程ごとに残します</h2>
-      <div className="mt-6 overflow-x-auto">
-        <table className="w-full min-w-[680px] border-collapse text-left">
-          <thead>
-            <tr className="border-y-2 border-slate-900 text-xs text-slate-500">
-              <th className="py-3 pr-5 font-semibold">工程</th>
-              <th className="py-3 pr-5 font-semibold">記録するもの</th>
-              <th className="py-3 font-semibold">確認すること</th>
-            </tr>
-          </thead>
-          <tbody>
-            {stages.map((stage) => (
-              <tr key={stage.name} className="border-b border-rose-200">
-                <th className="py-4 pr-5 font-semibold text-slate-900">{stage.name}</th>
-                <td className="py-4 pr-5 text-sm text-slate-700">{stage.record}</td>
-                <td className="py-4 text-sm text-slate-600">{stage.check}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </section>
-  );
-};
-
-const AutomationWorkPanel: React.FC = () => (
-  <section aria-labelledby="automation-work-title" className="border-y border-slate-300 bg-cyan-50/35 px-5 py-8 sm:px-8">
-    <p className="text-sm font-semibold text-cyan-900">自動化する範囲</p>
-    <h2 id="automation-work-title" className="mt-2 text-2xl font-semibold text-brand-ink">入力・処理・通知を分けて確認します</h2>
-    <div className="mt-7 grid gap-0 border-y-2 border-slate-900 md:grid-cols-3">
-      {[
-        ['入力', 'Drive / Sheets', '素材、担当者、期限、ステータス'],
-        ['処理', '決めた条件だけ実行', '転記、集計、期限判定、レポート作成'],
-        ['通知・出力', 'Discord / メール / 表', '確認依頼、未対応一覧、定例報告'],
-      ].map(([label, title, description], index) => (
-        <div key={label} className={`py-5 md:px-6 ${index < 2 ? 'border-b border-slate-300 md:border-b-0 md:border-r' : ''}`}>
-          <p className="text-xs font-semibold text-cyan-900">{label}</p>
-          <h3 className="mt-2 font-semibold text-slate-900">{title}</h3>
-          <p className="mt-2 text-sm leading-6 text-slate-600">{description}</p>
-        </div>
-      ))}
-    </div>
-    <p className="mt-5 border-l-4 border-cyan-800 pl-4 text-sm leading-7 text-slate-700">
-      公開、契約、権利判断など、人の確認が必要な操作は自動実行の対象から外します。
-    </p>
-  </section>
-);
-
-const WorkPanel: React.FC<WorkPanelProps> = ({ slug }) => {
-  if (slug === 'music-publishing') return <MusicWorkPanel />;
-  if (slug === 'sns-management') return <YoutubeWorkPanel />;
-  return <AutomationWorkPanel />;
-};
+const SERVICE_PROOF_POINTS = [
+  {
+    icon: Clock3,
+    label: '返信目安',
+    value: '1営業日以内',
+  },
+  {
+    icon: MapPin,
+    label: '拠点',
+    value: '京都発の実務チーム',
+  },
+  {
+    icon: ShieldCheck,
+    label: '支援範囲',
+    value: '運用と管理を一気通貫で',
+  },
+] as const;
 
 const ServiceDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const location = useLocation();
   const navigate = useNavigate();
   const service = slug ? getServiceBySlug(slug) : undefined;
+  const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
+  const [activeSlide, setActiveSlide] = useState(0);
 
   useEffect(() => {
     if (slug && service) {
       const canonicalPath = `/services/${service.slug}/`;
-      if (location.pathname !== canonicalPath) navigate(canonicalPath, { replace: true });
+      if (location.pathname !== canonicalPath) {
+        navigate(canonicalPath, { replace: true });
+      }
     }
   }, [slug, service, location.pathname, navigate]);
 
+  const slideImagePaths = useMemo(() => {
+    if (!service) return [];
+    return [service.media.listImage, ...service.media.galleryImages].slice(0, 3);
+  }, [service]);
+
+  const otherServices = useMemo(() => {
+    if (!service) return [];
+    return serviceCatalog.filter((item) => item.slug !== service.slug);
+  }, [service]);
+
+  const relatedCases = useMemo(() => {
+    if (!service) return [];
+    return siteConfig.cases.filter((item) => item.serviceSlug === service.slug);
+  }, [service]);
+
   useEffect(() => {
-    if (service?.slug) trackEvent('service_detail_view', { service: service.slug });
+    setActiveSlide(0);
   }, [service?.slug]);
 
-  const otherServices = useMemo(
-    () => (service ? serviceCatalog.filter((item) => item.slug !== service.slug) : []),
-    [service],
-  );
-  const relatedCase = useMemo(
-    () => (service ? siteConfig.cases.find((item) => item.serviceSlug === service.slug) : undefined),
-    [service],
-  );
+  useEffect(() => {
+    if (service?.slug) {
+      trackEvent('service_detail_view', { service: service.slug });
+    }
+  }, [service?.slug]);
 
-  if (!service) return <NotFoundPage />;
+  if (!service) {
+    return <NotFoundPage />;
+  }
 
   const Icon = service.icon;
   const phoneDisplay = siteConfig.companyProfile.phone || '';
   const phoneHref = phoneDisplay.replace(/[^\d+]/g, '');
 
   return (
-    <section className="bg-white pb-20 pt-28 md:pb-24 md:pt-32">
+    <section className="bg-[linear-gradient(180deg,_#ffffff_0%,_#fffaf7_100%)] pt-28 pb-20 md:pb-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold text-brand-primary-700 hover:text-brand-primary-800">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-2 text-sm text-brand-primary-700 transition-colors hover:text-brand-primary-800"
+        >
           <ArrowLeft className="h-4 w-4" />
           トップへ戻る
         </Link>
 
-        <header className="mt-8 grid gap-8 border-b-2 border-slate-900 pb-10 lg:grid-cols-[minmax(0,1fr)_300px] lg:items-end lg:gap-16">
-          <div>
-            <div className="flex items-center gap-3 text-sm font-semibold text-brand-primary-700">
-              <Icon className="h-5 w-5" />
-              {siteConfig.positioning.serviceDetailEyebrow}
+        <article className="mt-4 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-10">
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_280px] lg:items-start">
+            <div>
+              <div className="flex items-start gap-4">
+                <div
+                  className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl shadow-lg"
+                  style={{ background: getGradientStyle(service.color) }}
+                >
+                  <Icon className="h-7 w-7 text-white" />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold tracking-widest text-brand-primary-700">
+                    {siteConfig.positioning.serviceDetailEyebrow}
+                  </p>
+                  <h1 className="mt-1 text-3xl font-semibold text-brand-ink md:text-4xl">{service.title}</h1>
+                  <p className="mt-4 leading-relaxed text-slate-600">{service.detailLead}</p>
+                </div>
+              </div>
+
+              <p className="mt-5 max-w-3xl text-sm leading-relaxed text-slate-600 md:text-base">
+                {siteConfig.positioning.serviceDetailSummary}
+              </p>
+
+              <div className="mt-5 flex flex-wrap gap-2">
+                {service.items.map((item) => (
+                  <span
+                    key={item}
+                    className="inline-flex rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-700"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
             </div>
-            <h1 className="mt-4 text-4xl font-semibold leading-tight text-brand-ink md:text-6xl">{service.title}</h1>
-            <p className="mt-6 max-w-3xl text-base leading-8 text-slate-600 md:text-lg">{service.detailLead}</p>
+
+            <aside className="rounded-3xl border border-amber-200 bg-gradient-to-br from-amber-50 via-white to-white p-5 shadow-sm">
+              <p className="text-sm font-semibold text-amber-800">ご相談の目安</p>
+              <ul className="mt-4 space-y-3">
+                {SERVICE_PROOF_POINTS.map((item) => (
+                  <li key={item.label} className="rounded-2xl border border-white bg-white/80 px-4 py-3">
+                    <div className="flex items-center gap-3">
+                      <span className="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-amber-100 text-amber-800">
+                        <item.icon className="h-4 w-4" />
+                      </span>
+                      <div>
+                        <p className="text-xs font-semibold tracking-wide text-slate-500">{item.label}</p>
+                        <p className="text-sm font-semibold text-brand-ink">{item.value}</p>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </aside>
           </div>
-          <dl className="border-t border-slate-300 text-sm">
-            <div className="flex justify-between gap-5 border-b border-slate-300 py-3">
-              <dt className="text-slate-500">返信目安</dt>
-              <dd className="font-semibold text-slate-900">通常1営業日以内</dd>
-            </div>
-            <div className="flex justify-between gap-5 border-b border-slate-300 py-3">
-              <dt className="text-slate-500">拠点</dt>
-              <dd className="font-semibold text-slate-900">京都府長岡京市</dd>
-            </div>
-            <div className="flex justify-between gap-5 border-b border-slate-300 py-3">
-              <dt className="text-slate-500">費用</dt>
-              <dd className="font-semibold text-slate-900">作業前に個別見積り</dd>
-            </div>
-          </dl>
-        </header>
 
-        <div className="mt-10">
-          <WorkPanel slug={service.slug} />
-        </div>
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5">
+            <div className="overflow-hidden rounded-xl border border-slate-200 bg-slate-50 md:col-span-2">
+              <div className="relative aspect-video w-full bg-slate-100">
+                {slideImagePaths.map((imagePath, index) => (
+                  <img
+                    key={imagePath}
+                    src={asset(imagePath)}
+                    alt={`${service.title}のスライド画像${index + 1}`}
+                    width={1280}
+                    height={720}
+                    className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+                      activeSlide === index ? 'opacity-100' : 'opacity-0'
+                    }`}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    decoding="async"
+                  />
+                ))}
+              </div>
+              {slideImagePaths.length > 1 && (
+                <div className="flex items-center justify-center gap-2 border-t border-slate-200 bg-white py-3">
+                  {slideImagePaths.map((_, index) => (
+                    <button
+                      key={`slide-dot-${index}`}
+                      type="button"
+                      aria-label={`スライド${index + 1}を表示`}
+                      onClick={() => setActiveSlide(index)}
+                      className={`h-2.5 rounded-full transition-all ${
+                        activeSlide === index ? 'w-7 bg-brand-primary-700' : 'w-2.5 bg-slate-300 hover:bg-slate-400'
+                      }`}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
 
-        <section className="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-16">
-          {service.detailSections.map((section) => (
-            <div key={section.title}>
-              <h2 className="border-b-2 border-slate-900 pb-3 text-xl font-semibold text-brand-ink">{section.title}</h2>
-              <ul className="divide-y divide-slate-200">
-                {section.points.map((point) => (
-                  <li key={point} className="flex items-start gap-3 py-4 text-sm leading-7 text-slate-700">
-                    <Check className="mt-1.5 h-4 w-4 shrink-0 text-brand-primary-700" />
-                    <span>{point}</span>
+            <div className="md:col-span-2">
+              <h2 className="mb-3 text-lg font-bold text-slate-900">ギャラリー</h2>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+                {slideImagePaths.map((imagePath, index) => (
+                  <img
+                    key={imagePath}
+                    src={asset(imagePath)}
+                    alt={`${service.title}の参考画像${index + 1}`}
+                    width={960}
+                    height={640}
+                    className="h-52 w-full rounded-xl border border-slate-200 object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ))}
+              </div>
+            </div>
+
+            {service.detailSections.map((section) => (
+              <div key={section.title} className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+                <h2 className="text-lg font-semibold text-brand-ink">{section.title}</h2>
+                <ul className="mt-3 space-y-2">
+                  {section.points.map((point) => (
+                    <li key={point} className="flex items-start gap-2 text-sm leading-relaxed text-slate-700">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-900" />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          {relatedCases.length > 0 && (
+            <section className="mt-8">
+              <h2 className="text-xl font-semibold text-brand-ink">支援設計のサンプル</h2>
+              <p className="mt-2 mb-4 text-sm leading-relaxed text-slate-600">
+                特定顧客の実績紹介ではありません。自社運用とこれまで扱ってきた課題を抽象化し、
+                ご相談時に整理する内容と納品物のイメージを示しています。
+              </p>
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                {relatedCases.map((item) => (
+                  <article key={item.title} className="rounded-2xl border border-slate-200 bg-[#fffaf7] p-5">
+                    <p className="text-sm font-semibold text-slate-500">{item.clientType}</p>
+                    <h3 className="mt-1 text-lg font-semibold text-brand-ink">{item.title}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-slate-700">{item.challenge}</p>
+                    <p className="mt-3 text-sm font-semibold text-brand-primary-700">{item.outcome}</p>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {item.results.map((result) => (
+                        <span
+                          key={result}
+                          className="inline-flex rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700"
+                        >
+                          {result}
+                        </span>
+                      ))}
+                    </div>
+                  </article>
+                ))}
+              </div>
+              <p className="mt-4 text-xs leading-6 text-slate-600">
+                ※ 実際の支援範囲とお見積りは、資料・権利関係・現在の運用体制を確認したうえで個別にご案内します。
+              </p>
+            </section>
+          )}
+
+          <section className="mt-8">
+            <h2 className="mb-4 text-xl font-semibold text-brand-ink">支援のポイント</h2>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              {service.caseHighlights.map((item) => (
+                <div key={item.title} className="rounded-xl border border-slate-200 bg-white p-5">
+                  <h3 className="text-base font-semibold text-brand-ink">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.summary}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+              <h2 className="text-xl font-semibold text-brand-ink">お見積り</h2>
+              <p className="mt-2 text-sm leading-relaxed text-slate-700">{service.pricing.summary}</p>
+              <ul className="mt-3 space-y-2">
+                {service.pricing.items.map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-sm leading-relaxed text-slate-700">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-900" />
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
-          ))}
-        </section>
 
-        {relatedCase && (
-          <section className="mt-14 border-y border-slate-300 py-9">
-            <div className="grid gap-8 lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-14">
-              <div>
-                <p className="text-sm font-semibold text-brand-primary-700">よくあるご相談</p>
-                <h2 className="mt-2 text-2xl font-semibold text-brand-ink">{relatedCase.title}</h2>
-                <p className="mt-3 text-xs leading-5 text-slate-500">
-                  特定顧客の実績紹介ではありません。ご相談内容を説明するための一般例です。
-                </p>
-              </div>
-              <div>
-                <dl className="grid gap-6 sm:grid-cols-2">
-                  <div>
-                    <dt className="text-xs font-semibold text-slate-500">相談時の状態</dt>
-                    <dd className="mt-2 text-sm leading-7 text-slate-700">{relatedCase.challenge}</dd>
-                  </div>
-                  <div>
-                    <dt className="text-xs font-semibold text-slate-500">Regaloが確認する範囲</dt>
-                    <dd className="mt-2 text-sm leading-7 text-slate-700">{relatedCase.scope}</dd>
-                  </div>
-                </dl>
-                <div className="mt-6">
-                  <p className="text-xs font-semibold text-slate-500">お渡しするもの</p>
-                  <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold text-slate-800">
-                    {relatedCase.deliverables.map((item) => (
-                      <li key={item} className="flex items-center gap-2">
-                        <span className="h-1.5 w-1.5 bg-brand-primary-700" aria-hidden="true" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+            <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+              <h2 className="text-xl font-semibold text-brand-ink">技術</h2>
+              <p className="mt-2 text-sm leading-relaxed text-slate-700">
+                既存運用との整合を重視し、必要な技術要素のみを選定して導入します。
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {service.techStack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="inline-flex items-center rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-semibold text-slate-700"
+                  >
+                    {tech}
+                  </span>
+                ))}
               </div>
             </div>
           </section>
-        )}
 
-        <section className="mt-14 grid gap-10 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-16">
-          <div>
-            <h2 className="text-2xl font-semibold text-brand-ink">作業の進め方</h2>
-            <ol className="mt-5 border-t-2 border-slate-900">
+          <section className="mt-8 rounded-xl border border-slate-200 bg-white p-5">
+            <h2 className="mb-4 text-xl font-semibold text-brand-ink">進め方</h2>
+            <div className="space-y-3">
               {service.processSteps.map((step, index) => (
-                <li key={step.title} className="grid gap-2 border-b border-slate-300 py-4 sm:grid-cols-[44px_160px_minmax(0,1fr)]">
-                  <span className="text-xs font-semibold text-brand-primary-700">0{index + 1}</span>
-                  <span className="font-semibold text-slate-900">{step.title}</span>
-                  <span className="text-sm leading-6 text-slate-600">{step.description}</span>
-                </li>
+                <div key={step.title} className="flex gap-3">
+                  <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-primary-50 text-xs font-bold text-brand-primary-700">
+                    {index + 1}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-slate-900">{step.title}</p>
+                    <p className="text-sm leading-relaxed text-slate-600">{step.description}</p>
+                  </div>
+                </div>
               ))}
-            </ol>
-          </div>
-
-          <aside className="border-l-4 border-brand-primary-700 bg-slate-50 px-6 py-7">
-            <h2 className="text-xl font-semibold text-brand-ink">お見積り</h2>
-            <p className="mt-3 text-sm leading-7 text-slate-700">{service.pricing.summary}</p>
-            <ul className="mt-5 space-y-3">
-              {service.pricing.items.map((item) => (
-                <li key={item} className="text-sm leading-6 text-slate-700">{item}</li>
-              ))}
-            </ul>
-            <p className="mt-6 text-xs font-semibold text-slate-500">主に使用する環境</p>
-            <p className="mt-2 text-sm leading-6 text-slate-700">{service.techStack.join(' / ')}</p>
-          </aside>
-        </section>
-
-        <section className="mt-14 border-t-2 border-slate-900 pt-8">
-          <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
-            <div>
-              <h2 className="text-2xl font-semibold text-brand-ink">まずは資料の状態を確認します</h2>
-              <p className="mt-3 text-sm leading-7 text-slate-600">相談内容が未整理でも構いません。作業範囲を確認してから見積書をお送りします。</p>
             </div>
-            <div className="flex flex-col gap-3 sm:flex-row">
+          </section>
+
+          <div className="mt-8 rounded-xl border border-brand-primary-200 bg-brand-primary-50 p-5">
+            <h2 className="text-xl font-semibold text-brand-ink">ご相談・お見積り</h2>
+            <p className="mt-2 text-sm leading-relaxed text-slate-700">
+              事業フェーズや運用体制に合わせて、最適な支援内容をご提案します。まずは現状課題をお聞かせください。
+            </p>
+            <div className="mt-4 flex flex-wrap gap-3">
               <Link
                 to="/contact"
-                onClick={() => trackEvent('cta_click', { placement: 'service_detail', service: service.slug, target: 'contact' })}
-                className="inline-flex items-center justify-center gap-2 rounded-md bg-brand-primary-700 px-5 py-3 text-sm font-semibold text-white hover:bg-brand-primary-800"
+                onClick={() =>
+                  trackEvent('cta_click', { placement: 'service_detail', service: service.slug, target: 'contact' })
+                }
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand-primary-700 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-primary-800"
               >
-                見積りを相談する
+                無料相談フォームへ
                 <ArrowRight className="h-4 w-4" />
               </Link>
               {phoneHref && (
                 <a
                   href={`tel:${phoneHref}`}
                   onClick={() => trackEvent('phone_click', { placement: 'service_detail', service: service.slug })}
-                  className="inline-flex items-center justify-center gap-2 rounded-md border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-bold text-slate-700 transition-colors hover:bg-slate-100"
                 >
                   <Phone className="h-4 w-4" />
-                  {phoneDisplay}
+                  電話で相談: {phoneDisplay}
                 </a>
               )}
             </div>
           </div>
-        </section>
+        </article>
 
-        <nav className="mt-14 border-t border-slate-300 pt-7" aria-label="他の対応内容">
-          <p className="text-xs font-semibold text-slate-500">他の対応内容</p>
-          <div className="mt-3 grid gap-3 md:grid-cols-2">
+        <section className="mt-8">
+          <h2 className="mb-4 text-xl font-semibold text-brand-ink">他の事業を見る</h2>
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
             {otherServices.map((item) => (
-              <Link key={item.slug} to={`/services/${item.slug}/`} className="flex items-center justify-between gap-4 border-b border-slate-300 py-4 font-semibold text-brand-ink hover:text-brand-primary-700">
-                {item.title}
-                <ArrowRight className="h-4 w-4" />
+              <Link
+                key={item.slug}
+                to={`/services/${item.slug}/`}
+                className="rounded-xl border border-slate-200 bg-white p-4 transition-colors hover:border-brand-primary-300 hover:bg-brand-primary-50/40"
+              >
+                <p className="font-semibold text-brand-ink">{item.title}</p>
+                <p className="mt-1 text-sm text-slate-600">{item.description}</p>
               </Link>
             ))}
           </div>
-        </nav>
+        </section>
       </div>
     </section>
   );
