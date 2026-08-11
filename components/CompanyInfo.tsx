@@ -170,10 +170,10 @@ const CompanyInfo: React.FC = () => {
             aria-label="支援体制について"
           >
             <p className="text-xs font-semibold tracking-wider text-amber-800">支援体制について</p>
-            <h2 className="mt-2 text-2xl font-semibold text-brand-ink">少人数チームで、相談から改善まで伴走</h2>
+            <h2 className="mt-2 text-2xl font-semibold text-brand-ink">確認から納品まで、同じ会社窓口で対応</h2>
             <p className="mt-4 text-sm leading-relaxed text-slate-700">
-              Regaloは、相談内容を最初に整理し、運用、権利、共有フローのどこを整えるべきかを切り分けます。
-              資格や権利管理の知見も含め、現場で続けやすい形に落とし込むことを重視しています。
+              Regaloは、受領した資料、追加で確認する項目、担当する作業、納品物を分けてお伝えします。
+              権利情報や制作進行の状況は、一覧表と確認手順に残します。
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
               {representativeHighlights.map((item) => (

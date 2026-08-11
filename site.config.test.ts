@@ -10,7 +10,7 @@ describe('siteConfig cases', () => {
   });
 
   it('keeps published trust copy aligned with verified evidence', () => {
-    expect(siteConfig.companyProfile.business[0]).toBe('音楽出版事業部');
+    expect(siteConfig.companyProfile.business[0]).toBe('音楽権利管理・BGM制作');
     expect(siteConfig.newsItems.some((item) => item.title.includes('音楽著作権管理者養成講座を修了'))).toBe(true);
     expect(siteConfig.newsItems.some((item) => item.title.includes('資格取得'))).toBe(false);
   });
@@ -23,10 +23,11 @@ describe('siteConfig cases', () => {
     }
   });
 
-  it('includes clear structure for each support-design sample', () => {
+  it('includes clear structure for each common inquiry example', () => {
     for (const item of siteConfig.cases) {
       expect(item.title.length).toBeGreaterThan(0);
-      expect(item.clientType).toContain('実績紹介ではありません');
+      expect(item.clientType).toContain('よくあるご相談');
+      expect(item.clientType).not.toContain('実績紹介ではありません');
       expect(item.challenge.length).toBeGreaterThan(0);
       expect(item.results.length).toBeGreaterThan(0);
       expect(item.deliverables.length).toBeGreaterThan(0);

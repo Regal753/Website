@@ -30,15 +30,15 @@ const Header: React.FC = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/92 backdrop-blur-xl shadow-[0_8px_26px_rgba(15,23,42,0.08)] border-b border-slate-200/80 py-3'
-          : 'bg-white/72 backdrop-blur-md border-b border-white/40 py-4'
+          ? 'border-b border-slate-200 bg-white/95 py-3 backdrop-blur-xl'
+          : 'border-b border-slate-200/80 bg-white/90 py-4 backdrop-blur-md'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         {/* Logo */}
         <Link
           to="/"
-          className="flex items-center gap-2 cursor-pointer group rounded-xl bg-white/80 border border-slate-200/80 px-2.5 py-1.5 shadow-sm"
+          className="group flex cursor-pointer items-center gap-2"
           onClick={handleNavClick}
           aria-label="Regalo トップページへ移動"
         >
@@ -47,7 +47,7 @@ const Header: React.FC = () => {
             alt={siteConfig.companyName}
             width={40}
             height={40}
-            className="w-10 h-10 rounded-lg transform group-hover:rotate-12 transition-transform"
+            className="h-10 w-10 rounded-md"
           />
           <span className="text-xl font-semibold text-brand-ink">
             {siteConfig.companyName}
@@ -61,10 +61,10 @@ const Header: React.FC = () => {
                 key={item.href}
                 to={item.href}
                 onClick={handleNavClick}
-                className={`px-3 py-1.5 rounded-full text-xs lg:text-sm font-semibold whitespace-nowrap border transition-all ${
+                className={`border-b-2 px-1 py-2 text-xs font-semibold whitespace-nowrap transition-colors lg:text-sm ${
                   isActive(item.href, item.matchPrefix)
-                    ? 'text-brand-primary-700 bg-brand-primary-50 border-brand-primary-100'
-                    : 'text-slate-600 bg-white/70 border-slate-200 hover:text-brand-primary-700 hover:border-brand-primary-200 hover:bg-brand-primary-50/60'
+                    ? 'border-brand-primary-700 text-brand-primary-700'
+                    : 'border-transparent text-slate-600 hover:border-slate-300 hover:text-brand-primary-700'
                 }`}
               >
                 {item.label}
@@ -75,9 +75,9 @@ const Header: React.FC = () => {
           <Link
             to="/contact"
             onClick={handleNavClick}
-            className="inline-flex items-center gap-2 rounded-full bg-brand-primary-700 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-brand-primary-700/20 transition-all hover:-translate-y-px hover:bg-brand-primary-800"
+            className="inline-flex items-center gap-2 rounded-md bg-brand-primary-700 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-primary-800"
           >
-            無料相談
+            見積り相談
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
@@ -86,9 +86,9 @@ const Header: React.FC = () => {
           <Link
             to="/contact"
             onClick={handleNavClick}
-            className="inline-flex items-center gap-1.5 rounded-full bg-brand-primary-700 px-3.5 py-2 text-sm font-semibold text-white shadow-md shadow-brand-primary-700/20"
+            className="inline-flex items-center gap-1.5 rounded-md bg-brand-primary-700 px-3.5 py-2 text-sm font-semibold text-white"
           >
-            無料相談
+            見積り
             <ArrowRight className="h-3.5 w-3.5" />
           </Link>
           <button
@@ -114,16 +114,16 @@ const Header: React.FC = () => {
         }`}
         aria-hidden={!isMobileMenuOpen}
       >
-        <div className="rounded-b-2xl bg-white/95 backdrop-blur-xl border-t border-slate-200 shadow-xl p-4 flex flex-col gap-3">
+        <div className="flex flex-col gap-1 border-t border-slate-200 bg-white p-4 shadow-xl">
           {siteConfig.navItems.map((item) => (
             <Link
               key={item.href}
               to={item.href}
               onClick={handleNavClick}
-              className={`text-left text-sm font-semibold p-2.5 rounded-lg border transition-colors ${
+              className={`border-l-2 p-3 text-left text-sm font-semibold transition-colors ${
                 isActive(item.href, item.matchPrefix)
-                  ? 'text-brand-primary-700 bg-brand-primary-50 border-brand-primary-100'
-                  : 'text-slate-700 bg-white border-slate-200 hover:bg-slate-50'
+                  ? 'border-brand-primary-700 bg-brand-primary-50 text-brand-primary-700'
+                  : 'border-transparent text-slate-700 hover:bg-slate-50'
               }`}
             >
               {item.label}
@@ -132,9 +132,9 @@ const Header: React.FC = () => {
           <Link
             to="/contact"
             onClick={handleNavClick}
-            className="mt-1 inline-flex items-center justify-center gap-2 rounded-xl bg-brand-primary-700 px-4 py-3 text-sm font-semibold text-white"
+            className="mt-2 inline-flex items-center justify-center gap-2 rounded-md bg-brand-primary-700 px-4 py-3 text-sm font-semibold text-white"
           >
-            無料相談する
+            見積りを相談する
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
