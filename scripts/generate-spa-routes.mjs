@@ -18,61 +18,61 @@ const routeEntrypoints = [
     aliases: ['contact.html'],
     title: 'お問い合わせ | Regalo',
     description:
-      'SNS運用、音楽権利管理、AIを活用した運用改善のご相談を24時間受け付けています。通常1営業日以内にご連絡します。',
+      '音楽権利管理、YouTube運用、制作進行や定例業務の自動化についてご相談いただけます。通常1営業日以内にご連絡します。',
     canonicalPath: '/contact',
   },
   {
     path: 'services/sns-management/index.html',
-    title: 'SNS管理事業部 | Regalo',
+    title: 'YouTube運用・制作進行 | Regalo',
     description:
-      'YouTubeを中心に、企画設計から制作進行、公開後の分析改善まで一気通貫で支援します。',
+      '企画表、制作スケジュール、確認手順、公開後の数値記録を一つの流れにまとめます。',
     canonicalPath: '/services/sns-management/',
   },
   {
     path: 'services/music-publishing/index.html',
-    title: '音楽出版事業部 | Regalo',
-    description: '音楽著作権の管理を行い、制作から権利管理、実運用まで一貫して支援します。',
+    title: '音楽権利管理・BGM制作 | Regalo',
+    description: 'YouTubeで使う楽曲の権利者、管理状況、利用先、利用条件を確認し、台帳へまとめます。',
     canonicalPath: '/services/music-publishing/',
   },
   {
     path: 'services/ai-marketing-strategy/index.html',
-    title: 'AIマーケティング戦略事業部 | Regalo',
+    title: '業務改善・自動化支援 | Regalo',
     description:
-      'レポート整備、進行共有、通知の自動化を通じて、マーケティング運用の品質とスピードを高めます。',
+      '進捗表の転記、定例レポート、確認依頼、期限通知など、繰り返している作業を必要な箇所だけ自動化します。',
     canonicalPath: '/services/ai-marketing-strategy/',
   },
   // Legacy slugs resolve to the current service canonical URL.
   {
     path: 'services/sns-operations/index.html',
-    title: 'SNS管理事業部 | Regalo',
+    title: 'YouTube運用・制作進行 | Regalo',
     description:
-      'YouTubeを中心に、企画設計から制作進行、公開後の分析改善まで一気通貫で支援します。',
+      '企画表、制作スケジュール、確認手順、公開後の数値記録を一つの流れにまとめます。',
     canonicalPath: '/services/sns-management/',
   },
   {
     path: 'services/music-publishing-bgm/index.html',
-    title: '音楽出版事業部 | Regalo',
-    description: '音楽著作権の管理を行い、制作から権利管理、実運用まで一貫して支援します。',
+    title: '音楽権利管理・BGM制作 | Regalo',
+    description: 'YouTubeで使う楽曲の権利者、管理状況、利用先、利用条件を確認し、台帳へまとめます。',
     canonicalPath: '/services/music-publishing/',
   },
   {
     path: 'services/bgm-production/index.html',
-    title: '音楽出版事業部 | Regalo',
-    description: '音楽著作権の管理を行い、制作から権利管理、実運用まで一貫して支援します。',
+    title: '音楽権利管理・BGM制作 | Regalo',
+    description: 'YouTubeで使う楽曲の権利者、管理状況、利用先、利用条件を確認し、台帳へまとめます。',
     canonicalPath: '/services/music-publishing/',
   },
   {
     path: 'services/rights-management/index.html',
-    title: 'AIマーケティング戦略事業部 | Regalo',
+    title: '業務改善・自動化支援 | Regalo',
     description:
-      'レポート整備、進行共有、通知の自動化を通じて、マーケティング運用の品質とスピードを高めます。',
+      '進捗表の転記、定例レポート、確認依頼、期限通知など、繰り返している作業を必要な箇所だけ自動化します。',
     canonicalPath: '/services/ai-marketing-strategy/',
   },
   {
     path: 'services/workflow-automation/index.html',
-    title: 'AIマーケティング戦略事業部 | Regalo',
+    title: '業務改善・自動化支援 | Regalo',
     description:
-      'レポート整備、進行共有、通知の自動化を通じて、マーケティング運用の品質とスピードを高めます。',
+      '進捗表の転記、定例レポート、確認依頼、期限通知など、繰り返している作業を必要な箇所だけ自動化します。',
     canonicalPath: '/services/ai-marketing-strategy/',
   },
 ];

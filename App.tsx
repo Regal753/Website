@@ -100,7 +100,7 @@ const getRouteMeta = (pathname: string): RouteMeta => {
       return {
         title: `お問い合わせ | ${siteConfig.companyName}`,
         description:
-          'SNS運用、音楽権利管理、AIを活用した運用改善のご相談を24時間受け付けています。通常1営業日以内にご連絡します。',
+          '音楽権利管理、YouTube運用、制作進行や定例業務の自動化についてご相談いただけます。通常1営業日以内にご連絡します。',
         canonicalPath: '/contact',
       };
     case '/privacy':
@@ -167,7 +167,7 @@ function App() {
     <BrowserRouter basename={getRouterBasename()}>
       <ScrollToTopOnRouteChange />
       <RouteTracker />
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100/70 text-slate-800 selection:bg-cyan-100">
+      <div className="min-h-screen bg-white text-slate-800 selection:bg-indigo-100">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-brand-primary-700 focus:shadow-lg"

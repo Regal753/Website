@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { getServiceBySlug, serviceCatalog } from './services.catalog';
 
 describe('service catalog', () => {
-  it('has exactly three divisions', () => {
+  it('has exactly three service areas', () => {
     expect(serviceCatalog).toHaveLength(3);
   });
 
@@ -19,13 +19,13 @@ describe('service catalog', () => {
     }
   });
 
-  it('uses optimized media assets', () => {
-    for (const service of serviceCatalog) {
-      expect(service.media.listImage.endsWith('.webp')).toBe(true);
-      for (const image of service.media.galleryImages) {
-        expect(image.endsWith('.webp')).toBe(true);
-      }
-    }
+  it('uses concrete public-facing service names', () => {
+    expect(serviceCatalog.map((service) => service.title)).toEqual([
+      '音楽権利管理・BGM制作',
+      'YouTube運用・制作進行',
+      '業務改善・自動化支援',
+    ]);
+    expect(JSON.stringify(serviceCatalog)).not.toContain('AIマーケティング戦略事業部');
   });
 
   it('resolves legacy slugs including .html suffix', () => {

@@ -68,10 +68,21 @@ describe('site audit remediation', () => {
     }
   });
 
-  it('labels modeled support examples without implying customer results', () => {
-    expect(serviceDetailSource).toContain('支援設計のサンプル');
+  it('labels common inquiry examples once without implying customer results', () => {
+    expect(serviceDetailSource).toContain('よくあるご相談');
     expect(serviceDetailSource).toContain('特定顧客の実績紹介ではありません');
+    expect(serviceDetailSource.match(/特定顧客の実績紹介ではありません/g)).toHaveLength(1);
+    expect(serviceDetailSource).not.toContain('BEFORE');
+    expect(serviceDetailSource).not.toContain('DESIGN');
+    expect(serviceDetailSource).not.toContain('AFTER');
     expect(serviceDetailSource).not.toContain('公開している改善事例');
+  });
+
+  it('removes generated service imagery from public page components', () => {
+    expect(serviceDetailSource).not.toContain('<img');
+    expect(serviceDetailSource).not.toContain('service.media');
+    expect(heroSource).not.toContain('<img');
+    expect(heroSource).not.toContain('service.media');
   });
 
   it('keeps the inquiry flow estimate-first without publishing a price table', () => {
@@ -89,18 +100,18 @@ describe('site audit remediation', () => {
       (match) => match[1],
     );
     expect(lastModifiedDates).toHaveLength(9);
-    expect(lastModifiedDates.filter((date) => date === '2026-08-08')).toHaveLength(5);
+    expect(lastModifiedDates.filter((date) => date === '2026-08-08')).toHaveLength(2);
     expect(lastModifiedDates.filter((date) => date === '2026-08-10')).toHaveLength(2);
-    expect(lastModifiedDates.filter((date) => date === '2026-08-11')).toHaveLength(2);
+    expect(lastModifiedDates.filter((date) => date === '2026-08-11')).toHaveLength(5);
   });
 
   it('publishes decision-ready corporate trust information without inventing customer proof', () => {
     expect(homePageSource).toContain('<BusinessTrust />');
-    expect(businessTrustSource).toContain('稟議前に確認したい情報を、公開しています');
+    expect(businessTrustSource).toContain('発注前に必要な情報を');
     expect(businessTrustSource).toContain('国税庁 法人番号公表サイト');
     expect(businessTrustSource).toContain('クラウドワークス公式メディア');
     expect(businessTrustSource).toContain('日本音楽出版社協会');
-    expect(businessTrustSource).toContain("href: '#process'");
+    expect(businessTrustSource).toContain('href="#process"');
     expect(businessTrustSource).not.toMatch(/導入社数|顧客満足度|成功率|実績\s*\d+/);
     expect(footerSource).toContain('法人情報・外部確認先を見る');
     expect(footerSource).toContain('法人番号');
