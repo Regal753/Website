@@ -47,12 +47,12 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
     slug: 'sns-management',
     title: 'SNS管理事業部',
     description:
-      'YouTubeを中心に、企画設計から制作進行、公開後の分析改善まで一気通貫で支援します。再現可能な運用体制を構築し、継続的な成果を目指します。',
+      'YouTubeを中心に、企画、制作進行、投稿管理、公開後の数値確認に対応します。',
     items: ['YouTube運用代行', '企画・台本設計', 'KPI分析/改善', '投稿運用オペレーション'],
     icon: Youtube,
     color: 'from-red-500 to-red-600',
     detailLead:
-      'SNS管理事業部では、運用担当者依存から脱却し、組織で成果を積み上げるための運用設計を提供します。特にYouTube運用代行では、企画・制作・分析を同一フローで回し、改善サイクルの定着まで伴走します。',
+      'SNS管理事業部では、YouTubeの企画、制作進行、投稿管理、数値確認を担当します。運用手順と担当範囲を明文化し、継続して運用できる体制を整備します。',
     detailSections: [
       {
         title: '主な提供内容',
@@ -66,24 +66,24 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
       {
         title: '対応課題',
         points: [
-          '更新停止や運用品質のばらつきを解消したい',
+          '投稿手順と品質基準を統一したい',
           '再生回数・登録者数の伸び悩みを改善したい',
-          '担当者ごとの属人化を減らして体制化したい',
+          '担当者ごとの作業を共通手順にしたい',
         ],
       },
     ],
     caseHighlights: [
       {
-        title: '投稿継続率を改善し、運用停止リスクを低減',
-        summary: '企画/制作/分析の役割を明確化し、運用サイクルを標準化。',
+        title: '企画・制作・分析の担当を明確化',
+        summary: '各工程の担当と確認手順を明文化し、運用手順を標準化。',
       },
       {
-        title: 'サムネ・タイトル検証で視聴効率を向上',
-        summary: '検証フロー導入により、改善施策の実行速度と再現性を向上。',
+        title: 'サムネイル・タイトルの検証手順を整備',
+        summary: '公開前後に確認する項目と記録方法を明文化。',
       },
     ],
     pricing: {
-      summary: '投稿本数・運用範囲・改善頻度をヒアリング後、必要な範囲に絞ったお見積りをご案内します。',
+      summary: '投稿本数、運用範囲、確認頻度を伺い、作業内容と費用をお見積りで提示します。',
       items: [
         '初期設計: 現状分析、KPI設計、運用方針策定',
         '運用代行: 企画進行、投稿管理、数値分析、改善提案',
@@ -91,10 +91,10 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
       ],
     },
     processSteps: [
-      { title: '現状ヒアリング', description: '目標と運用課題を整理し、優先指標を定義します。' },
-      { title: '運用設計', description: '企画方針・制作フロー・投稿計画を設計します。' },
-      { title: '実行/検証', description: '実運用を進めながら数値を分析し、改善を回します。' },
-      { title: '月次改善', description: '成果共有と次月アクション合意を行い継続運用します。' },
+      { title: '現状確認', description: '運用状況、目標、担当体制、確認指標を確認します。' },
+      { title: '運用手順の作成', description: '企画方針、制作手順、投稿計画を作成します。' },
+      { title: '運用・数値確認', description: '投稿管理と公開後の数値確認を行います。' },
+      { title: '定例報告', description: '結果と次回の対応内容を報告します。' },
     ],
     techStack: ['YouTube Analytics', 'Google Sheets', 'Looker Studio', 'Discord'],
     media: {
@@ -109,12 +109,12 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
     slug: 'music-publishing',
     title: '音楽出版事業部',
     description:
-      '音楽著作権の管理を行い、制作から権利管理、実運用まで一貫して支援します。',
+      'BGM制作、音楽著作権管理、利用許諾、管理台帳の整備に対応します。',
     items: ['音楽著作権管理', 'BGM制作', '利用許諾/台帳運用', '運用フロー整備'],
     icon: Music,
     color: 'from-brand-primary-500 to-brand-primary-600',
     detailLead:
-      '音楽出版事業部では、BGM制作だけでなく、著作権管理・利用許諾・契約情報の整備まで含めて設計します。権利トラブルを抑えつつ、制作現場で使いやすい形で音楽資産を運用できる体制を提供します。',
+      '音楽出版事業部では、BGM制作、著作権管理、利用許諾、契約情報の整備に対応します。利用条件と確認手順を明文化し、制作担当者が確認できる管理台帳を作成します。',
     detailSections: [
       {
         title: '主な提供内容',
@@ -122,7 +122,7 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
           'BGMカタログ設計と運用ルール整備',
           'BGM制作（尺違い・差分対応）',
           '権利情報・契約情報の台帳整備',
-          '利用許諾フローの可視化と運用定着支援',
+          '利用許諾の確認手順と担当を明文化',
         ],
       },
       {
@@ -136,27 +136,27 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
     ],
     caseHighlights: [
       {
-        title: '公開前の権利確認を標準化',
-        summary: '台帳と利用ルールを整備し、判断のばらつきを抑制。',
+        title: '公開前の権利確認手順を整備',
+        summary: '管理台帳と利用条件を整備し、確認項目を明文化。',
       },
       {
-        title: '用途別BGM納品で再利用性を向上',
-        summary: '本編/Shorts向けなど複数尺で納品し、現場運用の負荷を削減。',
+        title: '用途別のBGMを納品',
+        summary: '本編、Shortsなど用途に応じた尺と形式で納品。',
       },
     ],
     pricing: {
-      summary: '制作曲数・運用範囲・管理対象曲数をヒアリング後、必要な作業を整理してお見積りをご案内します。',
+      summary: '制作曲数、管理対象曲数、利用用途を伺い、作業内容と費用をお見積りで提示します。',
       items: [
         '初期整備: 権利情報棚卸し、台帳設計、運用ルール作成',
-        '制作支援: オリジナルBGM制作、差分制作、納品最適化',
+        '制作支援: オリジナルBGM制作、差分制作、納品形式の調整',
         '運用支援: 許諾整理、登録更新、定期監査',
       ],
     },
     processSteps: [
-      { title: '要件整理', description: '利用用途、制作条件、管理課題を整理します。' },
-      { title: '設計/制作', description: '制作・権利管理・運用フローを同時に設計します。' },
-      { title: '導入運用', description: '台帳運用と利用許諾フローを現場に導入します。' },
-      { title: '定着改善', description: 'レビューを通じて運用品質を継続的に改善します。' },
+      { title: '要件確認', description: '利用用途、制作条件、管理対象を確認します。' },
+      { title: 'BGM制作・管理設計', description: 'BGM制作と権利管理の手順を作成します。' },
+      { title: '運用開始', description: '管理台帳と利用許諾の確認手順を導入します。' },
+      { title: '定期確認', description: '登録情報、利用状況、管理台帳を定期的に確認します。' },
     ],
     techStack: ['Google Sheets', 'Google Drive', '契約管理台帳', '監査チェックリスト'],
     media: {
@@ -171,12 +171,12 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
     slug: 'ai-marketing-strategy',
     title: 'AIマーケティング戦略事業部',
     description:
-      'レポート整備、進行共有、通知の自動化を通じて、マーケティング運用の品質とスピードを高めます。',
+      'レポート作成、進行共有、通知、確認依頼の自動化に対応します。',
     items: ['進行フロー設計', 'レポート自動化', '通知・共有設計', '運用監査/改善'],
     icon: Bot,
     color: 'from-cyan-500 to-cyan-600',
     detailLead:
-      'AIマーケティング戦略事業部では、週次レポート、進行共有、通知の自動化を通じて、実行速度と再現性を高めます。既存運用を壊さず、手作業依存を減らし、判断と実行が速いマーケティング体制を実現します。',
+      'AIマーケティング戦略事業部では、週次レポート、進行共有、通知、確認依頼の自動化に対応します。現在の運用手順と利用中のシステムを確認し、自動化する範囲を決定します。',
     detailSections: [
       {
         title: '主な提供内容',
@@ -184,7 +184,7 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
           '週次/月次レポートの自動生成',
           'Drive/Sheets/Discord連携による進行共有',
           '定例報告・リマインド・確認フロー自動化',
-          '運用監査と改善サイクルの定着支援',
+          '定例確認と変更手順の整備',
         ],
       },
       {
@@ -198,27 +198,27 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
     ],
     caseHighlights: [
       {
-        title: '定例レポート作成を自動化',
-        summary: '集計と共有の自動化で、改善判断までの時間を短縮。',
+        title: '定例レポートの集計・共有を自動化',
+        summary: '集計方法、出力形式、共有先を設定。',
       },
       {
-        title: '進行通知を自動化し対応速度を向上',
-        summary: '連携フロー構築により、共有漏れと報告工数を削減。',
+        title: '進行通知と確認依頼を自動化',
+        summary: '通知条件、送信先、確認手順を設定。',
       },
     ],
     pricing: {
-      summary: '整備範囲・自動化対象業務・連携システムをヒアリング後、段階導入も含めてお見積りをご案内します。',
+      summary: '自動化する業務、利用中のシステム、保守範囲を伺い、作業内容と費用をお見積りで提示します。',
       items: [
         '設計: 現行フロー整理、KPI定義、共有設計',
         '自動化構築: レポート整備、通知導線、ワークフロー実装',
-        '運用改善: 定期レビュー、改善提案、保守対応',
+        '運用後の確認: 定期レビュー、変更対応、保守対応',
       ],
     },
     processSteps: [
-      { title: '業務診断', description: '現行フローとボトルネックを可視化します。' },
-      { title: '設計', description: '運用ルールと自動化要件を統合設計します。' },
-      { title: '構築/試行', description: '段階導入で安全に構築し、実運用で検証します。' },
-      { title: '本番定着', description: '監視と改善を継続し、品質を安定化します。' },
+      { title: '現状確認', description: '現在の作業手順、担当者、利用中のシステムを確認します。' },
+      { title: '要件定義', description: '自動化する範囲、通知条件、確認手順を決定します。' },
+      { title: '構築・試行', description: '設定と動作確認を行い、対象業務で試行します。' },
+      { title: '運用開始', description: '本番環境で運用し、動作状況と変更事項を確認します。' },
     ],
     techStack: ['Google Drive API', 'Google Sheets API', 'Discord Bot', 'n8n / GCP'],
     media: {

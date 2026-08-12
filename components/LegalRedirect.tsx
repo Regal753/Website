@@ -28,7 +28,7 @@ const LegalRedirect: React.FC<LegalRedirectProps> = ({ title, target }) => {
               {title}を開く
               <ArrowRight className="h-4 w-4" />
             </a>
-            <p className="text-xs text-slate-500">{siteConfig.companyName} / 京都発の実務チーム</p>
+            <p className="text-xs text-slate-500">{siteConfig.companyName} / 京都府長岡京市に本社</p>
           </div>
         </div>
       </div>

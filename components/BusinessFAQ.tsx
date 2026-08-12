@@ -5,7 +5,7 @@ const faqs = [
   {
     question: '初回相談はどこまで無料ですか？',
     answer:
-      '最初のヒアリングと、現在の状況・ご希望の整理までは無料です。対象曲数や資料の状態を確認したうえで、必要な作業・期間・費用を事前にお見積りします。',
+      '最初のヒアリングと、現在の状況・ご希望の確認までは無料です。対象曲数や資料の状態を確認したうえで、必要な作業・期間・費用を事前にお見積りします。',
   },
   {
     question: '資料が揃っていなくても相談できますか？',
@@ -34,12 +34,12 @@ const BusinessFAQ: React.FC = () => {
     <section id="faq" className="bg-[#fffaf7] py-16 md:py-24">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="mb-8 max-w-2xl md:mb-10">
-          <p className="text-xs font-semibold tracking-[0.12em] text-brand-primary-700">よくある質問</p>
+          <p className="text-xs font-semibold tracking-[0.12em] text-brand-primary-700">FAQ</p>
           <h2 className="mt-3 text-3xl font-semibold leading-tight text-brand-ink md:text-4xl">
-            相談前の疑問にお答えします
+            ご相談・発注に関するご質問
           </h2>
           <p className="mt-4 text-sm leading-7 text-slate-600 md:text-base">
-            資料が揃っていなくても構いません。分かる範囲から、確認すべきことと進め方を整理します。
+            資料が揃っていない場合もご相談いただけます。確認できる情報を基に、不足資料と次の対応をご案内します。
           </p>
         </div>
 

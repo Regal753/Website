@@ -20,7 +20,7 @@ const PROOF_POINTS = [
   {
     icon: Building2,
     title: '株式会社Regalo',
-    description: '2024年6月設立。京都から会社窓口で対応',
+    description: '2024年6月設立。京都府長岡京市に本社',
   },
   {
     icon: Newspaper,
@@ -54,13 +54,13 @@ const Hero: React.FC = () => {
           <div>
             <p className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-white/85 px-3 py-1.5 text-sm font-semibold text-amber-900 shadow-sm backdrop-blur">
               <Music2 className="h-4 w-4" />
-              音楽出版を軸にした運用支援
+              音楽出版を軸とした運用支援
             </p>
 
             <h1 className="corporate-display mt-6 text-[2.3rem] font-bold text-brand-ink sm:text-5xl md:text-6xl lg:text-[4.15rem]">
-              <span className="block">音楽とYouTubeを、</span>
+              <span className="block">音楽とYouTubeの運用を、</span>
               <span className="mt-2 block bg-gradient-to-r from-amber-700 via-brand-primary-700 to-cyan-600 bg-clip-text text-transparent">
-                止まらない運用へ。
+                権利管理から支援します
               </span>
             </h1>
 
@@ -86,7 +86,7 @@ const Hero: React.FC = () => {
                 onClick={() => trackEvent('cta_click', { placement: 'hero_primary', target: 'contact' })}
                 className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-primary-700 px-7 py-4 font-semibold text-white shadow-[0_14px_32px_rgba(67,56,202,0.25)] transition-all hover:-translate-y-0.5 hover:bg-brand-primary-800 sm:w-auto"
               >
-                無料相談で整理する
+                お問い合わせ・ご相談
                 <ArrowRight className="h-5 w-5" />
               </Link>
               <button
@@ -97,12 +97,12 @@ const Hero: React.FC = () => {
                 }}
                 className="inline-flex w-full items-center justify-center rounded-xl border border-slate-300 bg-white/90 px-7 py-4 font-semibold text-slate-800 transition-all hover:-translate-y-0.5 hover:border-brand-primary-200 hover:text-brand-primary-700 sm:w-auto"
               >
-                支援内容を見る
+                事業内容を見る
               </button>
             </div>
 
             <p className="mt-4 text-sm font-medium text-slate-500">
-              初回相談無料 ・ 通常1営業日以内に返信 ・ 相談内容が未整理でもOK
+              初回相談無料 ・ 原則1営業日以内に返信 ・ 資料未整理でも受付
             </p>
           </div>
 
@@ -113,10 +113,10 @@ const Hero: React.FC = () => {
             <div className="relative flex items-end justify-between gap-4 px-1 pb-4">
               <div>
                 <p className="text-xs font-semibold tracking-[0.2em] text-white/75">SERVICE MAP</p>
-                <h2 className="mt-2 text-xl font-semibold text-white">3つの領域を、1つの窓口で</h2>
+                <h2 className="mt-2 text-xl font-semibold text-white">3つの事業領域に対応</h2>
               </div>
               <span className="hidden rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white/70 sm:inline-flex">
-                音楽出版を優先
+                音楽出版事業を中心に
               </span>
             </div>
 
@@ -178,13 +178,13 @@ const Hero: React.FC = () => {
 
             <div className="relative mt-3 flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-white sm:flex-row sm:items-center sm:justify-between">
               <p className="text-sm leading-relaxed text-white/70">
-                どの領域に相談すべきか分からない段階でも、そのまま送ってください。
+                ご相談内容を確認し、担当領域を当社で整理します。
               </p>
               <Link
                 to="/contact"
                 className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-white transition-colors hover:text-amber-200"
               >
-                相談内容を整理する
+                お問い合わせ
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

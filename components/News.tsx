@@ -17,7 +17,7 @@ const News: React.FC = () => {
             </p>
           <h2 className="mt-4 text-3xl font-semibold text-brand-ink">お知らせ</h2>
           <p className="mt-3 text-sm leading-relaxed text-slate-600 md:text-base">
-            外部掲載、資格取得、体制変更、サイト更新など、公開している動きをここにまとめています。
+            外部掲載、講座修了、体制変更、サイト更新に関するお知らせを掲載しています。
           </p>
         </div>
 

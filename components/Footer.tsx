@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/70">{siteConfig.positioning.footerTagline}</p>
           <div className="mt-4 flex flex-wrap gap-2">
             <span className="inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white/75">
-              京都発の実務チーム
+              京都府長岡京市に本社
             </span>
             <span className="inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white/75">
               会社窓口で対応

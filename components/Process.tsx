@@ -6,33 +6,33 @@ import { SectionId } from '../types';
 const STEPS = [
   {
     icon: Send,
-    title: 'フォーム送信',
-    description: 'お問い合わせフォームから、ご相談内容をお送りください。簡単な概要で構いません。',
-    note: 'ここまでは最短数分で完了',
+    title: 'お問い合わせ',
+    description: 'お問い合わせフォームから、ご相談内容をお送りください。資料が未整理の場合も受け付けています。',
+    note: 'フォーム受付',
     surface: 'border-amber-100 bg-amber-50/80',
     iconSurface: 'bg-amber-100 text-amber-800',
   },
   {
     icon: MessageSquare,
-    title: 'ヒアリング・返信',
+    title: '内容確認・ヒアリング',
     description: '通常1営業日以内にご連絡します。必要に応じてオンラインミーティングを設定します。',
-    note: '相談整理とヒアリングは無料',
+    note: '初回ヒアリング無料',
     surface: 'border-rose-100 bg-rose-50/80',
     iconSurface: 'bg-rose-100 text-rose-700',
   },
   {
     icon: FileSearch,
     title: 'ご提案・お見積り',
-    description: '課題を整理し、作業範囲・スケジュール・費用を明記したご提案をお送りします。',
-    note: 'スコープと費用感を先に明示',
+    description: 'ご相談内容と資料を確認し、作業範囲・スケジュール・費用を明記したご提案をお送りします。',
+    note: '作業範囲・費用を提示',
     surface: 'border-brand-primary-100 bg-brand-primary-50/80',
     iconSurface: 'bg-brand-primary-100 text-brand-primary-700',
   },
   {
     icon: Rocket,
-    title: '着手',
+    title: 'ご発注・着手',
     description: 'ご発注確定後、キックオフミーティングを経てプロジェクトを開始します。',
-    note: '着手後も改善の定着まで伴走',
+    note: 'ご発注確定後に開始',
     surface: 'border-cyan-100 bg-cyan-50/80',
     iconSurface: 'bg-cyan-100 text-cyan-800',
   },
@@ -44,12 +44,12 @@ const Process: React.FC = () => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center md:mb-14">
           <p className="mb-4 inline-flex rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-700">
-            ご相談から着手までの流れ
+            お問い合わせから着手まで
           </p>
-          <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">進め方</h2>
+          <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">ご発注までの流れ</h2>
           <p className="mx-auto max-w-2xl text-slate-600">
-            相談の入口はシンプルにして、着手前にスコープと費用を明確にします。
-            「何から話せばいいか分からない」状態でも進められる流れにしています。
+            お問い合わせ後に内容を確認し、作業範囲、スケジュール、費用をお見積りで提示します。
+            ご発注確定後に着手します。
           </p>
         </div>
 
@@ -80,16 +80,16 @@ const Process: React.FC = () => {
         <div className="mt-8 rounded-3xl border border-slate-200 bg-[#fffaf7] p-5 shadow-sm md:p-6">
           <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
             <div>
-              <p className="text-sm font-semibold text-slate-500">着手前に明確にすること</p>
+              <p className="text-sm font-semibold text-slate-500">お見積り前の確認事項</p>
               <p className="mt-2 text-sm leading-relaxed text-slate-600 md:text-base">
-                相談段階で「どこから手を付けるべきか」を一緒に整理し、作業範囲、優先順位、費用感を明確にしてから着手します。
+                ご相談内容と資料を確認し、作業範囲、優先順位、スケジュール、費用を明確にします。
               </p>
             </div>
             <Link
               to="/contact"
               className="inline-flex items-center gap-2 text-sm font-semibold text-brand-primary-700 transition-colors hover:text-brand-primary-800"
             >
-              無料相談から始める
+              お問い合わせ
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

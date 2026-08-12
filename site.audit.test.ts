@@ -16,6 +16,26 @@ const homePageSource = read('./pages/HomePage.tsx');
 const businessTrustSource = read('./components/BusinessTrust.tsx');
 const footerSource = read('./components/Footer.tsx');
 const heroSource = read('./components/Hero.tsx');
+const corporateCopySource = [
+  heroSource,
+  read('./components/Header.tsx'),
+  read('./components/Services.tsx'),
+  read('./components/Cases.tsx'),
+  read('./components/MusicRightsReview.tsx'),
+  read('./components/TeamPreview.tsx'),
+  businessTrustSource,
+  read('./components/Process.tsx'),
+  read('./components/BusinessFAQ.tsx'),
+  read('./components/News.tsx'),
+  read('./components/CompanyInfo.tsx'),
+  contactSource,
+  footerSource,
+  read('./components/LegalRedirect.tsx'),
+  serviceDetailSource,
+  read('./site.config.ts'),
+  read('./services.catalog.ts'),
+  read('./App.tsx'),
+].join('\n');
 const corporateFontStyles = read('./styles/corporate-font.css');
 const staticFontInjector = read('./scripts/inject-static-font-styles.mjs');
 const pagesWorkflow = read('./.github/workflows/pages.yml');
@@ -69,8 +89,8 @@ describe('site audit remediation', () => {
   });
 
   it('labels modeled support examples without implying customer results', () => {
-    expect(serviceDetailSource).toContain('支援設計のサンプル');
-    expect(serviceDetailSource).toContain('特定顧客の実績紹介ではありません');
+    expect(serviceDetailSource).toContain('支援内容の例');
+    expect(serviceDetailSource).toContain('特定顧客の実績ではありません');
     expect(serviceDetailSource).not.toContain('公開している改善事例');
   });
 
@@ -96,7 +116,7 @@ describe('site audit remediation', () => {
 
   it('publishes decision-ready corporate trust information without inventing customer proof', () => {
     expect(homePageSource).toContain('<BusinessTrust />');
-    expect(businessTrustSource).toContain('稟議前に確認したい情報を、公開しています');
+    expect(businessTrustSource).toContain('法人情報と発注前の確認事項');
     expect(businessTrustSource).toContain('国税庁 法人番号公表サイト');
     expect(businessTrustSource).toContain('クラウドワークス公式メディア');
     expect(businessTrustSource).toContain('日本音楽出版社協会');
@@ -104,6 +124,31 @@ describe('site audit remediation', () => {
     expect(businessTrustSource).not.toMatch(/導入社数|顧客満足度|成功率|実績\s*\d+/);
     expect(footerSource).toContain('法人情報・外部確認先を見る');
     expect(footerSource).toContain('法人番号');
+  });
+
+  it('uses direct corporate headings and excludes vague campaign copy', () => {
+    expect(corporateCopySource).toContain('現状確認と対応内容');
+    expect(corporateCopySource).toContain('法人情報と発注前の確認事項');
+    expect(corporateCopySource).toContain('課題別の対応内容と納品物');
+    expect(corporateCopySource).toContain('ご発注までの流れ');
+
+    for (const phrase of [
+      'まずは、',
+      '現在地',
+      '稟議前',
+      '止まらない運用',
+      '一気通貫',
+      '伴走',
+      '現場で回る',
+      '実務で回る',
+      '相談の入口',
+      '事業フェーズ',
+      '最適な支援内容',
+      '支援設計のサンプル',
+      '京都発の実務チーム',
+    ]) {
+      expect(corporateCopySource).not.toContain(phrase);
+    }
   });
 
   it('describes the legal entity in Organization structured data', () => {

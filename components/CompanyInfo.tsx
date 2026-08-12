@@ -40,7 +40,7 @@ const companyHighlights = [
   {
     icon: MapPin,
     label: '拠点',
-    value: '京都発の実務チーム',
+    value: '京都府長岡京市に本社',
   },
   {
     icon: ShieldCheck,
@@ -58,7 +58,7 @@ const representativeHighlights = [
   JASRAC_RELATION_LABEL,
   '音楽著作権管理者養成講座修了',
   '2024年6月法人設立',
-  '京都発の実務チーム',
+  '京都府長岡京市に本社',
 ] as const;
 
 const serviceThemes: Record<string, string> = {
@@ -81,8 +81,7 @@ const CompanyInfo: React.FC = () => {
             </p>
             <h1 className="mt-4 text-4xl font-semibold tracking-tight text-brand-ink md:text-5xl">会社情報</h1>
             <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-600 md:text-base">
-              {siteConfig.positioning.companySummary}{' '}
-              「贈り物」の精神を軸に、相談段階から改善の定着まで、継続しやすい形で価値を届けます。
+              {siteConfig.positioning.companySummary} 会社概要、代表者、所在地、外部確認先を掲載しています。
             </p>
 
             <div className="mt-6 grid gap-3 sm:grid-cols-3">
@@ -102,7 +101,7 @@ const CompanyInfo: React.FC = () => {
                 to="/contact"
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-primary-700 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-primary-800"
               >
-                無料相談する
+                お問い合わせ
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <a
@@ -115,7 +114,7 @@ const CompanyInfo: React.FC = () => {
           </div>
 
           <aside className="rounded-[32px] border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#ffffff_52%,_#fff7ed_100%)] p-6 text-brand-ink shadow-sm shadow-brand-primary-100/60 md:p-8">
-            <p className="text-xs font-semibold tracking-widest text-slate-500">ひと目で分かる会社情報</p>
+            <p className="text-xs font-semibold tracking-widest text-slate-500">会社概要</p>
             <h2 className="mt-4 text-2xl font-semibold text-brand-ink">{companyProfile.legalName}</h2>
             <div className="mt-6 space-y-3">
               <div className="rounded-2xl border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
@@ -170,10 +169,10 @@ const CompanyInfo: React.FC = () => {
             aria-label="支援体制について"
           >
             <p className="text-xs font-semibold tracking-wider text-amber-800">支援体制について</p>
-            <h2 className="mt-2 text-2xl font-semibold text-brand-ink">少人数チームで、相談から改善まで伴走</h2>
+            <h2 className="mt-2 text-2xl font-semibold text-brand-ink">代表窓口と支援体制</h2>
             <p className="mt-4 text-sm leading-relaxed text-slate-700">
-              Regaloは、相談内容を最初に整理し、運用、権利、共有フローのどこを整えるべきかを切り分けます。
-              資格や権利管理の知見も含め、現場で続けやすい形に落とし込むことを重視しています。
+              代表がご相談内容を確認し、案件ごとに必要な担当者と連携して対応します。
+              ご提案時に、対応内容、納品物、スケジュール、費用を明示します。
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
               {representativeHighlights.map((item) => (
@@ -191,7 +190,7 @@ const CompanyInfo: React.FC = () => {
           <section className="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-[0_18px_50px_rgba(15,23,42,0.06)]">
             <div className="border-b border-slate-200 bg-slate-50/80 px-5 py-4 md:px-6">
               <p className="text-xs font-semibold tracking-wide text-slate-500">法人情報</p>
-              <h2 className="mt-1 text-xl font-semibold text-brand-ink">公開している基本情報</h2>
+              <h2 className="mt-1 text-xl font-semibold text-brand-ink">会社概要</h2>
             </div>
             <table className="w-full text-left text-sm">
               <tbody>

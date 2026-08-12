@@ -17,24 +17,24 @@ const themes: Record<
   'music-publishing': {
     card: 'border-amber-200 bg-gradient-to-br from-amber-50 via-white to-white',
     chip: 'bg-amber-100 text-amber-900',
-    eyebrow: '主力事業 / BGM制作と権利管理',
+    eyebrow: 'BGM制作・著作権管理',
   },
   'sns-management': {
     card: 'border-rose-200 bg-gradient-to-br from-rose-50 via-white to-white',
     chip: 'bg-rose-100 text-rose-800',
-    eyebrow: 'YouTube運用と改善',
+    eyebrow: 'YouTube運用',
   },
   'ai-marketing-strategy': {
     card: 'border-cyan-200 bg-gradient-to-br from-cyan-50 via-white to-white',
     chip: 'bg-cyan-100 text-cyan-900',
-    eyebrow: '共有・進行・自動化',
+    eyebrow: '制作進行・業務自動化',
   },
 };
 
 const defaultTheme = {
   card: 'border-slate-200 bg-gradient-to-br from-slate-50 via-white to-white',
   chip: 'bg-slate-100 text-slate-800',
-  eyebrow: '運用設計と改善',
+  eyebrow: '業務運用・改善',
 };
 
 const Services: React.FC = () => {
@@ -46,21 +46,19 @@ const Services: React.FC = () => {
         <div className="mb-10 grid gap-6 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:items-end lg:gap-16 md:mb-14">
           <div>
             <p className="inline-flex items-center gap-2 rounded-full border border-brand-primary-200 bg-white px-3 py-1 text-xs font-semibold tracking-wide text-brand-primary-700 shadow-sm">
-              SERVICE
+              事業内容
             </p>
             <h2 className="mt-4 text-3xl font-semibold leading-tight text-brand-ink md:text-5xl">
-              音楽出版を軸に、
-              <br />
-              必要な領域を組み合わせる
+              3つの事業領域
             </h2>
           </div>
           <div>
             <p className="max-w-2xl text-base leading-8 text-slate-600">
-              BGMの制作・権利管理、YouTubeの企画と運用、共有や進行の整備まで。
-              相談窓口を分けず、いま詰まっている場所から必要な支援を組み立てます。
+              BGM制作・権利管理、YouTube運用、制作進行・業務自動化に対応しています。
+              ご相談内容に応じて、必要な事業領域を組み合わせてご提案します。
             </p>
             <p className="mt-3 text-sm font-semibold text-brand-primary-700">
-              相談先が分からなくても、課題整理から対応します。
+              担当領域が不明な場合も、当社で確認します。
             </p>
           </div>
         </div>
@@ -129,7 +127,7 @@ const Services: React.FC = () => {
                     }
                     className="mt-7 inline-flex items-center gap-2 rounded-xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-brand-primary-800"
                   >
-                    詳しい支援内容を見る
+                    事業内容の詳細を見る
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
