@@ -23,7 +23,7 @@ const deliverables = [
   {
     icon: Route,
     label: '対応順',
-    description: '止まりやすい箇所から次の行動を優先順位化',
+    description: '未確認事項を基に次の対応順を決定',
   },
 ] as const;
 
@@ -33,23 +33,19 @@ const MusicRightsReview: React.FC = () => {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="mb-8 max-w-2xl md:mb-10">
           <h2 className="text-3xl font-semibold leading-tight text-brand-ink md:text-5xl">
-            まずは、
-            <br className="sm:hidden" />
-            現在地の整理から。
+            現状確認と対応内容
           </h2>
           <p className="mt-4 text-sm leading-7 text-slate-600 md:text-base md:leading-8">
-            楽曲・権利者・利用先の情報が散らばったままでも、そのまま持ち込めます。
+            お手元の楽曲情報、権利情報、利用状況を確認し、不足資料と対応順を整理します。
           </p>
         </div>
 
         <div className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
           <div className="grid lg:grid-cols-[minmax(0,1.1fr)_minmax(380px,0.9fr)]">
             <div className="p-5 sm:p-6 md:p-10 lg:p-12">
-              <p className="text-sm font-semibold text-brand-primary-700">YouTube BGM・権利運用の初期診断</p>
+              <p className="text-sm font-semibold text-brand-primary-700">YouTube BGM・権利運用の初回確認</p>
               <h3 className="mt-3 max-w-2xl text-2xl font-semibold leading-tight text-brand-ink md:text-4xl">
-                未確認のまま進めないために、
-                <br className="hidden sm:block" />
-                最初の一手を決める。
+                未確認事項と対応順を明確にします
               </h3>
 
               <div className="mt-6 border-t border-slate-200 pt-5 md:mt-7 md:pt-6">
@@ -73,7 +69,7 @@ const MusicRightsReview: React.FC = () => {
                   }
                   className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-primary-700 px-6 py-3.5 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-brand-primary-800"
                 >
-                  初期診断を相談する（初回無料）
+                  初回相談を申し込む
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
@@ -87,7 +83,7 @@ const MusicRightsReview: React.FC = () => {
             </div>
 
             <aside className="border-t border-slate-200 bg-[#f3f6fb] p-5 sm:p-6 md:p-10 lg:border-l lg:border-t-0 lg:p-12">
-              <p className="text-xs font-semibold tracking-[0.12em] text-brand-primary-700">整理してお渡しするもの</p>
+              <p className="text-xs font-semibold tracking-[0.12em] text-brand-primary-700">初回確認で整理する項目</p>
               <div className="mt-4 divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white px-4 shadow-sm md:mt-5 md:px-5">
                 {deliverables.map((item, index) => (
                   <div key={item.label} className="flex gap-3 py-4 md:gap-4 md:py-5">

@@ -25,7 +25,7 @@ const INITIAL_FORM: ContactFormState = {
 
 const INQUIRY_TYPE_OPTIONS = [
   'お問い合わせ',
-  'YouTube BGM・権利運用の初期診断について',
+  'YouTube BGM・権利運用の初回確認について',
   'SNS管理事業部について',
   '音楽出版事業部について',
   'AIマーケティング戦略事業部について',
@@ -33,7 +33,7 @@ const INQUIRY_TYPE_OPTIONS = [
 ] as const;
 
 const INQUIRY_TYPE_PRESETS: Record<string, (typeof INQUIRY_TYPE_OPTIONS)[number]> = {
-  'music-rights-review': 'YouTube BGM・権利運用の初期診断について',
+  'music-rights-review': 'YouTube BGM・権利運用の初回確認について',
 };
 
 const CONTACT_HOURS = '電話受付 9:00-20:00（フォームは24時間受付）';
@@ -47,9 +47,9 @@ const CONTACT_HEALTH_TIMEOUT_MS = 4500;
 
 const CONTACT_PROMISES = ['通常1営業日以内に返信', '初回相談無料', 'フォームは24時間受付'] as const;
 const COMMON_ISSUES = [
-  '何から相談すべきか整理できていない',
-  'SNS運用と権利管理が別々に散っている',
-  '共有フローが属人化していて止まりやすい',
+  '相談内容や依頼範囲が決まっていない',
+  'SNS運用と権利管理の担当が分かれている',
+  '制作進行や情報共有が担当者に依存している',
 ] as const;
 
 type ContactFieldErrorKey = 'name' | 'email' | 'message' | 'consent' | 'attachments';
@@ -374,8 +374,8 @@ const Contact: React.FC = () => {
               </div>
               <h1 className="mt-4 text-4xl font-semibold tracking-tight text-brand-ink md:text-5xl">お問い合わせ</h1>
               <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-600 md:text-base">
-                内容を確認のうえ、通常1営業日以内にメールまたはお電話でご連絡します。
-                何から相談すべきか整理できていない段階でも、そのまま送って問題ありません。
+                内容を確認のうえ、原則1営業日以内にメールまたはお電話でご連絡します。
+                依頼範囲が未確定の場合も受け付けています。
               </p>
               <div className="mt-5 flex flex-wrap gap-2">
                 {CONTACT_PROMISES.map((item) => (
@@ -393,10 +393,10 @@ const Contact: React.FC = () => {
             </div>
 
             <aside className="border-t border-slate-200 bg-[linear-gradient(135deg,_#eef2ff_0%,_#f8fafc_52%,_#fff7ed_100%)] p-6 text-brand-ink lg:border-l lg:border-t-0 md:p-8">
-              <p className="text-xs font-semibold tracking-widest text-slate-500">ご相談の目安</p>
-              <h2 className="mt-4 text-2xl font-semibold text-brand-ink">相談の入口は一つにまとめています</h2>
+              <p className="text-xs font-semibold tracking-widest text-slate-500">受付情報</p>
+              <h2 className="mt-4 text-2xl font-semibold text-brand-ink">お問い合わせ窓口</h2>
               <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                SNS運用、権利管理、共有設計をまたいでいても、窓口を分けずに整理します。
+                SNS運用、権利管理、制作進行に関するご相談を、同じ窓口で受け付けています。
               </p>
 
               <div className="mt-6 space-y-3">
@@ -446,7 +446,7 @@ const Contact: React.FC = () => {
             tabIndex={-1}
             className="mt-6 rounded-[28px] border border-emerald-200 bg-emerald-50 px-5 py-4 shadow-sm"
           >
-            <p className="text-sm font-semibold text-emerald-800">送信が完了しました。無料相談ありがとうございます。</p>
+            <p className="text-sm font-semibold text-emerald-800">お問い合わせを受け付けました。</p>
             <p className="mt-1 text-sm leading-relaxed text-emerald-900/90">
               通常1営業日以内にご連絡します。お急ぎの場合はお電話でも受け付けています。
             </p>
@@ -479,7 +479,7 @@ const Contact: React.FC = () => {
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-slate-600">
                 {contactEndpointState === 'available'
-                  ? 'フォーム送信後、内容を確認して担当よりご連絡します。添付ファイルもそのまま送信できます。'
+                  ? 'フォーム送信後、内容を確認して担当よりご連絡します。フォームでは添付ファイルも送信できます。'
                   : 'Googleフォーム、メール、電話で受け付けています。ご都合のよい方法をお選びください。'}
               </p>
             </div>
@@ -796,7 +796,7 @@ const Contact: React.FC = () => {
             </div>
 
             <div className="rounded-3xl border border-amber-100 bg-[#fffaf7] p-5 shadow-sm">
-              <h3 className="text-base font-semibold text-brand-ink">相談前によくある状態</h3>
+              <h3 className="text-base font-semibold text-brand-ink">ご相談内容の例</h3>
               <ul className="mt-4 space-y-3">
                 {COMMON_ISSUES.map((item) => (
                   <li key={item} className="flex items-start gap-3 text-sm leading-relaxed text-slate-700">

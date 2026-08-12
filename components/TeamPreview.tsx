@@ -8,13 +8,13 @@ const PROFILE_HIGHLIGHTS = [
   JASRAC_RELATION_LABEL,
   'MPA音楽著作権管理者養成講座 2025年度修了',
   '2024年6月法人設立',
-  '京都発の実務チーム',
+  '京都府長岡京市に本社',
 ];
 
 const TEAM_VALUES = [
-  '相談内容を、実務で回る設計に落とし込む',
-  '運用だけでなく、権利やルール整備まで見る',
-  '納品して終わりではなく、継続しやすい形で残す',
+  'ご相談内容と対応範囲を明確にする',
+  '権利情報、運用手順、管理ルールを確認する',
+  '納品物と継続運用の手順を文書化する',
 ];
 
 const TeamPreview: React.FC = () => {
@@ -42,8 +42,8 @@ const TeamPreview: React.FC = () => {
               代表者 {siteConfig.companyProfile.representative}
             </p>
             <p className="mt-4 text-sm leading-relaxed text-slate-600">
-              小規模法人として、相談整理から運用定着までを連続して対応します。
-              運用、権利、共有フローのどこに課題があるかを切り分け、実務に落ちる形まで設計します。
+              小規模法人として、代表がご相談内容を確認し、担当者と連携して対応します。
+              音楽権利管理、SNS運用、制作進行の状況に応じて、必要な作業範囲を提示します。
             </p>
             <div className="mt-6 flex items-center gap-2 rounded-2xl border border-brand-primary-100 bg-white px-4 py-3 text-sm text-slate-700 shadow-sm">
               <MapPin className="h-4 w-4 text-amber-700" />
@@ -54,11 +54,10 @@ const TeamPreview: React.FC = () => {
           <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
             <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_280px]">
               <div>
-                <h3 className="text-2xl font-semibold text-brand-ink">相談から改善まで、同じ目線で伴走する</h3>
+                <h3 className="text-2xl font-semibold text-brand-ink">代表窓口による一貫した対応</h3>
                 <p className="mt-3 text-sm leading-relaxed text-slate-600 md:text-base">
-                  初回の課題整理から、運用体制づくり、権利や台帳の整備、共有フローの改善まで、
-                  実際に現場で回せるかを基準に設計します。見栄えだけを整える提案ではなく、
-                  日々の運用負荷を下げるところまで踏み込みます。
+                  初回相談で現在の状況とご希望を確認し、対応内容、納品物、スケジュール、費用をお見積りで提示します。
+                  権利情報、管理台帳、制作進行の整備にも対応します。
                 </p>
 
                 <div className="mt-6 flex flex-wrap gap-2">
@@ -75,7 +74,7 @@ const TeamPreview: React.FC = () => {
               </div>
 
               <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-                <p className="text-sm font-semibold text-slate-500">大事にしていること</p>
+                <p className="text-sm font-semibold text-slate-500">支援方針</p>
                 <ul className="mt-4 space-y-3">
                   {TEAM_VALUES.map((item) => (
                     <li key={item} className="flex items-start gap-3 text-sm leading-relaxed text-slate-700">

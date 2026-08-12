@@ -15,13 +15,13 @@ const SERVICE_PROOF_POINTS = [
   },
   {
     icon: MapPin,
-    label: '拠点',
-    value: '京都発の実務チーム',
+    label: '所在地',
+    value: '京都府長岡京市',
   },
   {
     icon: ShieldCheck,
-    label: '支援範囲',
-    value: '運用と管理を一気通貫で',
+    label: '対応体制',
+    value: '事業ごとに担当を設定',
   },
 ] as const;
 
@@ -122,7 +122,7 @@ const ServiceDetailPage: React.FC = () => {
             </div>
 
             <aside className="rounded-3xl border border-amber-200 bg-gradient-to-br from-amber-50 via-white to-white p-5 shadow-sm">
-              <p className="text-sm font-semibold text-amber-800">ご相談の目安</p>
+              <p className="text-sm font-semibold text-amber-800">受付情報</p>
               <ul className="mt-4 space-y-3">
                 {SERVICE_PROOF_POINTS.map((item) => (
                   <li key={item.label} className="rounded-2xl border border-white bg-white/80 px-4 py-3">
@@ -211,10 +211,9 @@ const ServiceDetailPage: React.FC = () => {
 
           {relatedCases.length > 0 && (
             <section className="mt-8">
-              <h2 className="text-xl font-semibold text-brand-ink">支援設計のサンプル</h2>
+              <h2 className="text-xl font-semibold text-brand-ink">支援内容の例</h2>
               <p className="mt-2 mb-4 text-sm leading-relaxed text-slate-600">
-                特定顧客の実績紹介ではありません。自社運用とこれまで扱ってきた課題を抽象化し、
-                ご相談時に整理する内容と納品物のイメージを示しています。
+                特定顧客の実績ではありません。想定される課題、対応内容、納品物を示しています。
               </p>
               <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
                 {relatedCases.map((item) => (
@@ -243,7 +242,7 @@ const ServiceDetailPage: React.FC = () => {
           )}
 
           <section className="mt-8">
-            <h2 className="mb-4 text-xl font-semibold text-brand-ink">支援のポイント</h2>
+            <h2 className="mb-4 text-xl font-semibold text-brand-ink">主な対応内容</h2>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               {service.caseHighlights.map((item) => (
                 <div key={item.title} className="rounded-xl border border-slate-200 bg-white p-5">
@@ -269,7 +268,7 @@ const ServiceDetailPage: React.FC = () => {
             </div>
 
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-5">
-              <h2 className="text-xl font-semibold text-brand-ink">技術</h2>
+              <h2 className="text-xl font-semibold text-brand-ink">使用技術</h2>
               <p className="mt-2 text-sm leading-relaxed text-slate-700">
                 既存運用との整合を重視し、必要な技術要素のみを選定して導入します。
               </p>
@@ -287,7 +286,7 @@ const ServiceDetailPage: React.FC = () => {
           </section>
 
           <section className="mt-8 rounded-xl border border-slate-200 bg-white p-5">
-            <h2 className="mb-4 text-xl font-semibold text-brand-ink">進め方</h2>
+            <h2 className="mb-4 text-xl font-semibold text-brand-ink">対応手順</h2>
             <div className="space-y-3">
               {service.processSteps.map((step, index) => (
                 <div key={step.title} className="flex gap-3">
@@ -306,7 +305,7 @@ const ServiceDetailPage: React.FC = () => {
           <div className="mt-8 rounded-xl border border-brand-primary-200 bg-brand-primary-50 p-5">
             <h2 className="text-xl font-semibold text-brand-ink">ご相談・お見積り</h2>
             <p className="mt-2 text-sm leading-relaxed text-slate-700">
-              事業フェーズや運用体制に合わせて、最適な支援内容をご提案します。まずは現状課題をお聞かせください。
+              現在の運用状況とご希望を確認し、対応内容、納品物、スケジュール、費用をお見積りで提示します。
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
               <Link
@@ -316,7 +315,7 @@ const ServiceDetailPage: React.FC = () => {
                 }
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-brand-primary-700 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-primary-800"
               >
-                無料相談フォームへ
+                お問い合わせフォーム
                 <ArrowRight className="h-4 w-4" />
               </Link>
               {phoneHref && (
@@ -326,7 +325,7 @@ const ServiceDetailPage: React.FC = () => {
                   className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-bold text-slate-700 transition-colors hover:bg-slate-100"
                 >
                   <Phone className="h-4 w-4" />
-                  電話で相談: {phoneDisplay}
+                  電話：{phoneDisplay}
                 </a>
               )}
             </div>
@@ -334,7 +333,7 @@ const ServiceDetailPage: React.FC = () => {
         </article>
 
         <section className="mt-8">
-          <h2 className="mb-4 text-xl font-semibold text-brand-ink">他の事業を見る</h2>
+          <h2 className="mb-4 text-xl font-semibold text-brand-ink">その他の事業</h2>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
             {otherServices.map((item) => (
               <Link
