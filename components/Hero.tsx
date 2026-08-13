@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { ArrowRight, BadgeCheck, Building2, ExternalLink, Music2, Newspaper, ShieldCheck } from 'lucide-react';
-import { serviceCatalog } from '../services.catalog';
+import { ArrowRight, BadgeCheck, Building2, Check, ExternalLink, Music2, Newspaper, ShieldCheck } from 'lucide-react';
 import { JASRAC_RELATION_LABEL, siteConfig } from '../site.config';
 import { SectionId } from '../types';
 import { trackEvent } from '../utils/analytics';
@@ -60,7 +59,7 @@ const Hero: React.FC = () => {
             <h1 className="corporate-display mt-6 text-[2.3rem] font-bold text-brand-ink sm:text-5xl md:text-6xl lg:text-[4.15rem]">
               <span className="block">音楽とYouTubeの運用を、</span>
               <span className="mt-2 block bg-gradient-to-r from-amber-700 via-brand-primary-700 to-cyan-600 bg-clip-text text-transparent">
-                権利管理から支援します
+                権利情報の整理から支援します
               </span>
             </h1>
 
@@ -106,87 +105,34 @@ const Hero: React.FC = () => {
             </p>
           </div>
 
-          <div className="relative overflow-hidden rounded-[32px] border border-slate-800 bg-slate-950 p-4 shadow-[0_28px_80px_rgba(15,23,42,0.24)] sm:p-5">
-            <div className="absolute -right-16 -top-20 h-56 w-56 rounded-full bg-brand-primary-500/25 blur-3xl" />
-            <div className="absolute -bottom-24 -left-20 h-56 w-56 rounded-full bg-amber-400/15 blur-3xl" />
-
-            <div className="relative flex items-end justify-between gap-4 px-1 pb-4">
-              <div>
-                <p className="text-xs font-semibold tracking-[0.2em] text-white/75">SERVICE MAP</p>
-                <h2 className="mt-2 text-xl font-semibold text-white">3つの事業領域に対応</h2>
-              </div>
-              <span className="hidden rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white/70 sm:inline-flex">
-                音楽出版事業を中心に
-              </span>
-            </div>
-
-            <div className="relative grid gap-3 sm:grid-cols-2">
-              {serviceCatalog.map((service, index) => {
-                const Icon = service.icon;
-                return (
-                  <Link
-                    key={service.slug}
-                    to={`/services/${service.slug}/`}
-                    onClick={() =>
-                      trackEvent('service_detail_click', { placement: 'hero_service_card', service: service.slug })
-                    }
-                    className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900 transition-all hover:-translate-y-0.5 hover:border-white/25 ${
-                      index === 0 ? 'sm:col-span-2' : ''
-                    }`}
-                  >
-                    <div className={`relative overflow-hidden ${index === 0 ? 'h-52 sm:h-60' : 'h-40'}`}>
-                      <img
-                        src={asset(service.media.listImage)}
-                        alt={service.title}
-                        width={1280}
-                        height={720}
-                        loading={index === 0 ? 'eager' : 'lazy'}
-                        fetchPriority={index === 0 ? 'high' : 'auto'}
-                        decoding="async"
-                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/25 to-transparent" />
-                      {index === 0 && (
-                        <span className="absolute left-4 top-4 rounded-full border border-amber-300/30 bg-slate-950/65 px-3 py-1 text-xs font-semibold text-amber-200 backdrop-blur">
-                          主力事業
-                        </span>
-                      )}
-                      <div className="absolute inset-x-0 bottom-0 p-4 text-white">
-                        <div className="flex items-center gap-2">
-                          <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-white/90 text-brand-primary-700">
-                            <Icon className="h-4 w-4" />
-                          </span>
-                          <p
-                            className={`font-semibold leading-snug ${
-                              service.slug === 'workflow-automation'
-                                ? 'text-sm tracking-[-0.025em]'
-                                : ''
-                            }`}
-                          >
-                            {service.title}
-                          </p>
-                        </div>
-                        <p className="mt-2 text-xs leading-relaxed text-white/70">
-                          {service.items.slice(0, 2).join(' / ')}
-                        </p>
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-
-            <div className="relative mt-3 flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-white sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-sm leading-relaxed text-white/70">
-                ご相談内容を確認し、担当領域を当社で整理します。
+          <div className="relative min-h-[520px] overflow-hidden rounded-3xl border border-slate-800 bg-slate-950 shadow-[0_28px_80px_rgba(15,23,42,0.24)]">
+            <img
+              src={asset('images/services/music-cover.webp')}
+              alt="音楽の権利情報確認と管理台帳整備の業務イメージ"
+              width={1280}
+              height={720}
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/65 to-slate-950/10" />
+            <div className="relative flex min-h-[520px] flex-col justify-end p-6 text-white sm:p-8">
+              <p className="text-xs font-semibold tracking-[0.18em] text-amber-200">主な確認内容</p>
+              <h2 className="mt-3 max-w-lg text-2xl font-semibold leading-tight sm:text-3xl">
+                楽曲・権利情報と運用手順を整理
+              </h2>
+              <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+                {['楽曲・権利者情報', '契約・利用条件', '公開前の確認手順', '管理台帳と担当範囲'].map((item) => (
+                  <li key={item} className="flex items-center gap-2 border-t border-white/20 pt-3 text-sm text-white/85">
+                    <Check className="h-4 w-4 shrink-0 text-amber-200" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 text-xs leading-5 text-white/60">
+                掲載画像は業務内容を示すイメージです。顧客実績ではありません。
               </p>
-              <Link
-                to="/contact"
-                className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-white transition-colors hover:text-amber-200"
-              >
-                お問い合わせ
-                <ArrowRight className="h-4 w-4" />
-              </Link>
             </div>
           </div>
         </div>

@@ -15,7 +15,7 @@ const STEPS = [
   {
     icon: MessageSquare,
     title: '内容確認・ヒアリング',
-    description: '通常1営業日以内にご連絡します。必要に応じてオンラインミーティングを設定します。',
+    description: '原則1営業日以内にご連絡します。必要に応じてオンラインミーティングを設定します。',
     note: '初回ヒアリング無料',
     surface: 'border-rose-100 bg-rose-50/80',
     iconSurface: 'bg-rose-100 text-rose-700',
@@ -55,14 +55,14 @@ const Process: React.FC = () => {
 
         <div className="relative">
           <div className="absolute left-0 right-0 top-16 hidden h-px bg-gradient-to-r from-amber-200 via-brand-primary-200 to-cyan-200 xl:block" />
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          <div className="grid border-y border-slate-300 md:grid-cols-2 xl:grid-cols-4 xl:divide-x xl:divide-slate-200">
             {STEPS.map((step, index) => (
               <article
                 key={step.title}
-                className={`relative rounded-3xl border p-6 shadow-sm shadow-slate-200/40 ${step.surface}`}
+                className="relative border-b border-slate-200 px-1 py-6 md:px-5 xl:border-b-0 first:xl:pl-0 last:xl:pr-0"
               >
                 <div className="flex items-start justify-between gap-4">
-                  <span className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl ${step.iconSurface}`}>
+                  <span className={`inline-flex h-12 w-12 items-center justify-center rounded-lg ${step.iconSurface}`}>
                     <step.icon className="h-5 w-5" />
                   </span>
                   <span className="inline-flex rounded-full border border-white/80 bg-white/80 px-3 py-1 text-xs font-semibold text-slate-500">
@@ -77,7 +77,7 @@ const Process: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-8 rounded-3xl border border-slate-200 bg-[#fffaf7] p-5 shadow-sm md:p-6">
+        <div className="mt-8 border-l-4 border-amber-300 bg-[#fffaf7] px-5 py-4 md:px-6">
           <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
             <div>
               <p className="text-sm font-semibold text-slate-500">お見積り前の確認事項</p>

@@ -17,7 +17,7 @@ const themes: Record<
   'music-publishing': {
     card: 'border-amber-200 bg-gradient-to-br from-amber-50 via-white to-white',
     chip: 'bg-amber-100 text-amber-900',
-    eyebrow: 'BGM制作・著作権管理',
+    eyebrow: 'BGM制作・権利情報管理',
   },
   'sns-management': {
     card: 'border-rose-200 bg-gradient-to-br from-rose-50 via-white to-white',
@@ -54,7 +54,7 @@ const Services: React.FC = () => {
           </div>
           <div>
             <p className="max-w-2xl text-base leading-8 text-slate-600">
-              BGM制作・権利管理、YouTube運用、制作進行・業務自動化に対応しています。
+              BGM制作・権利情報管理、YouTube運用、制作進行・業務自動化に対応しています。
               ご相談内容に応じて、必要な事業領域を組み合わせてご提案します。
             </p>
             <p className="mt-3 text-sm font-semibold text-brand-primary-700">
@@ -72,7 +72,7 @@ const Services: React.FC = () => {
             return (
               <article
                 key={service.slug}
-                className={`grid overflow-hidden rounded-[32px] border shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl ${
+                className={`grid overflow-hidden rounded-2xl border shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl ${
                   isPrimary ? 'lg:col-span-2 lg:grid-cols-[minmax(0,1.02fr)_minmax(360px,0.98fr)]' : ''
                 } ${theme.card}`}
               >
@@ -109,15 +109,9 @@ const Services: React.FC = () => {
                     ))}
                   </ul>
 
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    {service.techStack.slice(0, 3).map((item) => (
-                      <span
-                        key={item}
-                        className="inline-flex rounded-full border border-slate-200/90 bg-white/85 px-3 py-1 text-xs font-medium text-slate-600"
-                      >
-                        {item}
-                      </span>
-                    ))}
+                  <div className="mt-6 border-t border-slate-200/80 pt-5">
+                    <p className="text-xs font-semibold tracking-wide text-slate-500">対象となる企業の例</p>
+                    <p className="mt-2 text-sm leading-7 text-slate-700">{service.audience[0]}</p>
                   </div>
 
                   <Link
@@ -147,6 +141,9 @@ const Services: React.FC = () => {
                     decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/25 via-transparent to-white/5" />
+                  <span className="absolute bottom-3 right-3 rounded-md bg-slate-950/70 px-2.5 py-1 text-xs font-semibold text-white/85 backdrop-blur">
+                    業務イメージ
+                  </span>
                 </div>
               </article>
             );

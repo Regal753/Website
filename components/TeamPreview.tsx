@@ -43,7 +43,7 @@ const TeamPreview: React.FC = () => {
             </p>
             <p className="mt-4 text-sm leading-relaxed text-slate-600">
               小規模法人として、代表がご相談内容を確認し、担当者と連携して対応します。
-              音楽権利管理、SNS運用、制作進行の状況に応じて、必要な作業範囲を提示します。
+              音楽の権利情報管理、SNS運用、制作進行の状況に応じて、必要な作業範囲を提示します。
             </p>
             <div className="mt-6 flex items-center gap-2 rounded-2xl border border-brand-primary-100 bg-white px-4 py-3 text-sm text-slate-700 shadow-sm">
               <MapPin className="h-4 w-4 text-amber-700" />

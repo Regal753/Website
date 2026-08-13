@@ -100,7 +100,7 @@ const getRouteMeta = (pathname: string): RouteMeta => {
       return {
         title: `お問い合わせ | ${siteConfig.companyName}`,
         description:
-          'SNS運用、音楽権利管理、制作進行に関するお問い合わせを24時間受け付けています。原則1営業日以内にご連絡します。',
+          'YouTube・SNS運用、音楽の権利情報管理、制作進行に関するお問い合わせを24時間受け付けています。原則1営業日以内にご連絡します。',
         canonicalPath: '/contact',
       };
     case '/privacy':

@@ -1,17 +1,17 @@
 import { NavItem, CompanyProfile, CaseStudy, NewsItem } from './types';
 
 const CONTACT_EMAIL = 'contact@regalocom.net';
-export const JASRAC_RELATION_LABEL = 'JASRAC管理委託契約';
+export const JASRAC_RELATION_LABEL = 'JASRACへの管理委託';
 const BRAND_POSITIONING = {
   homepageSummary:
-    '株式会社Regaloは、YouTubeで使用する音楽の権利管理を起点に、SNS運用と制作進行を支援します。楽曲情報の確認、管理台帳の作成、運用手順の整備まで対応します。',
+    '株式会社Regaloは、YouTubeで使用する音楽の権利情報確認を起点に、SNS運用と制作進行を支援します。楽曲情報の整理、管理台帳の作成、運用手順の整備まで対応します。',
   companySummary:
-    '株式会社Regaloは京都府長岡京市を拠点に、音楽権利管理、SNS運用、制作進行、業務フローの整備に対応しています。',
+    '株式会社Regaloは京都府長岡京市を拠点に、音楽の権利情報管理、YouTube・SNS運用、制作進行、業務フローの整備に対応しています。',
   crossFunctionalLabel: '3つの事業領域に対応',
   serviceDetailEyebrow: '支援内容',
   serviceDetailSummary:
     '現在の運用状況を確認し、対応内容、納品物、進行手順を明確にします。',
-  footerTagline: '音楽権利管理を軸に、SNS運用と制作進行を支援します。',
+  footerTagline: '音楽の権利情報管理を軸に、YouTube・SNS運用と制作進行を支援します。',
 } as const;
 
 export const companyProfile: CompanyProfile = {
@@ -35,10 +35,10 @@ export const companyProfile: CompanyProfile = {
 export const cases: CaseStudy[] = [
   {
     serviceSlug: 'music-publishing',
-    title: 'BGMの権利管理と運用手順',
+    title: 'BGMの権利情報と運用手順',
     clientType: 'YouTube・BGM運用の支援内容例（顧客実績ではありません）',
     challenge: 'BGM利用可否の判断が人依存で、公開前確認に時間がかかる。',
-    scope: 'BGMカタログ構築・権利台帳整備・利用許諾フロー設計',
+    scope: 'BGMカタログ構築・権利台帳整備・利用条件の確認手順設計',
     outcome: '権利情報と利用条件を管理台帳に集約し、公開前の確認手順を明文化。',
     results: ['権利情報を台帳へ集約', '利用判断の基準を統一', '公開前の確認手順を明文化'],
     deliverables: ['台帳設計', '利用可否ルール', '許諾管理手順', '運用ルール'],
@@ -89,17 +89,17 @@ export const siteConfig = {
     mediaCoverage: 'https://crowdworks.jp/times/interview/28780/',
     trainingProgram: 'https://mpaj.or.jp/news/17695',
   },
-  siteTitle: 'Regalo | 音楽出版・SNS管理・業務自動化',
+  siteTitle: 'Regalo | 音楽出版・権利情報管理・YouTube運用・業務自動化',
   siteDescription:
-    '株式会社Regaloは京都府長岡京市を拠点に、音楽権利管理、SNS運用、制作進行、業務フローの整備に対応しています。',
+    '株式会社Regaloは京都府長岡京市を拠点に、音楽の権利情報管理、YouTube・SNS運用、制作進行、業務フローの整備に対応しています。',
   positioning: BRAND_POSITIONING,
   companyProfile,
   cases,
   newsItems,
   navItems: [
     { label: 'ホーム', href: '/' },
-    { label: '音楽出版事業部', href: '/services/music-publishing/' },
-    { label: 'SNS管理事業部', href: '/services/sns-management/' },
+    { label: '音楽出版・権利情報管理', href: '/services/music-publishing/' },
+    { label: 'YouTube・SNS運用', href: '/services/sns-management/' },
     { label: '業務自動化・制作進行支援', href: '/services/workflow-automation/' },
     { label: '会社情報', href: '/company' },
   ] as NavItem[],

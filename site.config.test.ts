@@ -4,7 +4,7 @@ import { JASRAC_RELATION_LABEL, siteConfig } from './site.config';
 
 describe('siteConfig cases', () => {
   it('describes the JASRAC relationship as a management contract, not an endorsement', () => {
-    expect(JASRAC_RELATION_LABEL).toBe('JASRAC管理委託契約');
+    expect(JASRAC_RELATION_LABEL).toBe('JASRACへの管理委託');
     expect(JASRAC_RELATION_LABEL).not.toContain('会員');
     expect(JASRAC_RELATION_LABEL).not.toContain('認定');
   });

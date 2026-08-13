@@ -94,6 +94,17 @@ describe('site audit remediation', () => {
     expect(serviceDetailSource).not.toContain('公開している改善事例');
   });
 
+  it('labels service images and publishes pre-contract scope information', () => {
+    expect(serviceDetailSource).toContain('業務イメージ');
+    expect(serviceDetailSource).toContain('掲載画像は業務内容を示すイメージです。顧客実績ではありません。');
+    expect(serviceDetailSource).toContain('対象となる企業');
+    expect(serviceDetailSource).toContain('ご相談時に必要な情報');
+    expect(serviceDetailSource).toContain('対応範囲');
+    expect(serviceDetailSource).toContain('対応可能な環境');
+    expect(serviceDetailSource).not.toContain('>ギャラリー</h2>');
+    expect(serviceDetailSource).not.toContain('>使用技術</h2>');
+  });
+
   it('keeps the inquiry flow estimate-first without publishing a price table', () => {
     expect(serviceDetailSource).toContain('>お見積り</h2>');
     expect(serviceDetailSource).not.toContain('>料金</h2>');

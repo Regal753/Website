@@ -7,7 +7,6 @@ import MusicRightsReview from '../components/MusicRightsReview';
 import News from '../components/News';
 import Process from '../components/Process';
 import Services from '../components/Services';
-import TeamPreview from '../components/TeamPreview';
 
 const HomePage: React.FC = () => (
   <>
@@ -15,7 +14,6 @@ const HomePage: React.FC = () => (
     <Services />
     <Cases />
     <MusicRightsReview />
-    <TeamPreview />
     <BusinessTrust />
     <Process />
     <BusinessFAQ />

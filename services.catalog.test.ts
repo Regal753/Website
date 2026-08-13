@@ -28,6 +28,32 @@ describe('service catalog', () => {
     }
   });
 
+  it('publishes decision-ready scope information for every service', () => {
+    for (const service of serviceCatalog) {
+      expect(service.audience.length).toBeGreaterThanOrEqual(3);
+      expect(service.intakeItems.length).toBeGreaterThanOrEqual(3);
+      expect(service.boundaries.length).toBeGreaterThanOrEqual(2);
+    }
+  });
+
+  it('uses customer-facing service names outside the internal company profile', () => {
+    expect(serviceCatalog.map((service) => service.title)).toEqual([
+      '音楽出版・権利情報管理',
+      'YouTube・SNS運用',
+      '業務自動化・制作進行支援',
+    ]);
+  });
+
+  it('states the music-rights decision boundary without claiming authority', () => {
+    const music = serviceCatalog.find((service) => service.slug === 'music-publishing');
+    expect(music?.boundaries).toContain(
+      '利用許諾の可否や使用料は、権利者、管理団体等の判断に従います。',
+    );
+    expect(music?.boundaries).toContain(
+      '個別案件の法的判断や権利侵害がないことの保証は行いません。',
+    );
+  });
+
   it('resolves legacy slugs including .html suffix', () => {
     expect(getServiceBySlug('music-publishing-bgm')?.slug).toBe('music-publishing');
     expect(getServiceBySlug('music-publishing-bgm.html')?.slug).toBe('music-publishing');

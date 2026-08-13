@@ -83,7 +83,7 @@ const BusinessTrust: React.FC = () => (
             支援内容の例は、顧客実績や成果値と区別して掲載しています。
           </p>
         </div>
-        <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+        <div className="border-y border-slate-300 py-4">
           <p className="text-xs font-semibold tracking-wide text-slate-500">法人情報</p>
           <p className="mt-2 text-lg font-semibold text-brand-ink">{siteConfig.companyProfile.legalName}</p>
           <p className="mt-2 text-sm leading-6 text-slate-600">
@@ -92,10 +92,10 @@ const BusinessTrust: React.FC = () => (
         </div>
       </div>
 
-      <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <div className="mt-8 grid border-y border-slate-300 md:grid-cols-2 xl:grid-cols-4 xl:divide-x xl:divide-slate-200">
         {trustItems.map((item) => (
-          <article key={item.title} className="flex h-full flex-col rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-            <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-primary-50 text-brand-primary-700">
+          <article key={item.title} className="flex h-full flex-col border-b border-slate-200 px-1 py-6 md:px-5 xl:border-b-0 first:xl:pl-0 last:xl:pr-0">
+            <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-brand-primary-50 text-brand-primary-700">
               <item.icon className="h-5 w-5" />
             </span>
             <h3 className="mt-5 text-xl font-semibold text-brand-ink">{item.title}</h3>
@@ -134,7 +134,7 @@ const BusinessTrust: React.FC = () => (
         ))}
       </div>
 
-      <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm md:p-6">
+      <div className="mt-7 border-t border-slate-300 pt-5">
         <div className="grid gap-4 md:grid-cols-3">
           {proofLinks.map((item) => (
             <a
@@ -145,7 +145,7 @@ const BusinessTrust: React.FC = () => (
               onClick={() =>
                 trackEvent('external_link_click', { platform: item.platform, placement: 'business_trust_proof' })
               }
-              className="group rounded-2xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-brand-primary-200 hover:bg-brand-primary-50/50"
+              className="group border-l-2 border-slate-300 px-4 py-2 transition-colors hover:border-brand-primary-400"
             >
               <span className="flex items-center justify-between gap-3 text-sm font-semibold text-brand-ink">
                 {item.label}
