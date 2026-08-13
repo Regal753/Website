@@ -108,7 +108,7 @@ const Hero: React.FC = () => {
           <div className="relative min-h-[520px] overflow-hidden rounded-3xl border border-slate-800 bg-slate-950 shadow-[0_28px_80px_rgba(15,23,42,0.24)]">
             <img
               src={asset('images/services/music-cover.webp')}
-              alt="音楽の権利情報確認と管理台帳整備の業務イメージ"
+              alt="音楽の権利情報確認と管理台帳整備"
               width={1280}
               height={720}
               loading="eager"
@@ -130,9 +130,6 @@ const Hero: React.FC = () => {
                   </li>
                 ))}
               </ul>
-              <p className="mt-5 text-xs leading-5 text-white/60">
-                掲載画像は業務内容を示すイメージです。顧客実績ではありません。
-              </p>
             </div>
           </div>
         </div>

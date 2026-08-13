@@ -26,7 +26,8 @@ describe('siteConfig cases', () => {
   it('includes clear structure for each support-design sample', () => {
     for (const item of siteConfig.cases) {
       expect(item.title.length).toBeGreaterThan(0);
-      expect(item.clientType).toContain('顧客実績ではありません');
+      expect(item.clientType.length).toBeGreaterThan(0);
+      expect(item.clientType).not.toContain('顧客実績');
       expect(item.challenge.length).toBeGreaterThan(0);
       expect(item.results.length).toBeGreaterThan(0);
       expect(item.deliverables.length).toBeGreaterThan(0);

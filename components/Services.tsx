@@ -141,9 +141,6 @@ const Services: React.FC = () => {
                     decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/25 via-transparent to-white/5" />
-                  <span className="absolute bottom-3 right-3 rounded-md bg-slate-950/70 px-2.5 py-1 text-xs font-semibold text-white/85 backdrop-blur">
-                    業務イメージ
-                  </span>
                 </div>
               </article>
             );

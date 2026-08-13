@@ -36,7 +36,7 @@ export const cases: CaseStudy[] = [
   {
     serviceSlug: 'music-publishing',
     title: 'BGMの権利情報と運用手順',
-    clientType: 'YouTube・BGM運用の支援内容例（顧客実績ではありません）',
+    clientType: 'YouTube・BGM運用',
     challenge: 'BGM利用可否の判断が人依存で、公開前確認に時間がかかる。',
     scope: 'BGMカタログ構築・権利台帳整備・利用条件の確認手順設計',
     outcome: '権利情報と利用条件を管理台帳に集約し、公開前の確認手順を明文化。',
@@ -46,7 +46,7 @@ export const cases: CaseStudy[] = [
   {
     serviceSlug: 'sns-management',
     title: 'YouTube運用手順の標準化',
-    clientType: 'YouTube運用の支援内容例（顧客実績ではありません）',
+    clientType: 'YouTube運用',
     challenge: '企画や確認手順が担当者ごとに異なり、公開後の数値確認が継続できない。',
     scope: 'YouTube運用設計・編集ガイドライン策定・KPIダッシュボード構築',
     outcome: '企画、制作、確認、公開後分析の手順と担当を明文化。',
@@ -56,7 +56,7 @@ export const cases: CaseStudy[] = [
   {
     serviceSlug: 'workflow-automation',
     title: '制作進行の共有・通知を自動化',
-    clientType: '制作進行の支援内容例（顧客実績ではありません）',
+    clientType: '制作進行',
     challenge: '素材収集・進捗共有・リマインドが手作業で、共有漏れや遅延が起きる。',
     scope: 'Google Drive / Sheets / Discord を連携した制作進行自動化',
     outcome: '素材共有、進捗更新、確認依頼を連携し、転記作業と連絡漏れを削減。',

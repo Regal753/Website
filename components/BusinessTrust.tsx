@@ -80,7 +80,7 @@ const BusinessTrust: React.FC = () => (
           </h2>
           <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-600 md:text-base">
             会社概要、責任者・連絡先、発注条件、契約・法務情報を掲載しています。
-            支援内容の例は、顧客実績や成果値と区別して掲載しています。
+            作業範囲、納品物、費用はお見積り時に確認できます。
           </p>
         </div>
         <div className="border-y border-slate-300 py-4">

@@ -136,19 +136,13 @@ const ServiceDetailPage: React.FC = () => {
             </aside>
           </div>
 
-          <section className="mt-10" aria-labelledby="service-images-title">
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-              <h2 id="service-images-title" className="text-xl font-semibold text-brand-ink">業務イメージ</h2>
-              <p className="text-xs leading-5 text-slate-500">
-                掲載画像は業務内容を示すイメージです。顧客実績ではありません。
-              </p>
-            </div>
-            <div className="mt-4 grid gap-4 md:grid-cols-2">
+          <section className="mt-10" aria-label={`${service.title}の掲載画像`}>
+            <div className="grid gap-4 md:grid-cols-2">
               {slideImagePaths.map((imagePath, index) => (
                 <img
                   key={imagePath}
                   src={asset(imagePath)}
-                  alt={`${service.title}の業務イメージ${index + 1}`}
+                  alt={`${service.title}の掲載画像${index + 1}`}
                   width={1280}
                   height={720}
                   className={`w-full border border-slate-200 object-cover ${index === 0 ? 'aspect-video md:col-span-2' : 'h-56'}`}
@@ -202,16 +196,15 @@ const ServiceDetailPage: React.FC = () => {
 
           {relatedCases.length > 0 && (
             <section className="mt-8">
-              <h2 className="text-xl font-semibold text-brand-ink">支援内容の例</h2>
+              <h2 className="text-xl font-semibold text-brand-ink">対応例</h2>
               <p className="mt-2 mb-4 text-sm leading-relaxed text-slate-600">
-                特定顧客の実績ではありません。想定される課題、対応内容、納品物を示しています。
+                ご相談内容に応じた対応の組み立て方を示しています。
               </p>
               <div className="divide-y divide-slate-200 border-y border-slate-200">
                 {relatedCases.map((item) => (
                   <article key={item.title} className="grid gap-4 py-6 lg:grid-cols-[220px_minmax(0,1fr)]">
                     <div>
-                      <p className="text-sm font-semibold text-slate-500">{item.clientType}</p>
-                      <h3 className="mt-1 text-lg font-semibold text-brand-ink">{item.title}</h3>
+                      <h3 className="text-lg font-semibold text-brand-ink">{item.title}</h3>
                     </div>
                     <div>
                       <p className="mt-3 text-sm leading-relaxed text-slate-700">{item.challenge}</p>
