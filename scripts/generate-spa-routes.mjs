@@ -18,7 +18,7 @@ const routeEntrypoints = [
     aliases: ['contact.html'],
     title: 'お問い合わせ | Regalo',
     description:
-      'SNS運用、音楽権利管理、AIを活用した運用改善のご相談を24時間受け付けています。通常1営業日以内にご連絡します。',
+      'SNS運用、音楽権利管理、制作進行、業務自動化のご相談を24時間受け付けています。通常1営業日以内にご連絡します。',
     canonicalPath: '/contact',
   },
   {
@@ -35,11 +35,11 @@ const routeEntrypoints = [
     canonicalPath: '/services/music-publishing/',
   },
   {
-    path: 'services/ai-marketing-strategy/index.html',
-    title: 'AIマーケティング戦略事業部 | Regalo',
+    path: 'services/workflow-automation/index.html',
+    title: '業務自動化・制作進行支援 | Regalo',
     description:
-      'レポート整備、進行共有、通知の自動化を通じて、マーケティング運用の品質とスピードを高めます。',
-    canonicalPath: '/services/ai-marketing-strategy/',
+      'レポート作成、進行共有、通知、確認依頼の自動化に対応し、運用手順と納品物を明確にします。',
+    canonicalPath: '/services/workflow-automation/',
   },
   // Legacy slugs resolve to the current service canonical URL.
   {
@@ -63,17 +63,17 @@ const routeEntrypoints = [
   },
   {
     path: 'services/rights-management/index.html',
-    title: 'AIマーケティング戦略事業部 | Regalo',
+    title: '業務自動化・制作進行支援 | Regalo',
     description:
-      'レポート整備、進行共有、通知の自動化を通じて、マーケティング運用の品質とスピードを高めます。',
-    canonicalPath: '/services/ai-marketing-strategy/',
+      'レポート作成、進行共有、通知、確認依頼の自動化に対応し、運用手順と納品物を明確にします。',
+    canonicalPath: '/services/workflow-automation/',
   },
   {
-    path: 'services/workflow-automation/index.html',
-    title: 'AIマーケティング戦略事業部 | Regalo',
+    path: 'services/ai-marketing-strategy/index.html',
+    title: '業務自動化・制作進行支援 | Regalo',
     description:
-      'レポート整備、進行共有、通知の自動化を通じて、マーケティング運用の品質とスピードを高めます。',
-    canonicalPath: '/services/ai-marketing-strategy/',
+      'レポート作成、進行共有、通知、確認依頼の自動化に対応し、運用手順と納品物を明確にします。',
+    canonicalPath: '/services/workflow-automation/',
   },
 ];
 
@@ -82,8 +82,9 @@ const redirectAliases = {
   'services/sns-operations.html': '/services/sns-management/',
   'services/music-publishing-bgm.html': '/services/music-publishing/',
   'services/bgm-production.html': '/services/music-publishing/',
-  'services/rights-management.html': '/services/ai-marketing-strategy/',
-  'services/workflow-automation.html': '/services/ai-marketing-strategy/',
+  'services/rights-management.html': '/services/workflow-automation/',
+  'services/ai-marketing-strategy.html': '/services/workflow-automation/',
+  'services/workflow-automation.html': '/services/workflow-automation/',
 };
 
 const writeEntrypoint = async (relativePath, content) => {

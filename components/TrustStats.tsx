@@ -7,7 +7,7 @@ const trustItems = [
     icon: Workflow,
     label: '横断支援',
     value: '3つの支援領域を一つの窓口で整理',
-    description: 'SNS運用、音楽権利管理、AIを活用した共有設計まで、課題を分断せずに整理します。',
+    description: 'SNS運用、音楽権利管理、制作進行、業務自動化まで、課題を分断せずに整理します。',
     surface: 'border-rose-100 bg-rose-50/80',
     iconSurface: 'bg-white text-rose-700',
   },

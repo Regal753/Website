@@ -24,7 +24,7 @@ const caseStyles: Record<
     icon: 'border-rose-200 bg-rose-100 text-rose-800',
     chip: 'bg-rose-100 text-rose-800',
   },
-  'ai-marketing-strategy': {
+  'workflow-automation': {
     card: 'border-cyan-200 bg-gradient-to-b from-cyan-50/80 via-white to-white',
     icon: 'border-cyan-200 bg-cyan-100 text-cyan-900',
     chip: 'bg-cyan-100 text-cyan-900',

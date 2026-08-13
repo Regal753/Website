@@ -158,7 +158,7 @@ const Hero: React.FC = () => {
                           </span>
                           <p
                             className={`font-semibold leading-snug ${
-                              service.slug === 'ai-marketing-strategy'
+                              service.slug === 'workflow-automation'
                                 ? 'text-sm tracking-[-0.025em]'
                                 : ''
                             }`}

@@ -109,9 +109,8 @@ describe('site audit remediation', () => {
       (match) => match[1],
     );
     expect(lastModifiedDates).toHaveLength(9);
-    expect(lastModifiedDates.filter((date) => date === '2026-08-08')).toHaveLength(5);
-    expect(lastModifiedDates.filter((date) => date === '2026-08-10')).toHaveLength(2);
-    expect(lastModifiedDates.filter((date) => date === '2026-08-11')).toHaveLength(2);
+    expect(lastModifiedDates.filter((date) => date === '2026-08-13')).toHaveLength(8);
+    expect(lastModifiedDates.filter((date) => date === '2026-08-10')).toHaveLength(1);
   });
 
   it('publishes decision-ready corporate trust information without inventing customer proof', () => {

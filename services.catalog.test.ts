@@ -32,16 +32,18 @@ describe('service catalog', () => {
     expect(getServiceBySlug('music-publishing-bgm')?.slug).toBe('music-publishing');
     expect(getServiceBySlug('music-publishing-bgm.html')?.slug).toBe('music-publishing');
     expect(getServiceBySlug('/music-publishing-bgm/')?.slug).toBe('music-publishing');
-    expect(getServiceBySlug('rights-management')?.slug).toBe('ai-marketing-strategy');
-    expect(getServiceBySlug('rights-management.html')?.slug).toBe('ai-marketing-strategy');
-    expect(getServiceBySlug('/rights-management/')?.slug).toBe('ai-marketing-strategy');
+    expect(getServiceBySlug('rights-management')?.slug).toBe('workflow-automation');
+    expect(getServiceBySlug('rights-management.html')?.slug).toBe('workflow-automation');
+    expect(getServiceBySlug('/rights-management/')?.slug).toBe('workflow-automation');
+    expect(getServiceBySlug('ai-marketing-strategy')?.slug).toBe('workflow-automation');
+    expect(getServiceBySlug('workflow-automation')?.slug).toBe('workflow-automation');
   });
 
   it('puts music publishing first without dropping the other divisions', () => {
     expect(serviceCatalog.map((service) => service.slug)).toEqual([
       'music-publishing',
       'sns-management',
-      'ai-marketing-strategy',
+      'workflow-automation',
     ]);
   });
 });

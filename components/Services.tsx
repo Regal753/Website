@@ -24,7 +24,7 @@ const themes: Record<
     chip: 'bg-rose-100 text-rose-800',
     eyebrow: 'YouTube運用',
   },
-  'ai-marketing-strategy': {
+  'workflow-automation': {
     card: 'border-cyan-200 bg-gradient-to-br from-cyan-50 via-white to-white',
     chip: 'bg-cyan-100 text-cyan-900',
     eyebrow: '制作進行・業務自動化',
