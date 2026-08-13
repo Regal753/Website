@@ -72,6 +72,7 @@ describe('contact worker health endpoint', () => {
       ok: true,
       accepting: true,
       delivery: 'google_forms',
+      supportsAttachments: false,
     });
 
     const googleFormFetch = vi
@@ -84,6 +85,7 @@ describe('contact worker health endpoint', () => {
     formData.set('phone', '070-0000-0000');
     formData.set('inquiry_type', 'YouTube BGM・権利運用の初期診断について');
     formData.set('message', '問い合わせ本文');
+    formData.set('consent', 'on');
 
     const response = await contactWorker.fetch(
       new Request('https://www.regalocom.net/api/contact', {
@@ -121,6 +123,29 @@ describe('contact worker health endpoint', () => {
     expect(response.status).toBe(204);
     expect(response.headers.get('access-control-allow-methods')).toBe('GET, POST, OPTIONS');
     expect(response.headers.get('x-content-type-options')).toBe('nosniff');
+  });
+
+  it('requires an explicit privacy and terms consent value', async () => {
+    const googleFormFetch = vi.spyOn(globalThis, 'fetch');
+    const formData = new FormData();
+    formData.set('name', 'テスト太郎');
+    formData.set('email', 'test@example.com');
+    formData.set('inquiry_type', 'その他');
+    formData.set('message', '問い合わせ本文');
+
+    const response = await contactWorker.fetch(
+      new Request('https://www.regalocom.net/api/contact', {
+        method: 'POST',
+        headers: { Origin: 'https://www.regalocom.net' },
+        body: formData,
+      }),
+      googleFormEnv,
+      context
+    );
+
+    expect(response.status).toBe(422);
+    expect(await response.json()).toMatchObject({ ok: false, error: 'missing_required_fields' });
+    expect(googleFormFetch).not.toHaveBeenCalled();
   });
 
   it('rejects browser requests from an unapproved origin before delivery', async () => {

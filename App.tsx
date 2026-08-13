@@ -184,6 +184,13 @@ function App() {
             <Route path="/contact.html" element={<Navigate to="/contact" replace />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/terms" element={<TermsPage />} />
+            <Route path="/services/ai-marketing-strategy" element={<Navigate to="/services/workflow-automation/" replace />} />
+            <Route path="/services/ai-marketing-strategy/" element={<Navigate to="/services/workflow-automation/" replace />} />
+            <Route path="/services/ai-marketing-strategy.html" element={<Navigate to="/services/workflow-automation/" replace />} />
+            <Route path="/services/rights-management" element={<Navigate to="/services/workflow-automation/" replace />} />
+            <Route path="/services/rights-management/" element={<Navigate to="/services/workflow-automation/" replace />} />
+            <Route path="/services/rights-management.html" element={<Navigate to="/services/workflow-automation/" replace />} />
+            <Route path="/services/workflow-automation.html" element={<Navigate to="/services/workflow-automation/" replace />} />
             <Route path="/services/:slug" element={<ServiceDetailPage />} />
             <Route path="/services/:slug/" element={<ServiceDetailPage />} />
             <Route path="*" element={<NotFoundPage />} />

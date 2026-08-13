@@ -27,7 +27,7 @@ export const companyProfile: CompanyProfile = {
   business: [
     '音楽出版事業部',
     'SNS管理事業部',
-    'AIマーケティング戦略事業部',
+    '業務自動化・制作進行支援',
   ],
   contactEmail: CONTACT_EMAIL,
 };
@@ -54,7 +54,7 @@ export const cases: CaseStudy[] = [
     deliverables: ['運用フロー', '編集ガイドライン', 'KPI定義', 'ダッシュボード'],
   },
   {
-    serviceSlug: 'ai-marketing-strategy',
+    serviceSlug: 'workflow-automation',
     title: '制作進行の共有・通知を自動化',
     clientType: '制作進行の支援内容例（顧客実績ではありません）',
     challenge: '素材収集・進捗共有・リマインドが手作業で、共有漏れや遅延が起きる。',
@@ -71,7 +71,7 @@ export const newsItems: NewsItem[] = [
     title: 'クラウドワークス公式メディア「クラウドソーシングTimes」に掲載',
     href: 'https://crowdworks.jp/times/interview/28780/',
   },
-  { date: '2026.02.18', title: 'AI戦略事業部発足' },
+  { date: '2026.02.18', title: '業務自動化・制作進行支援を開始' },
   { date: '2025.12.08', title: '音楽著作権管理者養成講座を修了' },
   { date: '2025.04.12', title: 'ホームページリニューアル' },
 ];
@@ -89,7 +89,7 @@ export const siteConfig = {
     mediaCoverage: 'https://crowdworks.jp/times/interview/28780/',
     trainingProgram: 'https://mpaj.or.jp/news/17695',
   },
-  siteTitle: 'Regalo | 音楽出版・SNS管理・AIマーケティング戦略',
+  siteTitle: 'Regalo | 音楽出版・SNS管理・業務自動化',
   siteDescription:
     '株式会社Regaloは京都府長岡京市を拠点に、音楽権利管理、SNS運用、制作進行、業務フローの整備に対応しています。',
   positioning: BRAND_POSITIONING,
@@ -100,7 +100,7 @@ export const siteConfig = {
     { label: 'ホーム', href: '/' },
     { label: '音楽出版事業部', href: '/services/music-publishing/' },
     { label: 'SNS管理事業部', href: '/services/sns-management/' },
-    { label: 'AIマーケティング戦略事業部', href: '/services/ai-marketing-strategy/' },
+    { label: '業務自動化・制作進行支援', href: '/services/workflow-automation/' },
     { label: '会社情報', href: '/company' },
   ] as NavItem[],
 };

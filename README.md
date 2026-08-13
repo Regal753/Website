@@ -41,13 +41,13 @@ BASE_PATH=/Website/ npm run build
 `.env` 例:
 
 ```env
-VITE_CONTACT_ENDPOINT=
+VITE_CONTACT_ENDPOINT=https://contact-api.regalocom.net
 VITE_SITE_URL=https://www.regalocom.net
 ```
 
-Cloudflare Workerを公開した後、GitHub Actions repository variable
-`VITE_CONTACT_ENDPOINT=https://www.regalocom.net/api/contact` を設定してPagesを再実行すると、
-サイト内フォームが有効になります。未設定の間も問い合わせ導線は停止しません。
+本番のCloudflare Workerは`https://contact-api.regalocom.net`で公開しています。
+フロントはこのURLのhealth checkに成功した場合だけサイト内フォームを表示し、異常時は
+Googleフォームとメールの明示導線へ切り替わるため、問い合わせ導線は停止しません。
 
 Cloudflare Worker 版の実装とセットアップは以下:
 

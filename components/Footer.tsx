@@ -35,8 +35,8 @@ const Footer: React.FC = () => {
             <Link to="/services/sns-management/" className="text-white/70 transition-colors hover:text-white">
               SNS管理事業部
             </Link>
-            <Link to="/services/ai-marketing-strategy/" className="text-white/70 transition-colors hover:text-white">
-              AIマーケティング戦略事業部
+            <Link to="/services/workflow-automation/" className="text-white/70 transition-colors hover:text-white">
+              業務自動化・制作進行支援
             </Link>
           </div>
         </div>

@@ -168,15 +168,15 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
     },
   },
   {
-    slug: 'ai-marketing-strategy',
-    title: 'AIマーケティング戦略事業部',
+    slug: 'workflow-automation',
+    title: '業務自動化・制作進行支援',
     description:
       'レポート作成、進行共有、通知、確認依頼の自動化に対応します。',
     items: ['進行フロー設計', 'レポート自動化', '通知・共有設計', '運用監査/改善'],
     icon: Bot,
     color: 'from-cyan-500 to-cyan-600',
     detailLead:
-      'AIマーケティング戦略事業部では、週次レポート、進行共有、通知、確認依頼の自動化に対応します。現在の運用手順と利用中のシステムを確認し、自動化する範囲を決定します。',
+      '業務自動化・制作進行支援では、週次レポート、進行共有、通知、確認依頼の自動化に対応します。現在の運用手順と利用中のシステムを確認し、自動化する範囲を決定します。',
     detailSections: [
       {
         title: '主な提供内容',
@@ -232,7 +232,7 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
 ];
 
 const servicePriority = new Map(
-  ['music-publishing', 'sns-management', 'ai-marketing-strategy'].map((slug, index) => [slug, index]),
+  ['music-publishing', 'sns-management', 'workflow-automation'].map((slug, index) => [slug, index]),
 );
 
 export const serviceCatalog: ServiceCatalogItem[] = [...serviceCatalogBase].sort(
@@ -245,8 +245,8 @@ const legacySlugMap: Record<string, string> = {
   'sns-operations': 'sns-management',
   'music-publishing-bgm': 'music-publishing',
   'bgm-production': 'music-publishing',
-  'rights-management': 'ai-marketing-strategy',
-  'workflow-automation': 'ai-marketing-strategy',
+  'rights-management': 'workflow-automation',
+  'ai-marketing-strategy': 'workflow-automation',
 };
 
 export const getServiceBySlug = (slug: string): ServiceCatalogItem | undefined => {

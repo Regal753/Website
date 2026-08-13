@@ -5,11 +5,15 @@ const contactSource = readFileSync(new URL('./components/Contact.tsx', import.me
 const envExample = readFileSync(new URL('./.env.example', import.meta.url), 'utf8');
 
 describe('contact trust boundary', () => {
-  it('fails closed when the first-party contact API is not configured', () => {
+  it('uses the verified first-party API and fails closed when its health check fails', () => {
+    expect(contactSource).toContain(
+      "const DEFAULT_CONTACT_ENDPOINT = 'https://contact-api.regalocom.net'"
+    );
     expect(contactSource).toContain('const CONFIGURED_CONTACT_ENDPOINT');
     expect(contactSource).not.toContain("|| '/api/contact'");
     expect(contactSource).toContain('data-contact-fallback="active"');
     expect(contactSource).toContain("payload?.accepting === true");
+    expect(contactSource).toContain('data-contact-form="primary"');
     expect(contactSource).not.toContain('formsubmit.co');
     expect(contactSource).not.toContain('contact_submit_fallback');
   });
@@ -19,5 +23,6 @@ describe('contact trust boundary', () => {
     expect(envExample).not.toContain('VITE_CONTACT_LEGACY_ENDPOINT');
     expect(contactSource).toContain('Googleフォームで問い合わせる');
     expect(contactSource).toContain('メールで問い合わせる');
+    expect(contactSource).toContain('予備のGoogleフォーム');
   });
 });

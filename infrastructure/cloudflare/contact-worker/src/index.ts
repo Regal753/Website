@@ -238,7 +238,8 @@ export default {
     }
 
     if (request.method === 'GET') {
-      const delivery = hasResendDelivery(env)
+      const supportsAttachments = hasResendDelivery(env);
+      const delivery = supportsAttachments
         ? 'resend'
         : getGoogleFormConfig(env)
           ? 'google_forms'
@@ -248,7 +249,13 @@ export default {
         request,
         env,
         accepting
-          ? { ok: true, accepting: true, service: 'regalo-contact-api', delivery }
+          ? {
+              ok: true,
+              accepting: true,
+              service: 'regalo-contact-api',
+              delivery,
+              supportsAttachments,
+            }
           : {
               ok: false,
               accepting: false,
@@ -286,6 +293,7 @@ export default {
       const phone = String(formData.get('phone') || '').trim();
       const inquiryType = String(formData.get('inquiry_type') || '').trim();
       const message = String(formData.get('message') || '').trim();
+      const consent = String(formData.get('consent') || '').trim();
       const autoResponse = String(formData.get('_autoresponse') || '').trim();
       const userAgent = request.headers.get('User-Agent') || '';
       const ip =
@@ -293,7 +301,7 @@ export default {
         request.headers.get('X-Forwarded-For') ||
         '';
 
-      if (!name || !email || !inquiryType || !message) {
+      if (!name || !email || !inquiryType || !message || consent !== 'on') {
         return json(request, env, { ok: false, error: 'missing_required_fields' }, 422);
       }
       if (!emailPattern.test(email)) {

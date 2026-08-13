@@ -28,7 +28,7 @@ const INQUIRY_TYPE_OPTIONS = [
   'YouTube BGM・権利運用の初回確認について',
   'SNS管理事業部について',
   '音楽出版事業部について',
-  'AIマーケティング戦略事業部について',
+  '業務自動化・制作進行支援について',
   'その他',
 ] as const;
 
@@ -42,7 +42,10 @@ const AUTORESPONSE_MESSAGE =
   'お問い合わせありがとうございます。内容を確認のうえ、通常1営業日以内にご連絡いたします。';
 const GENERIC_SUBMIT_ERROR =
   'サイト内フォームから送信できませんでした。入力内容を残したまま、下のメール導線またはGoogleフォームをご利用ください。';
-const CONFIGURED_CONTACT_ENDPOINT = (import.meta.env.VITE_CONTACT_ENDPOINT || '').trim();
+const DEFAULT_CONTACT_ENDPOINT = 'https://contact-api.regalocom.net';
+const CONFIGURED_CONTACT_ENDPOINT = (
+  import.meta.env.VITE_CONTACT_ENDPOINT || DEFAULT_CONTACT_ENDPOINT
+).trim();
 const CONTACT_HEALTH_TIMEOUT_MS = 4500;
 
 const CONTACT_PROMISES = ['通常1営業日以内に返信', '初回相談無料', 'フォームは24時間受付'] as const;
@@ -77,6 +80,7 @@ const Contact: React.FC = () => {
   const [contactEndpointState, setContactEndpointState] = useState<ContactEndpointState>(
     CONFIGURED_CONTACT_ENDPOINT ? 'checking' : 'unavailable'
   );
+  const [supportsAttachments, setSupportsAttachments] = useState(false);
   const hasTrackedSubmitSuccess = useRef(false);
   const nameInputRef = useRef<HTMLInputElement>(null);
   const emailInputRef = useRef<HTMLInputElement>(null);
@@ -136,14 +140,15 @@ const Contact: React.FC = () => {
           : null;
 
         if (isCurrent) {
-          setContactEndpointState(
-            response.ok && payload?.ok === true && payload?.accepting === true
-              ? 'available'
-              : 'unavailable'
-          );
+          const isAvailable = response.ok && payload?.ok === true && payload?.accepting === true;
+          setContactEndpointState(isAvailable ? 'available' : 'unavailable');
+          setSupportsAttachments(isAvailable && payload?.supportsAttachments === true);
         }
       } catch (_error) {
-        if (isCurrent) setContactEndpointState('unavailable');
+        if (isCurrent) {
+          setContactEndpointState('unavailable');
+          setSupportsAttachments(false);
+        }
       } finally {
         window.clearTimeout(timeoutId);
       }
@@ -251,7 +256,7 @@ const Contact: React.FC = () => {
     }
     if (!form.message.trim()) nextFieldErrors.message = 'お問い合わせ内容を入力してください。';
     if (!consent) nextFieldErrors.consent = 'プライバシーポリシーと利用規約への同意が必要です。';
-    if (totalAttachmentBytes > MAX_ATTACHMENT_BYTES) {
+    if (supportsAttachments && totalAttachmentBytes > MAX_ATTACHMENT_BYTES) {
       nextFieldErrors.attachments = '添付ファイルの合計サイズは10 MB以内にしてください。';
     }
 
@@ -411,21 +416,6 @@ const Contact: React.FC = () => {
                 </div>
                 <div className="rounded-2xl border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
                   <div className="flex items-center gap-3">
-                    <Phone className="h-5 w-5 text-amber-700" />
-                    <div>
-                      <p className="text-xs font-semibold tracking-wide text-slate-500">電話窓口</p>
-                      {companyPhoneHref ? (
-                        <a href={`tel:${companyPhoneHref}`} className="mt-1 block text-lg font-semibold text-brand-ink hover:text-brand-primary-700">
-                          {companyPhoneDisplay}
-                        </a>
-                      ) : (
-                        <p className="mt-1 text-lg font-semibold text-brand-ink">{companyPhoneDisplay}</p>
-                      )}
-                    </div>
-                  </div>
-                </div>
-                <div className="rounded-2xl border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
-                  <div className="flex items-center gap-3">
                     <ShieldCheck className="h-5 w-5 text-amber-700" />
                     <div>
                       <p className="text-xs font-semibold tracking-wide text-slate-500">対応時間</p>
@@ -479,7 +469,9 @@ const Contact: React.FC = () => {
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-slate-600">
                 {contactEndpointState === 'available'
-                  ? 'フォーム送信後、内容を確認して担当よりご連絡します。フォームでは添付ファイルも送信できます。'
+                  ? supportsAttachments
+                    ? 'フォーム送信後、内容を確認して担当よりご連絡します。添付ファイルも送信できます。'
+                    : 'フォーム送信後、内容を確認して担当よりご連絡します。添付ファイルがある場合はメールをご利用ください。'
                   : 'Googleフォーム、メール、電話で受け付けています。ご都合のよい方法をお選びください。'}
               </p>
             </div>
@@ -530,6 +522,7 @@ const Contact: React.FC = () => {
               </div>
             ) : (
             <form
+              data-contact-form="primary"
               action={contactEndpoint}
               method="POST"
               encType="multipart/form-data"
@@ -657,9 +650,12 @@ const Contact: React.FC = () => {
               </div>
 
               <div className="rounded-3xl border border-slate-200 bg-slate-50/80 p-4 md:p-5">
-                <p className="text-sm font-semibold text-slate-500">添付と同意</p>
+                <p className="text-sm font-semibold text-slate-500">
+                  {supportsAttachments ? '添付と同意' : '確認と同意'}
+                </p>
                 <div className="mt-4 space-y-4">
-                  <label className="block text-sm">
+                  {supportsAttachments && (
+                    <label className="block text-sm">
                     <span className="font-medium text-slate-700">添付ファイル（任意）</span>
                     <input
                       ref={attachmentInputRef}
@@ -684,7 +680,8 @@ const Contact: React.FC = () => {
                     {attachments.length > 0 && (
                       <p className="mt-2 text-xs text-slate-600">選択中: {attachmentSummary}</p>
                     )}
-                  </label>
+                    </label>
+                  )}
 
                   <label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-slate-200 bg-white p-4">
                     <input
@@ -809,14 +806,11 @@ const Contact: React.FC = () => {
               </ul>
             </div>
 
-            <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
-              <h3 className="text-base font-semibold text-brand-ink">
-                {contactEndpointState === 'available' ? 'フォームが使えない場合' : 'ほかの連絡方法'}
-              </h3>
+            {contactEndpointState === 'available' && (
+              <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+              <h3 className="text-base font-semibold text-brand-ink">フォームが使えない場合</h3>
               <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                {contactEndpointState === 'available'
-                  ? '通常はこのページのフォームをご利用ください。開けない場合は、以下の連絡方法をご利用ください。'
-                  : 'Googleフォームのほか、メールでもお問い合わせいただけます。'}
+                通常はこのページのフォームをご利用ください。送信できない場合は、以下の連絡方法をご利用ください。
               </p>
               <div className="mt-4 space-y-3">
                 <a
@@ -835,9 +829,9 @@ const Contact: React.FC = () => {
                     <FileText className="h-5 w-5" />
                   </span>
                   <span>
-                    <span className="block text-sm font-semibold text-brand-ink">Googleフォーム</span>
+                    <span className="block text-sm font-semibold text-brand-ink">予備のGoogleフォーム</span>
                     <span className="mt-1 block text-sm leading-relaxed text-slate-600">
-                      必要事項を入力して送信できる、確認済みの問い合わせ窓口です。
+                      サイト内フォームを利用できない場合の予備窓口です。
                     </span>
                     <span className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-brand-primary-700">
                       Googleフォームを開く
@@ -861,7 +855,8 @@ const Contact: React.FC = () => {
                   </span>
                 </a>
               </div>
-            </div>
+              </div>
+            )}
           </aside>
         </div>
       </div>
