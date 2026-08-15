@@ -62,8 +62,9 @@ const upsertCanonicalLink = (href: string) => {
   element.setAttribute('href', href);
 };
 
-const getRouteMeta = (pathname: string): RouteMeta => {
-  const serviceMatch = pathname.match(/^\/services\/([^/]+)\/?$/);
+export const getRouteMeta = (pathname: string): RouteMeta => {
+  const pathWithoutTrailingSlash = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname;
+  const serviceMatch = pathWithoutTrailingSlash.match(/^\/services\/([^/]+)$/);
   if (serviceMatch) {
     const decodedSlug = decodeURIComponent(serviceMatch[1]);
     const service = getServiceBySlug(decodedSlug);
@@ -80,7 +81,8 @@ const getRouteMeta = (pathname: string): RouteMeta => {
     '/company.html': '/company',
     '/contact.html': '/contact',
   };
-  const normalizedPathname = legacyRouteAliases[pathname] || pathname;
+  const normalizedPathname =
+    legacyRouteAliases[pathWithoutTrailingSlash] || pathWithoutTrailingSlash;
 
   switch (normalizedPathname) {
     case '/':
