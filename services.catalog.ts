@@ -39,6 +39,7 @@ export interface ServiceCatalogItem {
   icon: LucideIcon;
   color: string;
   detailLead: string;
+  detailSummary: string;
   detailSections: ServiceDetailSection[];
   caseHighlights: ServiceCaseItem[];
   pricing: ServicePricingModel;
@@ -62,6 +63,8 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
     color: 'from-red-500 to-red-600',
     detailLead:
       'YouTubeを中心に、企画、制作進行、投稿管理、公開後の数値確認を支援します。運用手順と担当範囲を明文化し、継続できる運用体制を整備します。',
+    detailSummary:
+      '対象チャンネルと制作体制を確認し、企画、制作、投稿、公開後の数値確認について担当範囲を整理します。',
     detailSections: [
       {
         title: '主な提供内容',
@@ -152,6 +155,8 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
     color: 'from-brand-primary-500 to-brand-primary-600',
     detailLead:
       'YouTube等で使用する楽曲について、権利者、契約、利用条件の情報を整理し、公開前に確認する手順と管理台帳を整備します。',
+    detailSummary:
+      '対象楽曲と契約状況を確認し、管理する情報と公開前の確認手順を整理します。',
     detailSections: [
       {
         title: '主な提供内容',
@@ -243,6 +248,8 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
     color: 'from-cyan-500 to-cyan-600',
     detailLead:
       '業務自動化・制作進行支援では、週次レポート、進行共有、通知、確認依頼の自動化に対応します。現在の運用手順と利用中のシステムを確認し、自動化する範囲を決定します。',
+    detailSummary:
+      '現在の作業手順と利用中のシステムを確認し、自動化する作業と人が確認する工程を分けます。',
     detailSections: [
       {
         title: '主な提供内容',

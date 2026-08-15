@@ -1,6 +1,5 @@
 import React from 'react';
-import { ArrowRight, FileSearch, MessageSquare, Rocket, Send } from 'lucide-react';
-import { Link } from 'react-router';
+import { FileSearch, MessageSquare, Rocket, Send } from 'lucide-react';
 import { SectionId } from '../types';
 
 const STEPS = [
@@ -40,7 +39,7 @@ const STEPS = [
 
 const Process: React.FC = () => {
   return (
-    <section id={SectionId.PROCESS} className="bg-white py-16 md:py-24">
+    <section id={SectionId.PROCESS} className="bg-white py-14 md:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center md:mb-14">
           <p className="mb-4 inline-flex rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-700">
@@ -74,24 +73,6 @@ const Process: React.FC = () => {
                 <p className="mt-5 text-xs font-semibold tracking-wide text-slate-600">{step.note}</p>
               </article>
             ))}
-          </div>
-        </div>
-
-        <div className="mt-8 border-l-4 border-amber-300 bg-[#fffaf7] px-5 py-4 md:px-6">
-          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
-            <div>
-              <p className="text-sm font-semibold text-slate-500">お見積り前の確認事項</p>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600 md:text-base">
-                ご相談内容と資料を確認し、作業範囲、優先順位、スケジュール、費用を明確にします。
-              </p>
-            </div>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-brand-primary-700 transition-colors hover:text-brand-primary-800"
-            >
-              お問い合わせ
-              <ArrowRight className="h-4 w-4" />
-            </Link>
           </div>
         </div>
       </div>

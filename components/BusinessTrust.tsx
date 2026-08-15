@@ -62,7 +62,7 @@ const proofLinks = [
 ] as const;
 
 const BusinessTrust: React.FC = () => (
-  <section className="bg-[#f6f8fc] py-16 md:py-24" aria-labelledby="business-trust-title">
+  <section className="bg-[#f6f8fc] py-14 md:py-20" aria-labelledby="business-trust-title">
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
         <div>
@@ -78,8 +78,7 @@ const BusinessTrust: React.FC = () => (
           </p>
         </div>
         <div className="border-y border-slate-300 py-4">
-          <p className="text-xs font-semibold tracking-wide text-slate-600">法人情報</p>
-          <p className="mt-2 text-lg font-semibold text-brand-ink">{siteConfig.companyProfile.legalName}</p>
+          <p className="text-lg font-semibold text-brand-ink">{siteConfig.companyProfile.legalName}</p>
           <p className="mt-2 text-sm leading-6 text-slate-600">
             代表者 {siteConfig.companyProfile.representative} / 法人番号 {siteConfig.companyProfile.corporateNumber}
           </p>

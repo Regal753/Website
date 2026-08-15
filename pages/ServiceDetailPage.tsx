@@ -101,7 +101,7 @@ const ServiceDetailPage: React.FC = () => {
               </div>
 
               <p className="mt-5 max-w-3xl text-sm leading-relaxed text-slate-600 md:text-base">
-                {siteConfig.positioning.serviceDetailSummary}
+                {service.detailSummary}
               </p>
 
               <div className="mt-5 flex flex-wrap gap-2">

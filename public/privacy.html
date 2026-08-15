@@ -9,7 +9,7 @@
       content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; script-src 'none'; upgrade-insecure-requests"
     />
     <title>プライバシーポリシー | Regalo</title>
-    <meta name="description" content="Regaloの個人情報保護方針です。" />
+    <meta name="description" content="株式会社Regaloの個人情報保護方針です。" />
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <link rel="canonical" href="https://www.regalocom.net/privacy" />
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
@@ -33,7 +33,13 @@
         color: var(--ink-subtle);
       }
       a { color: #2563eb; }
-      .wrap { max-width: 980px; margin: 0 auto; padding: 120px 20px 80px; }
+      .site-header { border-bottom: 1px solid var(--line); background: rgba(255, 255, 255, 0.96); }
+      .site-header-inner { max-width: 1180px; margin: 0 auto; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+      .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-weight: 700; }
+      .brand img { width: 36px; height: 36px; border-radius: 10px; }
+      .site-nav { display: flex; align-items: center; gap: 18px; font-size: 13px; font-weight: 600; }
+      .site-nav a { color: #475569; text-decoration: none; }
+      .wrap { max-width: 980px; margin: 0 auto; padding: 48px 20px 64px; }
       .topbar {
         display: flex;
         justify-content: space-between;
@@ -67,30 +73,49 @@
       .meta { color: #64748b; font-size: 12px; margin-top: 10px; }
       .back { display: inline-block; margin-top: 18px; }
       .home-link { text-decoration: none; font-weight: 500; }
+      .legal-footer { background: linear-gradient(180deg, #334155 0%, #4338ca 100%); color: rgba(255, 255, 255, 0.76); }
+      .legal-footer-inner { max-width: 1180px; margin: 0 auto; padding: 28px 20px; display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: center; font-size: 12px; }
+      .legal-footer strong { color: #fff; font-size: 14px; }
+      .legal-footer a { color: rgba(255, 255, 255, 0.88); }
       @media (max-width: 640px) {
-        .wrap { padding-top: 96px; }
+        .site-header-inner { padding: 12px 16px; }
+        .site-nav { gap: 12px; font-size: 12px; }
+        .site-nav .company-link { display: none; }
+        .wrap { padding: 32px 16px 48px; }
         .card { padding: 20px; border-radius: 16px; }
         h1 { font-size: 26px; }
       }
     </style>
   </head>
   <body>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand" href="./">
+          <img src="./images/logo-80.webp" width="36" height="36" alt="" />
+          <span>Regalo</span>
+        </a>
+        <nav class="site-nav" aria-label="法務ページナビゲーション">
+          <a class="company-link" href="./company">会社情報</a>
+          <a href="./contact">お問い合わせ</a>
+        </nav>
+      </div>
+    </header>
     <main class="wrap">
       <div class="topbar">
         <a class="home-link" href="./">&larr; トップへ戻る</a>
-        <span>京都発の実務チーム</span>
+        <span>株式会社Regalo</span>
       </div>
       <div class="card">
         <p class="badge">個人情報保護方針</p>
         <h1>プライバシーポリシー</h1>
         <p>
-          Regalo（以下「当社」）は、当社Webサイトおよびお問い合わせに関連して取得する情報について、
+          株式会社Regalo（以下「当社」）は、当社Webサイトおよびお問い合わせに関連して取得する情報について、
           個人情報の保護に関する法律その他の関係法令を遵守し、適切に取り扱います。
         </p>
 
         <h2>1. 事業者情報</h2>
         <ul>
-          <li>事業者名：Regalo（株式会社Regalo）</li>
+          <li>事業者名：株式会社Regalo</li>
           <li>所在地・代表者：<a href="./company">会社概要ページ</a>に記載</li>
         </ul>
 
@@ -160,10 +185,18 @@
           メール：<a href="mailto:contact@regalocom.net">contact@regalocom.net</a>
         </p>
 
-        <div class="meta">最終改定日：2026年2月22日</div>
+        <div class="meta">最終改定日：2026年8月15日</div>
 
         <a class="back" href="./">&larr; トップへ戻る</a>
       </div>
     </main>
+    <footer class="legal-footer">
+      <div class="legal-footer-inner">
+        <strong>株式会社Regalo</strong>
+        <span>代表者 塩田玲央</span>
+        <span>法人番号 4130001077277</span>
+        <a href="mailto:contact@regalocom.net">contact@regalocom.net</a>
+      </div>
+    </footer>
   </body>
 </html>

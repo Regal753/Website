@@ -34,7 +34,16 @@ describe('service catalog', () => {
       expect(service.intakeItems.length).toBeGreaterThanOrEqual(3);
       expect(service.boundaries.length).toBeGreaterThanOrEqual(2);
       expect(service.faqs.length).toBeGreaterThanOrEqual(3);
+      expect(service.detailSummary.length).toBeGreaterThan(20);
     }
+  });
+
+  it('uses a service-specific decision summary instead of one shared template', () => {
+    const summaries = serviceCatalog.map((service) => service.detailSummary);
+    expect(new Set(summaries).size).toBe(serviceCatalog.length);
+    expect(summaries.join('\n')).not.toContain(
+      '現在の運用状況を確認し、対応内容、納品物、進行手順を明確にします。',
+    );
   });
 
   it('uses customer-facing service names outside the internal company profile', () => {

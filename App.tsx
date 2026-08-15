@@ -17,6 +17,8 @@ type RouteMeta = {
   title: string;
   description: string;
   canonicalPath: string;
+  imagePath: string;
+  imageAlt: string;
 };
 
 const DEFAULT_SITE_URL = 'https://www.regalocom.net';
@@ -62,6 +64,21 @@ const upsertCanonicalLink = (href: string) => {
   element.setAttribute('href', href);
 };
 
+const upsertRouteStructuredData = (data: Record<string, unknown>[] | null) => {
+  const id = 'route-structured-data';
+  const current = document.getElementById(id);
+  if (!data) {
+    current?.remove();
+    return;
+  }
+
+  const element = current ?? document.createElement('script');
+  element.id = id;
+  element.setAttribute('type', 'application/ld+json');
+  element.textContent = JSON.stringify(data);
+  if (!current) document.head.appendChild(element);
+};
+
 export const getRouteMeta = (pathname: string): RouteMeta => {
   const pathWithoutTrailingSlash = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname;
   const serviceMatch = pathWithoutTrailingSlash.match(/^\/services\/([^/]+)$/);
@@ -73,6 +90,8 @@ export const getRouteMeta = (pathname: string): RouteMeta => {
         title: `${service.title} | ${siteConfig.companyName}`,
         description: service.description,
         canonicalPath: `/services/${service.slug}/`,
+        imagePath: `/${service.media.listImage}`,
+        imageAlt: `${service.title}のサービス案内`,
       };
     }
   }
@@ -90,6 +109,8 @@ export const getRouteMeta = (pathname: string): RouteMeta => {
         title: siteConfig.siteTitle,
         description: siteConfig.siteDescription,
         canonicalPath: '/',
+        imagePath: '/images/hero.webp',
+        imageAlt: 'Regaloのサービスイメージ',
       };
     case '/company':
       return {
@@ -97,6 +118,8 @@ export const getRouteMeta = (pathname: string): RouteMeta => {
         description:
           '株式会社Regaloの会社概要、代表者、所在地、事業内容、外部確認先を掲載しています。',
         canonicalPath: '/company',
+        imagePath: '/images/hero.webp',
+        imageAlt: '株式会社Regaloの会社情報',
       };
     case '/contact':
       return {
@@ -104,26 +127,93 @@ export const getRouteMeta = (pathname: string): RouteMeta => {
         description:
           'YouTube・SNS運用、音楽の権利情報管理、制作進行に関するお問い合わせを24時間受け付けています。原則1営業日以内にご連絡します。',
         canonicalPath: '/contact',
+        imagePath: '/images/hero.webp',
+        imageAlt: '株式会社Regaloのお問い合わせ窓口',
       };
     case '/privacy':
       return {
         title: `プライバシーポリシー | ${siteConfig.companyName}`,
         description: `${siteConfig.companyName}の個人情報保護方針です。`,
         canonicalPath: '/privacy',
+        imagePath: '/images/hero.webp',
+        imageAlt: '株式会社Regaloのプライバシーポリシー',
       };
     case '/terms':
       return {
         title: `利用規約 | ${siteConfig.companyName}`,
         description: `${siteConfig.companyName}のサービス利用条件です。`,
         canonicalPath: '/terms',
+        imagePath: '/images/hero.webp',
+        imageAlt: '株式会社Regaloの利用規約',
       };
     default:
       return {
         title: `ページが見つかりません | ${siteConfig.companyName}`,
         description: siteConfig.siteDescription,
         canonicalPath: pathname || '/',
+        imagePath: '/images/hero.webp',
+        imageAlt: 'Regaloのサービスイメージ',
       };
   }
+};
+
+export const getRouteStructuredData = (
+  pathname: string,
+  siteUrl = DEFAULT_SITE_URL,
+): Record<string, unknown>[] | null => {
+  const pathWithoutTrailingSlash = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname;
+  const serviceMatch = pathWithoutTrailingSlash.match(/^\/services\/([^/]+)$/);
+  if (!serviceMatch) return null;
+
+  const service = getServiceBySlug(decodeURIComponent(serviceMatch[1]));
+  if (!service) return null;
+
+  const normalizedSiteUrl = siteUrl.replace(/\/$/, '');
+  const serviceUrl = `${normalizedSiteUrl}/services/${service.slug}/`;
+  const organizationId = `${normalizedSiteUrl}/#organization`;
+
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: service.title,
+      serviceType: service.title,
+      description: service.description,
+      url: serviceUrl,
+      provider: {
+        '@type': 'Organization',
+        '@id': organizationId,
+        name: siteConfig.companyProfile.legalName,
+        url: `${normalizedSiteUrl}/`,
+      },
+      areaServed: {
+        '@type': 'Country',
+        name: '日本',
+      },
+      audience: {
+        '@type': 'BusinessAudience',
+        audienceType: '法人・制作会社',
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: siteConfig.companyName,
+          item: `${normalizedSiteUrl}/`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: service.title,
+          item: serviceUrl,
+        },
+      ],
+    },
+  ];
 };
 
 const RouteTracker: React.FC = () => {
@@ -140,15 +230,21 @@ const RouteTracker: React.FC = () => {
         : `${routerBase}${routeMeta.canonicalPath}`;
     const canonicalUrl =
       baseAwarePath === '/' ? `${getSiteUrl()}/` : `${getSiteUrl()}${baseAwarePath}`;
+    const imagePath = `${routerBase}${routeMeta.imagePath}`;
+    const imageUrl = `${getSiteUrl()}${imagePath}`;
 
     document.title = routeMeta.title;
     upsertMetaTag('description', routeMeta.description);
     upsertMetaTag('twitter:title', routeMeta.title);
     upsertMetaTag('twitter:description', routeMeta.description);
+    upsertMetaTag('twitter:image', imageUrl);
     upsertPropertyMetaTag('og:title', routeMeta.title);
     upsertPropertyMetaTag('og:description', routeMeta.description);
     upsertPropertyMetaTag('og:url', canonicalUrl);
+    upsertPropertyMetaTag('og:image', imageUrl);
+    upsertPropertyMetaTag('og:image:alt', routeMeta.imageAlt);
     upsertCanonicalLink(canonicalUrl);
+    upsertRouteStructuredData(getRouteStructuredData(location.pathname, getSiteUrl()));
   }, [location.pathname, location.search]);
 
   return null;

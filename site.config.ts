@@ -9,8 +9,6 @@ const BRAND_POSITIONING = {
     '株式会社Regaloは京都府長岡京市を拠点に、音楽の権利情報管理、YouTube・SNS運用、制作進行、業務フローの整備に対応しています。',
   crossFunctionalLabel: '3つの事業領域に対応',
   serviceDetailEyebrow: '支援内容',
-  serviceDetailSummary:
-    '現在の運用状況を確認し、対応内容、納品物、進行手順を明確にします。',
   footerTagline: '音楽の権利情報管理を軸に、YouTube・SNS運用と制作進行を支援します。',
 } as const;
 
@@ -68,7 +66,7 @@ export const cases: CaseStudy[] = [
 export const newsItems: NewsItem[] = [
   {
     date: '2026.08.15',
-    title: '法人向けの事業案内、発注前FAQ、旧URLの転送を改善',
+    title: '法人向けの事業案内、発注前FAQ、法務ページ、共有用メタ情報を改善',
   },
   {
     date: '2026.03.30',
