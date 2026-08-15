@@ -18,20 +18,20 @@ const routeEntrypoints = [
     aliases: ['contact.html'],
     title: 'お問い合わせ | Regalo',
     description:
-      'SNS運用、音楽権利管理、制作進行、業務自動化のご相談を24時間受け付けています。通常1営業日以内にご連絡します。',
+      'YouTube・SNS運用、音楽の権利情報管理、制作進行、業務自動化のご相談を24時間受け付けています。原則1営業日以内にご連絡します。',
     canonicalPath: '/contact',
   },
   {
     path: 'services/sns-management/index.html',
-    title: 'SNS管理事業部 | Regalo',
+    title: 'YouTube・SNS運用 | Regalo',
     description:
-      'YouTubeを中心に、企画設計から制作進行、公開後の分析改善まで一気通貫で支援します。',
+      'YouTubeを中心に、企画、制作進行、投稿管理、公開後の数値確認を支援します。',
     canonicalPath: '/services/sns-management/',
   },
   {
     path: 'services/music-publishing/index.html',
-    title: '音楽出版事業部 | Regalo',
-    description: '音楽著作権の管理を行い、制作から権利管理、実運用まで一貫して支援します。',
+    title: '音楽出版・権利情報管理 | Regalo',
+    description: 'BGM制作、権利情報・契約情報の整理、利用条件の確認手順、管理台帳の整備に対応します。',
     canonicalPath: '/services/music-publishing/',
   },
   {
@@ -44,21 +44,21 @@ const routeEntrypoints = [
   // Legacy slugs resolve to the current service canonical URL.
   {
     path: 'services/sns-operations/index.html',
-    title: 'SNS管理事業部 | Regalo',
+    title: 'YouTube・SNS運用 | Regalo',
     description:
-      'YouTubeを中心に、企画設計から制作進行、公開後の分析改善まで一気通貫で支援します。',
+      'YouTubeを中心に、企画、制作進行、投稿管理、公開後の数値確認を支援します。',
     canonicalPath: '/services/sns-management/',
   },
   {
     path: 'services/music-publishing-bgm/index.html',
-    title: '音楽出版事業部 | Regalo',
-    description: '音楽著作権の管理を行い、制作から権利管理、実運用まで一貫して支援します。',
+    title: '音楽出版・権利情報管理 | Regalo',
+    description: 'BGM制作、権利情報・契約情報の整理、利用条件の確認手順、管理台帳の整備に対応します。',
     canonicalPath: '/services/music-publishing/',
   },
   {
     path: 'services/bgm-production/index.html',
-    title: '音楽出版事業部 | Regalo',
-    description: '音楽著作権の管理を行い、制作から権利管理、実運用まで一貫して支援します。',
+    title: '音楽出版・権利情報管理 | Regalo',
+    description: 'BGM制作、権利情報・契約情報の整理、利用条件の確認手順、管理台帳の整備に対応します。',
     canonicalPath: '/services/music-publishing/',
   },
   {

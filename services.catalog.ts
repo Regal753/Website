@@ -38,6 +38,9 @@ export interface ServiceCatalogItem {
   caseHighlights: ServiceCaseItem[];
   pricing: ServicePricingModel;
   processSteps: ServiceProcessStep[];
+  audience: string[];
+  intakeItems: string[];
+  boundaries: string[];
   techStack: string[];
   media: ServiceMediaAssets;
 }
@@ -45,14 +48,14 @@ export interface ServiceCatalogItem {
 const serviceCatalogBase: ServiceCatalogItem[] = [
   {
     slug: 'sns-management',
-    title: 'SNS管理事業部',
+    title: 'YouTube・SNS運用',
     description:
       'YouTubeを中心に、企画、制作進行、投稿管理、公開後の数値確認に対応します。',
     items: ['YouTube運用代行', '企画・台本設計', 'KPI分析/改善', '投稿運用オペレーション'],
     icon: Youtube,
     color: 'from-red-500 to-red-600',
     detailLead:
-      'SNS管理事業部では、YouTubeの企画、制作進行、投稿管理、数値確認を担当します。運用手順と担当範囲を明文化し、継続して運用できる体制を整備します。',
+      'YouTubeを中心に、企画、制作進行、投稿管理、公開後の数値確認を支援します。運用手順と担当範囲を明文化し、継続できる運用体制を整備します。',
     detailSections: [
       {
         title: '主な提供内容',
@@ -96,6 +99,20 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
       { title: '運用・数値確認', description: '投稿管理と公開後の数値確認を行います。' },
       { title: '定例報告', description: '結果と次回の対応内容を報告します。' },
     ],
+    audience: [
+      'YouTube運用が担当者個人に依存している企業',
+      '企画から公開後の数値確認まで手順を統一したい企業',
+      '社内担当者と外部制作者の役割を明確にしたい企業',
+    ],
+    intakeItems: [
+      '対象チャンネルと現在の投稿状況',
+      '目標、確認している指標、希望する投稿本数',
+      '社内外の担当者と現在の制作手順',
+    ],
+    boundaries: [
+      '対応範囲と確認頻度は、運用状況を確認したうえで個別に定めます。',
+      '再生回数、登録者数その他の成果を保証するものではありません。',
+    ],
     techStack: ['YouTube Analytics', 'Google Sheets', 'Looker Studio', 'Discord'],
     media: {
       listImage: 'images/services/sns-cover.webp',
@@ -107,14 +124,14 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
   },
   {
     slug: 'music-publishing',
-    title: '音楽出版事業部',
+    title: '音楽出版・権利情報管理',
     description:
-      'BGM制作、音楽著作権管理、利用許諾、管理台帳の整備に対応します。',
-    items: ['音楽著作権管理', 'BGM制作', '利用許諾/台帳運用', '運用フロー整備'],
+      'BGM制作、権利情報・契約情報の整理、利用条件の確認手順、管理台帳の整備に対応します。',
+    items: ['権利情報の整理', 'BGM制作', '利用条件/台帳運用', '確認フロー整備'],
     icon: Music,
     color: 'from-brand-primary-500 to-brand-primary-600',
     detailLead:
-      '音楽出版事業部では、BGM制作、著作権管理、利用許諾、契約情報の整備に対応します。利用条件と確認手順を明文化し、制作担当者が確認できる管理台帳を作成します。',
+      'YouTube等で使用する楽曲について、権利者、契約、利用条件の情報を整理し、公開前に確認する手順と管理台帳を整備します。',
     detailSections: [
       {
         title: '主な提供内容',
@@ -122,7 +139,7 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
           'BGMカタログ設計と運用ルール整備',
           'BGM制作（尺違い・差分対応）',
           '権利情報・契約情報の台帳整備',
-          '利用許諾の確認手順と担当を明文化',
+          '利用条件を確認する手順と担当を明文化',
         ],
       },
       {
@@ -149,14 +166,29 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
       items: [
         '初期整備: 権利情報棚卸し、台帳設計、運用ルール作成',
         '制作支援: オリジナルBGM制作、差分制作、納品形式の調整',
-        '運用支援: 許諾整理、登録更新、定期監査',
+        '運用支援: 許諾情報の整理、登録情報の更新、定期確認',
       ],
     },
     processSteps: [
       { title: '要件確認', description: '利用用途、制作条件、管理対象を確認します。' },
-      { title: 'BGM制作・管理設計', description: 'BGM制作と権利管理の手順を作成します。' },
-      { title: '運用開始', description: '管理台帳と利用許諾の確認手順を導入します。' },
+      { title: 'BGM制作・管理設計', description: 'BGM制作と権利情報を確認する手順を作成します。' },
+      { title: '運用開始', description: '管理台帳と利用条件の確認手順を導入します。' },
       { title: '定期確認', description: '登録情報、利用状況、管理台帳を定期的に確認します。' },
+    ],
+    audience: [
+      'YouTube等でBGMを利用する法人・制作会社',
+      '楽曲、権利者、契約、利用条件の情報が分散している企業',
+      '公開前の確認手順と管理責任を明確にしたい企業',
+    ],
+    intakeItems: [
+      '対象楽曲、利用先、利用期間が分かる資料',
+      '権利者、管理団体、既存契約に関する資料',
+      '現在の確認手順と管理台帳の有無',
+    ],
+    boundaries: [
+      'Regaloは、権利情報、契約情報、確認手順の整理を支援します。',
+      '利用許諾の可否や使用料は、権利者、管理団体等の判断に従います。',
+      '個別案件の法的判断や権利侵害がないことの保証は行いません。',
     ],
     techStack: ['Google Sheets', 'Google Drive', '契約管理台帳', '監査チェックリスト'],
     media: {
@@ -219,6 +251,20 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
       { title: '要件定義', description: '自動化する範囲、通知条件、確認手順を決定します。' },
       { title: '構築・試行', description: '設定と動作確認を行い、対象業務で試行します。' },
       { title: '運用開始', description: '本番環境で運用し、動作状況と変更事項を確認します。' },
+    ],
+    audience: [
+      '進捗、素材、確認依頼が複数のツールに分散している企業',
+      'レポート作成や定例連絡の手作業を減らしたい企業',
+      '小規模な業務から段階的に自動化したい企業',
+    ],
+    intakeItems: [
+      '現在の作業手順と利用中のシステム',
+      '自動化したい作業、発生頻度、担当者',
+      '通知先、確認者、例外時の対応方法',
+    ],
+    boundaries: [
+      '既存システムの仕様と権限を確認し、自動化できる範囲を個別に定めます。',
+      '本番導入前に試行と動作確認を行い、変更手順を文書化します。',
     ],
     techStack: ['Google Drive API', 'Google Sheets API', 'Discord Bot', 'n8n / GCP'],
     media: {

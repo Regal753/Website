@@ -26,8 +26,8 @@ const INITIAL_FORM: ContactFormState = {
 const INQUIRY_TYPE_OPTIONS = [
   'お問い合わせ',
   'YouTube BGM・権利運用の初回確認について',
-  'SNS管理事業部について',
-  '音楽出版事業部について',
+  'YouTube・SNS運用について',
+  '音楽出版・権利情報管理について',
   '業務自動化・制作進行支援について',
   'その他',
 ] as const;
@@ -39,7 +39,7 @@ const INQUIRY_TYPE_PRESETS: Record<string, (typeof INQUIRY_TYPE_OPTIONS)[number]
 const CONTACT_HOURS = '電話受付 9:00-20:00（フォームは24時間受付）';
 const MAX_ATTACHMENT_BYTES = 10 * 1024 * 1024;
 const AUTORESPONSE_MESSAGE =
-  'お問い合わせありがとうございます。内容を確認のうえ、通常1営業日以内にご連絡いたします。';
+  'お問い合わせありがとうございます。内容を確認のうえ、原則1営業日以内にご連絡いたします。';
 const GENERIC_SUBMIT_ERROR =
   'サイト内フォームから送信できませんでした。入力内容を残したまま、下のメール導線またはGoogleフォームをご利用ください。';
 const DEFAULT_CONTACT_ENDPOINT = 'https://contact-api.regalocom.net';
@@ -48,10 +48,10 @@ const CONFIGURED_CONTACT_ENDPOINT = (
 ).trim();
 const CONTACT_HEALTH_TIMEOUT_MS = 4500;
 
-const CONTACT_PROMISES = ['通常1営業日以内に返信', '初回相談無料', 'フォームは24時間受付'] as const;
+const CONTACT_PROMISES = ['原則1営業日以内に返信', '初回相談無料', 'フォームは24時間受付'] as const;
 const COMMON_ISSUES = [
   '相談内容や依頼範囲が決まっていない',
-  'SNS運用と権利管理の担当が分かれている',
+  'SNS運用と権利情報確認の担当が分かれている',
   '制作進行や情報共有が担当者に依存している',
 ] as const;
 
@@ -401,7 +401,7 @@ const Contact: React.FC = () => {
               <p className="text-xs font-semibold tracking-widest text-slate-500">受付情報</p>
               <h2 className="mt-4 text-2xl font-semibold text-brand-ink">お問い合わせ窓口</h2>
               <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                SNS運用、権利管理、制作進行に関するご相談を、同じ窓口で受け付けています。
+                SNS運用、音楽の権利情報管理、制作進行に関するご相談を、同じ窓口で受け付けています。
               </p>
 
               <div className="mt-6 space-y-3">
@@ -438,7 +438,7 @@ const Contact: React.FC = () => {
           >
             <p className="text-sm font-semibold text-emerald-800">お問い合わせを受け付けました。</p>
             <p className="mt-1 text-sm leading-relaxed text-emerald-900/90">
-              通常1営業日以内にご連絡します。お急ぎの場合はお電話でも受け付けています。
+              原則1営業日以内にご連絡します。お急ぎの場合はお電話でも受け付けています。
             </p>
             <div className="mt-4 flex flex-col gap-3 sm:flex-row">
               {companyPhoneHref && (
@@ -489,7 +489,7 @@ const Contact: React.FC = () => {
                   Googleフォームから送信できます
                 </h3>
                 <p className="mt-2 text-sm leading-7 text-slate-600">
-                  別タブでRegaloの問い合わせフォームを開きます。通常1営業日以内に確認します。
+                  別タブでRegaloの問い合わせフォームを開きます。原則1営業日以内に確認します。
                 </p>
                 <div className="mt-5 flex flex-col gap-3 sm:flex-row">
                   <a

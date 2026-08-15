@@ -44,14 +44,14 @@ const Cases: React.FC = () => {
         <div className="mb-10 grid gap-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)] lg:items-end lg:gap-16 md:mb-14">
           <div>
             <p className="inline-flex rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-800">
-              支援内容の例
+              対応例
             </p>
             <h2 className="mt-4 text-3xl font-semibold leading-tight text-brand-ink md:text-5xl">
               課題別の対応内容と納品物
             </h2>
           </div>
           <p className="max-w-2xl text-base leading-8 text-slate-600">
-            以下は特定顧客の実績ではありません。想定される課題、対応内容、納品物を事業ごとに示しています。
+            よくある課題に対して、確認する内容と納品物を事業ごとにまとめています。
           </p>
         </div>
 
@@ -76,8 +76,7 @@ const Cases: React.FC = () => {
                   </span>
                 </div>
 
-                <p className="mt-6 text-xs font-semibold tracking-wide text-slate-500">{c.clientType}</p>
-                <h3 className="mt-2 text-2xl font-semibold leading-tight text-brand-ink">{c.title}</h3>
+                <h3 className="mt-6 text-2xl font-semibold leading-tight text-brand-ink">{c.title}</h3>
 
                 <div className="mt-6 rounded-2xl border border-slate-200 bg-white/90 p-4">
                   <p className="text-xs font-semibold tracking-[0.12em] text-slate-600">現状の課題</p>
@@ -121,10 +120,6 @@ const Cases: React.FC = () => {
             );
           })}
         </div>
-
-        <p className="mt-6 text-center text-xs leading-6 text-slate-500">
-          ※ 顧客実績、実績数値、成果保証を示すものではありません。実際の対応範囲とお見積りは、資料と契約状況を確認して個別にご案内します。
-        </p>
 
         <div className="mt-10 flex justify-center">
           <Link

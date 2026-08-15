@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { ArrowRight, BadgeCheck, Building2, ExternalLink, MapPin, ShieldCheck } from 'lucide-react';
-import { companyProfile, JASRAC_RELATION_LABEL, siteConfig } from '../site.config';
+import { companyProfile, siteConfig } from '../site.config';
 import { SectionId } from '../types';
 import { serviceCatalog } from '../services.catalog';
 
@@ -12,7 +12,6 @@ interface Row {
 }
 
 const phoneHref = (companyProfile.phone || '').replace(/[^\d+]/g, '');
-const partnerBankCount = companyProfile.partnerBanks?.length || 0;
 
 const rows: Row[] = [
   { label: '屋号 / ブランド名', value: companyProfile.brandName },
@@ -50,12 +49,12 @@ const companyHighlights = [
   {
     icon: Building2,
     label: '支援体制',
-    value: siteConfig.positioning.crossFunctionalLabel,
+    value: '代表がご相談内容を確認',
   },
 ] as const;
 
 const representativeHighlights = [
-  JASRAC_RELATION_LABEL,
+  '自社管理楽曲の著作権管理をJASRACへ委託',
   '音楽著作権管理者養成講座修了',
   '2024年6月法人設立',
   '京都府長岡京市に本社',
@@ -84,10 +83,10 @@ const CompanyInfo: React.FC = () => {
               {siteConfig.positioning.companySummary} 会社概要、代表者、所在地、外部確認先を掲載しています。
             </p>
 
-            <div className="mt-6 grid gap-3 sm:grid-cols-3">
+            <div className="mt-7 grid border-y border-slate-200 sm:grid-cols-3 sm:divide-x sm:divide-slate-200">
               {companyHighlights.map((item) => (
-                <div key={item.label} className="rounded-3xl border border-slate-200 bg-slate-50 p-4">
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-brand-primary-700 shadow-sm">
+                <div key={item.label} className="px-1 py-5 sm:px-5 first:sm:pl-0 last:sm:pr-0">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-brand-primary-50 text-brand-primary-700">
                     <item.icon className="h-5 w-5" />
                   </span>
                   <p className="mt-4 text-xs font-semibold tracking-wide text-slate-500">{item.label}</p>
@@ -171,8 +170,8 @@ const CompanyInfo: React.FC = () => {
             <p className="text-xs font-semibold tracking-wider text-amber-800">支援体制について</p>
             <h2 className="mt-2 text-2xl font-semibold text-brand-ink">代表窓口と支援体制</h2>
             <p className="mt-4 text-sm leading-relaxed text-slate-700">
-              代表がご相談内容を確認し、案件ごとに必要な担当者と連携して対応します。
-              ご提案時に、対応内容、納品物、スケジュール、費用を明示します。
+              代表がご相談内容を確認し、対応範囲と確認結果を取りまとめます。
+              ご提案時に、対応内容、納品物、スケジュール、費用、専門家への確認が必要な事項を明示します。
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
               {representativeHighlights.map((item) => (
@@ -276,11 +275,6 @@ const CompanyInfo: React.FC = () => {
               <p className="text-xs font-semibold tracking-wide text-slate-500">対応領域</p>
               <h2 className="mt-1 text-2xl font-semibold text-brand-ink">事業一覧</h2>
             </div>
-            {partnerBankCount > 0 && (
-              <span className="inline-flex rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700">
-                取引金融機関 {partnerBankCount}行
-              </span>
-            )}
           </div>
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {serviceCatalog.map((service) => (

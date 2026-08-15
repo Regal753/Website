@@ -4,7 +4,7 @@ import { JASRAC_RELATION_LABEL, siteConfig } from './site.config';
 
 describe('siteConfig cases', () => {
   it('describes the JASRAC relationship as a management contract, not an endorsement', () => {
-    expect(JASRAC_RELATION_LABEL).toBe('JASRAC管理委託契約');
+    expect(JASRAC_RELATION_LABEL).toBe('JASRACへの管理委託');
     expect(JASRAC_RELATION_LABEL).not.toContain('会員');
     expect(JASRAC_RELATION_LABEL).not.toContain('認定');
   });
@@ -26,7 +26,8 @@ describe('siteConfig cases', () => {
   it('includes clear structure for each support-design sample', () => {
     for (const item of siteConfig.cases) {
       expect(item.title.length).toBeGreaterThan(0);
-      expect(item.clientType).toContain('顧客実績ではありません');
+      expect(item.clientType.length).toBeGreaterThan(0);
+      expect(item.clientType).not.toContain('顧客実績');
       expect(item.challenge.length).toBeGreaterThan(0);
       expect(item.results.length).toBeGreaterThan(0);
       expect(item.deliverables.length).toBeGreaterThan(0);

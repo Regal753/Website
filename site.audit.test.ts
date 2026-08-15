@@ -88,10 +88,22 @@ describe('site audit remediation', () => {
     }
   });
 
-  it('labels modeled support examples without implying customer results', () => {
-    expect(serviceDetailSource).toContain('支援内容の例');
-    expect(serviceDetailSource).toContain('特定顧客の実績ではありません');
+  it('presents support examples without defensive disclaimers', () => {
+    expect(serviceDetailSource).toContain('対応例');
+    expect(serviceDetailSource).not.toContain('顧客実績ではありません');
     expect(serviceDetailSource).not.toContain('公開している改善事例');
+  });
+
+  it('keeps service images and publishes pre-contract scope information', () => {
+    expect(serviceDetailSource).toContain('slideImagePaths.map');
+    expect(serviceDetailSource).toContain('の掲載画像');
+    expect(serviceDetailSource).not.toContain('業務イメージ');
+    expect(serviceDetailSource).toContain('対象となる企業');
+    expect(serviceDetailSource).toContain('ご相談時に必要な情報');
+    expect(serviceDetailSource).toContain('対応範囲');
+    expect(serviceDetailSource).toContain('対応可能な環境');
+    expect(serviceDetailSource).not.toContain('>ギャラリー</h2>');
+    expect(serviceDetailSource).not.toContain('>使用技術</h2>');
   });
 
   it('keeps the inquiry flow estimate-first without publishing a price table', () => {
