@@ -45,6 +45,8 @@ const siteWorkerConfig = read('./infrastructure/cloudflare/site-worker/wrangler.
 const appSource = read('./App.tsx');
 const newsSource = read('./components/News.tsx');
 const siteConfigSource = read('./site.config.ts');
+const routeGeneratorSource = read('./scripts/generate-spa-routes.mjs');
+const processSource = read('./components/Process.tsx');
 
 describe('site audit remediation', () => {
   it('does not block first paint on external font CSS or an unrelated image preload', () => {
@@ -128,8 +130,8 @@ describe('site audit remediation', () => {
       (match) => match[1],
     );
     expect(lastModifiedDates).toHaveLength(9);
-    expect(lastModifiedDates.filter((date) => date === '2026-08-15')).toHaveLength(5);
-    expect(lastModifiedDates.filter((date) => date === '2026-08-13')).toHaveLength(3);
+    expect(lastModifiedDates.filter((date) => date === '2026-08-15')).toHaveLength(7);
+    expect(lastModifiedDates.filter((date) => date === '2026-08-13')).toHaveLength(1);
     expect(lastModifiedDates.filter((date) => date === '2026-08-10')).toHaveLength(1);
   });
 
@@ -144,6 +146,16 @@ describe('site audit remediation', () => {
     expect(businessTrustSource).not.toMatch(/導入社数|顧客満足度|成功率|実績\s*\d+/);
     expect(footerSource).toContain('法人情報・外部確認先を見る');
     expect(footerSource).toContain('法人番号');
+    expect(footerSource).toContain('電話受付 9:00-20:00');
+    expect(footerSource).not.toContain('>お問い合わせ</Link>');
+  });
+
+  it('keeps the home concise without removing service imagery or trust proof', () => {
+    expect(heroSource).not.toContain('主な確認内容');
+    expect(heroSource).not.toContain('楽曲・権利情報と運用手順を整理');
+    expect(heroSource).toContain('music-cover-640.webp');
+    expect(heroSource).toContain('PROOF_POINTS.map');
+    expect(processSource).not.toContain('お見積り前の確認事項');
   });
 
   it('uses direct corporate headings and excludes vague campaign copy', () => {
@@ -172,11 +184,33 @@ describe('site audit remediation', () => {
   });
 
   it('describes the legal entity in Organization structured data', () => {
+    expect(indexHtml).toContain('"@id": "https://www.regalocom.net/#organization"');
     expect(indexHtml).toContain('"legalName": "株式会社Regalo"');
     expect(indexHtml).toContain('"foundingDate": "2024-06-10"');
     expect(indexHtml).toContain('"name": "塩田玲央"');
     expect(indexHtml).toContain('houjin-bangou.nta.go.jp');
     expect(indexHtml).toContain('crowdworks.jp/times/interview/28780/');
+  });
+
+  it('keeps legal pages aligned with the current corporate identity', () => {
+    for (const html of [privacyHtml, termsHtml]) {
+      expect(html).toContain('<span>株式会社Regalo</span>');
+      expect(html).toContain('class="site-header"');
+      expect(html).toContain('class="legal-footer"');
+      expect(html).toContain('最終改定日：2026年8月15日');
+      expect(html).not.toContain('京都発の実務チーム');
+      expect(html).not.toMatch(/>\s*Regalo（以下「当社」）/);
+    }
+  });
+
+  it('publishes service-specific social images and structured data', () => {
+    expect(appSource).toContain("imagePath: `/${service.media.listImage}`");
+    expect(appSource).toContain("'@type': 'Service'");
+    expect(appSource).toContain("'@type': 'BreadcrumbList'");
+    expect(routeGeneratorSource).toContain('/images/services/music-cover.webp');
+    expect(routeGeneratorSource).toContain('/images/services/sns-cover.webp');
+    expect(routeGeneratorSource).toContain('/images/services/ai-cover.webp');
+    expect(routeGeneratorSource).toContain('id="route-structured-data"');
   });
 
   it('supports optional privacy-first production analytics without a secret', () => {
@@ -206,7 +240,7 @@ describe('site audit remediation', () => {
     expect(serviceDetailSource).toContain('よくあるご質問');
     expect(serviceDetailSource).toContain('service.faqs.map');
     expect(siteConfigSource).toContain("date: '2026.08.15'");
-    expect(siteConfigSource).toContain('発注前FAQ、旧URLの転送を改善');
+    expect(siteConfigSource).toContain('発注前FAQ、法務ページ、共有用メタ情報を改善');
     expect(newsSource).toContain('siteConfig.newsItems');
   });
 

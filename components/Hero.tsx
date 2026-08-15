@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { ArrowRight, BadgeCheck, Building2, Check, Music2, ShieldCheck } from 'lucide-react';
+import { ArrowRight, BadgeCheck, Building2, Music2, ShieldCheck } from 'lucide-react';
 import { JASRAC_RELATION_LABEL, siteConfig } from '../site.config';
 import { SectionId } from '../types';
 import { trackEvent } from '../utils/analytics';
@@ -99,7 +99,7 @@ const Hero: React.FC = () => {
             </p>
           </div>
 
-          <div className="relative min-h-[520px] overflow-hidden rounded-3xl border border-slate-800 bg-slate-950 shadow-[0_28px_80px_rgba(15,23,42,0.24)]">
+          <div className="relative min-h-[360px] overflow-hidden rounded-3xl border border-slate-800 bg-slate-950 shadow-[0_28px_80px_rgba(15,23,42,0.24)] sm:min-h-[420px] lg:min-h-[480px]">
             <img
               src={asset('images/services/music-cover-640.webp')}
               srcSet={`${asset('images/services/music-cover-480.webp')} 480w, ${asset('images/services/music-cover-640.webp')} 640w`}
@@ -113,24 +113,16 @@ const Hero: React.FC = () => {
               className="absolute inset-0 h-full w-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/65 to-slate-950/10" />
-            <div className="relative flex min-h-[520px] flex-col justify-end p-6 text-white sm:p-8">
-              <p className="text-xs font-semibold tracking-[0.18em] text-amber-200">主な確認内容</p>
-              <h2 className="mt-3 max-w-lg text-2xl font-semibold leading-tight sm:text-3xl">
-                楽曲・権利情報と運用手順を整理
-              </h2>
-              <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-                {['楽曲・権利者情報', '契約・利用条件', '公開前の確認手順', '管理台帳と担当範囲'].map((item) => (
-                  <li key={item} className="flex items-center gap-2 border-t border-white/20 pt-3 text-sm text-white/85">
-                    <Check className="h-4 w-4 shrink-0 text-amber-200" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
+            <div className="relative flex min-h-[360px] flex-col justify-end p-6 text-white sm:min-h-[420px] sm:p-8 lg:min-h-[480px]">
+              <p className="text-xs font-semibold tracking-[0.18em] text-amber-200">音楽出版・権利情報管理</p>
+              <p className="mt-3 max-w-lg text-xl font-semibold leading-tight sm:text-2xl">
+                公開前の確認手順と管理台帳を整備
+              </p>
             </div>
           </div>
         </div>
 
-        <div className="mt-9 grid overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 shadow-sm sm:grid-cols-3">
+        <div className="mt-7 grid overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 shadow-sm sm:grid-cols-3">
           {PROOF_POINTS.map((point) => (
             <div key={point.title} className="bg-white/95 p-4 sm:p-5">
               <div className="flex items-center gap-3">

@@ -27,12 +27,22 @@ const routeEntrypoints = [
     description:
       'YouTubeを中心に、企画、制作進行、投稿管理、公開後の数値確認を支援します。',
     canonicalPath: '/services/sns-management/',
+    imagePath: '/images/services/sns-cover.webp',
+    imageAlt: 'YouTube・SNS運用のサービス案内',
+    imageWidth: 900,
+    imageHeight: 600,
+    serviceName: 'YouTube・SNS運用',
   },
   {
     path: 'services/music-publishing/index.html',
     title: '音楽出版・権利情報管理 | Regalo',
     description: 'BGM制作、権利情報・契約情報の整理、利用条件の確認手順、管理台帳の整備に対応します。',
     canonicalPath: '/services/music-publishing/',
+    imagePath: '/images/services/music-cover.webp',
+    imageAlt: '音楽出版・権利情報管理のサービス案内',
+    imageWidth: 900,
+    imageHeight: 600,
+    serviceName: '音楽出版・権利情報管理',
   },
   {
     path: 'services/workflow-automation/index.html',
@@ -40,6 +50,11 @@ const routeEntrypoints = [
     description:
       'レポート作成、進行共有、通知、確認依頼の自動化に対応し、運用手順と納品物を明確にします。',
     canonicalPath: '/services/workflow-automation/',
+    imagePath: '/images/services/ai-cover.webp',
+    imageAlt: '業務自動化・制作進行支援のサービス案内',
+    imageWidth: 1280,
+    imageHeight: 720,
+    serviceName: '業務自動化・制作進行支援',
   },
   // Legacy slugs resolve to the current service canonical URL.
   {
@@ -48,24 +63,44 @@ const routeEntrypoints = [
     description:
       'YouTubeを中心に、企画、制作進行、投稿管理、公開後の数値確認を支援します。',
     canonicalPath: '/services/sns-management/',
+    imagePath: '/images/services/sns-cover.webp',
+    imageAlt: 'YouTube・SNS運用のサービス案内',
+    imageWidth: 900,
+    imageHeight: 600,
+    serviceName: 'YouTube・SNS運用',
   },
   {
     path: 'services/music-publishing-bgm/index.html',
     title: '音楽出版・権利情報管理 | Regalo',
     description: 'BGM制作、権利情報・契約情報の整理、利用条件の確認手順、管理台帳の整備に対応します。',
     canonicalPath: '/services/music-publishing/',
+    imagePath: '/images/services/music-cover.webp',
+    imageAlt: '音楽出版・権利情報管理のサービス案内',
+    imageWidth: 900,
+    imageHeight: 600,
+    serviceName: '音楽出版・権利情報管理',
   },
   {
     path: 'services/bgm-production/index.html',
     title: '音楽出版・権利情報管理 | Regalo',
     description: 'BGM制作、権利情報・契約情報の整理、利用条件の確認手順、管理台帳の整備に対応します。',
     canonicalPath: '/services/music-publishing/',
+    imagePath: '/images/services/music-cover.webp',
+    imageAlt: '音楽出版・権利情報管理のサービス案内',
+    imageWidth: 900,
+    imageHeight: 600,
+    serviceName: '音楽出版・権利情報管理',
   },
   {
     path: 'services/rights-management/index.html',
     title: '音楽出版・権利情報管理 | Regalo',
     description: 'BGM制作、権利情報・契約情報の整理、利用条件の確認手順、管理台帳の整備に対応します。',
     canonicalPath: '/services/music-publishing/',
+    imagePath: '/images/services/music-cover.webp',
+    imageAlt: '音楽出版・権利情報管理のサービス案内',
+    imageWidth: 900,
+    imageHeight: 600,
+    serviceName: '音楽出版・権利情報管理',
   },
   {
     path: 'services/ai-marketing-strategy/index.html',
@@ -73,6 +108,11 @@ const routeEntrypoints = [
     description:
       'レポート作成、進行共有、通知、確認依頼の自動化に対応し、運用手順と納品物を明確にします。',
     canonicalPath: '/services/workflow-automation/',
+    imagePath: '/images/services/ai-cover.webp',
+    imageAlt: '業務自動化・制作進行支援のサービス案内',
+    imageWidth: 1280,
+    imageHeight: 720,
+    serviceName: '業務自動化・制作進行支援',
   },
 ];
 
@@ -107,10 +147,58 @@ const replaceMeta = (html, attribute, value, content) => {
   return html.replace(pattern, `<meta ${attribute}="${value}" content="${escapeHtml(content)}" />`);
 };
 
+const createRouteStructuredData = (route) => {
+  if (!route.serviceName) return null;
+
+  const serviceUrl = routeUrl(route.canonicalPath);
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: route.serviceName,
+      serviceType: route.serviceName,
+      description: route.description,
+      url: serviceUrl,
+      provider: {
+        '@type': 'Organization',
+        '@id': `${siteUrl}/#organization`,
+        name: '株式会社Regalo',
+        url: `${siteUrl}/`,
+      },
+      areaServed: {
+        '@type': 'Country',
+        name: '日本',
+      },
+      audience: {
+        '@type': 'BusinessAudience',
+        audienceType: '法人・制作会社',
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Regalo',
+          item: `${siteUrl}/`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: route.serviceName,
+          item: serviceUrl,
+        },
+      ],
+    },
+  ];
+};
+
 const withRouteMeta = (html, route) => {
   const canonicalUrl = routeUrl(route.canonicalPath);
 
-  return [
+  const metaHtml = [
     (value) =>
       value.replace(/<title>.*?<\/title>/s, `<title>${escapeHtml(route.title)}</title>`),
     (value) => replaceMeta(value, 'name', 'description', route.description),
@@ -119,12 +207,26 @@ const withRouteMeta = (html, route) => {
     (value) => replaceMeta(value, 'property', 'og:description', route.description),
     (value) => replaceMeta(value, 'name', 'twitter:title', route.title),
     (value) => replaceMeta(value, 'name', 'twitter:description', route.description),
+    (value) => route.imagePath ? replaceMeta(value, 'property', 'og:image', `${siteUrl}${route.imagePath}`) : value,
+    (value) => route.imageAlt ? replaceMeta(value, 'property', 'og:image:alt', route.imageAlt) : value,
+    (value) => route.imageWidth ? replaceMeta(value, 'property', 'og:image:width', String(route.imageWidth)) : value,
+    (value) => route.imageHeight ? replaceMeta(value, 'property', 'og:image:height', String(route.imageHeight)) : value,
+    (value) => route.imagePath ? replaceMeta(value, 'name', 'twitter:image', `${siteUrl}${route.imagePath}`) : value,
     (value) =>
       value.replace(
         /<link\b(?=[^>]*\brel="canonical")[^>]*>/s,
         `<link rel="canonical" href="${escapeHtml(canonicalUrl)}" />`,
       ),
   ].reduce((current, transform) => transform(current), html);
+
+  const structuredData = createRouteStructuredData(route);
+  if (!structuredData) return metaHtml;
+
+  const serialized = JSON.stringify(structuredData).replace(/</g, '\\u003c');
+  return metaHtml.replace(
+    '</head>',
+    `    <script id="route-structured-data" type="application/ld+json">${serialized}</script>\n  </head>`,
+  );
 };
 
 const createRedirectHtml = (relativeTarget) => {

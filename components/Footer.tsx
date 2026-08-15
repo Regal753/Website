@@ -55,7 +55,7 @@ const Footer: React.FC = () => {
             >
               {siteConfig.companyProfile.contactEmail}
             </a>
-            <p className="text-white/60">受付時間 9:00-20:00</p>
+            <p className="text-white/60">電話受付 9:00-20:00</p>
             <a
               href="https://www.instagram.com/regalo0610/"
               target="_blank"
@@ -72,9 +72,6 @@ const Footer: React.FC = () => {
           <div className="flex flex-col gap-2 text-sm">
             <Link to="/company" className="text-white/70 transition-colors hover:text-white">
               会社情報
-            </Link>
-            <Link to="/contact" className="text-white/70 transition-colors hover:text-white">
-              お問い合わせ
             </Link>
             <Link to="/privacy" className="text-white/70 transition-colors hover:text-white">
               プライバシーポリシー
