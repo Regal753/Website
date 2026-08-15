@@ -54,12 +54,6 @@ const proofLinks = [
     platform: 'nta_corporate_registry',
   },
   {
-    label: 'クラウドワークス公式メディア',
-    description: '株式会社Regaloの企業インタビュー',
-    href: siteConfig.verificationLinks.mediaCoverage,
-    platform: 'crowdworks_times',
-  },
-  {
     label: '日本音楽出版社協会',
     description: '2025年度講座の主催・内容を確認',
     href: siteConfig.verificationLinks.trainingProgram,
@@ -84,7 +78,7 @@ const BusinessTrust: React.FC = () => (
           </p>
         </div>
         <div className="border-y border-slate-300 py-4">
-          <p className="text-xs font-semibold tracking-wide text-slate-500">法人情報</p>
+          <p className="text-xs font-semibold tracking-wide text-slate-600">法人情報</p>
           <p className="mt-2 text-lg font-semibold text-brand-ink">{siteConfig.companyProfile.legalName}</p>
           <p className="mt-2 text-sm leading-6 text-slate-600">
             代表者 {siteConfig.companyProfile.representative} / 法人番号 {siteConfig.companyProfile.corporateNumber}
@@ -135,7 +129,7 @@ const BusinessTrust: React.FC = () => (
       </div>
 
       <div className="mt-7 border-t border-slate-300 pt-5">
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2">
           {proofLinks.map((item) => (
             <a
               key={item.label}

@@ -1,10 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router';
-import { ArrowDown, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowDown, CheckCircle2 } from 'lucide-react';
 import { serviceCatalog } from '../services.catalog';
 import { siteConfig } from '../site.config';
 import { SectionId } from '../types';
-import { trackEvent } from '../utils/analytics';
 
 const caseStyles: Record<
   string,
@@ -119,17 +117,6 @@ const Cases: React.FC = () => {
               </article>
             );
           })}
-        </div>
-
-        <div className="mt-10 flex justify-center">
-          <Link
-            to="/contact"
-            onClick={() => trackEvent('cta_click', { placement: 'cases_section', target: 'contact' })}
-            className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-sm font-semibold text-slate-800 shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand-primary-200 hover:text-brand-primary-700"
-          >
-            支援内容を相談する
-            <ArrowRight className="h-4 w-4" />
-          </Link>
         </div>
       </div>
     </section>

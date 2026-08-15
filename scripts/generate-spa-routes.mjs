@@ -63,10 +63,9 @@ const routeEntrypoints = [
   },
   {
     path: 'services/rights-management/index.html',
-    title: '業務自動化・制作進行支援 | Regalo',
-    description:
-      'レポート作成、進行共有、通知、確認依頼の自動化に対応し、運用手順と納品物を明確にします。',
-    canonicalPath: '/services/workflow-automation/',
+    title: '音楽出版・権利情報管理 | Regalo',
+    description: 'BGM制作、権利情報・契約情報の整理、利用条件の確認手順、管理台帳の整備に対応します。',
+    canonicalPath: '/services/music-publishing/',
   },
   {
     path: 'services/ai-marketing-strategy/index.html',
@@ -82,7 +81,7 @@ const redirectAliases = {
   'services/sns-operations.html': '/services/sns-management/',
   'services/music-publishing-bgm.html': '/services/music-publishing/',
   'services/bgm-production.html': '/services/music-publishing/',
-  'services/rights-management.html': '/services/workflow-automation/',
+  'services/rights-management.html': '/services/music-publishing/',
   'services/ai-marketing-strategy.html': '/services/workflow-automation/',
   'services/workflow-automation.html': '/services/workflow-automation/',
 };

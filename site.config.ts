@@ -67,6 +67,10 @@ export const cases: CaseStudy[] = [
 
 export const newsItems: NewsItem[] = [
   {
+    date: '2026.08.15',
+    title: '法人向けの事業案内、発注前FAQ、旧URLの転送を改善',
+  },
+  {
     date: '2026.03.30',
     title: 'クラウドワークス公式メディア「クラウドソーシングTimes」に掲載',
     href: 'https://crowdworks.jp/times/interview/28780/',
