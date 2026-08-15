@@ -1,6 +1,8 @@
 # Canonical page redirects
 /company.html /company 301
+/company/ /company 301
 /contact.html /contact 301
+/contact/ /contact 301
 
 # Legacy service names
 /services/sns-operations /services/sns-management/ 301
