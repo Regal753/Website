@@ -43,7 +43,8 @@ const Header: React.FC = () => {
           aria-label="Regalo トップページへ移動"
         >
           <img
-            src={import.meta.env.BASE_URL + 'images/logo.webp'}
+            src={import.meta.env.BASE_URL + 'images/logo-80.webp'}
+            srcSet={`${import.meta.env.BASE_URL}images/logo-80.webp 2x, ${import.meta.env.BASE_URL}images/logo.webp 3x`}
             alt={siteConfig.companyName}
             width={40}
             height={40}

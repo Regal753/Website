@@ -26,6 +26,11 @@ interface ServiceMediaAssets {
   galleryImages: string[];
 }
 
+interface ServiceFaqItem {
+  question: string;
+  answer: string;
+}
+
 export interface ServiceCatalogItem {
   slug: string;
   title: string;
@@ -41,6 +46,7 @@ export interface ServiceCatalogItem {
   audience: string[];
   intakeItems: string[];
   boundaries: string[];
+  faqs: ServiceFaqItem[];
   techStack: string[];
   media: ServiceMediaAssets;
 }
@@ -112,6 +118,20 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
     boundaries: [
       '対応範囲と確認頻度は、運用状況を確認したうえで個別に定めます。',
       '再生回数、登録者数その他の成果を保証するものではありません。',
+    ],
+    faqs: [
+      {
+        question: 'YouTube以外のSNSにも対応できますか？',
+        answer: 'YouTubeを中心に対応しています。その他のSNSは、現在の運用状況、投稿本数、必要な制作工程を確認したうえで個別にご案内します。',
+      },
+      {
+        question: '社内担当者や既存の制作会社と一緒に進められますか？',
+        answer: '可能です。企画、制作、確認、投稿、数値確認の担当範囲と承認手順を整理し、既存体制に合わせて進行方法を決めます。',
+      },
+      {
+        question: '報告内容と頻度はどのように決まりますか？',
+        answer: '確認する指標、投稿本数、定例会の有無を伺い、レポート項目と報告頻度をお見積り時に提示します。',
+      },
     ],
     techStack: ['YouTube Analytics', 'Google Sheets', 'Looker Studio', 'Discord'],
     media: {
@@ -190,6 +210,20 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
       '利用許諾の可否や使用料は、権利者、管理団体等の判断に従います。',
       '個別案件の法的判断や権利侵害がないことの保証は行いません。',
     ],
+    faqs: [
+      {
+        question: 'Regaloが楽曲の利用許諾を判断しますか？',
+        answer: 'Regaloは権利者、契約、利用条件の情報と確認手順を整理します。利用許諾の可否や使用料は、権利者、管理団体等の判断に従います。',
+      },
+      {
+        question: '資料が整理できていなくても相談できますか？',
+        answer: '可能です。対象楽曲、利用先、既存契約、現在の確認方法について、分かる範囲から確認し、追加で必要な情報を整理します。',
+      },
+      {
+        question: '契約書や管理台帳はどのように共有しますか？',
+        answer: '初回のお問い合わせでは概要をお送りください。契約書や管理台帳等の資料は、返信後に共有方法をご案内します。',
+      },
+    ],
     techStack: ['Google Sheets', 'Google Drive', '契約管理台帳', '監査チェックリスト'],
     media: {
       listImage: 'images/services/music-cover.webp',
@@ -266,6 +300,20 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
       '既存システムの仕様と権限を確認し、自動化できる範囲を個別に定めます。',
       '本番導入前に試行と動作確認を行い、変更手順を文書化します。',
     ],
+    faqs: [
+      {
+        question: '現在使っているツールを変更する必要がありますか？',
+        answer: '必須ではありません。現在の作業手順と権限を確認し、既存ツールを活用できる範囲と変更が必要な範囲を分けてご案内します。',
+      },
+      {
+        question: '一部の作業だけでも自動化できますか？',
+        answer: '可能です。定例レポート、通知、確認依頼など対象を絞って試行し、動作確認後に本番運用へ移します。',
+      },
+      {
+        question: '導入後の変更や保守にも対応できますか？',
+        answer: '対応できます。対象システム、確認頻度、変更対応の範囲を確認し、運用後の対応内容をお見積り時に提示します。',
+      },
+    ],
     techStack: ['Google Drive API', 'Google Sheets API', 'Discord Bot', 'n8n / GCP'],
     media: {
       listImage: 'images/services/ai-cover.webp',
@@ -291,7 +339,7 @@ const legacySlugMap: Record<string, string> = {
   'sns-operations': 'sns-management',
   'music-publishing-bgm': 'music-publishing',
   'bgm-production': 'music-publishing',
-  'rights-management': 'workflow-automation',
+  'rights-management': 'music-publishing',
   'ai-marketing-strategy': 'workflow-automation',
 };
 

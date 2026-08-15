@@ -278,6 +278,25 @@ const ServiceDetailPage: React.FC = () => {
             </div>
           </section>
 
+          <section className="mt-8" aria-labelledby={`${service.slug}-faq-title`}>
+            <h2 id={`${service.slug}-faq-title`} className="text-xl font-semibold text-brand-ink">
+              よくあるご質問
+            </h2>
+            <div className="mt-4 divide-y divide-slate-200 border-y border-slate-200">
+              {service.faqs.map((item) => (
+                <details key={item.question} className="group py-4">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-brand-ink marker:content-none">
+                    {item.question}
+                    <span aria-hidden="true" className="text-lg text-brand-primary-700 transition-transform group-open:rotate-45">
+                      ＋
+                    </span>
+                  </summary>
+                  <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-600">{item.answer}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+
           <div className="mt-8 rounded-xl border border-brand-primary-200 bg-brand-primary-50 p-5">
             <h2 className="text-xl font-semibold text-brand-ink">ご相談・お見積り</h2>
             <p className="mt-2 text-sm leading-relaxed text-slate-700">

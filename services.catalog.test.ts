@@ -33,6 +33,7 @@ describe('service catalog', () => {
       expect(service.audience.length).toBeGreaterThanOrEqual(3);
       expect(service.intakeItems.length).toBeGreaterThanOrEqual(3);
       expect(service.boundaries.length).toBeGreaterThanOrEqual(2);
+      expect(service.faqs.length).toBeGreaterThanOrEqual(3);
     }
   });
 
@@ -58,9 +59,9 @@ describe('service catalog', () => {
     expect(getServiceBySlug('music-publishing-bgm')?.slug).toBe('music-publishing');
     expect(getServiceBySlug('music-publishing-bgm.html')?.slug).toBe('music-publishing');
     expect(getServiceBySlug('/music-publishing-bgm/')?.slug).toBe('music-publishing');
-    expect(getServiceBySlug('rights-management')?.slug).toBe('workflow-automation');
-    expect(getServiceBySlug('rights-management.html')?.slug).toBe('workflow-automation');
-    expect(getServiceBySlug('/rights-management/')?.slug).toBe('workflow-automation');
+    expect(getServiceBySlug('rights-management')?.slug).toBe('music-publishing');
+    expect(getServiceBySlug('rights-management.html')?.slug).toBe('music-publishing');
+    expect(getServiceBySlug('/rights-management/')?.slug).toBe('music-publishing');
     expect(getServiceBySlug('ai-marketing-strategy')?.slug).toBe('workflow-automation');
     expect(getServiceBySlug('workflow-automation')?.slug).toBe('workflow-automation');
   });

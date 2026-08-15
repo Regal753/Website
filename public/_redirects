@@ -1,0 +1,21 @@
+# Canonical page redirects
+/company.html /company 301
+/contact.html /contact 301
+
+# Legacy service names
+/services/sns-operations /services/sns-management/ 301
+/services/sns-operations/ /services/sns-management/ 301
+/services/sns-operations.html /services/sns-management/ 301
+/services/music-publishing-bgm /services/music-publishing/ 301
+/services/music-publishing-bgm/ /services/music-publishing/ 301
+/services/music-publishing-bgm.html /services/music-publishing/ 301
+/services/bgm-production /services/music-publishing/ 301
+/services/bgm-production/ /services/music-publishing/ 301
+/services/bgm-production.html /services/music-publishing/ 301
+/services/rights-management /services/music-publishing/ 301
+/services/rights-management/ /services/music-publishing/ 301
+/services/rights-management.html /services/music-publishing/ 301
+/services/ai-marketing-strategy /services/workflow-automation/ 301
+/services/ai-marketing-strategy/ /services/workflow-automation/ 301
+/services/ai-marketing-strategy.html /services/workflow-automation/ 301
+/services/workflow-automation.html /services/workflow-automation/ 301

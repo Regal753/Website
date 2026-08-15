@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { ArrowRight, BadgeCheck, Building2, Check, ExternalLink, Music2, Newspaper, ShieldCheck } from 'lucide-react';
+import { ArrowRight, BadgeCheck, Building2, Check, Music2, ShieldCheck } from 'lucide-react';
 import { JASRAC_RELATION_LABEL, siteConfig } from '../site.config';
 import { SectionId } from '../types';
 import { trackEvent } from '../utils/analytics';
@@ -20,12 +20,6 @@ const PROOF_POINTS = [
     icon: Building2,
     title: '株式会社Regalo',
     description: '2024年6月設立。京都府長岡京市に本社',
-  },
-  {
-    icon: Newspaper,
-    title: '外部メディア掲載',
-    description: 'クラウドワークス公式メディアに掲載',
-    href: 'https://crowdworks.jp/times/interview/28780/',
   },
 ] as const;
 
@@ -107,10 +101,12 @@ const Hero: React.FC = () => {
 
           <div className="relative min-h-[520px] overflow-hidden rounded-3xl border border-slate-800 bg-slate-950 shadow-[0_28px_80px_rgba(15,23,42,0.24)]">
             <img
-              src={asset('images/services/music-cover.webp')}
+              src={asset('images/services/music-cover-640.webp')}
+              srcSet={`${asset('images/services/music-cover-480.webp')} 480w, ${asset('images/services/music-cover-640.webp')} 640w`}
+              sizes="(min-width: 1280px) 592px, (min-width: 1024px) 46vw, 100vw"
               alt="音楽の権利情報確認と管理台帳整備"
-              width={1280}
-              height={720}
+              width={900}
+              height={600}
               loading="eager"
               fetchPriority="high"
               decoding="async"
@@ -134,10 +130,9 @@ const Hero: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-9 grid grid-cols-2 overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 shadow-sm lg:grid-cols-4">
-          {PROOF_POINTS.map((point) => {
-            const content = (
-              <>
+        <div className="mt-9 grid overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 shadow-sm sm:grid-cols-3">
+          {PROOF_POINTS.map((point) => (
+            <div key={point.title} className="bg-white/95 p-4 sm:p-5">
               <div className="flex items-center gap-3">
                 <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-amber-50 text-amber-800 sm:h-10 sm:w-10 sm:rounded-2xl">
                   <point.icon className="h-5 w-5" />
@@ -145,32 +140,8 @@ const Hero: React.FC = () => {
                 <p className="text-sm font-semibold leading-tight text-brand-ink sm:text-base">{point.title}</p>
               </div>
               <p className="mt-3 text-xs leading-relaxed text-slate-600 sm:text-sm">{point.description}</p>
-              {'href' in point && (
-                <span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-brand-primary-700">
-                  掲載記事を確認
-                  <ExternalLink className="h-3.5 w-3.5" />
-                </span>
-              )}
-              </>
-            );
-
-            return 'href' in point ? (
-              <a
-                key={point.title}
-                href={point.href}
-                target="_blank"
-                rel="noreferrer"
-                onClick={() => trackEvent('external_link_click', { platform: 'crowdworks_times', placement: 'hero_proof' })}
-                className="bg-white/95 p-4 transition-colors hover:bg-amber-50/70 sm:p-5"
-              >
-                {content}
-              </a>
-            ) : (
-              <div key={point.title} className="bg-white/95 p-4 sm:p-5">
-                {content}
-              </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </div>
     </section>

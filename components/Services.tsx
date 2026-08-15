@@ -37,8 +37,16 @@ const defaultTheme = {
   eyebrow: '業務運用・改善',
 };
 
+const coverSourceDimensions: Record<string, { width: number; height: number }> = {
+  'music-publishing': { width: 900, height: 600 },
+  'sns-management': { width: 900, height: 600 },
+  'workflow-automation': { width: 1280, height: 720 },
+};
+
 const Services: React.FC = () => {
   const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
+  const coverVariant = (path: string, width: 480 | 640) =>
+    path.replace(/\.webp$/i, `-${width}.webp`);
 
   return (
     <section id={SectionId.SERVICES} className="bg-[#f6f8fc] py-16 md:py-24">
@@ -132,10 +140,12 @@ const Services: React.FC = () => {
                   }`}
                 >
                   <img
-                    src={asset(service.media.listImage)}
+                    src={asset(coverVariant(service.media.listImage, 480))}
+                    srcSet={`${asset(coverVariant(service.media.listImage, 480))} 480w, ${asset(coverVariant(service.media.listImage, 640))} 640w`}
+                    sizes={isPrimary ? '(min-width: 1280px) 560px, (min-width: 1024px) 46vw, 100vw' : '(min-width: 1280px) 590px, (min-width: 1024px) 46vw, 100vw'}
                     alt={`${service.title}のメインイメージ`}
-                    width={1280}
-                    height={720}
+                    width={coverSourceDimensions[service.slug]?.width ?? 1280}
+                    height={coverSourceDimensions[service.slug]?.height ?? 720}
                     className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
                     loading="lazy"
                     decoding="async"

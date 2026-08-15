@@ -40,6 +40,11 @@ const corporateFontStyles = read('./styles/corporate-font.css');
 const staticFontInjector = read('./scripts/inject-static-font-styles.mjs');
 const pagesWorkflow = read('./.github/workflows/pages.yml');
 const cloudflareHeaders = read('./public/_headers');
+const cloudflareRedirects = read('./public/_redirects');
+const siteWorkerConfig = read('./infrastructure/cloudflare/site-worker/wrangler.toml');
+const appSource = read('./App.tsx');
+const newsSource = read('./components/News.tsx');
+const siteConfigSource = read('./site.config.ts');
 
 describe('site audit remediation', () => {
   it('does not block first paint on external font CSS or an unrelated image preload', () => {
@@ -114,6 +119,8 @@ describe('site audit remediation', () => {
   it('uses calm public contact copy', () => {
     expect(contactSource).not.toContain('送信できない画面');
     expect(contactSource).toContain('ご都合のよい方法をお選びください');
+    expect(contactSource).toContain('初回返信後に共有方法をご案内します');
+    expect(contactSource).not.toContain('メールへ直接添付してください');
   });
 
   it('keeps sitemap update evidence current for every canonical route', () => {
@@ -121,15 +128,17 @@ describe('site audit remediation', () => {
       (match) => match[1],
     );
     expect(lastModifiedDates).toHaveLength(9);
-    expect(lastModifiedDates.filter((date) => date === '2026-08-13')).toHaveLength(8);
+    expect(lastModifiedDates.filter((date) => date === '2026-08-15')).toHaveLength(5);
+    expect(lastModifiedDates.filter((date) => date === '2026-08-13')).toHaveLength(3);
     expect(lastModifiedDates.filter((date) => date === '2026-08-10')).toHaveLength(1);
   });
 
   it('publishes decision-ready corporate trust information without inventing customer proof', () => {
     expect(homePageSource).toContain('<BusinessTrust />');
+    expect(homePageSource).not.toContain('<MusicRightsReview />');
     expect(businessTrustSource).toContain('法人情報と発注前の確認事項');
     expect(businessTrustSource).toContain('国税庁 法人番号公表サイト');
-    expect(businessTrustSource).toContain('クラウドワークス公式メディア');
+    expect(businessTrustSource).not.toContain('クラウドワークス公式メディア');
     expect(businessTrustSource).toContain('日本音楽出版社協会');
     expect(businessTrustSource).toContain("href: '#process'");
     expect(businessTrustSource).not.toMatch(/導入社数|顧客満足度|成功率|実績\s*\d+/);
@@ -183,5 +192,28 @@ describe('site audit remediation', () => {
     expect(indexHtml).toContain('https://contact-api.regalocom.net');
     expect(cloudflareHeaders).toContain('https://contact-api.regalocom.net');
     expect(cloudflareHeaders).toContain('https://*.workers.dev');
+  });
+
+  it('uses permanent canonical redirects and a real HTTP 404 fallback', () => {
+    expect(cloudflareRedirects).toContain('/services/rights-management /services/music-publishing/ 301');
+    expect(cloudflareRedirects).toContain('/services/sns-operations /services/sns-management/ 301');
+    expect(cloudflareRedirects).toContain('/services/ai-marketing-strategy /services/workflow-automation/ 301');
+    expect(siteWorkerConfig).toContain('not_found_handling = "404-page"');
+    expect(appSource).toContain('path="/services/rights-management" element={<Navigate to="/services/music-publishing/"');
+  });
+
+  it('publishes service-specific questions and a current factual update', () => {
+    expect(serviceDetailSource).toContain('よくあるご質問');
+    expect(serviceDetailSource).toContain('service.faqs.map');
+    expect(siteConfigSource).toContain("date: '2026.08.15'");
+    expect(siteConfigSource).toContain('発注前FAQ、旧URLの転送を改善');
+    expect(newsSource).toContain('siteConfig.newsItems');
+  });
+
+  it('loads responsive home images instead of full-size assets by default', () => {
+    expect(heroSource).toContain('music-cover-480.webp');
+    expect(heroSource).toContain('music-cover-640.webp');
+    expect(read('./components/Services.tsx')).toContain('coverVariant(service.media.listImage, 480)');
+    expect(read('./components/Header.tsx')).toContain('images/logo-80.webp');
   });
 });
