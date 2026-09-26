@@ -4,7 +4,7 @@ import { siteConfig } from '../site.config';
 import { SectionId } from '../types';
 
 const Cases: React.FC = () => (
-  <section id={SectionId.CASES} className="bg-white py-16 md:py-24">
+  <section id={SectionId.CASES} className="bg-[#fbf8ee] py-16 md:py-24">
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="mb-10 max-w-3xl md:mb-14">
         <h2 className="text-3xl font-semibold text-brand-ink md:text-4xl">

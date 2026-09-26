@@ -17,7 +17,7 @@ const Services: React.FC = () => {
     path.replace(/\.webp$/i, `-${width}.webp`);
 
   return (
-    <section id={SectionId.SERVICES} className="scroll-mt-20 bg-[#f8fafc] py-16 md:py-24">
+    <section id={SectionId.SERVICES} className="scroll-mt-20 bg-[#e1e2d2] py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 max-w-3xl md:mb-14">
           <h2 className="text-3xl font-semibold text-brand-ink md:text-4xl">3つの事業領域</h2>
@@ -34,7 +34,7 @@ const Services: React.FC = () => {
             return (
               <article
                 key={service.slug}
-                className={`grid overflow-hidden rounded-md border border-slate-200 bg-white ${
+                className={`grid overflow-hidden rounded-md border border-slate-200 bg-[#fffde9] ${
                   isPrimary ? 'lg:col-span-2 lg:grid-cols-[1fr_1fr]' : ''
                 }`}
               >

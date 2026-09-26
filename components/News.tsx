@@ -8,7 +8,7 @@ const News: React.FC = () => {
   if (!shouldDisplayNews(items)) return null;
 
   return (
-    <section className="bg-white py-16 md:py-24">
+    <section className="bg-[#fbf8ee] py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-6 lg:grid-cols-[300px_minmax(0,1fr)]">
           <div>
@@ -21,7 +21,7 @@ const News: React.FC = () => {
           </p>
         </div>
 
-          <div className="rounded-[28px] border border-slate-200 bg-[#fffaf7] p-5 shadow-sm md:p-6">
+          <div className="rounded-[28px] border border-slate-200 bg-[#fffde9] p-5 shadow-sm md:p-6">
             <ul className="divide-y divide-slate-200/90">
               {items.map((item) => {
                 const isExternalLink = typeof item.href === 'string' && /^https?:\/\//.test(item.href);

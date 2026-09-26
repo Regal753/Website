@@ -9,7 +9,7 @@ const Hero: React.FC = () => {
   const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 
   return (
-    <section id={SectionId.HOME} className="bg-[#f3f6fb] pb-16 pt-32 md:pb-24 md:pt-40">
+    <section id={SectionId.HOME} className="bg-[#fbf8ee] pb-16 pt-32 md:pb-24 md:pt-40">
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_0.95fr] lg:gap-16 lg:px-8">
         <div>
           <h1 className="corporate-display max-w-[13em] text-[2.125rem] font-bold text-brand-ink min-[375px]:text-[2.5rem] sm:text-5xl lg:text-[3.65rem]">

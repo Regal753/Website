@@ -31,7 +31,7 @@ const faqs = [
 
 const BusinessFAQ: React.FC = () => {
   return (
-    <section id="faq" className="bg-[#fffaf7] py-16 md:py-24">
+    <section id="faq" className="bg-[#f3f1e7] py-16 md:py-24">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="mb-8 max-w-2xl md:mb-10">
           <p className="text-xs font-semibold tracking-[0.12em] text-brand-primary-700">FAQ</p>

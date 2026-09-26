@@ -62,7 +62,7 @@ const proofLinks = [
 ] as const;
 
 const BusinessTrust: React.FC = () => (
-  <section className="bg-[#f6f8fc] py-14 md:py-20" aria-labelledby="business-trust-title">
+  <section className="bg-[#eeeee0] py-14 md:py-20" aria-labelledby="business-trust-title">
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
         <div>

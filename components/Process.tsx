@@ -9,7 +9,7 @@ const STEPS = [
     description: 'お問い合わせフォームから、ご相談内容をお送りください。資料が未整理の場合も受け付けています。',
     note: 'フォーム受付',
     surface: 'border-amber-100 bg-amber-50/80',
-    iconSurface: 'bg-amber-100 text-amber-800',
+    iconSurface: 'bg-[#eee8d2] text-brand-ink',
   },
   {
     icon: MessageSquare,
@@ -17,7 +17,7 @@ const STEPS = [
     description: '原則1営業日以内にご連絡します。必要に応じてオンラインミーティングを設定します。',
     note: '初回ヒアリング無料',
     surface: 'border-rose-100 bg-rose-50/80',
-    iconSurface: 'bg-rose-100 text-rose-700',
+    iconSurface: 'bg-[#eee8d2] text-brand-ink',
   },
   {
     icon: FileSearch,
@@ -25,7 +25,7 @@ const STEPS = [
     description: 'ご相談内容と資料を確認し、作業範囲・スケジュール・費用を明記したご提案をお送りします。',
     note: '作業範囲・費用を提示',
     surface: 'border-brand-primary-100 bg-brand-primary-50/80',
-    iconSurface: 'bg-brand-primary-100 text-brand-primary-700',
+    iconSurface: 'bg-[#eee8d2] text-brand-ink',
   },
   {
     icon: Rocket,
@@ -33,13 +33,13 @@ const STEPS = [
     description: 'ご発注確定後、キックオフミーティングを経てプロジェクトを開始します。',
     note: 'ご発注確定後に開始',
     surface: 'border-cyan-100 bg-cyan-50/80',
-    iconSurface: 'bg-cyan-100 text-cyan-800',
+    iconSurface: 'bg-[#eee8d2] text-brand-ink',
   },
 ] as const;
 
 const Process: React.FC = () => {
   return (
-    <section id={SectionId.PROCESS} className="bg-white py-14 md:py-20">
+    <section id={SectionId.PROCESS} className="bg-[#fbf8ee] py-14 md:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center md:mb-14">
           <p className="mb-4 inline-flex rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-700">
@@ -53,7 +53,7 @@ const Process: React.FC = () => {
         </div>
 
         <div className="relative">
-          <div className="absolute left-0 right-0 top-16 hidden h-px bg-gradient-to-r from-amber-200 via-brand-primary-200 to-cyan-200 xl:block" />
+          <div className="absolute left-0 right-0 top-16 hidden h-px bg-gradient-to-r from-slate-200 via-slate-300 to-slate-200 xl:block" />
           <div className="grid border-y border-slate-300 md:grid-cols-2 xl:grid-cols-4 xl:divide-x xl:divide-slate-200">
             {STEPS.map((step, index) => (
               <article
