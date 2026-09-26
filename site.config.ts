@@ -4,7 +4,7 @@ const CONTACT_EMAIL = 'contact@regalocom.net';
 export const JASRAC_RELATION_LABEL = 'JASRACへの管理委託';
 const BRAND_POSITIONING = {
   homepageSummary:
-    '株式会社Regaloは、YouTubeで使用する音楽の権利情報確認を起点に、SNS運用と制作進行を支援します。楽曲情報の整理、管理台帳の作成、運用手順の整備まで対応します。',
+    'YouTubeで使うBGMの権利情報を確認し、管理台帳と公開前の確認手順を整えます。企画・制作進行や投稿管理もご相談いただけます。',
   companySummary:
     '株式会社Regaloは京都府長岡京市を拠点に、音楽の権利情報管理、YouTube・SNS運用、制作進行、業務フローの整備に対応しています。',
   crossFunctionalLabel: '3つの事業領域に対応',
@@ -100,9 +100,9 @@ export const siteConfig = {
   newsItems,
   navItems: [
     { label: 'ホーム', href: '/' },
-    { label: '音楽出版・権利情報管理', href: '/services/music-publishing/' },
-    { label: 'YouTube・SNS運用', href: '/services/sns-management/' },
-    { label: '業務自動化・制作進行支援', href: '/services/workflow-automation/' },
+    { label: '音楽・権利情報', href: '/services/music-publishing/' },
+    { label: 'YouTube・SNS', href: '/services/sns-management/' },
+    { label: '制作進行・自動化', href: '/services/workflow-automation/' },
     { label: '会社情報', href: '/company' },
   ] as NavItem[],
 };
