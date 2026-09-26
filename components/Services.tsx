@@ -20,9 +20,9 @@ const Services: React.FC = () => {
     <section id={SectionId.SERVICES} className="scroll-mt-20 bg-[#e1e2d2] py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 max-w-3xl md:mb-14">
-          <h2 className="text-3xl font-semibold text-brand-ink md:text-4xl">3つの事業領域</h2>
+          <h2 className="text-3xl font-semibold text-brand-ink md:text-4xl">主な対応業務</h2>
           <p className="mt-4 text-base leading-8 text-slate-700">
-            音楽の権利情報、YouTube・SNS運用、制作進行・業務自動化を扱います。
+            BGMの契約情報、動画の制作・投稿、定例報告や進捗連絡。ご依頼範囲に合わせて担当業務を定めます。
           </p>
         </div>
 
@@ -56,7 +56,7 @@ const Services: React.FC = () => {
                     onClick={() => trackEvent('service_detail_click', { placement: 'services_cta', service: service.slug })}
                     className="mt-auto inline-flex w-fit items-center gap-2 pt-6 text-sm font-semibold text-brand-primary-700 transition-colors hover:text-brand-primary-800"
                   >
-                    事業内容の詳細を見る
+                    対応内容を見る
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>

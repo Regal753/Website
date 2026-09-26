@@ -36,10 +36,10 @@ const BusinessFAQ: React.FC = () => {
         <div className="mb-8 max-w-2xl md:mb-10">
           <p className="text-xs font-semibold tracking-[0.12em] text-brand-primary-700">FAQ</p>
           <h2 className="mt-3 text-3xl font-semibold leading-tight text-brand-ink md:text-4xl">
-            ご相談・発注に関するご質問
+            発注前のご質問
           </h2>
           <p className="mt-4 text-sm leading-7 text-slate-600 md:text-base">
-            資料が揃っていない場合もご相談いただけます。確認できる情報を基に、不足資料と次の対応をご案内します。
+            費用、必要な資料、BGMの権利確認について、問い合わせ前に確認できる内容をまとめました。
           </p>
         </div>
 

@@ -6,7 +6,7 @@ const STEPS = [
   {
     icon: Send,
     title: 'お問い合わせ',
-    description: 'お問い合わせフォームから、ご相談内容をお送りください。資料が未整理の場合も受け付けています。',
+    description: '対象の楽曲やチャンネル、現在困っている作業を分かる範囲でお知らせください。',
     note: 'フォーム受付',
     surface: 'border-amber-100 bg-amber-50/80',
     iconSurface: 'bg-[#eee8d2] text-brand-ink',
@@ -14,7 +14,7 @@ const STEPS = [
   {
     icon: MessageSquare,
     title: '内容確認・ヒアリング',
-    description: '原則1営業日以内にご連絡します。必要に応じてオンラインミーティングを設定します。',
+    description: '原則1営業日以内にご連絡します。対象資料、担当範囲、希望時期を確認します。',
     note: '初回ヒアリング無料',
     surface: 'border-rose-100 bg-rose-50/80',
     iconSurface: 'bg-[#eee8d2] text-brand-ink',
@@ -22,7 +22,7 @@ const STEPS = [
   {
     icon: FileSearch,
     title: 'ご提案・お見積り',
-    description: 'ご相談内容と資料を確認し、作業範囲・スケジュール・費用を明記したご提案をお送りします。',
+    description: '確認した内容を基に、作業範囲、納品物、スケジュール、費用を提示します。',
     note: '作業範囲・費用を提示',
     surface: 'border-brand-primary-100 bg-brand-primary-50/80',
     iconSurface: 'bg-[#eee8d2] text-brand-ink',
@@ -30,7 +30,7 @@ const STEPS = [
   {
     icon: Rocket,
     title: 'ご発注・着手',
-    description: 'ご発注確定後、キックオフミーティングを経てプロジェクトを開始します。',
+    description: 'ご発注後、資料の共有方法と確認担当を決めて作業を始めます。',
     note: 'ご発注確定後に開始',
     surface: 'border-cyan-100 bg-cyan-50/80',
     iconSurface: 'bg-[#eee8d2] text-brand-ink',
@@ -47,8 +47,7 @@ const Process: React.FC = () => {
           </p>
           <h2 className="mb-4 text-3xl font-semibold text-brand-ink md:text-4xl">ご発注までの流れ</h2>
           <p className="mx-auto max-w-2xl text-slate-600">
-            お問い合わせ後に内容を確認し、作業範囲、スケジュール、費用をお見積りで提示します。
-            ご発注確定後に着手します。
+            まず対象資料とご希望を確認します。対応できる範囲と費用を提示し、ご発注後に着手します。
           </p>
         </div>
 

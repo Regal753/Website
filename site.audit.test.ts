@@ -162,7 +162,7 @@ describe('site audit remediation', () => {
   it('uses direct corporate headings and excludes vague campaign copy', () => {
     expect(corporateCopySource).toContain('現状確認と対応内容');
     expect(corporateCopySource).toContain('法人情報と発注前の確認事項');
-    expect(corporateCopySource).toContain('課題別の対応内容と納品物');
+    expect(corporateCopySource).toContain('ご相談内容と納品物の例');
     expect(corporateCopySource).toContain('ご発注までの流れ');
 
     for (const phrase of [
@@ -241,7 +241,7 @@ describe('site audit remediation', () => {
     expect(serviceDetailSource).toContain('よくあるご質問');
     expect(serviceDetailSource).toContain('service.faqs.map');
     expect(siteConfigSource).toContain("date: '2026.08.15'");
-    expect(siteConfigSource).toContain('発注前FAQ、法務ページ、共有用メタ情報を改善');
+    expect(siteConfigSource).toContain('発注前のFAQ、法務ページを更新');
     expect(newsSource).toContain('siteConfig.newsItems');
   });
 
