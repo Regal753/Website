@@ -23,9 +23,9 @@ export const companyProfile: CompanyProfile = {
   corporateNumber: '4130001077277',
   partnerBanks: ['住信SBIネット銀行', 'GMOあおぞら銀行', 'みずほ銀行'],
   business: [
-    '音楽出版事業部',
-    'SNS管理事業部',
-    '業務自動化・制作進行支援',
+    '音楽出版・BGM制作',
+    'YouTube・SNS運用',
+    '制作進行・業務自動化',
   ],
   contactEmail: CONTACT_EMAIL,
 };
