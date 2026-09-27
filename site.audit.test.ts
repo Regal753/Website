@@ -130,19 +130,18 @@ describe('site audit remediation', () => {
       (match) => match[1],
     );
     expect(lastModifiedDates).toHaveLength(9);
-    expect(lastModifiedDates.filter((date) => date === '2026-08-15')).toHaveLength(7);
-    expect(lastModifiedDates.filter((date) => date === '2026-08-13')).toHaveLength(1);
+    expect(lastModifiedDates.filter((date) => date === '2026-09-28')).toHaveLength(8);
     expect(lastModifiedDates.filter((date) => date === '2026-08-10')).toHaveLength(1);
   });
 
   it('publishes decision-ready corporate trust information without inventing customer proof', () => {
     expect(homePageSource).toContain('<BusinessTrust />');
     expect(homePageSource).not.toContain('<MusicRightsReview />');
-    expect(businessTrustSource).toContain('法人情報と発注前の確認事項');
-    expect(businessTrustSource).toContain('国税庁 法人番号公表サイト');
-    expect(businessTrustSource).not.toContain('クラウドワークス公式メディア');
-    expect(businessTrustSource).toContain('日本音楽出版社協会');
-    expect(businessTrustSource).toContain("href: '#process'");
+    expect(businessTrustSource).toContain('会社情報');
+    expect(businessTrustSource).toContain('クラウドワークスの企業インタビュー');
+    expect(businessTrustSource).toContain('siteConfig.verificationLinks.mediaCoverage');
+    expect(businessTrustSource).not.toContain('返信目安');
+    expect(corporateCopySource).toContain('国税庁 法人番号公表サイト');
     expect(businessTrustSource).not.toMatch(/導入社数|顧客満足度|成功率|実績\s*\d+/);
     expect(footerSource).toContain('法人情報・外部確認先を見る');
     expect(footerSource).toContain('法人番号');
@@ -161,7 +160,8 @@ describe('site audit remediation', () => {
 
   it('uses direct corporate headings and excludes vague campaign copy', () => {
     expect(corporateCopySource).toContain('現状確認と対応内容');
-    expect(corporateCopySource).toContain('法人情報と発注前の確認事項');
+    expect(corporateCopySource).toContain('会社情報');
+    expect(corporateCopySource).not.toContain('法人情報と発注前の確認事項');
     expect(corporateCopySource).toContain('ご相談の例');
     expect(corporateCopySource).toContain('ご発注までの流れ');
 
@@ -198,7 +198,7 @@ describe('site audit remediation', () => {
       expect(html).toContain('<span>株式会社Regalo</span>');
       expect(html).toContain('class="site-header"');
       expect(html).toContain('class="legal-footer"');
-      expect(html).toContain('最終改定日：2026年8月15日');
+      expect(html).toContain('最終改定日：2026年9月28日');
       expect(html).not.toContain('京都発の実務チーム');
       expect(html).not.toMatch(/>\s*Regalo（以下「当社」）/);
     }

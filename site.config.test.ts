@@ -10,7 +10,7 @@ describe('siteConfig cases', () => {
   });
 
   it('keeps published trust copy aligned with verified evidence', () => {
-    expect(siteConfig.companyProfile.business[0]).toBe('音楽出版事業部');
+    expect(siteConfig.companyProfile.business[0]).toBe('音楽出版・BGM制作');
     expect(siteConfig.newsItems.some((item) => item.title.includes('音楽著作権管理者養成講座を修了'))).toBe(true);
     expect(siteConfig.newsItems.some((item) => item.title.includes('資格取得'))).toBe(false);
   });

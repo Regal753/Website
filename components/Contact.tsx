@@ -365,66 +365,17 @@ const Contact: React.FC = () => {
   return (
     <section
       id={SectionId.CONTACT}
-      className="bg-[linear-gradient(180deg,_#ffffff_0%,_#fff8f1_100%)] pt-28 pb-20 md:pb-24"
+      className="bg-[#fbf8ee] pt-28 pb-20 md:pb-24"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-[0_18px_50px_rgba(15,23,42,0.08)]">
-          <div className="grid lg:grid-cols-[minmax(0,1fr)_320px]">
-            <div className="p-6 md:p-8">
-              <p className="inline-flex rounded-full border border-brand-primary-200 bg-brand-primary-50 px-3 py-1 text-xs font-semibold text-brand-primary-700">
-                お問い合わせ
-              </p>
-              <div className="mt-4 inline-flex items-center justify-center rounded-full bg-brand-primary-50 p-3">
-                <Mail className="h-6 w-6 text-brand-primary-700" />
-              </div>
-              <h1 className="mt-4 text-4xl font-semibold tracking-tight text-brand-ink md:text-5xl">お問い合わせ</h1>
-              <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-600 md:text-base">
-                内容を確認のうえ、原則1営業日以内にメールまたはお電話でご連絡します。
-                依頼範囲が未確定の場合も受け付けています。
-              </p>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {CONTACT_PROMISES.map((item) => (
-                  <span
-                    key={item}
-                    className="inline-flex rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-700"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-              {contactEndpointState === 'available' && (
-                <p className="mt-4 text-xs text-slate-500">「*」は必須項目です。</p>
-              )}
-            </div>
-
-            <aside className="border-t border-slate-200 bg-[linear-gradient(135deg,_#eef2ff_0%,_#f8fafc_52%,_#fff7ed_100%)] p-6 text-brand-ink lg:border-l lg:border-t-0 md:p-8">
-              <p className="text-xs font-semibold tracking-widest text-slate-500">受付情報</p>
-              <h2 className="mt-4 text-2xl font-semibold text-brand-ink">お問い合わせ窓口</h2>
-              <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                SNS運用、音楽の権利情報管理、制作進行に関するご相談を、同じ窓口で受け付けています。
-              </p>
-
-              <div className="mt-6 space-y-3">
-                <div className="rounded-2xl border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
-                  <div className="flex items-center gap-3">
-                    <Clock3 className="h-5 w-5 text-amber-700" />
-                    <div>
-                      <p className="text-xs font-semibold tracking-wide text-slate-500">返信目安</p>
-                      <p className="mt-1 text-lg font-semibold text-brand-ink">1営業日以内</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="rounded-2xl border border-brand-primary-100 bg-white/85 p-4 shadow-sm">
-                  <div className="flex items-center gap-3">
-                    <ShieldCheck className="h-5 w-5 text-amber-700" />
-                    <div>
-                      <p className="text-xs font-semibold tracking-wide text-slate-500">対応時間</p>
-                      <p className="mt-1 text-sm font-semibold leading-relaxed text-brand-ink">{CONTACT_HOURS}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </aside>
+        <div className="border-b border-slate-300 pb-8">
+          <p className="text-xs font-semibold tracking-[0.12em] text-brand-primary-700">CONTACT</p>
+          <h1 className="mt-4 text-4xl font-semibold tracking-tight text-brand-ink md:text-5xl">お問い合わせ</h1>
+          <p className="mt-4 max-w-3xl text-base leading-8 text-slate-700">
+            音楽・YouTube・制作進行に関するご相談を受け付けています。依頼範囲が決まっていなくても、分かる範囲からお送りください。
+          </p>
+          <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-700">
+            {CONTACT_PROMISES.map((item) => <span key={item} className="border-l-2 border-brand-primary-700 pl-3">{item}</span>)}
           </div>
         </div>
 
@@ -461,8 +412,8 @@ const Contact: React.FC = () => {
           </div>
         )}
 
-        <div className="mt-8 grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1.12fr)_340px]">
-          <div className="rounded-[32px] border border-slate-200 bg-white/95 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.06)] md:p-8">
+        <div className="mt-8 grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,1.25fr)_300px]">
+          <div className="border-t-2 border-brand-ink bg-white p-5 md:p-8">
             <div className="mb-6">
               <h2 className="text-2xl font-semibold text-brand-ink">
                 {contactEndpointState === 'available' ? 'お問い合わせフォーム' : 'お問い合わせはこちら'}
@@ -480,7 +431,7 @@ const Contact: React.FC = () => {
               <div
                 data-contact-fallback="active"
                 role="status"
-                className="rounded-3xl border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#ffffff_62%,_#fff7ed_100%)] p-5 md:p-6"
+                className="border-t border-slate-300 pt-5"
               >
                 <p className="text-xs font-semibold tracking-widest text-brand-primary-700">
                   {contactEndpointState === 'checking' ? '送信経路を確認中' : '受付中の連絡方法'}
@@ -502,7 +453,7 @@ const Contact: React.FC = () => {
                         placement: 'contact_primary_fallback',
                       })
                     }
-                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-primary-700 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-primary-800"
+                    className="inline-flex items-center justify-center gap-2 bg-brand-primary-700 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-primary-800"
                   >
                     <FileText className="h-4 w-4" />
                     Googleフォームで問い合わせる
@@ -510,7 +461,7 @@ const Contact: React.FC = () => {
                   </a>
                   <a
                     href={fallbackMailHref}
-                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-brand-ink transition-colors hover:bg-slate-50"
+                    className="inline-flex items-center justify-center gap-2 border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-brand-ink transition-colors hover:bg-slate-50"
                   >
                     <Mail className="h-4 w-4" />
                     メールで問い合わせる
@@ -536,7 +487,7 @@ const Contact: React.FC = () => {
               <input type="hidden" name="_autoresponse" value={AUTORESPONSE_MESSAGE} />
               <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
 
-              <div className="rounded-3xl border border-slate-200 bg-slate-50/80 p-4 md:p-5">
+              <div className="border-t border-slate-300 py-5">
                 <p className="text-sm font-semibold text-slate-500">基本情報</p>
                 <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
                   <label className="block text-sm">
@@ -610,7 +561,7 @@ const Contact: React.FC = () => {
                 </div>
               </div>
 
-              <div className="rounded-3xl border border-slate-200 bg-white p-4 md:p-5">
+              <div className="border-t border-slate-300 py-5">
                 <p className="text-sm font-semibold text-slate-500">相談内容</p>
                 <div className="mt-4 space-y-4">
                   <label className="block text-sm">
@@ -649,7 +600,7 @@ const Contact: React.FC = () => {
                 </div>
               </div>
 
-              <div className="rounded-3xl border border-slate-200 bg-slate-50/80 p-4 md:p-5">
+              <div className="border-t border-slate-300 py-5">
                 <p className="text-sm font-semibold text-slate-500">
                   {supportsAttachments ? '添付と同意' : '確認と同意'}
                 </p>
@@ -724,7 +675,7 @@ const Contact: React.FC = () => {
                     </p>
                   )}
                   <p className="text-xs leading-6 text-slate-500">
-                    入力内容は株式会社Regaloの問い合わせ窓口へ送信します。予備フォームへ自動転送することはありません。
+                    入力内容は当社の受付システムを通じてGoogleフォームへ送信され、株式会社Regaloが確認します。
                   </p>
                 </div>
               </div>
@@ -772,7 +723,7 @@ const Contact: React.FC = () => {
           </div>
 
           <aside className="space-y-4">
-            <div className="rounded-[32px] border border-brand-primary-100 bg-[linear-gradient(135deg,_#eef2ff_0%,_#ffffff_55%,_#fff7ed_100%)] p-5 text-brand-ink shadow-sm shadow-brand-primary-100/60">
+            <div className="border-t border-slate-300 pt-5 text-brand-ink">
               <p className="text-xs font-semibold tracking-widest text-slate-500">電話窓口</p>
               <h2 className="mt-3 text-xl font-semibold text-brand-ink">お電話でのお問い合わせ</h2>
               {companyPhoneHref ? (
@@ -792,7 +743,7 @@ const Contact: React.FC = () => {
               </div>
             </div>
 
-            <div className="rounded-3xl border border-amber-100 bg-[#fffaf7] p-5 shadow-sm">
+            <div className="border-t border-slate-300 pt-5">
               <h3 className="text-base font-semibold text-brand-ink">ご相談内容の例</h3>
               <ul className="mt-4 space-y-3">
                 {COMMON_ISSUES.map((item) => (
@@ -807,7 +758,7 @@ const Contact: React.FC = () => {
             </div>
 
             {contactEndpointState === 'available' && (
-              <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+              <div className="border-t border-slate-300 pt-5">
               <h3 className="text-base font-semibold text-brand-ink">フォームが使えない場合</h3>
               <p className="mt-2 text-sm leading-relaxed text-slate-600">
                 通常はこのページのフォームをご利用ください。送信できない場合は、以下の連絡方法をご利用ください。

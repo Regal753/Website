@@ -1,29 +1,10 @@
 import React, { useEffect, useMemo } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router';
-import { ArrowLeft, ArrowRight, Clock3, MapPin, Phone, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Phone } from 'lucide-react';
 import NotFoundPage from './NotFoundPage';
 import { getServiceBySlug, serviceCatalog } from '../services.catalog';
 import { siteConfig } from '../site.config';
 import { trackEvent } from '../utils/analytics';
-import { getGradientStyle } from '../utils/gradient';
-
-const SERVICE_PROOF_POINTS = [
-  {
-    icon: Clock3,
-    label: '返信目安',
-    value: '1営業日以内',
-  },
-  {
-    icon: MapPin,
-    label: '所在地',
-    value: '京都府長岡京市',
-  },
-  {
-    icon: ShieldCheck,
-    label: '対応体制',
-    value: '代表が内容を確認',
-  },
-] as const;
 
 const ServiceDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -43,7 +24,7 @@ const ServiceDetailPage: React.FC = () => {
 
   const slideImagePaths = useMemo(() => {
     if (!service) return [];
-    return [service.media.listImage, ...service.media.galleryImages].slice(0, 3);
+    return [service.media.listImage];
   }, [service]);
 
   const otherServices = useMemo(() => {
@@ -71,7 +52,7 @@ const ServiceDetailPage: React.FC = () => {
   const phoneHref = phoneDisplay.replace(/[^\d+]/g, '');
 
   return (
-    <section className="bg-[linear-gradient(180deg,_#ffffff_0%,_#fffaf7_100%)] pt-28 pb-20 md:pb-24">
+    <section className="bg-[#f6f5e9] pt-28 pb-20 md:pb-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <Link
           to="/"
@@ -81,15 +62,14 @@ const ServiceDetailPage: React.FC = () => {
           トップへ戻る
         </Link>
 
-        <article className="mt-4 border-y border-slate-200 bg-white px-1 py-8 md:px-8 md:py-10">
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_280px] lg:items-start">
+        <article className="mt-4 border-y border-[#d2d2c3] px-1 py-8 md:px-8 md:py-10">
+          <div>
             <div>
               <div className="flex items-start gap-4">
                 <div
-                  className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl shadow-lg"
-                  style={{ background: getGradientStyle(service.color) }}
+                  className="flex h-12 w-12 shrink-0 items-center justify-center bg-[#dce6e4]"
                 >
-                  <Icon className="h-7 w-7 text-white" />
+                  <Icon className="h-6 w-6 text-[#183e56]" />
                 </div>
                 <div>
                   <p className="text-xs font-semibold tracking-widest text-brand-primary-700">
@@ -107,55 +87,27 @@ const ServiceDetailPage: React.FC = () => {
               <p className="mt-5 max-w-3xl text-sm leading-relaxed text-slate-600 md:text-base">
                 {service.detailSummary}
               </p>
+              {service.slug === 'music-publishing' && (
+                <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-700">
+                  当社管理楽曲の著作権管理はJASRACへ委託しています。楽曲の利用許諾や使用料は、権利者・管理団体等の判断に従います。
+                </p>
+              )}
 
               <div className="mt-5 flex flex-wrap gap-2">
                 {service.items.map((item) => (
                   <span
                     key={item}
-                    className="inline-flex rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-700"
+                    className="inline-flex border-l-2 border-[#9aaeb0] px-2 py-1 text-xs font-semibold text-slate-700"
                   >
                     {item}
                   </span>
                 ))}
               </div>
+              <Link to="/contact" className="mt-6 inline-flex items-center gap-2 border-b border-[#183e56] pb-1 text-sm font-semibold text-[#183e56]">
+                ご相談・お見積り <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
-
-            <aside className="border-y border-amber-200 bg-amber-50/50 px-1 py-4 sm:px-5">
-              <p className="text-sm font-semibold text-amber-800">受付情報</p>
-              <ul className="mt-3 divide-y divide-amber-200/70">
-                {SERVICE_PROOF_POINTS.map((item) => (
-                  <li key={item.label} className="py-3">
-                    <div className="flex items-center gap-3">
-                      <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-amber-100 text-amber-800">
-                        <item.icon className="h-4 w-4" />
-                      </span>
-                      <div>
-                        <p className="text-xs font-semibold tracking-wide text-slate-500">{item.label}</p>
-                        <p className="text-sm font-semibold text-brand-ink">{item.value}</p>
-                      </div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </aside>
           </div>
-
-          <section className="mt-10" aria-label={`${service.title}の掲載画像`}>
-            <div className="grid gap-4 md:grid-cols-2">
-              {slideImagePaths.map((imagePath, index) => (
-                <img
-                  key={imagePath}
-                  src={asset(imagePath)}
-                  alt={`${service.title}の掲載画像${index + 1}`}
-                  width={1280}
-                  height={720}
-                  className={`w-full border border-slate-200 object-cover ${index === 0 ? 'aspect-video md:col-span-2' : 'h-56'}`}
-                  loading={index === 0 ? 'eager' : 'lazy'}
-                  decoding="async"
-                />
-              ))}
-            </div>
-          </section>
 
           <section className="mt-10 border-y border-slate-200" aria-label="発注前の確認事項">
             <div className="grid lg:grid-cols-3 lg:divide-x lg:divide-slate-200">
@@ -196,6 +148,13 @@ const ServiceDetailPage: React.FC = () => {
                 </div>
               ))}
             </div>
+          </section>
+
+          <section className="mt-10" aria-label={`${service.title}の掲載画像`}>
+            {slideImagePaths.map((imagePath) => (
+              <img key={imagePath} src={asset(imagePath)} alt={`${service.title}の掲載画像`} width={1280} height={720} className="h-56 w-full border border-[#d2d2c3] object-cover md:h-72" loading="lazy" decoding="async" />
+            ))}
+            <p className="mt-2 text-xs text-slate-500">サービス内容を表すイメージ画像です。</p>
           </section>
 
           {relatedCases.length > 0 && (
