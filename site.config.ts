@@ -4,12 +4,12 @@ const CONTACT_EMAIL = 'contact@regalocom.net';
 export const JASRAC_RELATION_LABEL = 'JASRACへの管理委託';
 const BRAND_POSITIONING = {
   homepageSummary:
-    '利用先と契約内容を記録し、動画公開前の確認項目と担当を決めます。YouTubeの企画、制作進行、投稿管理にも対応します。',
+    '株式会社Regaloは、BGMの制作、楽曲の権利・契約情報の整理、YouTube動画の企画・投稿を行っています。進捗共有やレポート作成の自動化にも対応します。',
   companySummary:
-    '株式会社Regaloは京都府長岡京市を拠点に、BGMの制作・権利情報管理、YouTubeの制作・投稿管理、進捗共有の自動化を行っています。',
+    '株式会社Regaloは京都府長岡京市を拠点に、BGM制作、音楽出版、YouTube・SNS運用、業務自動化を行っています。',
   crossFunctionalLabel: '音楽・動画・制作進行に対応',
   serviceDetailEyebrow: '対応業務',
-  footerTagline: 'BGMの権利情報管理、YouTubeの制作・投稿管理、制作進行の自動化に対応します。',
+  footerTagline: 'BGM制作、音楽出版、YouTube・SNS運用、業務自動化を行っています。',
 } as const;
 
 export const companyProfile: CompanyProfile = {
@@ -84,16 +84,16 @@ export const siteConfig = {
   contactEmail: CONTACT_EMAIL,
   contactFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSdbqMVhTDUHcfhnrv5Vj96aBF9WhyAwysTfmG9CdgElhrGm1A/viewform',
   representativeProfile:
-    '株式会社Regalo代表の塩田玲央です。京都府長岡京市を拠点に、BGMの権利情報管理、YouTube運用、制作進行を担当しています。2025年度に日本音楽出版社協会主催の音楽著作権管理者養成講座を修了しました。ご相談時には対象楽曲、契約資料、制作工程を確認し、対応範囲をお見積りに明記します。',
+    '株式会社Regalo代表の塩田玲央です。京都府長岡京市を拠点に、音楽出版、YouTube・SNS運用、制作進行を行っています。2025年度に日本音楽出版社協会が主催する音楽著作権管理者養成講座を修了しました。',
   verificationLinks: {
     corporateRegistry:
       'https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=4130001077277',
     mediaCoverage: 'https://crowdworks.jp/times/interview/28780/',
     trainingProgram: 'https://mpaj.or.jp/news/17695',
   },
-  siteTitle: 'Regalo | 音楽出版・権利情報管理・YouTube運用・業務自動化',
+  siteTitle: 'Regalo | 音楽出版・BGM制作・YouTube運用・業務自動化',
   siteDescription:
-    '株式会社Regaloは京都府長岡京市を拠点に、BGMの制作・権利情報管理、YouTubeの制作・投稿管理、進捗共有の自動化を行っています。',
+    '株式会社Regaloは京都府長岡京市を拠点に、BGM制作、音楽出版、YouTube・SNS運用、業務自動化を行っています。',
   positioning: BRAND_POSITIONING,
   companyProfile,
   cases,

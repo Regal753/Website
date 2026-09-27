@@ -97,7 +97,7 @@ const ServiceDetailPage: React.FC = () => {
                   </p>
                   <h1 className="mt-1 text-3xl font-semibold text-brand-ink md:text-4xl">
                     {service.slug === 'music-publishing' ? (
-                      <>音楽出版・<br className="md:hidden" />権利情報管理</>
+                      <>音楽出版・<br className="md:hidden" />BGM制作</>
                     ) : service.title}
                   </h1>
                   <p className="mt-4 leading-relaxed text-slate-600">{service.detailLead}</p>

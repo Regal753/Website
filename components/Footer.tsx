@@ -30,13 +30,13 @@ const Footer: React.FC = () => {
           <p className="mb-3 text-xs font-semibold tracking-widest text-white/50">事業一覧</p>
           <div className="flex flex-col gap-2 text-sm">
             <Link to="/services/music-publishing/" className="text-white/70 transition-colors hover:text-white">
-              音楽出版・権利情報管理
+              音楽出版・BGM制作
             </Link>
             <Link to="/services/sns-management/" className="text-white/70 transition-colors hover:text-white">
               YouTube・SNS運用
             </Link>
             <Link to="/services/workflow-automation/" className="text-white/70 transition-colors hover:text-white">
-              業務自動化・制作進行支援
+              制作進行・業務自動化
             </Link>
           </div>
         </div>

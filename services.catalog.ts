@@ -57,14 +57,14 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
     slug: 'sns-management',
     title: 'YouTube・SNS運用',
     description:
-      'YouTubeを中心に、動画企画、制作スケジュール、投稿設定、公開後の数値確認を担当します。',
-    items: ['チャンネル運用', '企画・台本作成', '投稿予約・公開管理', '公開後の数値確認'],
+      'YouTubeを中心に、動画の企画、制作進行、投稿管理、公開後の分析を行います。',
+    items: ['動画の企画・台本', '制作進行', '投稿管理', '公開後の分析'],
     icon: Youtube,
     color: 'from-red-500 to-red-600',
     detailLead:
-      'YouTubeの企画から投稿、公開後の数値確認まで対応します。制作工程ごとの担当と承認方法を決め、投稿計画と報告内容を文書に残します。',
+      'YouTubeを中心に、動画の企画、制作進行、投稿管理を行います。公開後は再生状況などを確認し、次の企画に反映します。',
     detailSummary:
-      '既存のチャンネル、投稿本数、社内外の担当者を確認したうえで、受託する工程をお見積りに明記します。',
+      'チャンネルの現状と制作体制に応じて、担当する工程を決めます。',
     detailSections: [
       {
         title: '主な提供内容',
@@ -147,16 +147,16 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
   },
   {
     slug: 'music-publishing',
-    title: '音楽出版・権利情報管理',
+    title: '音楽出版・BGM制作',
     description:
-      'BGMの制作と、楽曲・契約情報の台帳管理を行います。利用先ごとの確認項目も文書化します。',
-    items: ['楽曲・契約情報の台帳', '用途別BGMの制作', '利用条件の確認', '公開前チェック手順'],
+      'BGMの制作と、楽曲の権利者・契約情報の整理を行います。利用条件の確認にも対応します。',
+    items: ['BGM制作', '楽曲・契約情報の整理', '利用条件の確認', '公開前の確認手順'],
     icon: Music,
     color: 'from-brand-primary-500 to-brand-primary-600',
     detailLead:
-      'YouTubeなどで使うBGMの権利者、契約、利用条件を台帳に記録します。動画公開前に誰が何を確認するかを決め、必要に応じて用途別のBGMも制作します。',
+      'BGMの制作と、楽曲の権利者・契約情報の整理を行います。動画などで利用する際の確認手順も作成します。',
     detailSummary:
-      '対象楽曲、利用先、契約資料を確認し、台帳に記載する項目と確認担当を決めます。',
+      '対象楽曲、利用先、既存の契約資料を確認してから作業を始めます。',
     detailSections: [
       {
         title: '主な提供内容',
@@ -240,16 +240,16 @@ const serviceCatalogBase: ServiceCatalogItem[] = [
   },
   {
     slug: 'workflow-automation',
-    title: '業務自動化・制作進行支援',
+    title: '制作進行・業務自動化',
     description:
-      '現在使っているツールを確認し、レポート集計、進捗共有、確認依頼を自動化します。',
-    items: ['制作工程・担当の整理', 'レポートの自動集計', '確認依頼の通知設定', '運用手順書の作成'],
+      'レポート作成や進捗連絡など、繰り返しの業務を自動化します。',
+    items: ['進捗共有', 'レポート作成', '通知・確認依頼', '業務の自動化'],
     icon: Bot,
     color: 'from-cyan-500 to-cyan-600',
     detailLead:
-      'Google DriveやGoogle Sheetsなど、現在使っているツールを確認します。レポート集計、進捗更新、確認依頼のうち、自動化する作業と人が確認する作業を決めます。',
+      'レポート作成、進捗共有、確認依頼など、手作業で繰り返している業務を自動化します。',
     detailSummary:
-      '対象業務、通知先、例外時の対応を決め、小さな範囲で動作確認してから運用を始めます。',
+      '利用中のツールと業務の流れを確認し、対応する範囲を決めます。',
     detailSections: [
       {
         title: '主な提供内容',

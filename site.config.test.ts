@@ -52,7 +52,7 @@ describe('siteConfig cases', () => {
 
   it('keeps the representative profile aligned with the copy preview', () => {
     expect(siteConfig.representativeProfile).toBe(
-      '株式会社Regalo代表の塩田玲央です。京都府長岡京市を拠点に、BGMの権利情報管理、YouTube運用、制作進行を担当しています。2025年度に日本音楽出版社協会主催の音楽著作権管理者養成講座を修了しました。ご相談時には対象楽曲、契約資料、制作工程を確認し、対応範囲をお見積りに明記します。',
+      '株式会社Regalo代表の塩田玲央です。京都府長岡京市を拠点に、音楽出版、YouTube・SNS運用、制作進行を行っています。2025年度に日本音楽出版社協会が主催する音楽著作権管理者養成講座を修了しました。',
     );
   });
 });

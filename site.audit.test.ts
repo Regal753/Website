@@ -162,7 +162,7 @@ describe('site audit remediation', () => {
   it('uses direct corporate headings and excludes vague campaign copy', () => {
     expect(corporateCopySource).toContain('現状確認と対応内容');
     expect(corporateCopySource).toContain('法人情報と発注前の確認事項');
-    expect(corporateCopySource).toContain('ご相談内容と納品物の例');
+    expect(corporateCopySource).toContain('ご相談の例');
     expect(corporateCopySource).toContain('ご発注までの流れ');
 
     for (const phrase of [
