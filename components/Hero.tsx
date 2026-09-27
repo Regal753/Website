@@ -13,8 +13,9 @@ const Hero: React.FC = () => {
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_0.95fr] lg:gap-16 lg:px-8">
         <div>
           <h1 className="corporate-display max-w-[13em] text-[2rem] font-bold text-brand-ink min-[375px]:text-[2.5rem] sm:text-5xl lg:text-[3.65rem]">
-            <span className="block">音楽制作と、</span>
-            <span className="block">YouTube運用。</span>
+            <span className="block">音楽の権利も、</span>
+            <span className="block">YouTube運用も、</span>
+            <span className="block">透明に。</span>
           </h1>
           <p className="mt-7 max-w-xl text-base leading-8 text-slate-700 sm:text-lg">
             {siteConfig.positioning.homepageSummary}
