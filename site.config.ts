@@ -4,12 +4,12 @@ const CONTACT_EMAIL = 'contact@regalocom.net';
 export const JASRAC_RELATION_LABEL = 'JASRACへの管理委託';
 const BRAND_POSITIONING = {
   homepageSummary:
-    '株式会社Regaloは、YouTubeで使用する音楽の権利情報確認を起点に、SNS運用と制作進行を支援します。楽曲情報の整理、管理台帳の作成、運用手順の整備まで対応します。',
+    '株式会社Regaloは、BGMの制作、楽曲の権利・契約情報の整理、YouTube動画の企画・投稿を行っています。進捗共有やレポート作成の自動化にも対応します。',
   companySummary:
-    '株式会社Regaloは京都府長岡京市を拠点に、音楽の権利情報管理、YouTube・SNS運用、制作進行、業務フローの整備に対応しています。',
-  crossFunctionalLabel: '3つの事業領域に対応',
-  serviceDetailEyebrow: '支援内容',
-  footerTagline: '音楽の権利情報管理を軸に、YouTube・SNS運用と制作進行を支援します。',
+    '株式会社Regaloは京都府長岡京市を拠点に、BGM制作、音楽出版、YouTube・SNS運用、業務自動化を行っています。',
+  crossFunctionalLabel: '音楽・動画・制作進行に対応',
+  serviceDetailEyebrow: '対応業務',
+  footerTagline: 'BGM制作、音楽出版、YouTube・SNS運用、業務自動化を行っています。',
 } as const;
 
 export const companyProfile: CompanyProfile = {
@@ -33,40 +33,40 @@ export const companyProfile: CompanyProfile = {
 export const cases: CaseStudy[] = [
   {
     serviceSlug: 'music-publishing',
-    title: 'BGMの権利情報と運用手順',
+    title: 'BGMの利用条件を一覧化',
     clientType: 'YouTube・BGM運用',
-    challenge: 'BGM利用可否の判断が人依存で、公開前確認に時間がかかる。',
-    scope: 'BGMカタログ構築・権利台帳整備・利用条件の確認手順設計',
-    outcome: '権利情報と利用条件を管理台帳に集約し、公開前の確認手順を明文化。',
-    results: ['権利情報を台帳へ集約', '利用判断の基準を統一', '公開前の確認手順を明文化'],
-    deliverables: ['台帳設計', '利用可否ルール', '許諾管理手順', '運用ルール'],
+    challenge: '契約書や楽曲情報が分散し、動画ごとの利用条件を確認するのに時間がかかる。',
+    scope: '対象楽曲、権利者、契約、利用先を確認し、台帳と公開前チェック表を作成。',
+    outcome: '楽曲と利用条件を台帳にまとめ、公開前の確認項目と担当を文書化。',
+    results: ['対象楽曲と契約資料を一覧化', '利用条件の確認項目を設定', '公開前の確認担当を明記'],
+    deliverables: ['楽曲・契約情報の台帳', '利用条件チェック表', '公開前の確認手順'],
   },
   {
     serviceSlug: 'sns-management',
-    title: 'YouTube運用手順の標準化',
+    title: 'YouTubeの制作・投稿管理',
     clientType: 'YouTube運用',
-    challenge: '企画や確認手順が担当者ごとに異なり、公開後の数値確認が継続できない。',
-    scope: 'YouTube運用設計・編集ガイドライン策定・KPIダッシュボード構築',
-    outcome: '企画、制作、確認、公開後分析の手順と担当を明文化。',
-    results: ['制作フローを標準化', 'KPIダッシュボードを構築', '役割分担を明文化'],
-    deliverables: ['運用フロー', '編集ガイドライン', 'KPI定義', 'ダッシュボード'],
+    challenge: '企画、制作、承認、投稿の担当が曖昧で、公開後の数値も記録できていない。',
+    scope: '投稿計画と担当・承認手順を決め、公開後の指標を定例レポートにまとめる。',
+    outcome: '企画から投稿までの担当と、公開後に確認する数値を文書化。',
+    results: ['投稿計画と担当を明記', '承認手順を設定', '公開後の指標を記録'],
+    deliverables: ['投稿計画表', '制作・承認手順', '定例レポートの雛形'],
   },
   {
     serviceSlug: 'workflow-automation',
     title: '制作進行の共有・通知を自動化',
     clientType: '制作進行',
-    challenge: '素材収集・進捗共有・リマインドが手作業で、共有漏れや遅延が起きる。',
-    scope: 'Google Drive / Sheets / Discord を連携した制作進行自動化',
-    outcome: '素材共有、進捗更新、確認依頼を連携し、転記作業と連絡漏れを削減。',
-    results: ['進捗共有を一元化', '共有漏れを抑制', 'リマインドを自動化'],
-    deliverables: ['フォルダ設計', '進捗シート雛形', '通知フロー', '運用手順'],
+    challenge: '素材の保存先、進捗、確認依頼が複数のツールに分かれ、連絡が手作業になっている。',
+    scope: 'Google Drive、Google Sheets、Discordの連携範囲を決め、進捗と確認依頼の通知を設定。',
+    outcome: '素材の保存先、進捗の更新方法、通知条件を決めて共有。',
+    results: ['素材の保存先を整理', '進捗の更新方法を設定', '確認依頼の通知条件を設定'],
+    deliverables: ['共有フォルダの構成表', '進捗管理シート', '通知条件の一覧', '運用手順書'],
   },
 ];
 
 export const newsItems: NewsItem[] = [
   {
     date: '2026.08.15',
-    title: '法人向けの事業案内、発注前FAQ、法務ページ、共有用メタ情報を改善',
+    title: '法人向け事業案内、発注前のFAQ、法務ページを更新',
   },
   {
     date: '2026.03.30',
@@ -84,25 +84,25 @@ export const siteConfig = {
   contactEmail: CONTACT_EMAIL,
   contactFormUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSdbqMVhTDUHcfhnrv5Vj96aBF9WhyAwysTfmG9CdgElhrGm1A/viewform',
   representativeProfile:
-    '株式会社Regalo代表の塩田玲央です。京都を拠点に、YouTubeで使用する動画の権利管理を起点として、SNS運用と制作進行の整備に取り組んでいます。日本音楽出版社協会主催の音楽著作権管理者養成講座を2025年度に修了しました。権利情報や進行状況をこと細かくチェックしていきます。',
+    '株式会社Regalo代表の塩田玲央です。京都府長岡京市を拠点に、音楽出版、YouTube・SNS運用、制作進行を行っています。2025年度に日本音楽出版社協会が主催する音楽著作権管理者養成講座を修了しました。',
   verificationLinks: {
     corporateRegistry:
       'https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=4130001077277',
     mediaCoverage: 'https://crowdworks.jp/times/interview/28780/',
     trainingProgram: 'https://mpaj.or.jp/news/17695',
   },
-  siteTitle: 'Regalo | 音楽出版・権利情報管理・YouTube運用・業務自動化',
+  siteTitle: 'Regalo | 音楽出版・BGM制作・YouTube運用・業務自動化',
   siteDescription:
-    '株式会社Regaloは京都府長岡京市を拠点に、音楽の権利情報管理、YouTube・SNS運用、制作進行、業務フローの整備に対応しています。',
+    '株式会社Regaloは京都府長岡京市を拠点に、BGM制作、音楽出版、YouTube・SNS運用、業務自動化を行っています。',
   positioning: BRAND_POSITIONING,
   companyProfile,
   cases,
   newsItems,
   navItems: [
     { label: 'ホーム', href: '/' },
-    { label: '音楽出版・権利情報管理', href: '/services/music-publishing/' },
-    { label: 'YouTube・SNS運用', href: '/services/sns-management/' },
-    { label: '業務自動化・制作進行支援', href: '/services/workflow-automation/' },
+    { label: '音楽・権利情報', href: '/services/music-publishing/' },
+    { label: 'YouTube・SNS', href: '/services/sns-management/' },
+    { label: '制作進行・自動化', href: '/services/workflow-automation/' },
     { label: '会社情報', href: '/company' },
   ] as NavItem[],
 };

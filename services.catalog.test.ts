@@ -48,9 +48,9 @@ describe('service catalog', () => {
 
   it('uses customer-facing service names outside the internal company profile', () => {
     expect(serviceCatalog.map((service) => service.title)).toEqual([
-      '音楽出版・権利情報管理',
+      '音楽出版・BGM制作',
       'YouTube・SNS運用',
-      '業務自動化・制作進行支援',
+      '制作進行・業務自動化',
     ]);
   });
 

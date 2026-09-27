@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
   const phoneHref = phone.replace(/[^\d+]/g, '');
 
   return (
-    <footer className="relative mt-10 overflow-hidden bg-[linear-gradient(180deg,_#334155_0%,_#4338ca_100%)] py-14 text-white">
+    <footer className="relative mt-10 overflow-hidden bg-[#383d32] py-14 text-white">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-primary-300/70 to-transparent" />
       <div className="absolute left-[-6rem] top-[-3rem] h-36 w-36 rounded-full bg-brand-primary-500/10 blur-3xl" />
       <div className="absolute bottom-[-4rem] right-[-4rem] h-40 w-40 rounded-full bg-amber-300/10 blur-3xl" />
@@ -30,13 +30,13 @@ const Footer: React.FC = () => {
           <p className="mb-3 text-xs font-semibold tracking-widest text-white/50">事業一覧</p>
           <div className="flex flex-col gap-2 text-sm">
             <Link to="/services/music-publishing/" className="text-white/70 transition-colors hover:text-white">
-              音楽出版・権利情報管理
+              音楽出版・BGM制作
             </Link>
             <Link to="/services/sns-management/" className="text-white/70 transition-colors hover:text-white">
               YouTube・SNS運用
             </Link>
             <Link to="/services/workflow-automation/" className="text-white/70 transition-colors hover:text-white">
-              業務自動化・制作進行支援
+              制作進行・業務自動化
             </Link>
           </div>
         </div>

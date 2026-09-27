@@ -265,7 +265,7 @@ function App() {
     <BrowserRouter basename={getRouterBasename()}>
       <ScrollToTopOnRouteChange />
       <RouteTracker />
-      <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100/70 text-slate-800 selection:bg-cyan-100">
+      <div className="min-h-screen bg-[#fbf8ee] text-slate-800 selection:bg-[#e7e6d6]">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-brand-primary-700 focus:shadow-lg"

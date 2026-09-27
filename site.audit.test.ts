@@ -150,18 +150,19 @@ describe('site audit remediation', () => {
     expect(footerSource).not.toContain('>お問い合わせ</Link>');
   });
 
-  it('keeps the home concise without removing service imagery or trust proof', () => {
+  it('keeps service imagery and corporate trust information without duplicate proof cards', () => {
     expect(heroSource).not.toContain('主な確認内容');
     expect(heroSource).not.toContain('楽曲・権利情報と運用手順を整理');
-    expect(heroSource).toContain('music-cover-640.webp');
-    expect(heroSource).toContain('PROOF_POINTS.map');
+    expect(heroSource).toContain('music-gallery-2.webp');
+    expect(heroSource).not.toContain('PROOF_POINTS.map');
+    expect(homePageSource).toContain('<BusinessTrust />');
     expect(processSource).not.toContain('お見積り前の確認事項');
   });
 
   it('uses direct corporate headings and excludes vague campaign copy', () => {
     expect(corporateCopySource).toContain('現状確認と対応内容');
     expect(corporateCopySource).toContain('法人情報と発注前の確認事項');
-    expect(corporateCopySource).toContain('課題別の対応内容と納品物');
+    expect(corporateCopySource).toContain('ご相談の例');
     expect(corporateCopySource).toContain('ご発注までの流れ');
 
     for (const phrase of [
@@ -240,13 +241,13 @@ describe('site audit remediation', () => {
     expect(serviceDetailSource).toContain('よくあるご質問');
     expect(serviceDetailSource).toContain('service.faqs.map');
     expect(siteConfigSource).toContain("date: '2026.08.15'");
-    expect(siteConfigSource).toContain('発注前FAQ、法務ページ、共有用メタ情報を改善');
+    expect(siteConfigSource).toContain('発注前のFAQ、法務ページを更新');
     expect(newsSource).toContain('siteConfig.newsItems');
   });
 
-  it('loads responsive home images instead of full-size assets by default', () => {
-    expect(heroSource).toContain('music-cover-480.webp');
-    expect(heroSource).toContain('music-cover-640.webp');
+  it('uses a bounded hero image and responsive service covers', () => {
+    expect(heroSource).toContain('music-gallery-2.webp');
+    expect(heroSource).toContain('width={900}');
     expect(read('./components/Services.tsx')).toContain('coverVariant(service.media.listImage, 480)');
     expect(read('./components/Header.tsx')).toContain('images/logo-80.webp');
   });

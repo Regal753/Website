@@ -1,126 +1,46 @@
 import React from 'react';
-import { ArrowDown, CheckCircle2 } from 'lucide-react';
 import { serviceCatalog } from '../services.catalog';
 import { siteConfig } from '../site.config';
 import { SectionId } from '../types';
 
-const caseStyles: Record<
-  string,
-  {
-    card: string;
-    icon: string;
-    chip: string;
-  }
-> = {
-  'music-publishing': {
-    card: 'border-amber-200 bg-gradient-to-b from-amber-50/80 via-white to-white',
-    icon: 'border-amber-200 bg-amber-100 text-amber-900',
-    chip: 'bg-amber-100 text-amber-900',
-  },
-  'sns-management': {
-    card: 'border-rose-200 bg-gradient-to-b from-rose-50/80 via-white to-white',
-    icon: 'border-rose-200 bg-rose-100 text-rose-800',
-    chip: 'bg-rose-100 text-rose-800',
-  },
-  'workflow-automation': {
-    card: 'border-cyan-200 bg-gradient-to-b from-cyan-50/80 via-white to-white',
-    icon: 'border-cyan-200 bg-cyan-100 text-cyan-900',
-    chip: 'bg-cyan-100 text-cyan-900',
-  },
-};
-
-const defaultStyle = {
-  card: 'border-slate-200 bg-gradient-to-b from-slate-50 via-white to-white',
-  icon: 'border-slate-200 bg-slate-100 text-slate-800',
-  chip: 'bg-slate-100 text-slate-800',
-};
-
-const Cases: React.FC = () => {
-  return (
-    <section id={SectionId.CASES} className="bg-white py-16 md:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 grid gap-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)] lg:items-end lg:gap-16 md:mb-14">
-          <div>
-            <p className="inline-flex rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-800">
-              対応例
-            </p>
-            <h2 className="mt-4 text-3xl font-semibold leading-tight text-brand-ink md:text-5xl">
-              課題別の対応内容と納品物
-            </h2>
-          </div>
-          <p className="max-w-2xl text-base leading-8 text-slate-600">
-            よくある課題に対して、確認する内容と納品物を事業ごとにまとめています。
-          </p>
-        </div>
-
-        <div className="grid gap-6 lg:grid-cols-3">
-          {siteConfig.cases.map((c) => {
-            const service = serviceCatalog.find((item) => item.slug === c.serviceSlug);
-            if (!service) return null;
-            const Icon = service.icon;
-            const style = caseStyles[c.serviceSlug] ?? defaultStyle;
-
-            return (
-              <article
-                key={c.title}
-                className={`flex h-full flex-col rounded-[32px] border p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl md:p-7 ${style.card}`}
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <span className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl border ${style.icon}`}>
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <span className={`rounded-full px-3 py-1 text-xs font-semibold ${style.chip}`}>
-                    {service.title}
-                  </span>
-                </div>
-
-                <h3 className="mt-6 text-2xl font-semibold leading-tight text-brand-ink">{c.title}</h3>
-
-                <div className="mt-6 rounded-2xl border border-slate-200 bg-white/90 p-4">
-                  <p className="text-xs font-semibold tracking-[0.12em] text-slate-600">現状の課題</p>
-                  <p className="mt-2 text-sm leading-7 text-slate-700">{c.challenge}</p>
-                </div>
-
-                <div className="my-3 flex justify-center text-slate-400" aria-hidden="true">
-                  <ArrowDown className="h-5 w-5" />
-                </div>
-
-                <div className="rounded-2xl bg-slate-950 p-4 text-white">
-                  <p className="text-xs font-semibold tracking-[0.12em] text-white/75">対応内容</p>
-                  <p className="mt-2 text-sm leading-7 text-white/80">{c.scope}</p>
-                </div>
-
-                <div className="mt-5">
-                  <p className="text-xs font-semibold tracking-[0.12em] text-slate-600">対応後の状態</p>
-                  <p className="mt-2 text-sm leading-7 text-slate-700">{c.outcome}</p>
-                </div>
-
-                <ul className="mt-5 space-y-2">
-                  {c.results.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-sm font-semibold text-slate-700">
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-primary-700" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-auto flex flex-wrap gap-2 pt-6">
-                  {c.deliverables.map((item) => (
-                    <span
-                      key={item}
-                      className="inline-flex rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </article>
-            );
-          })}
-        </div>
+const Cases: React.FC = () => (
+  <section id={SectionId.CASES} className="bg-[#fbf8ee] py-16 md:py-24">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mb-10 max-w-3xl md:mb-14">
+        <h2 className="text-3xl font-semibold text-brand-ink md:text-4xl">
+          ご相談の例
+        </h2>
       </div>
-    </section>
-  );
-};
+
+      <div className="grid gap-10 lg:grid-cols-3 lg:gap-8">
+        {siteConfig.cases.map((c) => {
+          const service = serviceCatalog.find((item) => item.slug === c.serviceSlug);
+          if (!service) return null;
+
+          return (
+            <article key={c.title} className="border-t-2 border-slate-300 pt-6">
+              <p className="text-xs font-semibold text-slate-500">{service.title}</p>
+              <h3 className="mt-3 text-xl font-semibold leading-snug text-brand-ink md:text-2xl">{c.title}</h3>
+              <dl className="mt-6 divide-y divide-slate-200 border-y border-slate-200 text-sm leading-7">
+                <div className="py-4">
+                  <dt className="font-semibold text-brand-ink">相談内容</dt>
+                  <dd className="mt-1 text-slate-700">{c.challenge}</dd>
+                </div>
+                <div className="py-4">
+                  <dt className="font-semibold text-brand-ink">対応内容</dt>
+                  <dd className="mt-1 text-slate-700">{c.scope}</dd>
+                </div>
+                <div className="py-4">
+                  <dt className="font-semibold text-brand-ink">納品物</dt>
+                  <dd className="mt-1 text-slate-700">{c.deliverables.join('・')}</dd>
+                </div>
+              </dl>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+);
 
 export default Cases;

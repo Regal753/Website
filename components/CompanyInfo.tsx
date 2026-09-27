@@ -80,7 +80,7 @@ const CompanyInfo: React.FC = () => {
             </p>
             <h1 className="mt-4 text-4xl font-semibold tracking-tight text-brand-ink md:text-5xl">会社情報</h1>
             <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-600 md:text-base">
-              {siteConfig.positioning.companySummary} 会社概要、代表者、所在地、外部確認先を掲載しています。
+              {siteConfig.positioning.companySummary} 所在地、代表者、事業内容と公開情報の確認先を掲載しています。
             </p>
 
             <div className="mt-7 grid border-y border-slate-200 sm:grid-cols-3 sm:divide-x sm:divide-slate-200">

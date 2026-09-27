@@ -62,7 +62,7 @@ const proofLinks = [
 ] as const;
 
 const BusinessTrust: React.FC = () => (
-  <section className="bg-[#f6f8fc] py-14 md:py-20" aria-labelledby="business-trust-title">
+  <section className="bg-[#eeeee0] py-14 md:py-20" aria-labelledby="business-trust-title">
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
         <div>
@@ -73,8 +73,8 @@ const BusinessTrust: React.FC = () => (
             法人情報と発注前の確認事項
           </h2>
           <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-600 md:text-base">
-            会社概要、責任者・連絡先、発注条件、契約・法務情報を掲載しています。
-            作業範囲、納品物、費用はお見積り時に確認できます。
+            法人名、所在地、代表者、連絡先を公開しています。
+            作業範囲、納品物、スケジュール、費用は発注前のお見積りで提示します。
           </p>
         </div>
         <div className="border-y border-slate-300 py-4">

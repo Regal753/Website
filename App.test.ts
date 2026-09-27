@@ -13,7 +13,7 @@ describe('route metadata', () => {
 
   it('keeps canonical service paths with a trailing slash', () => {
     expect(getRouteMeta('/services/music-publishing/')).toMatchObject({
-      title: '音楽出版・権利情報管理 | Regalo',
+      title: '音楽出版・BGM制作 | Regalo',
       canonicalPath: '/services/music-publishing/',
       imagePath: '/images/services/music-cover.webp',
     });
@@ -24,7 +24,7 @@ describe('route metadata', () => {
       const data = getRouteStructuredData(path);
       expect(data?.map((item) => item['@type'])).toEqual(['Service', 'BreadcrumbList']);
       expect(data?.[0]).toMatchObject({
-        name: '音楽出版・権利情報管理',
+        name: '音楽出版・BGM制作',
         url: 'https://www.regalocom.net/services/music-publishing/',
       });
     }

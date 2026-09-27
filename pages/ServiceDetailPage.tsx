@@ -95,7 +95,11 @@ const ServiceDetailPage: React.FC = () => {
                   <p className="text-xs font-semibold tracking-widest text-brand-primary-700">
                     {siteConfig.positioning.serviceDetailEyebrow}
                   </p>
-                  <h1 className="mt-1 text-3xl font-semibold text-brand-ink md:text-4xl">{service.title}</h1>
+                  <h1 className="mt-1 text-3xl font-semibold text-brand-ink md:text-4xl">
+                    {service.slug === 'music-publishing' ? (
+                      <>音楽出版・<br className="md:hidden" />BGM制作</>
+                    ) : service.title}
+                  </h1>
                   <p className="mt-4 leading-relaxed text-slate-600">{service.detailLead}</p>
                 </div>
               </div>
@@ -196,10 +200,7 @@ const ServiceDetailPage: React.FC = () => {
 
           {relatedCases.length > 0 && (
             <section className="mt-8">
-              <h2 className="text-xl font-semibold text-brand-ink">対応例</h2>
-              <p className="mt-2 mb-4 text-sm leading-relaxed text-slate-600">
-                ご相談内容に応じた対応の組み立て方を示しています。
-              </p>
+              <h2 className="mb-4 text-xl font-semibold text-brand-ink">対応例</h2>
               <div className="divide-y divide-slate-200 border-y border-slate-200">
                 {relatedCases.map((item) => (
                   <article key={item.title} className="grid gap-4 py-6 lg:grid-cols-[220px_minmax(0,1fr)]">
@@ -246,7 +247,7 @@ const ServiceDetailPage: React.FC = () => {
             <div className="border-t border-slate-300 pt-5">
               <h2 className="text-xl font-semibold text-brand-ink">対応可能な環境</h2>
               <p className="mt-2 text-sm leading-relaxed text-slate-700">
-                既存運用との整合を重視し、必要な技術要素のみを選定して導入します。
+                利用中のツールとアクセス権限を確認し、対応できる環境をお見積り時にお伝えします。
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {service.techStack.map((tech) => (
