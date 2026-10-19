@@ -93,8 +93,6 @@ export const siteConfig = {
   },
   businessCooperation: {
     acrCloud: {
-      title: 'ACRCloudとの事業協力',
-      description: '音楽認識技術を提供するACRCloudとの事業協力に取り組んでいます。',
       href: 'https://www.acrcloud.com/',
       logo: '/images/partners/acrcloud-logo.png',
     },
