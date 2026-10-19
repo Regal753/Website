@@ -42,6 +42,25 @@ const BusinessTrust: React.FC = () => (
             掲載記事を読む <ExternalLink className="h-4 w-4" />
           </a>
           <p className="mt-4 text-xs leading-6 text-slate-500">掲載内容はクラウドワークスの利用についての取材です。</p>
+
+          <div className="mt-8 border-t border-slate-300 pt-7">
+            <p className="text-xs font-semibold tracking-[0.12em] text-brand-primary-700">BUSINESS PARTNER</p>
+            <h3 className="mt-4 text-xl font-semibold leading-snug text-brand-ink md:text-2xl">
+              {siteConfig.businessCooperation.acrCloud.title}
+            </h3>
+            <p className="mt-4 text-sm leading-7 text-slate-700">
+              {siteConfig.businessCooperation.acrCloud.description}
+            </p>
+            <a
+              href={siteConfig.businessCooperation.acrCloud.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackEvent('external_link_click', { platform: 'acrcloud', placement: 'business_trust' })}
+              className="mt-6 inline-flex items-center gap-2 border-b border-brand-primary-700 pb-1 text-sm font-semibold text-brand-primary-700 hover:text-brand-primary-800"
+            >
+              ACRCloud公式サイト <ExternalLink className="h-4 w-4" />
+            </a>
+          </div>
         </div>
       </div>
     </div>
