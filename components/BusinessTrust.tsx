@@ -43,15 +43,13 @@ const BusinessTrust: React.FC = () => (
           </a>
           <p className="mt-4 text-xs leading-6 text-slate-500">掲載内容はクラウドワークスの利用についての取材です。</p>
 
-          <div className="mt-8 border-t border-slate-300 pt-7">
-            <p className="text-xs font-semibold tracking-[0.12em] text-brand-primary-700">BUSINESS PARTNER</p>
             <a
               href={siteConfig.businessCooperation.acrCloud.href}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="ACRCloud公式サイト（ロゴ）"
               onClick={() => trackEvent('external_link_click', { platform: 'acrcloud', placement: 'business_trust_logo' })}
-              className="mt-4 flex items-center justify-center bg-white p-16 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-primary-700"
+              className="mt-6 inline-flex items-center justify-center p-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-primary-700"
             >
               <img
                 src={siteConfig.businessCooperation.acrCloud.logo}
@@ -60,25 +58,9 @@ const BusinessTrust: React.FC = () => (
                 height={127}
                 loading="lazy"
                 decoding="async"
-                className="h-auto w-48 max-w-full"
+                className="h-auto w-32 max-w-full"
               />
             </a>
-            <h3 className="mt-4 text-xl font-semibold leading-snug text-brand-ink md:text-2xl">
-              {siteConfig.businessCooperation.acrCloud.title}
-            </h3>
-            <p className="mt-4 text-sm leading-7 text-slate-700">
-              {siteConfig.businessCooperation.acrCloud.description}
-            </p>
-            <a
-              href={siteConfig.businessCooperation.acrCloud.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackEvent('external_link_click', { platform: 'acrcloud', placement: 'business_trust' })}
-              className="mt-6 inline-flex items-center gap-2 border-b border-brand-primary-700 pb-1 text-sm font-semibold text-brand-primary-700 hover:text-brand-primary-800"
-            >
-              ACRCloud公式サイト <ExternalLink className="h-4 w-4" />
-            </a>
-          </div>
         </div>
       </div>
     </div>
