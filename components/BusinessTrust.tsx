@@ -45,6 +45,24 @@ const BusinessTrust: React.FC = () => (
 
           <div className="mt-8 border-t border-slate-300 pt-7">
             <p className="text-xs font-semibold tracking-[0.12em] text-brand-primary-700">BUSINESS PARTNER</p>
+            <a
+              href={siteConfig.businessCooperation.acrCloud.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="ACRCloud公式サイト（ロゴ）"
+              onClick={() => trackEvent('external_link_click', { platform: 'acrcloud', placement: 'business_trust_logo' })}
+              className="mt-4 flex items-center justify-center bg-white p-16 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-primary-700"
+            >
+              <img
+                src={siteConfig.businessCooperation.acrCloud.logo}
+                alt="ACRCloud"
+                width={384}
+                height={127}
+                loading="lazy"
+                decoding="async"
+                className="h-auto w-48 max-w-full"
+              />
+            </a>
             <h3 className="mt-4 text-xl font-semibold leading-snug text-brand-ink md:text-2xl">
               {siteConfig.businessCooperation.acrCloud.title}
             </h3>
