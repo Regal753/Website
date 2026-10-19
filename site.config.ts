@@ -91,6 +91,13 @@ export const siteConfig = {
     mediaCoverage: 'https://crowdworks.jp/times/interview/28780/',
     trainingProgram: 'https://mpaj.or.jp/news/17695',
   },
+  businessCooperation: {
+    acrCloud: {
+      title: 'ACRCloudとの事業協力',
+      description: '音楽認識技術を提供するACRCloudとの事業協力に取り組んでいます。',
+      href: 'https://www.acrcloud.com/',
+    },
+  },
   siteTitle: 'Regalo | 音楽出版・BGM制作・YouTube運用・業務自動化',
   siteDescription:
     '株式会社Regaloは京都府長岡京市を拠点に、BGM制作、音楽出版、YouTube・SNS運用、業務自動化を行っています。',
