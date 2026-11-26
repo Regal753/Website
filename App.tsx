@@ -23,7 +23,7 @@ type RouteMeta = {
 
 const DEFAULT_SITE_URL = 'https://www.regalocom.net';
 
-const getRouterBasename = (): string | undefined => {
+export const getRouterBasename = (): string | undefined => {
   const baseUrl = import.meta.env.BASE_URL || '/';
   if (baseUrl === '/' || baseUrl === './') return undefined;
   return baseUrl.replace(/\/$/, '');

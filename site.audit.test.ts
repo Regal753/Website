@@ -254,7 +254,7 @@ describe('site audit remediation', () => {
 
   it('prerenders canonical pages into the static HTML and hydrates them', () => {
     expect(read('./package.json')).toContain('vite build --ssr entry-server.tsx --outDir dist-ssr');
-    expect(read('./entry-server.tsx')).toContain('StaticRouter');
+    expect(read('./entry-server.tsx')).toContain('StaticRouter basename={basename}');
     expect(routeGeneratorSource).toContain('withPrerenderedBody');
     expect(routeGeneratorSource).toContain("render('/')");
     expect(entrySource).toContain('hydrateRoot');
