@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="900" height="600">
+  <!-- YouTube・SNS運用：動画プレイヤー、縦型動画、推移と予定 -->
+  <rect width="900" height="600" fill="#f3efe1"/>
+  <circle cx="450" cy="290" r="220" fill="#e4e9e6"/>
+  <circle cx="180" cy="400" r="110" fill="#e8e4d2"/>
+
+  <path d="M90 300 C 160 250, 220 280, 270 300 M630 330 C 690 360, 760 340, 820 290"
+        fill="none" stroke="#c98a3c" stroke-width="6" stroke-linecap="round"/>
+
+  <g fill="none" stroke="#163d58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <!-- 動画プレイヤー -->
+    <rect x="260" y="120" width="360" height="260" rx="14" fill="#fffdf4"/>
+    <path d="M260 150 H620"/>
+    <g fill="#93b3bd" stroke="none"><circle cx="280" cy="135" r="4.5"/><circle cx="296" cy="135" r="4.5"/><circle cx="312" cy="135" r="4.5"/></g>
+    <rect x="280" y="168" width="320" height="150" rx="8" fill="#dce7e9" stroke="none"/>
+    <circle cx="440" cy="243" r="30" fill="#163d58" stroke="none"/>
+    <path d="M430 228 L456 243 L430 258 Z" fill="#fffdf4" stroke="none"/>
+    <path d="M280 342 H600" stroke="#c9c3b3"/>
+    <path d="M280 342 H470" stroke="#c98a3c"/>
+    <circle cx="470" cy="342" r="7" fill="#fffdf4" stroke="#c98a3c"/>
+    <path d="M280 362 H380" stroke="#93b3bd" stroke-width="2.5"/>
+
+    <!-- 推移カード（左） -->
+    <rect x="110" y="320" width="170" height="120" rx="10" fill="#fffdf4"/>
+    <g fill="#163d58" stroke="none">
+      <rect x="132" y="392" width="18" height="30" rx="2"/>
+      <rect x="160" y="374" width="18" height="48" rx="2"/>
+      <rect x="188" y="382" width="18" height="40" rx="2"/>
+      <rect x="216" y="352" width="18" height="70" rx="2" fill="#c98a3c"/>
+    </g>
+    <path d="M132 340 H200" stroke="#93b3bd" stroke-width="2.5"/>
+
+    <!-- 縦型動画（右） -->
+    <rect x="650" y="150" width="120" height="220" rx="18" fill="#fffdf4"/>
+    <rect x="664" y="176" width="92" height="150" rx="6" fill="#dce7e9" stroke="none"/>
+    <circle cx="710" cy="251" r="16" fill="#163d58" stroke="none"/>
+    <path d="M705 243 L719 251 L705 259 Z" fill="#fffdf4" stroke="none"/>
+    <path d="M690 348 H730"/>
+    <g stroke="#c98a3c" stroke-width="2.5">
+      <path d="M742 200 C 742 192, 754 192, 754 200 C 754 208, 742 214, 742 214 C 742 214, 730 208, 730 200 C 730 192, 742 192, 742 200"/>
+    </g>
+
+    <!-- 予定カード（右上） -->
+    <rect x="560" y="60" width="130" height="80" rx="8" fill="#fffdf4"/>
+    <path d="M560 84 H690 M586 52 V68 M664 52 V68"/>
+    <g fill="#93b3bd" stroke="none">
+      <rect x="576" y="96" width="16" height="12" rx="2"/><rect x="602" y="96" width="16" height="12" rx="2"/>
+      <rect x="654" y="96" width="16" height="12" rx="2"/><rect x="576" y="116" width="16" height="12" rx="2"/>
+      <rect x="628" y="116" width="16" height="12" rx="2"/>
+    </g>
+    <rect x="628" y="96" width="16" height="12" rx="2" fill="#c98a3c" stroke="none"/>
+
+    <path d="M200 160 V178 M191 169 H209 M820 440 V456 M812 448 H828" stroke="#c98a3c" stroke-width="2.5"/>
+  </g>
+</svg>

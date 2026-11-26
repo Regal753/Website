@@ -2,14 +2,13 @@ import React from 'react';
 import { Link } from 'react-router';
 import { ArrowRight } from 'lucide-react';
 import { serviceCatalog } from '../services.catalog';
+import SectionHeading from './SectionHeading';
 import { SectionId } from '../types';
 import { trackEvent } from '../utils/analytics';
 
-const coverSourceDimensions: Record<string, { width: number; height: number }> = {
-  'music-publishing': { width: 900, height: 600 },
-  'sns-management': { width: 900, height: 600 },
-  'workflow-automation': { width: 1280, height: 720 },
-};
+// カバー画像はすべて3:2の線画（design/illustrations から書き出し）
+const COVER_WIDTH = 1350;
+const COVER_HEIGHT = 900;
 
 const Services: React.FC = () => {
   const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
@@ -17,21 +16,18 @@ const Services: React.FC = () => {
     path.replace(/\.webp$/i, `-${width}.webp`);
 
   return (
-    <section id={SectionId.SERVICES} className="scroll-mt-20 bg-[#e1e2d2] py-16 md:py-24">
+    <section id={SectionId.SERVICES} className="scroll-mt-20 bg-paper-alt py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 max-w-3xl md:mb-14">
-          <h2 className="text-3xl font-semibold text-brand-ink md:text-4xl">事業内容</h2>
-        </div>
+        <SectionHeading eyebrow="SERVICES" title="事業内容" />
 
         <div className="grid gap-6 lg:grid-cols-2">
           {serviceCatalog.map((service, index) => {
             const isPrimary = index === 0;
-            const dimensions = coverSourceDimensions[service.slug] ?? { width: 1280, height: 720 };
 
             return (
               <article
                 key={service.slug}
-                className={`grid overflow-hidden rounded-md border border-slate-200 bg-[#fffde9] ${
+                className={`grid overflow-hidden rounded-lg border border-slate-200 bg-paper-card ${
                   isPrimary ? 'lg:col-span-2 lg:grid-cols-[1fr_1fr]' : ''
                 }`}
               >
@@ -60,11 +56,11 @@ const Services: React.FC = () => {
                   srcSet={`${asset(coverVariant(service.media.listImage, 480))} 480w, ${asset(coverVariant(service.media.listImage, 640))} 640w`}
                   sizes={isPrimary ? '(min-width: 1024px) 46vw, 100vw' : '(min-width: 1024px) 44vw, 100vw'}
                   alt=""
-                  width={dimensions.width}
-                  height={dimensions.height}
+                  width={COVER_WIDTH}
+                  height={COVER_HEIGHT}
                   loading="lazy"
                   decoding="async"
-                  className={`order-1 w-full object-cover ${isPrimary ? 'h-64 lg:order-2 lg:h-full' : 'h-56 md:h-64'}`}
+                  className={`order-1 aspect-[16/9] h-auto w-full object-cover ${isPrimary ? 'lg:order-2 lg:aspect-auto lg:h-full' : ''}`}
                 />
               </article>
             );

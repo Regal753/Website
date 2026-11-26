@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChevronDown } from 'lucide-react';
+import SectionHeading from './SectionHeading';
 
 const faqs = [
   {
@@ -31,23 +32,19 @@ const faqs = [
 
 const BusinessFAQ: React.FC = () => {
   return (
-    <section id="faq" className="bg-[#f3f1e7] py-16 md:py-24">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-8 max-w-2xl md:mb-10">
-          <p className="text-xs font-semibold tracking-[0.12em] text-brand-primary-700">FAQ</p>
-          <h2 className="mt-3 text-3xl font-semibold leading-tight text-brand-ink md:text-4xl">
-            発注前のご質問
-          </h2>
-          <p className="mt-4 text-sm leading-7 text-slate-600 md:text-base">
-            費用、必要な資料、BGMの権利確認について、問い合わせ前に確認できる内容をまとめました。
-          </p>
-        </div>
+    <section id="faq" className="bg-paper-alt py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHeading
+          eyebrow="FAQ"
+          title="発注前のご質問"
+          lead="費用、必要な資料、BGMの権利確認について、問い合わせ前に確認できる内容をまとめました。"
+        />
 
-        <div className="space-y-3">
+        <div className="max-w-4xl space-y-3">
           {faqs.map((faq) => (
             <details
               key={faq.question}
-              className="group overflow-hidden rounded-2xl border border-slate-200 bg-white open:border-brand-primary-200"
+              className="group overflow-hidden rounded-lg border border-slate-200 bg-paper-card open:border-brand-primary-200"
             >
               <summary className="flex min-h-20 cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-left text-sm font-semibold leading-6 text-slate-900 marker:content-none md:px-6">
                 <span>{faq.question}</span>

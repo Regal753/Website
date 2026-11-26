@@ -152,9 +152,9 @@ const ServiceDetailPage: React.FC = () => {
 
           <section className="mt-10" aria-label={`${service.title}の掲載画像`}>
             {slideImagePaths.map((imagePath) => (
-              <img key={imagePath} src={asset(imagePath)} alt={`${service.title}の掲載画像`} width={1280} height={720} className="h-56 w-full border border-[#d2d2c3] object-cover md:h-72" loading="lazy" decoding="async" />
+              <img key={imagePath} src={asset(imagePath)} alt={`${service.title}の掲載画像`} width={1350} height={900} className="aspect-[3/2] h-auto w-full max-w-2xl rounded-lg border border-slate-200" loading="lazy" decoding="async" />
             ))}
-            <p className="mt-2 text-xs text-slate-500">サービス内容を表すイメージ画像です。</p>
+            <p className="mt-2 text-xs text-slate-500">サービス内容を表すイラストです。</p>
           </section>
 
           {relatedCases.length > 0 && (

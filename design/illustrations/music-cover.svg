@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="900" height="600">
+  <!-- 音楽出版・BGM制作：鍵盤、譜面、権利情報の台帳 -->
+  <rect width="900" height="600" fill="#f3efe1"/>
+  <circle cx="420" cy="300" r="210" fill="#e8e4d2"/>
+  <circle cx="700" cy="250" r="120" fill="#ece2cc"/>
+
+  <path d="M120 470 C 220 520, 320 470, 420 440 C 520 410, 600 470, 760 430"
+        fill="none" stroke="#c98a3c" stroke-width="6" stroke-linecap="round"/>
+
+  <g fill="none" stroke="#163d58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <!-- 鍵盤 -->
+    <rect x="110" y="330" width="250" height="100" rx="8" fill="#fffdf4"/>
+    <path d="M110 356 H360"/>
+    <g fill="#93b3bd" stroke="none"><circle cx="130" cy="343" r="5"/><circle cx="148" cy="343" r="5"/></g>
+    <path d="M170 343 H230" stroke="#c98a3c" stroke-width="3"/>
+    <path d="M141 356 V430 M172 356 V430 M203 356 V430 M234 356 V430 M265 356 V430 M296 356 V430 M327 356 V430" stroke-width="2"/>
+    <g fill="#163d58" stroke="none">
+      <rect x="133" y="356" width="14" height="42" rx="2"/><rect x="164" y="356" width="14" height="42" rx="2"/>
+      <rect x="226" y="356" width="14" height="42" rx="2"/><rect x="257" y="356" width="14" height="42" rx="2"/>
+      <rect x="288" y="356" width="14" height="42" rx="2"/>
+    </g>
+
+    <!-- 譜面 -->
+    <g transform="rotate(-4 440 260)">
+      <path d="M360 110 H500 L530 140 V400 H360 Z" fill="#fffdf4"/>
+      <path d="M500 110 V140 H530"/>
+      <g stroke-width="1.8" stroke="#456c7e">
+        <path d="M380 165 H510 M380 173 H510 M380 181 H510 M380 189 H510 M380 197 H510"/>
+        <path d="M380 235 H510 M380 243 H510 M380 251 H510 M380 259 H510 M380 267 H510"/>
+        <path d="M380 305 H510 M380 313 H510 M380 321 H510 M380 329 H510 M380 337 H510"/>
+      </g>
+      <g fill="#163d58" stroke="none">
+        <ellipse cx="404" cy="189" rx="6" ry="4.5"/><ellipse cx="436" cy="181" rx="6" ry="4.5"/>
+        <ellipse cx="470" cy="193" rx="6" ry="4.5"/><ellipse cx="410" cy="259" rx="6" ry="4.5"/>
+        <ellipse cx="456" cy="251" rx="6" ry="4.5"/><ellipse cx="490" cy="263" rx="6" ry="4.5"/>
+        <ellipse cx="420" cy="329" rx="6" ry="4.5"/><ellipse cx="470" cy="321" rx="6" ry="4.5"/>
+      </g>
+      <path d="M410 189 V165 M442 181 V157 M476 193 V169 M442 157 L476 161 M416 259 V235 M462 251 V227 M496 263 V239 M426 329 V305 M476 321 V297" stroke-width="2"/>
+    </g>
+
+    <!-- 権利情報の台帳 -->
+    <rect x="585" y="160" width="200" height="230" rx="10" fill="#fffdf4"/>
+    <rect x="653" y="148" width="64" height="24" rx="6" fill="#e1e2d2"/>
+    <g stroke="#c98a3c">
+      <circle cx="615" cy="212" r="10"/><path d="M610 212 L614 216 L621 208"/>
+      <circle cx="615" cy="258" r="10"/><path d="M610 258 L614 262 L621 254"/>
+      <circle cx="615" cy="304" r="10"/><path d="M610 304 L614 308 L621 300"/>
+    </g>
+    <circle cx="615" cy="350" r="10" stroke="#93b3bd"/>
+    <path d="M639 208 H760 M639 254 H748 M639 300 H756 M639 346 H730"/>
+    <path d="M639 220 H700 M639 266 H712 M639 312 H690 M639 358 H684" stroke="#93b3bd" stroke-width="2.5"/>
+
+    <!-- 浮かぶ音符 -->
+    <g fill="#c98a3c" stroke="none">
+      <ellipse cx="226" cy="236" rx="9" ry="7"/><ellipse cx="270" cy="222" rx="9" ry="7"/>
+    </g>
+    <path d="M234 236 V188 L278 176 V222" stroke="#c98a3c" stroke-width="3"/>
+    <path d="M168 170 V188 M159 179 H177 M820 140 V156 M812 148 H828" stroke="#c98a3c" stroke-width="2.5"/>
+  </g>
+</svg>

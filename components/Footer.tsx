@@ -7,23 +7,12 @@ const Footer: React.FC = () => {
   const phoneHref = phone.replace(/[^\d+]/g, '');
 
   return (
-    <footer className="relative mt-10 overflow-hidden bg-[#383d32] py-14 text-white">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-primary-300/70 to-transparent" />
-      <div className="absolute left-[-6rem] top-[-3rem] h-36 w-36 rounded-full bg-brand-primary-500/10 blur-3xl" />
-      <div className="absolute bottom-[-4rem] right-[-4rem] h-40 w-40 rounded-full bg-amber-300/10 blur-3xl" />
-
-      <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-[1.2fr_0.8fr_0.8fr_0.8fr] lg:px-8">
+    <footer className="bg-[#383d32] py-14 text-white">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-[1.2fr_0.8fr_0.8fr_0.8fr] lg:px-8">
         <div>
           <h2 className="text-2xl font-semibold text-white">{siteConfig.companyName}</h2>
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/70">{siteConfig.positioning.footerTagline}</p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <span className="inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white/75">
-              京都府長岡京市に本社
-            </span>
-            <span className="inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-white/75">
-              会社窓口で対応
-            </span>
-          </div>
+          <p className="mt-4 text-xs text-white/60">本社：京都府長岡京市</p>
         </div>
 
         <div>
@@ -83,7 +72,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-      <div className="relative mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-3 border-t border-white/10 pt-5 text-xs text-white/50 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
           <div className="flex flex-wrap gap-x-4 gap-y-2">
             <span>{siteConfig.companyProfile.legalName}</span>

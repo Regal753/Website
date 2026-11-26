@@ -21,6 +21,12 @@ module.exports = {
         ],
       },
       colors: {
+        // 背景は3色だけ使う：基本・交互の節・カード
+        paper: {
+          DEFAULT: '#fbf8ee',
+          alt: '#efede1',
+          card: '#fffdf4',
+        },
         slate: {
           50: '#faf8f0',
           100: '#f2efe4',
