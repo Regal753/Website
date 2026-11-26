@@ -17,9 +17,9 @@ const BusinessTrust: React.FC = () => (
             株式会社Regaloは京都府長岡京市を拠点に、音楽出版・BGM制作、YouTube運用、制作進行の自動化を行っています。
           </p>
           <dl className="mt-7 grid gap-4 border-t border-slate-300 pt-5 text-sm sm:grid-cols-3">
-            <div><dt className="text-xs font-semibold text-slate-500">設立</dt><dd className="mt-1 font-medium text-brand-ink">{siteConfig.companyProfile.established}</dd></div>
-            <div><dt className="text-xs font-semibold text-slate-500">代表</dt><dd className="mt-1 font-medium text-brand-ink">{siteConfig.companyProfile.representative}</dd></div>
-            <div><dt className="text-xs font-semibold text-slate-500">所在地</dt><dd className="mt-1 font-medium text-brand-ink">京都府長岡京市</dd></div>
+            <div><dt className="text-xs font-semibold text-slate-600">設立</dt><dd className="mt-1 font-medium text-brand-ink">{siteConfig.companyProfile.established}</dd></div>
+            <div><dt className="text-xs font-semibold text-slate-600">代表</dt><dd className="mt-1 font-medium text-brand-ink">{siteConfig.companyProfile.representative}</dd></div>
+            <div><dt className="text-xs font-semibold text-slate-600">所在地</dt><dd className="mt-1 font-medium text-brand-ink">京都府長岡京市</dd></div>
           </dl>
           <Link to="/company" className="mt-7 inline-flex items-center gap-2 border-b border-brand-primary-700 pb-1 text-sm font-semibold text-brand-primary-700 hover:text-brand-primary-800">
             会社概要を見る <ArrowRight className="h-4 w-4" />
@@ -41,7 +41,7 @@ const BusinessTrust: React.FC = () => (
           >
             掲載記事を読む <ExternalLink className="h-4 w-4" />
           </a>
-          <p className="mt-4 text-xs leading-6 text-slate-500">掲載内容はクラウドワークスの利用についての取材です。</p>
+          <p className="mt-4 text-xs leading-6 text-slate-600">掲載内容はクラウドワークスの利用についての取材です。</p>
 
           <div className="mt-8 border-t border-slate-300 pt-6">
             <p className="text-xs font-semibold tracking-[0.12em] text-brand-primary-700">事業協力</p>

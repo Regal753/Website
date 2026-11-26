@@ -8,7 +8,8 @@
   },
   "scripts": {
     "dev": "npm run build:css && vite",
-    "build": "npm run build:css && vite build && npm run build:legal-fonts && npm run build:routes",
+    "build": "npm run build:css && vite build && npm run build:ssr && npm run build:legal-fonts && npm run build:routes",
+    "build:ssr": "vite build --ssr entry-server.tsx --outDir dist-ssr",
     "preview": "vite preview",
     "build:css": "tailwindcss -c tailwind.config.cjs -i styles/tailwind.css -o public/tailwind.css --minify",
     "build:legal-fonts": "node scripts/inject-static-font-styles.mjs",

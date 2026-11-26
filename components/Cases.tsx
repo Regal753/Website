@@ -16,7 +16,7 @@ const Cases: React.FC = () => (
 
           return (
             <article key={c.title} className="border-t-2 border-slate-300 pt-6">
-              <p className="text-xs font-semibold text-slate-500">{service.title}</p>
+              <p className="text-xs font-semibold text-slate-600">{service.title}</p>
               <h3 className="mt-3 text-xl font-semibold leading-snug text-brand-ink md:text-2xl">{c.title}</h3>
               <dl className="mt-6 divide-y divide-slate-200 border-y border-slate-200 text-sm leading-7">
                 <div className="py-4">

@@ -43,7 +43,7 @@ const Header: React.FC = () => {
           <img
             src={import.meta.env.BASE_URL + 'images/logo-80.webp'}
             srcSet={`${import.meta.env.BASE_URL}images/logo-80.webp 2x, ${import.meta.env.BASE_URL}images/logo.webp 3x`}
-            alt={siteConfig.companyName}
+            alt=""
             width={40}
             height={40}
             className="h-10 w-10"

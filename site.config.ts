@@ -8,7 +8,7 @@ const BRAND_POSITIONING = {
   companySummary:
     '株式会社Regaloは京都府長岡京市を拠点に、BGM制作、音楽出版、YouTube・SNS運用、業務自動化を行っています。',
   crossFunctionalLabel: '音楽・動画・制作進行に対応',
-  serviceDetailEyebrow: '対応業務',
+  serviceDetailEyebrow: 'SERVICE',
   footerTagline: 'BGM制作、音楽出版、YouTube・SNS運用、業務自動化を行っています。',
 } as const;
 
@@ -64,6 +64,8 @@ export const cases: CaseStudy[] = [
 ];
 
 export const newsItems: NewsItem[] = [
+  { date: '2026.11.27', title: 'ホームページのデザインを刷新' },
+  { date: '2026.10.19', title: '会社情報にACRCloudとの事業協力を掲載' },
   {
     date: '2026.08.15',
     title: '法人向け事業案内、発注前のFAQ、法務ページを更新',
