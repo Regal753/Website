@@ -9,7 +9,7 @@ const Hero: React.FC = () => {
   const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 
   return (
-    <section id={SectionId.HOME} className="bg-[#fbf8ee] pb-16 pt-32 md:pb-24 md:pt-40">
+    <section id={SectionId.HOME} className="bg-paper pb-16 pt-32 md:pb-24 md:pt-40">
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_0.95fr] lg:gap-16 lg:px-8">
         <div>
           <h1 className="corporate-display max-w-[13em] text-[2rem] font-bold text-brand-ink min-[375px]:text-[2.5rem] sm:text-5xl lg:text-[3.65rem]">
@@ -40,14 +40,14 @@ const Hero: React.FC = () => {
         </div>
 
         <img
-          src={asset('images/services/music-gallery-2.webp')}
-          alt="音楽制作と資料を表すイメージ画像"
+          src={asset('images/hero-illustration.svg')}
+          alt="楽曲、権利情報、動画の運用、分配までを一本の線でつないだイラスト"
           width={900}
           height={600}
           loading="eager"
           fetchPriority="high"
           decoding="async"
-          className="h-[300px] w-full rounded-lg object-cover sm:h-[380px] lg:h-[460px]"
+          className="aspect-[3/2] h-auto w-full rounded-lg"
         />
       </div>
     </section>

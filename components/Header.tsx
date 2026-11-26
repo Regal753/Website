@@ -28,10 +28,8 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 border-b border-slate-200 transition-colors duration-300 ${
-        isScrolled
-          ? 'bg-[#fbf8ee] py-3'
-          : 'bg-[#fbf8ee] py-4'
+      className={`fixed top-0 left-0 right-0 z-50 border-b border-slate-200 bg-paper transition-[padding] duration-300 ${
+        isScrolled ? 'py-3' : 'py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
@@ -107,7 +105,7 @@ const Header: React.FC = () => {
         }`}
         aria-hidden={!isMobileMenuOpen}
       >
-        <div className="flex flex-col gap-1 border-t border-slate-200 bg-white p-4 shadow-lg">
+        <div className="flex flex-col gap-1 border-t border-slate-200 bg-paper p-4 shadow-lg">
           {siteConfig.navItems.map((item) => (
             <Link
               key={item.href}
@@ -125,7 +123,7 @@ const Header: React.FC = () => {
           <Link
             to="/contact"
             onClick={handleNavClick}
-            className="mt-1 inline-flex items-center justify-center gap-2 rounded-xl bg-brand-primary-700 px-4 py-3 text-sm font-semibold text-white"
+            className="mt-1 inline-flex items-center justify-center gap-2 rounded-lg bg-brand-primary-700 px-4 py-3 text-sm font-semibold text-white"
           >
             お問い合わせ
             <ArrowRight className="h-4 w-4" />

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="900" height="600">
+  <!-- 制作進行・業務自動化：資料 → 自動処理 → 確認 → 報告の流れ -->
+  <rect width="900" height="600" fill="#f3efe1"/>
+  <circle cx="450" cy="300" r="230" fill="#e8e4d2"/>
+  <circle cx="720" cy="300" r="120" fill="#ece2cc"/>
+
+  <g fill="none" stroke="#c98a3c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M250 300 H310 C 340 300, 340 220, 370 220 H392"/>
+    <path d="M330 300 C 340 300, 340 380, 370 380 H392"/>
+    <path d="M500 220 H530 C 560 220, 560 300, 590 300 H612"/>
+    <path d="M500 380 H530 C 560 380, 560 300, 590 300"/>
+    <path d="M600 290 L612 300 L600 310"/>
+  </g>
+
+  <g fill="none" stroke="#163d58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <!-- 資料 -->
+    <path d="M130 200 H220 L250 230 V400 H130 Z" fill="#fffdf4"/>
+    <path d="M220 200 V230 H250"/>
+    <path d="M150 260 H230 M150 290 H222 M150 320 H230 M150 350 H200" stroke-width="2.5"/>
+    <path d="M150 272 H200 M150 302 H210 M150 332 H190" stroke="#93b3bd" stroke-width="2"/>
+
+    <!-- 自動処理（歯車） -->
+    <rect x="392" y="170" width="108" height="100" rx="12" fill="#fffdf4"/>
+    <g transform="translate(446 220)">
+      <path d="M-6 -32 H6 L8 -22 L17 -18 L26 -24 L34 -16 L28 -7 L32 2 L42 4 V16 L32 18 L28 27 L34 36 L26 44 L17 38 L8 42 L6 52 H-6 L-8 42 L-17 38 L-26 44 L-34 36 L-28 27 L-32 18 L-42 16 V4 L-32 2 L-28 -7 L-34 -16 L-26 -24 L-17 -18 L-8 -22 Z"
+            transform="scale(0.72) translate(0 -10)" fill="#dce7e9"/>
+      <circle cx="0" cy="0" r="10" fill="#fffdf4"/>
+    </g>
+
+    <!-- 確認（チェック） -->
+    <rect x="392" y="330" width="108" height="100" rx="12" fill="#fffdf4"/>
+    <circle cx="446" cy="380" r="26" fill="#163d58" stroke="none"/>
+    <path d="M434 380 L443 389 L459 371" stroke="#fffdf4" stroke-width="4"/>
+
+    <!-- 報告書 -->
+    <rect x="612" y="190" width="180" height="220" rx="10" fill="#fffdf4"/>
+    <path d="M632 220 H740 M632 238 H700" stroke-width="2.5"/>
+    <rect x="632" y="258" width="140" height="80" rx="6" fill="#dce7e9" stroke="none"/>
+    <path d="M644 322 L674 302 L700 312 L756 272" stroke="#c98a3c"/>
+    <circle cx="756" cy="272" r="5" fill="#c98a3c" stroke="none"/>
+    <path d="M632 360 H772 M632 384 H740" stroke="#93b3bd" stroke-width="2.5"/>
+
+    <!-- 時計 -->
+    <circle cx="250" cy="460" r="34" fill="#fffdf4"/>
+    <path d="M250 440 V460 L264 470"/>
+    <path d="M300 150 V168 M291 159 H309 M820 460 V476 M812 468 H828" stroke="#c98a3c" stroke-width="2.5"/>
+  </g>
+</svg>

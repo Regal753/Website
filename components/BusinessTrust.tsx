@@ -5,12 +5,12 @@ import { siteConfig } from '../site.config';
 import { trackEvent } from '../utils/analytics';
 
 const BusinessTrust: React.FC = () => (
-  <section className="bg-[#eeeee0] py-14 md:py-20" aria-labelledby="business-trust-title">
+  <section className="bg-paper-alt py-16 md:py-24" aria-labelledby="business-trust-title">
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-20">
         <div>
           <p className="text-xs font-semibold tracking-[0.12em] text-brand-primary-700">ABOUT REGALO</p>
-          <h2 id="business-trust-title" className="mt-4 text-3xl font-semibold tracking-tight text-brand-ink md:text-4xl">
+          <h2 id="business-trust-title" className="mt-3 text-3xl font-semibold leading-tight text-brand-ink md:text-4xl">
             会社情報
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-8 text-slate-700">
@@ -43,13 +43,15 @@ const BusinessTrust: React.FC = () => (
           </a>
           <p className="mt-4 text-xs leading-6 text-slate-500">掲載内容はクラウドワークスの利用についての取材です。</p>
 
+          <div className="mt-8 border-t border-slate-300 pt-6">
+            <p className="text-xs font-semibold tracking-[0.12em] text-brand-primary-700">事業協力</p>
             <a
               href={siteConfig.businessCooperation.acrCloud.href}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="ACRCloud公式サイト（ロゴ）"
               onClick={() => trackEvent('external_link_click', { platform: 'acrcloud', placement: 'business_trust_logo' })}
-              className="mt-6 inline-flex items-center justify-center p-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-primary-700"
+              className="mt-4 inline-flex items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-primary-700"
             >
               <img
                 src={siteConfig.businessCooperation.acrCloud.logo}
@@ -61,6 +63,7 @@ const BusinessTrust: React.FC = () => (
                 className="h-auto w-32 max-w-full"
               />
             </a>
+          </div>
         </div>
       </div>
     </div>

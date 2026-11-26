@@ -21,8 +21,6 @@ const corporateCopySource = [
   read('./components/Header.tsx'),
   read('./components/Services.tsx'),
   read('./components/Cases.tsx'),
-  read('./components/MusicRightsReview.tsx'),
-  read('./components/TeamPreview.tsx'),
   businessTrustSource,
   read('./components/Process.tsx'),
   read('./components/BusinessFAQ.tsx'),
@@ -152,14 +150,13 @@ describe('site audit remediation', () => {
   it('keeps service imagery and corporate trust information without duplicate proof cards', () => {
     expect(heroSource).not.toContain('主な確認内容');
     expect(heroSource).not.toContain('楽曲・権利情報と運用手順を整理');
-    expect(heroSource).toContain('music-gallery-2.webp');
+    expect(heroSource).toContain('hero-illustration.svg');
     expect(heroSource).not.toContain('PROOF_POINTS.map');
     expect(homePageSource).toContain('<BusinessTrust />');
     expect(processSource).not.toContain('お見積り前の確認事項');
   });
 
   it('uses direct corporate headings and excludes vague campaign copy', () => {
-    expect(corporateCopySource).toContain('現状確認と対応内容');
     expect(corporateCopySource).toContain('会社情報');
     expect(corporateCopySource).not.toContain('法人情報と発注前の確認事項');
     expect(corporateCopySource).toContain('ご相談の例');
@@ -245,10 +242,25 @@ describe('site audit remediation', () => {
     expect(newsSource).toContain('siteConfig.newsItems');
   });
 
-  it('uses a bounded hero image and responsive service covers', () => {
-    expect(heroSource).toContain('music-gallery-2.webp');
+  it('uses an uncropped line-art hero and responsive service covers', () => {
+    expect(heroSource).toContain('hero-illustration.svg');
     expect(heroSource).toContain('width={900}');
+    expect(heroSource).toContain('aspect-[3/2]');
+    expect(heroSource).not.toContain('object-cover');
     expect(read('./components/Services.tsx')).toContain('coverVariant(service.media.listImage, 480)');
     expect(read('./components/Header.tsx')).toContain('images/logo-80.webp');
+  });
+
+  it('keeps one section-heading pattern and a small surface palette', () => {
+    for (const component of ['Services', 'Cases', 'Process', 'BusinessFAQ', 'News']) {
+      expect(read(`./components/${component}.tsx`)).toContain('<SectionHeading');
+    }
+    const homeSources = ['Hero', 'Services', 'Cases', 'BusinessTrust', 'Process', 'BusinessFAQ', 'News', 'Header', 'Footer']
+      .map((component) => read(`./components/${component}.tsx`))
+      .join('\n');
+    expect(homeSources).not.toMatch(/bg-\[#(fbf8ee|e1e2d2|eeeee0|f3f1e7|fffde9)\]/);
+    expect(homeSources).not.toContain('rounded-[28px]');
+    expect(homeSources).not.toContain('blur-3xl');
+    expect(indexHtml).toContain('<meta name="theme-color" content="#fbf8ee" />');
   });
 });
