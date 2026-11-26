@@ -128,7 +128,8 @@ describe('site audit remediation', () => {
       (match) => match[1],
     );
     expect(lastModifiedDates).toHaveLength(9);
-    expect(lastModifiedDates.filter((date) => date === '2026-09-28')).toHaveLength(8);
+    expect(lastModifiedDates.filter((date) => date === '2026-11-27')).toHaveLength(6);
+    expect(lastModifiedDates.filter((date) => date === '2026-09-28')).toHaveLength(2);
     expect(lastModifiedDates.filter((date) => date === '2026-08-10')).toHaveLength(1);
   });
 
@@ -249,6 +250,31 @@ describe('site audit remediation', () => {
     expect(heroSource).not.toContain('object-cover');
     expect(read('./components/Services.tsx')).toContain('coverVariant(service.media.listImage, 480)');
     expect(read('./components/Header.tsx')).toContain('images/logo-80.webp');
+  });
+
+  it('prerenders canonical pages into the static HTML and hydrates them', () => {
+    expect(read('./package.json')).toContain('vite build --ssr entry-server.tsx --outDir dist-ssr');
+    expect(read('./entry-server.tsx')).toContain('StaticRouter');
+    expect(routeGeneratorSource).toContain('withPrerenderedBody');
+    expect(routeGeneratorSource).toContain("render('/')");
+    expect(entrySource).toContain('hydrateRoot');
+  });
+
+  it('keeps small text at WCAG AA contrast on the cream palette', () => {
+    const sources = ['Cases', 'BusinessTrust', 'News', 'CompanyInfo', 'Contact', 'Footer', 'BusinessFAQ']
+      .map((component) => read(`./components/${component}.tsx`))
+      .concat(serviceDetailSource)
+      .join('\n');
+    expect(sources).not.toContain('text-slate-500');
+    expect(footerSource).not.toMatch(/text-white\/(40|50)\b/);
+    expect(read('./components/Header.tsx')).toContain('alt=""');
+  });
+
+  it('offers one inquiry type per service that the contact worker can route', () => {
+    expect(contactSource).toContain('選択してください');
+    expect(contactSource).toContain("'楽曲の権利情報・利用条件の確認について'");
+    expect(contactSource).not.toContain('YouTube BGM・権利運用');
+    expect(contactSource).toContain("nextFieldErrors.type = 'お問い合わせ種別を選択してください。'");
   });
 
   it('keeps one section-heading pattern and a small surface palette', () => {

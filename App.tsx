@@ -260,9 +260,10 @@ const ScrollToTopOnRouteChange: React.FC = () => {
   return null;
 };
 
-function App() {
+// ルーターの外側（BrowserRouter / StaticRouter）を差し替えられるよう、画面本体を分けておく
+export function AppRoutes() {
   return (
-    <BrowserRouter basename={getRouterBasename()}>
+    <>
       <ScrollToTopOnRouteChange />
       <RouteTracker />
       <div className="min-h-screen bg-paper text-slate-800 selection:bg-[#e7e6d6]">
@@ -296,6 +297,14 @@ function App() {
         </main>
         <Footer />
       </div>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter basename={getRouterBasename()}>
+      <AppRoutes />
     </BrowserRouter>
   );
 }

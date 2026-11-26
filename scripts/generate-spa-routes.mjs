@@ -1,8 +1,11 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 const distDir = path.resolve('dist');
 const indexHtmlPath = path.join(distDir, 'index.html');
+const ssrEntryPath = path.resolve('dist-ssr', 'entry-server.js');
+const EMPTY_ROOT = '<div id="root"></div>';
 const siteUrl = 'https://www.regalocom.net';
 
 const routeEntrypoints = [
@@ -29,8 +32,8 @@ const routeEntrypoints = [
     canonicalPath: '/services/sns-management/',
     imagePath: '/images/services/sns-cover.webp',
     imageAlt: 'YouTube・SNS運用のサービス案内',
-    imageWidth: 900,
-    imageHeight: 600,
+    imageWidth: 1350,
+    imageHeight: 900,
     serviceName: 'YouTube・SNS運用',
   },
   {
@@ -40,8 +43,8 @@ const routeEntrypoints = [
     canonicalPath: '/services/music-publishing/',
     imagePath: '/images/services/music-cover.webp',
     imageAlt: '音楽出版・BGM制作のサービス案内',
-    imageWidth: 900,
-    imageHeight: 600,
+    imageWidth: 1350,
+    imageHeight: 900,
     serviceName: '音楽出版・BGM制作',
   },
   {
@@ -52,8 +55,8 @@ const routeEntrypoints = [
     canonicalPath: '/services/workflow-automation/',
     imagePath: '/images/services/ai-cover.webp',
     imageAlt: '制作進行・業務自動化のサービス案内',
-    imageWidth: 1280,
-    imageHeight: 720,
+    imageWidth: 1350,
+    imageHeight: 900,
     serviceName: '制作進行・業務自動化',
   },
   // Legacy slugs resolve to the current service canonical URL.
@@ -65,8 +68,8 @@ const routeEntrypoints = [
     canonicalPath: '/services/sns-management/',
     imagePath: '/images/services/sns-cover.webp',
     imageAlt: 'YouTube・SNS運用のサービス案内',
-    imageWidth: 900,
-    imageHeight: 600,
+    imageWidth: 1350,
+    imageHeight: 900,
     serviceName: 'YouTube・SNS運用',
   },
   {
@@ -76,8 +79,8 @@ const routeEntrypoints = [
     canonicalPath: '/services/music-publishing/',
     imagePath: '/images/services/music-cover.webp',
     imageAlt: '音楽出版・BGM制作のサービス案内',
-    imageWidth: 900,
-    imageHeight: 600,
+    imageWidth: 1350,
+    imageHeight: 900,
     serviceName: '音楽出版・BGM制作',
   },
   {
@@ -87,8 +90,8 @@ const routeEntrypoints = [
     canonicalPath: '/services/music-publishing/',
     imagePath: '/images/services/music-cover.webp',
     imageAlt: '音楽出版・BGM制作のサービス案内',
-    imageWidth: 900,
-    imageHeight: 600,
+    imageWidth: 1350,
+    imageHeight: 900,
     serviceName: '音楽出版・BGM制作',
   },
   {
@@ -98,8 +101,8 @@ const routeEntrypoints = [
     canonicalPath: '/services/music-publishing/',
     imagePath: '/images/services/music-cover.webp',
     imageAlt: '音楽出版・BGM制作のサービス案内',
-    imageWidth: 900,
-    imageHeight: 600,
+    imageWidth: 1350,
+    imageHeight: 900,
     serviceName: '音楽出版・BGM制作',
   },
   {
@@ -110,8 +113,8 @@ const routeEntrypoints = [
     canonicalPath: '/services/workflow-automation/',
     imagePath: '/images/services/ai-cover.webp',
     imageAlt: '制作進行・業務自動化のサービス案内',
-    imageWidth: 1280,
-    imageHeight: 720,
+    imageWidth: 1350,
+    imageHeight: 900,
     serviceName: '制作進行・業務自動化',
   },
 ];
@@ -255,13 +258,31 @@ const createRedirectHtml = (relativeTarget) => {
 `;
 };
 
+// 正規URLのページだけ本文をHTMLへ書き出す（旧URLは _redirects の301で正規URLへ移るため空のまま）
+const withPrerenderedBody = (html, markup) => {
+  if (!html.includes(EMPTY_ROOT)) {
+    throw new Error('dist/index.html does not contain an empty #root to prerender into');
+  }
+  return html.replace(EMPTY_ROOT, `<div id="root">${markup}</div>`);
+};
+
+const isCanonicalEntrypoint = (route) =>
+  route.path === `${route.canonicalPath.replace(/^\//, '').replace(/\/$/, '')}/index.html`;
+
 const main = async () => {
   const indexHtml = await readFile(indexHtmlPath, 'utf8');
+  const { render } = await import(pathToFileURL(ssrEntryPath).href);
 
   await writeEntrypoint('services/index.html', indexHtml);
+  await writeFile(indexHtmlPath, withPrerenderedBody(indexHtml, render('/')), 'utf8');
+  let prerenderedCount = 1;
 
   for (const route of routeEntrypoints) {
-    const routeHtml = withRouteMeta(indexHtml, route);
+    let routeHtml = withRouteMeta(indexHtml, route);
+    if (isCanonicalEntrypoint(route)) {
+      routeHtml = withPrerenderedBody(routeHtml, render(route.canonicalPath));
+      prerenderedCount += 1;
+    }
     await writeEntrypoint(route.path, routeHtml);
 
     for (const aliasPath of route.aliases ?? []) {
@@ -278,7 +299,7 @@ const main = async () => {
     0,
   );
   console.info(
-    `[build:routes] generated ${routeEntrypoints.length + flatEntrypointCount + 1} SPA entrypoints and ${Object.keys(redirectAliases).length} redirect aliases`,
+    `[build:routes] generated ${routeEntrypoints.length + flatEntrypointCount + 1} SPA entrypoints (${prerenderedCount} prerendered) and ${Object.keys(redirectAliases).length} redirect aliases`,
   );
 };
 

@@ -48,7 +48,7 @@ const BusinessFAQ: React.FC = () => {
             >
               <summary className="flex min-h-20 cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-left text-sm font-semibold leading-6 text-slate-900 marker:content-none md:px-6">
                 <span>{faq.question}</span>
-                <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition-all group-open:rotate-180 group-open:bg-brand-primary-50 group-open:text-brand-primary-700">
+                <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition-all group-open:rotate-180 group-open:bg-brand-primary-50 group-open:text-brand-primary-700">
                   <ChevronDown className="h-4 w-4" />
                 </span>
               </summary>

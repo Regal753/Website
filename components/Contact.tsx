@@ -19,21 +19,22 @@ import { trackEvent } from '../utils/analytics';
 const INITIAL_FORM: ContactFormState = {
   name: '',
   email: '',
-  type: 'お問い合わせ',
+  type: '',
   message: '',
 };
 
+// 事業ごとに1つずつ。受付Worker（contact-worker）は語句でGoogleフォームの種別へ振り分けるため、
+// 「権利」の選択肢には YouTube・BGM の語を入れない
 const INQUIRY_TYPE_OPTIONS = [
-  'お問い合わせ',
-  'YouTube BGM・権利運用の初回確認について',
-  'YouTube・SNS運用について',
   '音楽出版・BGM制作について',
+  '楽曲の権利情報・利用条件の確認について',
+  'YouTube・SNS運用について',
   '制作進行・業務自動化について',
-  'その他',
+  'その他・まだ決まっていない',
 ] as const;
 
 const INQUIRY_TYPE_PRESETS: Record<string, (typeof INQUIRY_TYPE_OPTIONS)[number]> = {
-  'music-rights-review': 'YouTube BGM・権利運用の初回確認について',
+  'music-rights-review': '楽曲の権利情報・利用条件の確認について',
 };
 
 const CONTACT_HOURS = '電話受付 9:00-20:00（フォームは24時間受付）';
@@ -55,7 +56,7 @@ const COMMON_ISSUES = [
   '制作進行や情報共有が担当者に依存している',
 ] as const;
 
-type ContactFieldErrorKey = 'name' | 'email' | 'message' | 'consent' | 'attachments';
+type ContactFieldErrorKey = 'name' | 'email' | 'type' | 'message' | 'consent' | 'attachments';
 type ContactFieldErrors = Partial<Record<ContactFieldErrorKey, string>>;
 type ContactEndpointState = 'checking' | 'available' | 'unavailable';
 
@@ -84,6 +85,7 @@ const Contact: React.FC = () => {
   const hasTrackedSubmitSuccess = useRef(false);
   const nameInputRef = useRef<HTMLInputElement>(null);
   const emailInputRef = useRef<HTMLInputElement>(null);
+  const typeInputRef = useRef<HTMLSelectElement>(null);
   const messageInputRef = useRef<HTMLTextAreaElement>(null);
   const attachmentInputRef = useRef<HTMLInputElement>(null);
   const consentInputRef = useRef<HTMLInputElement>(null);
@@ -209,6 +211,10 @@ const Contact: React.FC = () => {
       emailInputRef.current?.focus();
       return;
     }
+    if (errors.type) {
+      typeInputRef.current?.focus();
+      return;
+    }
     if (errors.message) {
       messageInputRef.current?.focus();
       return;
@@ -225,7 +231,7 @@ const Contact: React.FC = () => {
   };
 
   const updateField = (key: keyof ContactFormState, value: string) => {
-    if (key === 'name' || key === 'email' || key === 'message') {
+    if (key === 'name' || key === 'email' || key === 'type' || key === 'message') {
       clearFieldError(key);
     }
     setError('');
@@ -254,6 +260,7 @@ const Contact: React.FC = () => {
     } else if (emailInputRef.current && !emailInputRef.current.checkValidity()) {
       nextFieldErrors.email = 'メールアドレスの形式を確認してください。';
     }
+    if (!form.type) nextFieldErrors.type = 'お問い合わせ種別を選択してください。';
     if (!form.message.trim()) nextFieldErrors.message = 'お問い合わせ内容を入力してください。';
     if (!consent) nextFieldErrors.consent = 'プライバシーポリシーと利用規約への同意が必要です。';
     if (supportsAttachments && totalAttachmentBytes > MAX_ATTACHMENT_BYTES) {
@@ -365,7 +372,7 @@ const Contact: React.FC = () => {
   return (
     <section
       id={SectionId.CONTACT}
-      className="bg-[#fbf8ee] pt-28 pb-20 md:pb-24"
+      className="bg-paper pt-28 pb-20 md:pb-24"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="border-b border-slate-300 pb-8">
@@ -385,7 +392,7 @@ const Contact: React.FC = () => {
             role="status"
             aria-live="polite"
             tabIndex={-1}
-            className="mt-6 rounded-[28px] border border-emerald-200 bg-emerald-50 px-5 py-4 shadow-sm"
+            className="mt-6 rounded-lg border border-emerald-200 bg-emerald-50 px-5 py-4"
           >
             <p className="text-sm font-semibold text-emerald-800">お問い合わせを受け付けました。</p>
             <p className="mt-1 text-sm leading-relaxed text-emerald-900/90">
@@ -413,7 +420,7 @@ const Contact: React.FC = () => {
         )}
 
         <div className="mt-8 grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,1.25fr)_300px]">
-          <div className="border-t-2 border-brand-ink bg-white p-5 md:p-8">
+          <div className="border-t-2 border-brand-ink bg-paper-card p-5 md:p-8">
             <div className="mb-6">
               <h2 className="text-2xl font-semibold text-brand-ink">
                 {contactEndpointState === 'available' ? 'お問い合わせフォーム' : 'お問い合わせはこちら'}
@@ -467,7 +474,7 @@ const Contact: React.FC = () => {
                     メールで問い合わせる
                   </a>
                 </div>
-                <p className="mt-4 text-xs leading-6 text-slate-500">
+                <p className="mt-4 text-xs leading-6 text-slate-600">
                   契約書や管理台帳等の資料は、初回返信後に共有方法をご案内します。
                 </p>
               </div>
@@ -488,7 +495,7 @@ const Contact: React.FC = () => {
               <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
 
               <div className="border-t border-slate-300 py-5">
-                <p className="text-sm font-semibold text-slate-500">基本情報</p>
+                <p className="text-sm font-semibold text-slate-600">基本情報</p>
                 <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
                   <label className="block text-sm">
                     <span className="font-medium text-slate-700">お名前 *</span>
@@ -498,7 +505,7 @@ const Contact: React.FC = () => {
                       name="name"
                       value={form.name}
                       onChange={(event) => updateField('name', event.target.value)}
-                      className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
+                      className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
                       autoComplete="name"
                       aria-invalid={fieldErrors.name ? 'true' : 'false'}
                       aria-describedby={fieldErrors.name ? 'contact-name-error' : undefined}
@@ -518,7 +525,7 @@ const Contact: React.FC = () => {
                       name="company"
                       value={company}
                       onChange={(event) => setCompany(event.target.value)}
-                      className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
+                      className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
                       autoComplete="organization"
                     />
                   </label>
@@ -531,7 +538,7 @@ const Contact: React.FC = () => {
                       name="email"
                       value={form.email}
                       onChange={(event) => updateField('email', event.target.value)}
-                      className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
+                      className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
                       autoComplete="email"
                       inputMode="email"
                       spellCheck={false}
@@ -553,7 +560,7 @@ const Contact: React.FC = () => {
                       name="phone"
                       value={phone}
                       onChange={(event) => setPhone(event.target.value)}
-                      className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
+                      className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
                       autoComplete="tel"
                       inputMode="tel"
                     />
@@ -562,20 +569,32 @@ const Contact: React.FC = () => {
               </div>
 
               <div className="border-t border-slate-300 py-5">
-                <p className="text-sm font-semibold text-slate-500">相談内容</p>
+                <p className="text-sm font-semibold text-slate-600">相談内容</p>
                 <div className="mt-4 space-y-4">
                   <label className="block text-sm">
-                    <span className="font-medium text-slate-700">お問い合わせ種別</span>
+                    <span className="font-medium text-slate-700">お問い合わせ種別 *</span>
                     <select
+                      ref={typeInputRef}
                       name="inquiry_type"
                       value={form.type}
                       onChange={(event) => updateField('type', event.target.value)}
-                      className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
+                      className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
+                      aria-invalid={fieldErrors.type ? 'true' : 'false'}
+                      aria-describedby={fieldErrors.type ? 'contact-type-error' : undefined}
+                      required
                     >
+                      <option value="" disabled>
+                        選択してください
+                      </option>
                       {INQUIRY_TYPE_OPTIONS.map((option) => (
                         <option key={option}>{option}</option>
                       ))}
                     </select>
+                    {fieldErrors.type && (
+                      <p id="contact-type-error" className="mt-2 text-xs font-medium text-red-600">
+                        {fieldErrors.type}
+                      </p>
+                    )}
                   </label>
 
                   <label className="block text-sm">
@@ -586,7 +605,7 @@ const Contact: React.FC = () => {
                       value={form.message}
                       onChange={(event) => updateField('message', event.target.value)}
                       rows={7}
-                      className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
+                      className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-primary-500"
                       aria-invalid={fieldErrors.message ? 'true' : 'false'}
                       aria-describedby={fieldErrors.message ? 'contact-message-error' : undefined}
                       required
@@ -601,7 +620,7 @@ const Contact: React.FC = () => {
               </div>
 
               <div className="border-t border-slate-300 py-5">
-                <p className="text-sm font-semibold text-slate-500">
+                <p className="text-sm font-semibold text-slate-600">
                   {supportsAttachments ? '添付と同意' : '確認と同意'}
                 </p>
                 <div className="mt-4 space-y-4">
@@ -615,11 +634,11 @@ const Contact: React.FC = () => {
                       multiple
                       onChange={handleFileChange}
                       accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.zip,.png,.jpg,.jpeg,.webp,.mp4,.mov"
-                      className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-slate-900 file:mr-3 file:rounded-md file:border-0 file:bg-slate-100 file:px-3 file:py-1.5 file:text-slate-700"
+                      className="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 file:mr-3 file:rounded-md file:border-0 file:bg-slate-100 file:px-3 file:py-1.5 file:text-slate-700"
                       aria-invalid={fieldErrors.attachments ? 'true' : 'false'}
                       aria-describedby={fieldErrors.attachments ? 'contact-attachments-error' : undefined}
                     />
-                    <div className="mt-2 flex items-start gap-2 text-xs text-slate-500">
+                    <div className="mt-2 flex items-start gap-2 text-xs text-slate-600">
                       <Paperclip className="mt-0.5 h-4 w-4 shrink-0" />
                       <span>添付ファイルの合計は10MB以内で送信してください。</span>
                     </div>
@@ -634,7 +653,7 @@ const Contact: React.FC = () => {
                     </label>
                   )}
 
-                  <label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-slate-200 bg-white p-4">
+                  <label className="flex cursor-pointer items-start gap-3 rounded-lg border border-slate-200 bg-white p-4">
                     <input
                       ref={consentInputRef}
                       type="checkbox"
@@ -674,7 +693,7 @@ const Contact: React.FC = () => {
                       {fieldErrors.consent}
                     </p>
                   )}
-                  <p className="text-xs leading-6 text-slate-500">
+                  <p className="text-xs leading-6 text-slate-600">
                     入力内容は当社の受付システムを通じてGoogleフォームへ送信され、株式会社Regaloが確認します。
                   </p>
                 </div>
@@ -686,7 +705,7 @@ const Contact: React.FC = () => {
                   role="alert"
                   aria-live="assertive"
                   tabIndex={-1}
-                  className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700"
+                  className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700"
                 >
                   <p>{error}</p>
                   <div className="mt-3 flex flex-col gap-2 sm:flex-row">
@@ -713,7 +732,7 @@ const Contact: React.FC = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-primary-700 px-6 py-3.5 font-semibold text-white transition-colors hover:bg-brand-primary-800 disabled:cursor-not-allowed disabled:opacity-70"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-primary-700 px-6 py-3.5 font-semibold text-white transition-colors hover:bg-brand-primary-800 disabled:cursor-not-allowed disabled:opacity-70"
               >
                 {isSubmitting ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
                 {isSubmitting ? '送信中…' : 'お問い合わせを送信'}
@@ -724,7 +743,7 @@ const Contact: React.FC = () => {
 
           <aside className="space-y-4">
             <div className="border-t border-slate-300 pt-5 text-brand-ink">
-              <p className="text-xs font-semibold tracking-widest text-slate-500">電話窓口</p>
+              <p className="text-xs font-semibold tracking-widest text-slate-600">電話窓口</p>
               <h2 className="mt-3 text-xl font-semibold text-brand-ink">お電話でのお問い合わせ</h2>
               {companyPhoneHref ? (
                 <a
@@ -738,7 +757,7 @@ const Contact: React.FC = () => {
                 <p className="mt-4 text-lg font-semibold text-brand-ink">{companyPhoneDisplay}</p>
               )}
               <div className="mt-4 flex items-center gap-2 text-sm text-slate-600">
-                <Clock3 className="h-4 w-4 text-amber-700" />
+                <Clock3 className="h-4 w-4 text-brand-primary-700" />
                 <span>{CONTACT_HOURS}</span>
               </div>
             </div>
@@ -748,7 +767,7 @@ const Contact: React.FC = () => {
               <ul className="mt-4 space-y-3">
                 {COMMON_ISSUES.map((item) => (
                   <li key={item} className="flex items-start gap-3 text-sm leading-relaxed text-slate-700">
-                    <span className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber-100 text-amber-800">
+                    <span className="mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-paper-alt text-brand-ink">
                       <ShieldCheck className="h-3.5 w-3.5" />
                     </span>
                     <span>{item}</span>
@@ -774,9 +793,9 @@ const Contact: React.FC = () => {
                       placement: 'contact_sidebar',
                     })
                   }
-                  className="flex items-start gap-3 rounded-2xl border border-brand-primary-100 bg-brand-primary-50/70 p-4 transition-colors hover:bg-brand-primary-50"
+                  className="flex items-start gap-3 rounded-lg border border-brand-primary-100 bg-brand-primary-50/70 p-4 transition-colors hover:bg-brand-primary-50"
                 >
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white text-brand-primary-700 shadow-sm">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white text-brand-primary-700">
                     <FileText className="h-5 w-5" />
                   </span>
                   <span>
@@ -793,9 +812,9 @@ const Contact: React.FC = () => {
 
                 <a
                   href={fallbackMailHref}
-                  className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50/80 p-4 transition-colors hover:bg-slate-50"
+                  className="flex items-start gap-3 rounded-lg border border-slate-200 bg-slate-50/80 p-4 transition-colors hover:bg-slate-50"
                 >
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white text-brand-primary-700 shadow-sm">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white text-brand-primary-700">
                     <Mail className="h-5 w-5" />
                   </span>
                   <span>

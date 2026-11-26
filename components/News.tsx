@@ -27,7 +27,7 @@ const News: React.FC = () => {
                   key={`${item.date}-${item.title}-${item.href ?? 'no-link'}`}
                   className="flex flex-col gap-2 py-5 sm:flex-row sm:items-baseline sm:gap-8"
                 >
-                  <time className="w-28 shrink-0 text-sm font-semibold tabular-nums text-slate-500">
+                  <time className="w-28 shrink-0 text-sm font-semibold tabular-nums text-slate-600">
                     {item.date}
                   </time>
                   <div className="flex-1">

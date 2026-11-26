@@ -18,7 +18,7 @@ const rows = [
 ] as const;
 
 const CompanyInfo: React.FC = () => (
-  <section id={SectionId.COMPANY} className="bg-[#fbf8ee] pb-20 pt-28 md:pb-24">
+  <section id={SectionId.COMPANY} className="bg-paper pb-20 pt-28 md:pb-24">
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="border-b border-slate-300 pb-10 md:pb-12">
         <p className="text-xs font-semibold tracking-[0.12em] text-brand-primary-700">COMPANY</p>
@@ -37,7 +37,7 @@ const CompanyInfo: React.FC = () => (
           <dl className="mt-6 border-t border-slate-300">
             {rows.map((row) => (
               <div key={row.label} className="grid gap-1 border-b border-slate-200 py-4 text-sm sm:grid-cols-[150px_minmax(0,1fr)] sm:gap-6">
-                <dt className="font-medium text-slate-500">{row.label}</dt>
+                <dt className="font-medium text-slate-600">{row.label}</dt>
                 <dd className="break-words leading-7 text-brand-ink">
                   {'href' in row && row.href ? <a href={row.href} className="text-brand-primary-700 underline underline-offset-4 hover:text-brand-primary-800">{row.value}</a> : row.value}
                 </dd>

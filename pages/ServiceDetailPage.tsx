@@ -52,7 +52,7 @@ const ServiceDetailPage: React.FC = () => {
   const phoneHref = phoneDisplay.replace(/[^\d+]/g, '');
 
   return (
-    <section className="bg-[#f6f5e9] pt-28 pb-20 md:pb-24">
+    <section className="bg-paper pt-28 pb-20 md:pb-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <Link
           to="/"
@@ -62,17 +62,17 @@ const ServiceDetailPage: React.FC = () => {
           トップへ戻る
         </Link>
 
-        <article className="mt-4 border-y border-[#d2d2c3] px-1 py-8 md:px-8 md:py-10">
+        <article className="mt-4 border-y border-slate-300 px-1 py-8 md:px-8 md:py-10">
           <div>
             <div>
               <div className="flex items-start gap-4">
                 <div
-                  className="flex h-12 w-12 shrink-0 items-center justify-center bg-[#dce6e4]"
+                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-paper-alt"
                 >
-                  <Icon className="h-6 w-6 text-[#183e56]" />
+                  <Icon className="h-6 w-6 text-brand-primary-700" />
                 </div>
                 <div>
-                  <p className="text-xs font-semibold tracking-widest text-brand-primary-700">
+                  <p className="text-xs font-semibold tracking-[0.12em] text-brand-primary-700">
                     {siteConfig.positioning.serviceDetailEyebrow}
                   </p>
                   <h1 className="mt-1 text-3xl font-semibold text-brand-ink md:text-4xl">
@@ -97,13 +97,13 @@ const ServiceDetailPage: React.FC = () => {
                 {service.items.map((item) => (
                   <span
                     key={item}
-                    className="inline-flex border-l-2 border-[#9aaeb0] px-2 py-1 text-xs font-semibold text-slate-700"
+                    className="inline-flex border-l-2 border-slate-300 px-2 py-1 text-xs font-semibold text-slate-700"
                   >
                     {item}
                   </span>
                 ))}
               </div>
-              <Link to="/contact" className="mt-6 inline-flex items-center gap-2 border-b border-[#183e56] pb-1 text-sm font-semibold text-[#183e56]">
+              <Link to="/contact" className="mt-6 inline-flex items-center gap-2 border-b border-brand-primary-700 pb-1 text-sm font-semibold text-brand-primary-700 hover:text-brand-primary-800">
                 ご相談・お見積り <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -154,7 +154,7 @@ const ServiceDetailPage: React.FC = () => {
             {slideImagePaths.map((imagePath) => (
               <img key={imagePath} src={asset(imagePath)} alt={`${service.title}の掲載画像`} width={1350} height={900} className="aspect-[3/2] h-auto w-full max-w-2xl rounded-lg border border-slate-200" loading="lazy" decoding="async" />
             ))}
-            <p className="mt-2 text-xs text-slate-500">サービス内容を表すイラストです。</p>
+            <p className="mt-2 text-xs text-slate-600">サービス内容を表すイラストです。</p>
           </section>
 
           {relatedCases.length > 0 && (
@@ -257,7 +257,7 @@ const ServiceDetailPage: React.FC = () => {
             </div>
           </section>
 
-          <div className="mt-8 rounded-xl border border-brand-primary-200 bg-brand-primary-50 p-5">
+          <div className="mt-8 rounded-lg border border-brand-primary-200 bg-brand-primary-50 p-5">
             <h2 className="text-xl font-semibold text-brand-ink">ご相談・お見積り</h2>
             <p className="mt-2 text-sm leading-relaxed text-slate-700">
               現在の運用状況とご希望を確認し、対応内容、納品物、スケジュール、費用をお見積りで提示します。
@@ -294,7 +294,7 @@ const ServiceDetailPage: React.FC = () => {
               <Link
                 key={item.slug}
                 to={`/services/${item.slug}/`}
-                className="rounded-xl border border-slate-200 bg-white p-4 transition-colors hover:border-brand-primary-300 hover:bg-brand-primary-50/40"
+                className="rounded-lg border border-slate-200 bg-paper-card p-4 transition-colors hover:border-brand-primary-300 hover:bg-brand-primary-50/40"
               >
                 <p className="font-semibold text-brand-ink">{item.title}</p>
                 <p className="mt-1 text-sm text-slate-600">{item.description}</p>
