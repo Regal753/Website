@@ -5,6 +5,8 @@ import NotFoundPage from './NotFoundPage';
 import { getServiceBySlug, serviceCatalog } from '../services.catalog';
 import { siteConfig } from '../site.config';
 import { trackEvent } from '../utils/analytics';
+import { ArticleServiceSlug, getArticlesByService } from '../utils/articles';
+import ArticleList from '../components/ArticleList';
 
 const ServiceDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -21,6 +23,11 @@ const ServiceDetailPage: React.FC = () => {
       }
     }
   }, [slug, service, location.pathname, navigate]);
+
+  const relatedArticles = useMemo(
+    () => (service ? getArticlesByService(service.slug as ArticleServiceSlug) : []),
+    [service],
+  );
 
   const slideImagePaths = useMemo(() => {
     if (!service) return [];
@@ -156,6 +163,13 @@ const ServiceDetailPage: React.FC = () => {
             ))}
             <p className="mt-2 text-xs text-slate-600">サービス内容を表すイラストです。</p>
           </section>
+
+          {relatedArticles.length > 0 && (
+            <section className="mt-10" aria-labelledby="related-articles-title">
+              <h2 id="related-articles-title" className="mb-4 text-xl font-semibold text-brand-ink">関連する記事</h2>
+              <ArticleList items={relatedArticles} />
+            </section>
+          )}
 
           {relatedCases.length > 0 && (
             <section className="mt-8">

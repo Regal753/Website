@@ -13,6 +13,12 @@ const listTsx = (dir: string): string[] =>
     .filter((name) => name.endsWith('.tsx'))
     .map((name) => `./${dir}/${name}`);
 
+// 公開する記事（_ で始まる雛形は除く）
+const listArticles = (): string[] =>
+  readdirSync(new URL('./content/articles/', import.meta.url))
+    .filter((name) => name.endsWith('.md') && !name.startsWith('_'))
+    .map((name) => `./content/articles/${name}`);
+
 const coveredCodePoints = (): Set<number> => {
   const css = read('./styles/corporate-font.css');
   const covered = new Set<number>();
@@ -36,6 +42,8 @@ describe('corporate font subsets', () => {
     const files = [
       ...listTsx('components'),
       ...listTsx('pages'),
+      ...listTsx('utils'),
+      ...listArticles(),
       './site.config.ts',
       './services.catalog.ts',
       './App.tsx',

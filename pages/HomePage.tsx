@@ -1,4 +1,5 @@
 import React from 'react';
+import ArticlesPreview from '../components/ArticlesPreview';
 import BusinessTrust from '../components/BusinessTrust';
 import BusinessFAQ from '../components/BusinessFAQ';
 import Cases from '../components/Cases';
@@ -12,6 +13,7 @@ const HomePage: React.FC = () => (
     <Hero />
     <Services />
     <Cases />
+    <ArticlesPreview />
     <BusinessTrust />
     <Process />
     <BusinessFAQ />
