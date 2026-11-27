@@ -87,6 +87,14 @@ describe('articles', () => {
     expect(html).not.toContain('href=');
   });
 
+  it('blanks draft articles at build time so their text never reaches the bundle', async () => {
+    const { isDraftArticle } = await import('./vite.config');
+    expect(isDraftArticle(sample.replace('service:', 'draft: true\nservice:'))).toBe(true);
+    expect(isDraftArticle(sample)).toBe(false);
+    expect(isDraftArticle('本文に draft: true と書いても下書きにはならない')).toBe(false);
+    expect(buildArticleList({ '../content/articles/blanked.md': '' })).toEqual([]);
+  });
+
   it('keeps the writing template out of the published list', () => {
     const template = readFileSync(new URL('./content/articles/_template.md', import.meta.url), 'utf8');
     expect(template).toContain('draft: true');

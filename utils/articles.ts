@@ -60,14 +60,16 @@ export const parseArticle = (fileName: string, source: string): Article => {
 };
 
 // 公開日の新しい順。下書き（draft: true）は VITE_SHOW_DRAFTS=1 のときだけ含める
+// （ビルドでは vite.config.ts が下書きを空文字にするので、空のファイルもここで除く）
 export const buildArticleList = (files: Record<string, string>, includeDrafts = false): Article[] =>
   Object.entries(files)
-    .filter(([path]) => !/\/_[^/]*\.md$/.test(path))
+    .filter(([path, source]) => !/\/_[^/]*\.md$/.test(path) && source.trim() !== '')
     .map(([path, source]) => parseArticle(path, source))
     .filter((article) => includeDrafts || !article.draft)
     .sort((a, b) => (a.date === b.date ? a.slug.localeCompare(b.slug) : b.date.localeCompare(a.date)));
 
-const articleFiles = import.meta.glob('../content/articles/*.md', {
+// _ で始まる雛形は配布物に入れない
+const articleFiles = import.meta.glob(['../content/articles/*.md', '!../content/articles/_*.md'], {
   query: '?raw',
   import: 'default',
   eager: true,
