@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/corporate-font.css';
-import App from './App';
+import App, { getRouterBasename } from './App';
 import { initializeAnalytics } from './utils/analytics';
 
 initializeAnalytics();
@@ -17,9 +17,23 @@ const app = (
   </React.StrictMode>
 );
 
-// ビルド時に本文を書き出したページはそのHTMLを引き継ぎ、空のページは通常どおり描画する
-if (rootElement.hasChildNodes()) {
+const normalizePath = (value: string): string => (value.length > 1 ? value.replace(/\/+$/, '') : value) || '/';
+
+// 今のURL（basename を除く）が、ビルド時に本文を書き出したURLと同じか。
+// 404ページから戻ってきた場合などは、別のページの本文が入っているので引き継がない。
+const matchesPrerenderedPath = (element: HTMLElement): boolean => {
+  const prerenderedPath = element.dataset.prerenderedPath;
+  if (!prerenderedPath) return false;
+  const basename = getRouterBasename() ?? '';
+  const pathname = basename && window.location.pathname.startsWith(basename)
+    ? window.location.pathname.slice(basename.length)
+    : window.location.pathname;
+  return normalizePath(pathname) === normalizePath(prerenderedPath);
+};
+
+if (rootElement.hasChildNodes() && matchesPrerenderedPath(rootElement)) {
   ReactDOM.hydrateRoot(rootElement, app);
 } else {
+  rootElement.replaceChildren();
   ReactDOM.createRoot(rootElement).render(app);
 }

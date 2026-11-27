@@ -4,7 +4,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import { getServiceBySlug } from './services.catalog';
 import { siteConfig } from './site.config';
-import { getArticleBySlug } from './utils/articles';
+import { getArticleBySlug, hasArticles } from './utils/articles';
 import ArticlePage from './pages/ArticlePage';
 import ArticlesPage from './pages/ArticlesPage';
 import CompanyPage from './pages/CompanyPage';
@@ -112,7 +112,7 @@ export const getRouteMeta = (pathname: string): RouteMeta => {
       };
     }
   }
-  if (pathWithoutTrailingSlash === '/articles') {
+  if (pathWithoutTrailingSlash === '/articles' && hasArticles) {
     return {
       title: `記事 | ${siteConfig.companyName}`,
       description: 'BGMの権利やYouTube運用で、株式会社Regaloが実際に確認していることをまとめています。',
