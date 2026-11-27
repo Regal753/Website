@@ -259,11 +259,15 @@ const createRedirectHtml = (relativeTarget) => {
 };
 
 // 正規URLのページだけ本文をHTMLへ書き出す（旧URLは _redirects の301で正規URLへ移るため空のまま）
-const withPrerenderedBody = (html, markup) => {
+const withPrerenderedBody = (html, markup, prerenderedPath) => {
   if (!html.includes(EMPTY_ROOT)) {
     throw new Error('dist/index.html does not contain an empty #root to prerender into');
   }
-  return html.replace(EMPTY_ROOT, `<div id="root">${markup}</div>`);
+  // どのURLの本文を書き出したかを残し、ブラウザ側で一致するときだけ引き継ぐ（index.tsx）
+  return html.replace(
+    EMPTY_ROOT,
+    `<div id="root" data-prerendered-path="${escapeHtml(prerenderedPath)}">${markup}</div>`,
+  );
 };
 
 const isCanonicalEntrypoint = (route) =>
@@ -310,13 +314,13 @@ const main = async () => {
   const articleEntrypoints = createArticleEntrypoints(getArticleEntrypoints(siteUrl));
 
   await writeEntrypoint('services/index.html', indexHtml);
-  await writeFile(indexHtmlPath, withPrerenderedBody(indexHtml, render('/')), 'utf8');
+  await writeFile(indexHtmlPath, withPrerenderedBody(indexHtml, render('/'), '/'), 'utf8');
   let prerenderedCount = 1;
 
   for (const route of routeEntrypoints) {
     let routeHtml = withRouteMeta(indexHtml, route);
     if (isCanonicalEntrypoint(route)) {
-      routeHtml = withPrerenderedBody(routeHtml, render(route.canonicalPath));
+      routeHtml = withPrerenderedBody(routeHtml, render(route.canonicalPath), route.canonicalPath);
       prerenderedCount += 1;
     }
     await writeEntrypoint(route.path, routeHtml);
@@ -327,7 +331,7 @@ const main = async () => {
   }
 
   for (const route of articleEntrypoints) {
-    const routeHtml = withPrerenderedBody(withRouteMeta(indexHtml, route), render(route.canonicalPath));
+    const routeHtml = withPrerenderedBody(withRouteMeta(indexHtml, route), render(route.canonicalPath), route.canonicalPath);
     await writeEntrypoint(route.path, routeHtml);
     prerenderedCount += 1;
   }

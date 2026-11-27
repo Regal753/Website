@@ -258,6 +258,9 @@ describe('site audit remediation', () => {
     expect(routeGeneratorSource).toContain('withPrerenderedBody');
     expect(routeGeneratorSource).toContain("render('/')");
     expect(entrySource).toContain('hydrateRoot');
+    // 404ページから戻ったときなど、書き出したURLと違うページでは引き継がない
+    expect(routeGeneratorSource).toContain('data-prerendered-path');
+    expect(entrySource).toContain('matchesPrerenderedPath(rootElement)');
   });
 
   it('keeps small text at WCAG AA contrast on the cream palette', () => {
