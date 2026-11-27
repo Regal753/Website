@@ -21,7 +21,16 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 CSS = ROOT / "styles" / "corporate-font.css"
 OUT = ROOT / "styles" / "fonts" / "noto-sans-jp-regalo-supplement.woff2"
 SOURCE_FONT = pathlib.Path(r"C:\Windows\Fonts\NotoSansJP-VF.ttf")
-SOURCES = ["components/*.tsx", "pages/*.tsx", "site.config.ts", "services.catalog.ts", "App.tsx", "index.html"]
+SOURCES = [
+    "components/*.tsx",
+    "pages/*.tsx",
+    "utils/*.tsx",
+    "content/articles/[!_]*.md",
+    "site.config.ts",
+    "services.catalog.ts",
+    "App.tsx",
+    "index.html",
+]
 FACE = re.compile(r"@font-face\s*\{(.*?)\}", re.S)
 
 

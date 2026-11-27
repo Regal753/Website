@@ -222,7 +222,7 @@ const withRouteMeta = (html, route) => {
       ),
   ].reduce((current, transform) => transform(current), html);
 
-  const structuredData = createRouteStructuredData(route);
+  const structuredData = route.structuredData ?? createRouteStructuredData(route);
   if (!structuredData) return metaHtml;
 
   const serialized = JSON.stringify(structuredData).replace(/</g, '\\u003c');
@@ -269,9 +269,45 @@ const withPrerenderedBody = (html, markup) => {
 const isCanonicalEntrypoint = (route) =>
   route.path === `${route.canonicalPath.replace(/^\//, '').replace(/\/$/, '')}/index.html`;
 
+// 公開する記事の一覧ページと各記事ページ。記事が1本もなければ何も書き出さない
+const createArticleEntrypoints = (articles) => {
+  if (articles.length === 0) return [];
+  return [
+    {
+      path: 'articles/index.html',
+      title: '記事 | Regalo',
+      description: 'BGMの権利やYouTube運用で、株式会社Regaloが実際に確認していることをまとめています。',
+      canonicalPath: '/articles/',
+      imageAlt: '株式会社Regaloの記事一覧',
+    },
+    ...articles.map((article) => ({
+      path: `articles/${article.slug}/index.html`,
+      title: `${article.title} | Regalo`,
+      description: article.description,
+      canonicalPath: `/articles/${article.slug}/`,
+      imageAlt: `${article.title}（株式会社Regaloの記事）`,
+      structuredData: [article.structuredData],
+      lastmod: article.updated ?? article.date,
+    })),
+  ];
+};
+
+// public/sitemap.xml をもとに、記事のURLを dist/sitemap.xml へ足す
+const appendArticlesToSitemap = async (entrypoints) => {
+  if (entrypoints.length === 0) return;
+  const sitemapPath = path.join(distDir, 'sitemap.xml');
+  const sitemap = await readFile(sitemapPath, 'utf8');
+  const latest = entrypoints.reduce((max, route) => (route.lastmod && route.lastmod > max ? route.lastmod : max), '');
+  const urls = entrypoints
+    .map((route) => `  <url>\n    <loc>${escapeHtml(routeUrl(route.canonicalPath))}</loc>\n    <lastmod>${route.lastmod ?? latest}</lastmod>\n  </url>\n`)
+    .join('');
+  await writeFile(sitemapPath, sitemap.replace('</urlset>', `${urls}</urlset>`), 'utf8');
+};
+
 const main = async () => {
   const indexHtml = await readFile(indexHtmlPath, 'utf8');
-  const { render } = await import(pathToFileURL(ssrEntryPath).href);
+  const { render, getArticleEntrypoints } = await import(pathToFileURL(ssrEntryPath).href);
+  const articleEntrypoints = createArticleEntrypoints(getArticleEntrypoints(siteUrl));
 
   await writeEntrypoint('services/index.html', indexHtml);
   await writeFile(indexHtmlPath, withPrerenderedBody(indexHtml, render('/')), 'utf8');
@@ -290,6 +326,13 @@ const main = async () => {
     }
   }
 
+  for (const route of articleEntrypoints) {
+    const routeHtml = withPrerenderedBody(withRouteMeta(indexHtml, route), render(route.canonicalPath));
+    await writeEntrypoint(route.path, routeHtml);
+    prerenderedCount += 1;
+  }
+  await appendArticlesToSitemap(articleEntrypoints);
+
   for (const [aliasPath, redirectTarget] of Object.entries(redirectAliases)) {
     await writeEntrypoint(aliasPath, createRedirectHtml(redirectTarget));
   }
@@ -299,7 +342,7 @@ const main = async () => {
     0,
   );
   console.info(
-    `[build:routes] generated ${routeEntrypoints.length + flatEntrypointCount + 1} SPA entrypoints (${prerenderedCount} prerendered) and ${Object.keys(redirectAliases).length} redirect aliases`,
+    `[build:routes] generated ${routeEntrypoints.length + flatEntrypointCount + articleEntrypoints.length + 1} SPA entrypoints (${prerenderedCount} prerendered, ${articleEntrypoints.length} article pages) and ${Object.keys(redirectAliases).length} redirect aliases`,
   );
 };
 

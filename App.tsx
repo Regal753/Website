@@ -4,6 +4,9 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import { getServiceBySlug } from './services.catalog';
 import { siteConfig } from './site.config';
+import { getArticleBySlug } from './utils/articles';
+import ArticlePage from './pages/ArticlePage';
+import ArticlesPage from './pages/ArticlesPage';
 import CompanyPage from './pages/CompanyPage';
 import ContactPage from './pages/ContactPage';
 import HomePage from './pages/HomePage';
@@ -96,6 +99,29 @@ export const getRouteMeta = (pathname: string): RouteMeta => {
     }
   }
 
+  const articleMatch = pathWithoutTrailingSlash.match(/^\/articles\/([^/]+)$/);
+  if (articleMatch) {
+    const article = getArticleBySlug(decodeURIComponent(articleMatch[1]));
+    if (article) {
+      return {
+        title: `${article.title} | ${siteConfig.companyName}`,
+        description: article.description,
+        canonicalPath: `/articles/${article.slug}/`,
+        imagePath: '/images/hero.webp',
+        imageAlt: `${article.title}（株式会社Regaloの記事）`,
+      };
+    }
+  }
+  if (pathWithoutTrailingSlash === '/articles') {
+    return {
+      title: `記事 | ${siteConfig.companyName}`,
+      description: 'BGMの権利やYouTube運用で、株式会社Regaloが実際に確認していることをまとめています。',
+      canonicalPath: '/articles/',
+      imagePath: '/images/hero.webp',
+      imageAlt: '株式会社Regaloの記事一覧',
+    };
+  }
+
   const legacyRouteAliases: Record<string, '/company' | '/contact'> = {
     '/company.html': '/company',
     '/contact.html': '/contact',
@@ -157,18 +183,53 @@ export const getRouteMeta = (pathname: string): RouteMeta => {
   }
 };
 
+// 記事ページの構造化データ（ビルド時の書き出しでも同じ内容を使う）
+export const createArticleStructuredData = (
+  article: { slug: string; title: string; description: string; date: string; updated?: string },
+  siteUrl = DEFAULT_SITE_URL,
+): Record<string, unknown> => {
+  const normalizedSiteUrl = siteUrl.replace(/\/$/, '');
+  const organization = {
+    '@type': 'Organization',
+    '@id': `${normalizedSiteUrl}/#organization`,
+    name: siteConfig.companyProfile.legalName,
+    url: `${normalizedSiteUrl}/`,
+  };
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: article.title,
+    description: article.description,
+    datePublished: article.date,
+    dateModified: article.updated ?? article.date,
+    url: `${normalizedSiteUrl}/articles/${article.slug}/`,
+    mainEntityOfPage: `${normalizedSiteUrl}/articles/${article.slug}/`,
+    inLanguage: 'ja',
+    author: organization,
+    publisher: organization,
+  };
+};
+
 export const getRouteStructuredData = (
   pathname: string,
   siteUrl = DEFAULT_SITE_URL,
 ): Record<string, unknown>[] | null => {
   const pathWithoutTrailingSlash = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname;
+  const normalizedSiteUrl = siteUrl.replace(/\/$/, '');
+
+  const articleMatch = pathWithoutTrailingSlash.match(/^\/articles\/([^/]+)$/);
+  if (articleMatch) {
+    const article = getArticleBySlug(decodeURIComponent(articleMatch[1]));
+    if (!article) return null;
+    return [createArticleStructuredData(article, normalizedSiteUrl)];
+  }
+
   const serviceMatch = pathWithoutTrailingSlash.match(/^\/services\/([^/]+)$/);
   if (!serviceMatch) return null;
 
   const service = getServiceBySlug(decodeURIComponent(serviceMatch[1]));
   if (!service) return null;
 
-  const normalizedSiteUrl = siteUrl.replace(/\/$/, '');
   const serviceUrl = `${normalizedSiteUrl}/services/${service.slug}/`;
   const organizationId = `${normalizedSiteUrl}/#organization`;
 
@@ -290,6 +351,10 @@ export function AppRoutes() {
             <Route path="/services/rights-management/" element={<Navigate to="/services/music-publishing/" replace />} />
             <Route path="/services/rights-management.html" element={<Navigate to="/services/music-publishing/" replace />} />
             <Route path="/services/workflow-automation.html" element={<Navigate to="/services/workflow-automation/" replace />} />
+            <Route path="/articles" element={<ArticlesPage />} />
+            <Route path="/articles/" element={<ArticlesPage />} />
+            <Route path="/articles/:slug" element={<ArticlePage />} />
+            <Route path="/articles/:slug/" element={<ArticlePage />} />
             <Route path="/services/:slug" element={<ServiceDetailPage />} />
             <Route path="/services/:slug/" element={<ServiceDetailPage />} />
             <Route path="*" element={<NotFoundPage />} />

@@ -2,6 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router';
 import { ArrowRight, Menu, X } from 'lucide-react';
 import { siteConfig } from '../site.config';
+import { hasArticles } from '../utils/articles';
+import { NavItem } from '../types';
+
+// 公開済みの記事があるときだけ、会社情報の前に「記事」を出す
+const navItems: NavItem[] = hasArticles
+  ? siteConfig.navItems.flatMap((item) =>
+      item.href === '/company' ? [{ label: '記事', href: '/articles/', matchPrefix: true }, item] : [item],
+    )
+  : siteConfig.navItems;
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -55,7 +64,7 @@ const Header: React.FC = () => {
 
         <div className="hidden lg:flex items-center gap-3 xl:gap-4">
           <nav className="flex items-center gap-5 xl:gap-7">
-            {siteConfig.navItems.filter((item) => item.href !== '/').map((item) => (
+            {navItems.filter((item) => item.href !== '/').map((item) => (
               <Link
                 key={item.href}
                 to={item.href}
@@ -106,7 +115,7 @@ const Header: React.FC = () => {
         aria-hidden={!isMobileMenuOpen}
       >
         <div className="flex flex-col gap-1 border-t border-slate-200 bg-paper p-4 shadow-lg">
-          {siteConfig.navItems.map((item) => (
+          {navItems.map((item) => (
             <Link
               key={item.href}
               to={item.href}

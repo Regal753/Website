@@ -5,6 +5,7 @@ module.exports = {
     './index.tsx',
     './components/**/*.{ts,tsx}',
     './pages/**/*.{ts,tsx}',
+    './utils/**/*.{ts,tsx}',
     './services.catalog.ts',
     './site.config.ts',
   ],
