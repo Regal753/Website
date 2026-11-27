@@ -22,5 +22,5 @@
   font-display: swap;
   font-weight: 400 700;
   src: url('./fonts/noto-sans-jp-regalo-supplement.woff2') format('woff2-variations');
-  unicode-range: U+2192, U+4F3A, U+4FC3, U+5237, U+5247, U+539F, U+5546, U+56E3, U+56F0, U+5883, U+627F, U+6620, U+66F8, U+69D8, U+74B0, U+7DE0, U+7E70, U+8AAD, U+900F, U+FF0B;
+  unicode-range: U+2192, U+25EF, U+3010, U+3011, U+3076, U+30D8, U+4E21, U+4E26, U+4F3A, U+4F75, U+4FC3, U+5074, U+5177, U+5237, U+5247, U+539F, U+5473, U+547C, U+5546, U+56E3, U+56F0, U+5883, U+591A, U+59FF, U+5B57, U+5B66, U+5F35, U+60AA, U+60F3, U+6255, U+627F, U+639B, U+653E, U+6620, U+66F8, U+69D8, U+6BD4, U+7167, U+74B0, U+7B97, U+7DCF, U+7DE0, U+7E70, U+8A0E, U+8A5E, U+8AA4, U+8AAD, U+8ABF, U+8AD6, U+900F, U+9084, U+975E, U+97FF, U+98DF, U+FF0B;
 }
